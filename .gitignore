@@ -1,1 +1,11 @@
 .antigravity/
+*.iml
+.gradle
+/local.properties
+/.idea
+/build
+/app/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
