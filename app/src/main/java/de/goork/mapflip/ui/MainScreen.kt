@@ -37,14 +37,19 @@ import de.goork.mapflip.ui.theme.Green500
 import de.goork.mapflip.ui.theme.Red500
 import java.util.Locale
 
+private const val PREFS_NAME = "mapflip"
+private const val PREFS_KEY_LANG = "lang"
+private const val URL_FAMWAKE = "https://play.google.com/store/apps/details?id=de.familienwecker.famwake"
+private const val URL_NOTTHOFF = "https://notthoff.org"
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
     val context = LocalContext.current
-    val prefs = remember { context.getSharedPreferences("mapflip", Context.MODE_PRIVATE) }
+    val prefs = remember { context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
     val systemLang = Locale.getDefault().language
     var lang by remember {
-        mutableStateOf(prefs.getString("lang", if (systemLang == "de") "de" else "en") ?: "en")
+        mutableStateOf(prefs.getString(PREFS_KEY_LANG, if (systemLang == "de") "de" else "en") ?: "en")
     }
     val s = if (lang == "de") Strings.DE else Strings.EN
 
@@ -92,7 +97,7 @@ fun MainScreen() {
                 FilledTonalButton(
                     onClick = {
                         lang = if (lang == "de") "en" else "de"
-                        prefs.edit().putString("lang", lang).apply()
+                        prefs.edit().putString(PREFS_KEY_LANG, lang).apply()
                     },
                     modifier = Modifier.height(32.dp),
                     contentPadding = PaddingValues(horizontal = 12.dp, vertical = 0.dp),
@@ -282,7 +287,7 @@ fun MainScreen() {
                     )
                     Spacer(Modifier.height(10.dp))
                     Text(
-                        text = "FamWake \u2013 Familienwecker",
+                        text = s.famwakeTitle,
                         style = MaterialTheme.typography.titleMedium.copy(
                             fontWeight = FontWeight.SemiBold
                         )
@@ -299,7 +304,7 @@ fun MainScreen() {
                         onClick = {
                             context.startActivity(Intent(
                                 Intent.ACTION_VIEW,
-                                Uri.parse("https://play.google.com/store/apps/details?id=de.familienwecker.famwake")
+                                Uri.parse(URL_FAMWAKE)
                             ))
                         },
                         shape = RoundedCornerShape(12.dp),
@@ -323,7 +328,7 @@ fun MainScreen() {
                 ),
                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f),
                 modifier = Modifier.clickable {
-                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://notthoff.org")))
+                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(URL_NOTTHOFF)))
                 }
             )
 
