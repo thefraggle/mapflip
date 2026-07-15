@@ -3,7 +3,29 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+    <!-- Map pin with integrated redirect arrow -->
+    <!-- Pin body (teardrop) -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M54,30 C45,30 38,37 38,46 C38,58 54,78 54,78 C54,78 70,58 70,46 C70,37 63,30 54,30 Z M54,52 C50.7,52 48,49.3 48,46 C48,42.7 50.7,40 54,40 C57.3,40 60,42.7 60,46 C60,49.3 57.3,52 54,52 Z"/>
+        android:pathData="M54,25 C44.06,25 36,33.06 36,43 C36,56.5 54,80 54,80 C54,80 72,56.5 72,43 C72,33.06 63.94,25 54,25 Z M54,50.5 C49.86,50.5 46.5,47.14 46.5,43 C46.5,38.86 49.86,35.5 54,35.5 C58.14,35.5 61.5,38.86 61.5,43 C61.5,47.14 58.14,50.5 54,50.5 Z"/>
+    <!-- Curved redirect arrow wrapping around pin -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.85"
+        android:pathData="M38,38 C35.5,32 38,26 44,23 C44,23 40,27 41,32 Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.85"
+        android:pathData="M70,38 C72.5,32 70,26 64,23 C64,23 68,27 67,32 Z"/>
+    <!-- Arrow arc -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M40,30 Q46,18 54,18 Q62,18 68,30"/>
+    <!-- Arrow head -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M65,26 L69,31 L63,32 Z"/>
 </vector>
