@@ -1,31 +1,33 @@
 # MapFlip
 
-Apple Maps → Google Maps Redirector für Android.
-
-## Was macht MapFlip?
-
-MapFlip fängt Apple Maps Links (`maps.apple.com`) automatisch ab und öffnet sie in Google Maps. Nach einmaliger Einrichtung arbeitet die App komplett unsichtbar im Hintergrund.
+Automatically redirect Apple Maps links to Google Maps on Android. Set up once, then it works invisibly in the background.
 
 ## Features
 
-- 🔄 Automatische Umleitung – kein manuelles Kopieren
-- 👻 Unsichtbar – die App öffnet sich nicht sichtbar
-- 🗺️ Unterstützt Suchen, Koordinaten, Adressen & Navigation
-- 🔒 Keine Datensammlung, keine Werbung
-- 🌍 Deutsch & Englisch
+- 🔄 Automatic redirect – no manual copying
+- 👻 Invisible – the app doesn't visibly open
+- 🗺️ Supports searches, coordinates, addresses & navigation
+- 🔒 No data collection, no ads
+- 🌍 English & German
 
-## Einrichtung
+## How it works
 
-1. App installieren
-2. App öffnen → „Einstellungen öffnen" tippen
-3. Link-Weiterleitung für `maps.apple.com` aktivieren
-4. Fertig!
+1. Install MapFlip
+2. Open the app → tap "Open Settings"
+3. Enable link forwarding for `maps.apple.com`
+4. Done!
+
+From now on, every Apple Maps link opens directly in Google Maps.
+
+## Download
+
+Download the latest APK from [Releases](https://github.com/thefraggle/mapflip/releases).
 
 ## Tech Stack
 
 - Kotlin + Jetpack Compose (Material 3)
 - Min SDK 26 (Android 8.0), Target SDK 35
-- Keine externen Dependencies außer AndroidX
+- No external dependencies beyond AndroidX
 
 ## Build
 
@@ -34,6 +36,6 @@ MapFlip fängt Apple Maps Links (`maps.apple.com`) automatisch ab und öffnet si
 ./gradlew :app:testDebugUnitTest
 ```
 
-## Lizenz
+## License
 
-© 2025 Daniel Notthoff – [notthoff.org](https://notthoff.org)
+[MIT](LICENSE) © 2025 Daniel Notthoff – [notthoff.org](https://notthoff.org)
