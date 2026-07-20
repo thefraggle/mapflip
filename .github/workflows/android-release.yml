@@ -52,6 +52,9 @@ jobs:
             APP_VERSION="$GRADLE_VERSION"
           fi
           echo "app_version=$APP_VERSION" >> $GITHUB_OUTPUT
+          
+          # Extract raw English changelog for GitHub Release body
+          python3 -c "import re, os; content = open('docs/CHANGELOG.en.md', encoding='utf-8').read(); m = re.search(r'## \d+\.\d+\.\d+.*?\n(.*?)(?=\n## \d+\.\d+\.\d+|$)', content, re.DOTALL); open('release_body.md', 'w', encoding='utf-8').write(m.group(1).strip() if m else 'Release notes automatically published.')"
 
       - name: Run Unit Tests
         run: ./gradlew :app:testDebugUnitTest --build-cache
@@ -103,7 +106,7 @@ jobs:
             MapFlip-v${{ steps.metadata.outputs.app_version }}-release.aab
             MapFlip-v${{ steps.metadata.outputs.app_version }}-release.apk
           name: Release ${{ github.ref_name }}
-          body: "Release notes automatically published to Google Play Store."
+          body_path: release_body.md
           prerelease: false
           make_latest: true
 
