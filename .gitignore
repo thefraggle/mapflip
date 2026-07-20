@@ -17,4 +17,6 @@ local.properties
 *.hprof
 keystore.properties
 release-notes/
+.env
+
 
