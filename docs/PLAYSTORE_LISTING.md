@@ -108,4 +108,4 @@ MapFlip was built for Android users who regularly receive Apple Maps links from 
 |---|---|
 | **Entwickler** | Daniel Notthoff |
 | **Website** | https://notthoff.org |
-| **Datenschutz-URL** | https://notthoff.org/mapflip/privacy |
+| **Datenschutz-URL** | https://goork.de/mapflip/#privacy |

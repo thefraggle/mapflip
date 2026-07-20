@@ -2,6 +2,8 @@
 
 Automatically redirect Apple Maps links to Google Maps on Android. Set up once, then it works invisibly in the background.
 
+🔗 **Website & Privacy Policy:** [goork.de/mapflip](https://goork.de/mapflip/)
+
 ## Features
 
 - 🔄 Automatic redirect – no manual copying
@@ -38,4 +40,4 @@ Download the latest APK from [Releases](https://github.com/thefraggle/mapflip/re
 
 ## License
 
-[MIT](LICENSE) © 2025 Daniel Notthoff – [notthoff.org](https://notthoff.org)
+[MIT](LICENSE) © 2026 Daniel Notthoff – [notthoff.org](https://notthoff.org)
