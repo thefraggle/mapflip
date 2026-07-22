@@ -1,3 +1,8 @@
+## 1.0.1
+- Feedback-Button zum schnellen Melden von Wünschen und Fehlern hinzugefügt
+- Neue pulsierende Anzeige signalisiert die aktive Hintergrundfunktion
+- Performance und Stabilität verbessert
+
 ## 1.0.0
 - Erstveröffentlichung von MapFlip
 - Automatische Weiterleitung von Apple Maps Links zu Google Maps

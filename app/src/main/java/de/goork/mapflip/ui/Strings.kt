@@ -24,6 +24,7 @@ object Strings {
         val famwakeButton: String,
         val copyright: String,
         val langToggle: String,
+        val btnFeedback: String,
     )
 
     val DE = AppStrings(
@@ -42,8 +43,9 @@ object Strings {
         famwakePromo = "Vom gleichen Entwickler",
         famwakeDesc = "FamWake koordiniert den Morgen f\u00fcr die ganze Familie \u2013 Bad-Zeiten, Fr\u00fchst\u00fcck und Aufstehen.",
         famwakeButton = "Mehr erfahren",
-        copyright = "\u00a9 2025 Daniel Notthoff \u2022 notthoff.org",
+        copyright = "\u00a9 2026 Daniel Notthoff \u2022 notthoff.org",
         langToggle = "EN",
+        btnFeedback = "Feedback & Bugs melden",
     )
 
     val EN = AppStrings(
@@ -62,7 +64,8 @@ object Strings {
         famwakePromo = "From the same developer",
         famwakeDesc = "FamWake coordinates the morning for the whole family \u2013 bathroom times, breakfast, and wake-up.",
         famwakeButton = "Learn more",
-        copyright = "\u00a9 2025 Daniel Notthoff \u2022 notthoff.org",
+        copyright = "\u00a9 2026 Daniel Notthoff \u2022 notthoff.org",
         langToggle = "DE",
+        btnFeedback = "Report Feedback & Bugs",
     )
 }

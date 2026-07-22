@@ -6,7 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CheckCircle
+import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.*
@@ -227,6 +228,39 @@ fun MainScreen() {
                 )
             }
 
+            Spacer(Modifier.height(12.dp))
+
+            // Feedback button for testers
+            OutlinedButton(
+                onClick = {
+                    val intent = Intent(Intent.ACTION_SENDTO).apply {
+                        data = Uri.parse("mailto:daniel.notthoff@gmail.com")
+                        putExtra(Intent.EXTRA_SUBJECT, "[MapFlip v1.0.1 Feedback]")
+                    }
+                    try {
+                        context.startActivity(intent)
+                    } catch (_: Exception) {}
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp)
+                    .height(48.dp),
+                shape = RoundedCornerShape(14.dp)
+            ) {
+                Icon(
+                    Icons.Outlined.Email,
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp)
+                )
+                Spacer(Modifier.width(8.dp))
+                Text(
+                    s.btnFeedback,
+                    style = MaterialTheme.typography.labelMedium.copy(
+                        fontWeight = FontWeight.Medium
+                    )
+                )
+            }
+
             Spacer(Modifier.height(16.dp))
 
             // Status indicator – refined
@@ -378,6 +412,17 @@ private fun StatusBadge(text: String, active: Boolean) {
     )
     val contentColor = if (active) Green500 else Red500
 
+    val infiniteTransition = rememberInfiniteTransition(label = "pulse")
+    val pulseAlpha by infiniteTransition.animateFloat(
+        initialValue = 0.3f,
+        targetValue = 1.0f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1000, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "pulseAlpha"
+    )
+
     Surface(
         color = bgColor,
         shape = RoundedCornerShape(12.dp),
@@ -387,12 +432,21 @@ private fun StatusBadge(text: String, active: Boolean) {
             Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                if (active) Icons.Outlined.CheckCircle else Icons.Outlined.Info,
-                contentDescription = null,
-                tint = contentColor,
-                modifier = Modifier.size(18.dp)
-            )
+            if (active) {
+                Box(
+                    modifier = Modifier
+                        .size(10.dp)
+                        .clip(CircleShape)
+                        .background(Green500.copy(alpha = pulseAlpha))
+                )
+            } else {
+                Icon(
+                    Icons.Outlined.Info,
+                    contentDescription = null,
+                    tint = contentColor,
+                    modifier = Modifier.size(18.dp)
+                )
+            }
             Spacer(Modifier.width(10.dp))
             Text(
                 text = text,

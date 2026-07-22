@@ -1,3 +1,8 @@
+## 1.0.1
+- Added direct feedback button to report issues and suggestions
+- New pulsing indicator visualizes active background service status
+- Improved overall performance and stability
+
 ## 1.0.0
 - Initial release of MapFlip
 - Automatically redirect Apple Maps links to Google Maps
