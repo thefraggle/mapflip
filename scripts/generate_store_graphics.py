@@ -38,6 +38,17 @@ def draw_rounded_rect(draw, coords, radius, fill, outline=None, width=1):
     """Draws a rounded rectangle."""
     draw.rounded_rectangle(coords, radius=radius, fill=fill, outline=outline, width=width)
 
+def draw_icon_badge(draw, x, y, size, bg_color, symbol, symbol_color=(255, 255, 255)):
+    """Draws a circular badge with a centered vector symbol."""
+    draw.ellipse((x, y, x + size, y + size), fill=bg_color)
+    font = get_font(FONT_BOLD, int(size * 0.52))
+    bbox = font.getbbox(symbol)
+    sw = bbox[2] - bbox[0]
+    sh = bbox[3] - bbox[1]
+    sx = x + (size - sw) // 2 - bbox[0]
+    sy = y + (size - sh) // 2 - bbox[1]
+    draw.text((sx, sy), symbol, font=font, fill=symbol_color)
+
 def add_drop_shadow(image, radius=20, offset=(0, 15), shadow_color=(0, 0, 0, 120)):
     """Creates a shadow behind an image."""
     shadow = Image.new("RGBA", (image.width + radius * 2, image.height + radius * 2), (0, 0, 0, 0))
@@ -132,8 +143,8 @@ def create_screen(config, output_path):
             shadow_img = add_drop_shadow(framed, radius=30, offset=(0, 20))
             bg.paste(shadow_img, (60, 680), shadow_img)
             
-            # Draw an arrow / callout badge underneath
-            badge_font = get_font(FONT_BOLD, 36)
+            # Draw callout badge underneath
+            badge_font = get_font(FONT_BOLD, 34)
             callout = Image.new("RGBA", (840, 140), (0, 0, 0, 0))
             c_draw = ImageDraw.Draw(callout)
             draw_rounded_rect(c_draw, (0, 0, 840, 140), radius=24, fill=(16, 185, 129, 230))
@@ -175,21 +186,21 @@ def create_screen(config, output_path):
         card_title_font = get_font(FONT_BOLD, 42)
         card_desc_font = get_font(FONT_REGULAR, 30)
         
-        for icon, title, desc in cards:
-            card = Image.new("RGBA", (920, 280), (0, 0, 0, 0))
+        for badge_color, symbol, title, desc in cards:
+            card = Image.new("RGBA", (920, 260), (0, 0, 0, 0))
             c_draw = ImageDraw.Draw(card)
-            draw_rounded_rect(c_draw, (0, 0, 920, 280), radius=28, fill=(30, 41, 59, 230), outline=(71, 85, 105, 180), width=2)
+            draw_rounded_rect(c_draw, (0, 0, 920, 260), radius=28, fill=(30, 41, 59, 230), outline=(71, 85, 105, 180), width=2)
             
-            # Icon
-            c_draw.text((40, 40), icon, font=get_font(FONT_BOLD, 64), fill=(129, 140, 248))
-            # Title
+            # Circular Icon Badge
+            draw_icon_badge(c_draw, 40, 45, 80, badge_color, symbol)
+            
+            # Title & Desc
             c_draw.text((150, 45), title, font=card_title_font, fill=(255, 255, 255))
-            # Desc
-            c_draw.text((150, 110), desc, font=card_desc_font, fill=(148, 163, 184))
+            c_draw.text((150, 105), desc, font=card_desc_font, fill=(148, 163, 184))
             
             c_shadow = add_drop_shadow(card, radius=20, offset=(0, 12))
             bg.paste(c_shadow, (80, y_card), c_shadow)
-            y_card += 340
+            y_card += 310
 
     bg.save(output_path, "PNG")
     print(f"Generated Promo Screen: {output_path}")
@@ -268,19 +279,19 @@ def main():
             'subtitle': 'Kein Kopieren, kein Einfügen, 100% automatisch.',
             'raw_image': f"{RAW_DIR}/raw_chat.png",
             'is_chat': True,
-            'callout_text_1': '⚡ Apple Maps Link angetippt',
+            'callout_text_1': '✓ Apple Maps Link angetippt',
             'callout_text_2': '→ Öffnet sich direkt in Google Maps!'
         },
         {
             'category': 'DATENSCHUTZ & FREIHEIT',
             'headline': '100% Kostenlos,\nOhne Werbung & Privat',
-            'subtitle': 'Vom Entwickler von FamWake gebaut.',
+            'subtitle': 'Keine Datenerfassung. Minimalistisch & Schnell.',
             'is_features': True,
             'feature_cards': [
-                ("🔒", "100% Datenschutz", "Keine Datenerfassung, kein Tracking, keine Server."),
-                ("⚡", "0ms Verzögerung", "Direktes Umleiten im Hintergrund ohne Ladezeit."),
-                ("🆓", "100% Gratis", "Keine In-App Käufe, keine Werbung, Open Source."),
-                ("🔋", "Akkuschonend", "Verbraucht 0% Akku – läuft nur bei Link-Klick.")
+                ((16, 185, 129), "✓", "100% Datenschutz", "Keine Datenerfassung, kein Tracking, keine Server."),
+                ((99, 102, 241), "→", "0ms Verzögerung", "Direktes Umleiten im Hintergrund ohne Ladezeit."),
+                ((245, 158, 11), "★", "100% Gratis", "Keine In-App Käufe, keine Werbung, Open Source."),
+                ((6, 182, 212), "✔", "Akkuschonend", "Verbraucht 0% Akku – läuft nur bei Link-Klick.")
             ]
         }
     ]
@@ -305,19 +316,19 @@ def main():
             'subtitle': 'No copying, no pasting, 100% automatic.',
             'raw_image': f"{RAW_DIR}/raw_chat.png",
             'is_chat': True,
-            'callout_text_1': '⚡ Tapped Apple Maps Link',
+            'callout_text_1': '✓ Tapped Apple Maps Link',
             'callout_text_2': '→ Opens directly in Google Maps!'
         },
         {
             'category': 'PRIVACY & FREEDOM',
             'headline': '100% Free, No Ads\n& Privacy-First',
-            'subtitle': 'Built by the creator of FamWake.',
+            'subtitle': 'No data collection. Minimalist & Fast.',
             'is_features': True,
             'feature_cards': [
-                ("🔒", "100% Privacy", "Zero data collection, no tracking, no servers."),
-                ("⚡", "Instant Redirect", "Direct background routing with zero delay."),
-                ("🆓", "100% Free", "No in-app purchases, no ads, open source."),
-                ("🔋", "Battery Friendly", "Zero battery impact – runs only on link tap.")
+                ((16, 185, 129), "✓", "100% Privacy", "Zero data collection, no tracking, no servers."),
+                ((99, 102, 241), "→", "Instant Redirect", "Direct background routing with zero delay."),
+                ((245, 158, 11), "★", "100% Free", "No in-app purchases, no ads, open source."),
+                ((6, 182, 212), "✔", "Battery Friendly", "Zero battery impact – runs only on link tap.")
             ]
         }
     ]
