@@ -1,0 +1,29 @@
+name: Update Play Store Metadata
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-metadata:
+    name: Update Play Store Listings (14 Locales)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install google-api-python-client google-auth
+
+      - name: Update Store Listings via Google Play Developer API
+        env:
+          SERVICE_ACCOUNT_JSON: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+        run: |
+          python scripts/update_playstore_listing.py
