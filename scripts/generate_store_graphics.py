@@ -38,16 +38,47 @@ def draw_rounded_rect(draw, coords, radius, fill, outline=None, width=1):
     """Draws a rounded rectangle."""
     draw.rounded_rectangle(coords, radius=radius, fill=fill, outline=outline, width=width)
 
-def draw_icon_badge(draw, x, y, size, bg_color, symbol, symbol_color=(255, 255, 255)):
-    """Draws a circular badge with a centered vector symbol."""
+def draw_vector_icon(draw, cx, cy, size, icon_type, color=(255, 255, 255)):
+    """Draws crisp vector icons guaranteed to render on all systems without font dependencies."""
+    w = max(4, int(size * 0.12))
+    if icon_type == 'check':
+        p1 = (cx - size * 0.32, cy - size * 0.05)
+        p2 = (cx - size * 0.1, cy + size * 0.25)
+        p3 = (cx + size * 0.32, cy - size * 0.25)
+        draw.line([p1, p2, p3], fill=color, width=w, joint='round')
+    elif icon_type == 'arrow':
+        p1 = (cx - size * 0.32, cy)
+        p2 = (cx + size * 0.32, cy)
+        a1 = (cx + size * 0.1, cy - size * 0.2)
+        a2 = (cx + size * 0.1, cy + size * 0.2)
+        draw.line([p1, p2], fill=color, width=w)
+        draw.line([a1, p2, a2], fill=color, width=w, joint='round')
+    elif icon_type == 'star':
+        points = []
+        r_outer = size * 0.36
+        r_inner = size * 0.16
+        for i in range(10):
+            r = r_outer if i % 2 == 0 else r_inner
+            angle = i * math.pi / 5 - math.pi / 2
+            points.append((cx + r * math.cos(angle), cy + r * math.sin(angle)))
+        draw.polygon(points, fill=color)
+    elif icon_type == 'zap':
+        p = [
+            (cx + size * 0.05, cy - size * 0.38),
+            (cx - size * 0.25, cy + size * 0.02),
+            (cx - size * 0.02, cy + size * 0.02),
+            (cx - size * 0.08, cy + size * 0.38),
+            (cx + size * 0.25, cy - size * 0.02),
+            (cx + size * 0.02, cy - size * 0.02)
+        ]
+        draw.polygon(p, fill=color)
+
+def draw_icon_badge(draw, x, y, size, bg_color, icon_type, symbol_color=(255, 255, 255)):
+    """Draws a circular badge containing a vector icon."""
     draw.ellipse((x, y, x + size, y + size), fill=bg_color)
-    font = get_font(FONT_BOLD, int(size * 0.52))
-    bbox = font.getbbox(symbol)
-    sw = bbox[2] - bbox[0]
-    sh = bbox[3] - bbox[1]
-    sx = x + (size - sw) // 2 - bbox[0]
-    sy = y + (size - sh) // 2 - bbox[1]
-    draw.text((sx, sy), symbol, font=font, fill=symbol_color)
+    cx = x + size // 2
+    cy = y + size // 2
+    draw_vector_icon(draw, cx, cy, int(size * 0.7), icon_type, color=symbol_color)
 
 def add_drop_shadow(image, radius=20, offset=(0, 15), shadow_color=(0, 0, 0, 120)):
     """Creates a shadow behind an image."""
@@ -148,8 +179,13 @@ def create_screen(config, output_path):
             callout = Image.new("RGBA", (840, 140), (0, 0, 0, 0))
             c_draw = ImageDraw.Draw(callout)
             draw_rounded_rect(c_draw, (0, 0, 840, 140), radius=24, fill=(16, 185, 129, 230))
-            c_draw.text((40, 30), config['callout_text_1'], font=badge_font, fill=(255, 255, 255))
-            c_draw.text((40, 80), config['callout_text_2'], font=subtitle_font, fill=(236, 253, 245))
+            
+            # Vector icons on callout
+            draw_vector_icon(c_draw, 50, 48, 30, 'check', color=(255, 255, 255))
+            c_draw.text((80, 28), config['callout_text_1'], font=badge_font, fill=(255, 255, 255))
+            
+            draw_vector_icon(c_draw, 50, 96, 30, 'arrow', color=(236, 253, 245))
+            c_draw.text((80, 78), config['callout_text_2'], font=subtitle_font, fill=(236, 253, 245))
             
             c_shadow = add_drop_shadow(callout, radius=20, offset=(0, 10))
             bg.paste(c_shadow, (100, 1350), c_shadow)
@@ -186,13 +222,13 @@ def create_screen(config, output_path):
         card_title_font = get_font(FONT_BOLD, 42)
         card_desc_font = get_font(FONT_REGULAR, 30)
         
-        for badge_color, symbol, title, desc in cards:
+        for badge_color, icon_type, title, desc in cards:
             card = Image.new("RGBA", (920, 260), (0, 0, 0, 0))
             c_draw = ImageDraw.Draw(card)
             draw_rounded_rect(c_draw, (0, 0, 920, 260), radius=28, fill=(30, 41, 59, 230), outline=(71, 85, 105, 180), width=2)
             
-            # Circular Icon Badge
-            draw_icon_badge(c_draw, 40, 45, 80, badge_color, symbol)
+            # Circular Vector Icon Badge
+            draw_icon_badge(c_draw, 40, 45, 80, badge_color, icon_type)
             
             # Title & Desc
             c_draw.text((150, 45), title, font=card_title_font, fill=(255, 255, 255))
@@ -226,7 +262,11 @@ def create_feature_graphic(config, output_path):
     
     # Left Text Block
     draw.text((70, 90), "MapFlip", font=title_font, fill=(255, 255, 255))
-    draw.text((70, 185), config['subtitle'], font=sub_font, fill=(199, 210, 254))
+    
+    # Draw vector arrow between Apple Maps and Google Maps
+    draw.text((70, 185), "Apple Maps", font=sub_font, fill=(199, 210, 254))
+    draw_vector_icon(draw, 320, 203, 30, 'arrow', color=(199, 210, 254))
+    draw.text((360, 185), "Google Maps", font=sub_font, fill=(199, 210, 254))
     
     # Tagline Pill
     pill_text = config['tagline']
@@ -279,8 +319,8 @@ def main():
             'subtitle': 'Kein Kopieren, kein Einfügen, 100% automatisch.',
             'raw_image': f"{RAW_DIR}/raw_chat.png",
             'is_chat': True,
-            'callout_text_1': '✓ Apple Maps Link angetippt',
-            'callout_text_2': '→ Öffnet sich direkt in Google Maps!'
+            'callout_text_1': 'Apple Maps Link angetippt',
+            'callout_text_2': 'Öffnet sich direkt in Google Maps!'
         },
         {
             'category': 'DATENSCHUTZ & FREIHEIT',
@@ -288,10 +328,10 @@ def main():
             'subtitle': 'Keine Datenerfassung. Minimalistisch & Schnell.',
             'is_features': True,
             'feature_cards': [
-                ((16, 185, 129), "✓", "100% Datenschutz", "Keine Datenerfassung, kein Tracking, keine Server."),
-                ((99, 102, 241), "→", "0ms Verzögerung", "Direktes Umleiten im Hintergrund ohne Ladezeit."),
-                ((245, 158, 11), "★", "100% Gratis", "Keine In-App Käufe, keine Werbung, Open Source."),
-                ((6, 182, 212), "✔", "Akkuschonend", "Verbraucht 0% Akku – läuft nur bei Link-Klick.")
+                ((16, 185, 129), "check", "100% Datenschutz", "Keine Datenerfassung, kein Tracking, keine Server."),
+                ((99, 102, 241), "arrow", "0ms Verzögerung", "Direktes Umleiten im Hintergrund ohne Ladezeit."),
+                ((245, 158, 11), "star", "100% Gratis", "Keine In-App Käufe, keine Werbung, Open Source."),
+                ((6, 182, 212), "zap", "Akkuschonend", "Verbraucht 0% Akku – läuft nur bei Link-Klick.")
             ]
         }
     ]
@@ -316,8 +356,8 @@ def main():
             'subtitle': 'No copying, no pasting, 100% automatic.',
             'raw_image': f"{RAW_DIR}/raw_chat.png",
             'is_chat': True,
-            'callout_text_1': '✓ Tapped Apple Maps Link',
-            'callout_text_2': '→ Opens directly in Google Maps!'
+            'callout_text_1': 'Tapped Apple Maps Link',
+            'callout_text_2': 'Opens directly in Google Maps!'
         },
         {
             'category': 'PRIVACY & FREEDOM',
@@ -325,10 +365,10 @@ def main():
             'subtitle': 'No data collection. Minimalist & Fast.',
             'is_features': True,
             'feature_cards': [
-                ((16, 185, 129), "✓", "100% Privacy", "Zero data collection, no tracking, no servers."),
-                ((99, 102, 241), "→", "Instant Redirect", "Direct background routing with zero delay."),
-                ((245, 158, 11), "★", "100% Free", "No in-app purchases, no ads, open source."),
-                ((6, 182, 212), "✔", "Battery Friendly", "Zero battery impact – runs only on link tap.")
+                ((16, 185, 129), "check", "100% Privacy", "Zero data collection, no tracking, no servers."),
+                ((99, 102, 241), "arrow", "Instant Redirect", "Direct background routing with zero delay."),
+                ((245, 158, 11), "star", "100% Free", "No in-app purchases, no ads, open source."),
+                ((6, 182, 212), "zap", "Battery Friendly", "Zero battery impact – runs only on link tap.")
             ]
         }
     ]
@@ -337,7 +377,6 @@ def main():
     for idx, screen in enumerate(de_screens, 1):
         create_screen(screen, f"{OUTPUT_BASE}/de-DE/screen_{idx}.png")
     create_feature_graphic({
-        'subtitle': 'Apple Maps → Google Maps',
         'tagline': 'Automatisch. Unsichtbar. Datenschutzfreundlich.'
     }, f"{OUTPUT_BASE}/de-DE/feature_graphic.png")
 
@@ -345,7 +384,6 @@ def main():
     for idx, screen in enumerate(en_screens, 1):
         create_screen(screen, f"{OUTPUT_BASE}/en-US/screen_{idx}.png")
     create_feature_graphic({
-        'subtitle': 'Apple Maps → Google Maps',
         'tagline': 'Automatic. Invisible. Privacy-First.'
     }, f"{OUTPUT_BASE}/en-US/feature_graphic.png")
 
