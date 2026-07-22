@@ -131,11 +131,11 @@ def create_screen(config, output_path):
     bg.paste(glow, (600, 1200), glow)
     
     # 2. Text Content Top Section
-    category_font = get_font(FONT_BOLD, 38)
-    headline_font = get_font(FONT_BOLD, 76)
-    subtitle_font = get_font(FONT_REGULAR, 46)
+    category_font = get_font(FONT_BOLD, 36)
+    headline_font = get_font(FONT_BOLD, 68)
+    subtitle_font = get_font(FONT_REGULAR, 40)
     
-    y_offset = 100
+    y_offset = 95
     
     # Category Pill
     cat_text = config['category'].upper()
@@ -143,7 +143,7 @@ def create_screen(config, output_path):
     cat_w = cat_bbox[2] - cat_bbox[0]
     cat_h = cat_bbox[3] - cat_bbox[1]
     
-    pill_padding_x = 30
+    pill_padding_x = 28
     pill_padding_y = 12
     pill_x = 80
     pill_w = cat_w + pill_padding_x * 2
@@ -159,18 +159,23 @@ def create_screen(config, output_path):
     )
     draw.text((pill_x + pill_padding_x, y_offset + pill_padding_y - 2), cat_text, font=category_font, fill=(199, 210, 254))
     
-    y_offset += pill_h + 35
+    y_offset += pill_h + 30
     
-    # Headline
-    lines = config['headline'].split('\n')
-    for line in lines:
-        draw.text((80, y_offset), line, font=headline_font, fill=(255, 255, 255))
-        y_offset += 92
+    # Headline (Automated Multiline Word-Wrap)
+    raw_lines = config['headline'].split('\n')
+    for raw_line in raw_lines:
+        h_lines = wrap_text(raw_line, headline_font, max_width=920)
+        for h_line in h_lines:
+            draw.text((80, y_offset), h_line, font=headline_font, fill=(255, 255, 255))
+            y_offset += 84
         
-    y_offset += 20
+    y_offset += 15
     
-    # Subtitle
-    draw.text((80, y_offset), config['subtitle'], font=subtitle_font, fill=(203, 213, 225))
+    # Subtitle (Automated Multiline Word-Wrap)
+    sub_lines = wrap_text(config['subtitle'], subtitle_font, max_width=920)
+    for s_line in sub_lines:
+        draw.text((80, y_offset), s_line, font=subtitle_font, fill=(203, 213, 225))
+        y_offset += 52
     
     # 3. Image Frame Section
     raw_img_path = config.get('raw_image')
