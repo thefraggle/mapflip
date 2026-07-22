@@ -4,7 +4,7 @@ import sys
 
 LISTINGS = {
     'en-US': {
-        'title': 'MapFlip – Apple to Google Maps',
+        'title': 'MapFlip - Apple to Google',
         'shortDescription': 'Automatically open Apple Maps links directly in Google Maps.',
         'fullDescription': """Your friends send you Apple Maps links – but you use Google Maps?
 
@@ -33,7 +33,7 @@ MapFlip solves this problem. Set it up once, and everything happens automaticall
 MapFlip was built for Android users who regularly receive Apple Maps links from iPhone users – whether via WhatsApp, email, SMS, or social media."""
     },
     'de-DE': {
-        'title': 'MapFlip – Apple zu Google Maps',
+        'title': 'MapFlip - Apple zu Google',
         'shortDescription': 'Apple Maps Links automatisch in Google Maps öffnen.',
         'fullDescription': """Deine Freunde schicken dir Apple Maps Links – aber du nutzt Google Maps?
 
@@ -62,7 +62,7 @@ MapFlip löst dieses Problem. Einmal einrichten, danach passiert alles automatis
 MapFlip wurde für Android-Nutzer entwickelt, die regelmäßig Apple Maps Links von iPhone-Nutzern erhalten – ob per WhatsApp, E-Mail, SMS oder Social Media."""
     },
     'da-DK': {
-        'title': 'MapFlip – Apple til Google Maps',
+        'title': 'MapFlip - Apple til Google',
         'shortDescription': 'Åbn Apple Maps-links automatisk i Google Maps.',
         'fullDescription': """Dine venner sender dig Apple Maps-links – men du bruger Google Maps?
 
@@ -91,7 +91,7 @@ MapFlip løser dette problem. Sæt det op én gang, og alt sker automatisk: Hver
 MapFlip er bygget til Android-brugere, der regelmæssigt modtager Apple Maps-links fra iPhone-brugere – uanset om det er via WhatsApp, e-mail, SMS eller sociale medier."""
     },
     'fr-FR': {
-        'title': 'MapFlip - Apple à Google Maps',
+        'title': 'MapFlip - Apple à Google',
         'shortDescription': 'Ouvrez automatiquement les liens Apple Maps dans Google Maps.',
         'fullDescription': """Vos amis vous envoient des liens Apple Maps – mais vous utilisez Google Maps ?
 
@@ -120,7 +120,7 @@ MapFlip résout ce problème. Configurez-le une fois, et tout se fait automatiqu
 MapFlip a été conçu pour les utilisateurs d'Android qui reçoivent régulièrement des liens Apple Maps de la part d'utilisateurs d'iPhone – que ce soit par WhatsApp, e-mail, SMS ou réseaux sociaux."""
     },
     'it-IT': {
-        'title': 'MapFlip: Apple a Google Maps',
+        'title': 'MapFlip - Apple a Google',
         'shortDescription': 'Apri automaticamente i link di Apple Maps in Google Maps.',
         'fullDescription': """I tuoi amici ti inviano link di Apple Maps – ma tu usi Google Maps?
 
@@ -178,7 +178,7 @@ MapFlipがその問題を解決します。一度設定するだけで、すべ�
 MapFlipは、iPhoneユーザーからApple Mapsのリンクをよく受け取るAndroidユーザーのために開発されました（LINE、WhatsApp、メール、SMS、SNSなど）。"""
     },
     'nl-NL': {
-        'title': 'MapFlip: Apple naar Google Maps',
+        'title': 'MapFlip - Apple naar Google',
         'shortDescription': 'Open Apple Maps-links automatisch in Google Maps.',
         'fullDescription': """Je vrienden sturen je Apple Maps-links – maar jij gebruikt Google Maps?
 
@@ -207,7 +207,7 @@ MapFlip lost dit probleem op. Stel het één keer in en alles gebeurt automatisc
 MapFlip is gebouwd voor Android-gebruikers die regelmatig Apple Maps-links ontvangen van iPhone-gebruikers – via WhatsApp, e-mail, sms of sociale media."""
     },
     'no-NO': {
-        'title': 'MapFlip – Apple til Google Maps',
+        'title': 'MapFlip - Apple til Google',
         'shortDescription': 'Åpne Apple Maps-lenker automatisk i Google Maps.',
         'fullDescription': """Vennene dine sender deg Apple Maps-lenker – men du bruker Google Maps?
 
@@ -236,7 +236,7 @@ MapFlip løser dette problemet. Sett det opp én gang, og alt skjer automatisk: 
 MapFlip er bygget for Android-brukere som regelmessig mottar Apple Maps-lenker fra iPhone-brukere – enten via WhatsApp, e-post, SMS eller sosiale medier."""
     },
     'pl-PL': {
-        'title': 'MapFlip – Apple na Google Maps',
+        'title': 'MapFlip - Apple na Google',
         'shortDescription': 'Automatycznie otwieraj linki Apple Maps w Google Maps.',
         'fullDescription': """Znajomi przysyłają Ci linki z Apple Maps – ale Ty używasz Google Maps?
 
@@ -265,7 +265,7 @@ MapFlip rozwiązuje ten problem. Skonfiguruj raz, a wszystko stanie się automat
 MapFlip powstał z myślą o użytkownikach Androida, którzy regularnie otrzymują linki Apple Maps od użytkowników iPhone'ów – przez WhatsApp, e-mail, SMS czy media społecznościowe."""
     },
     'pt-BR': {
-        'title': 'MapFlip: Apple p/ Google Maps',
+        'title': 'MapFlip - Apple para Google',
         'shortDescription': 'Abra links do Apple Maps diretamente no Google Maps.',
         'fullDescription': """Seus amigos enviam links do Apple Maps – mas você usa o Google Maps?
 
@@ -294,7 +294,7 @@ O MapFlip resolve esse problema. Configure uma vez e tudo acontece automaticamen
 O MapFlip foi feito para usuários de Android que recebem frequentemente links do Apple Maps de usuários de iPhone – seja pelo WhatsApp, e-mail, SMS ou redes sociais."""
     },
     'pt-PT': {
-        'title': 'MapFlip: Apple p/ Google Maps',
+        'title': 'MapFlip - Apple para Google',
         'shortDescription': 'Abra links do Apple Maps diretamente no Google Maps.',
         'fullDescription': """Os seus amigos enviam-lhe links do Apple Maps – mas você usa o Google Maps?
 
@@ -323,7 +323,7 @@ O MapFlip resolve este problema. Configure uma vez e tudo acontece automaticamen
 O MapFlip foi desenvolvido para utilizadores de Android que recebem frequentemente links do Apple Maps de utilizadores de iPhone – seja por WhatsApp, e-mail, SMS ou redes sociais."""
     },
     'sv-SE': {
-        'title': 'MapFlip – Apple til Google Maps',
+        'title': 'MapFlip - Apple till Google',
         'shortDescription': 'Öppna Apple Maps-länkar automatiskt i Google Maps.',
         'fullDescription': """Dina vänner skickar Apple Maps-länkar – men du använder Google Maps?
 
@@ -352,7 +352,7 @@ MapFlip löser detta problem. Ställ in det en gång så sker allt automatiskt: 
 MapFlip är skapat för Android-användare som regelbundet tar emot Apple Maps-länkar från iPhone-användare – via WhatsApp, e-post, SMS eller sociala medier."""
     },
     'es-ES': {
-        'title': 'MapFlip – Apple a Google Maps',
+        'title': 'MapFlip - Apple a Google',
         'shortDescription': 'Abre enlaces de Apple Maps directamente en Google Maps.',
         'fullDescription': """¿Tus amigos te envían enlaces de Apple Maps, pero tú usas Google Maps?
 
@@ -381,7 +381,7 @@ MapFlip soluciona este problema. Configúralo una vez y todo sucederá automáti
 MapFlip fue creado para usuarios de Android que reciben con frecuencia enlaces de Apple Maps de usuarios de iPhone, ya sea por WhatsApp, correo electrónico, SMS o redes sociales."""
     },
     'tr-TR': {
-        'title': 'MapFlip: Apple\'dan Google Maps',
+        'title': 'MapFlip - Apple\'dan Google',
         'shortDescription': 'Apple Maps bağlantılarını otomatik olarak Google Maps\'te açın.',
         'fullDescription': """Arkadaşlarınız size Apple Maps bağlantıları gönderiyor ama siz Google Maps mi kullanıyorsunuz?
 
