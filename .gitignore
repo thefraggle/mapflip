@@ -19,6 +19,10 @@ keystore.properties
 release-notes/
 .env
 .kotlin/
+docs/assets/playstore/
+docs/assets/raw/
+docs/PLAYSTORE_LISTING.md
+scripts/generate_metadata.py
 
 
 
