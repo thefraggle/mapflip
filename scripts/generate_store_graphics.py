@@ -96,6 +96,25 @@ def add_drop_shadow(image, radius=20, offset=(0, 15), shadow_color=(0, 0, 0, 120
     result.paste(image, (radius, radius), image)
     return result
 
+def wrap_text(text, font, max_width):
+    """Splits text into lines that fit within max_width."""
+    words = text.split(' ')
+    lines = []
+    current_line = []
+    for word in words:
+        test_line = ' '.join(current_line + [word])
+        bbox = font.getbbox(test_line)
+        w = bbox[2] - bbox[0]
+        if w <= max_width:
+            current_line.append(word)
+        else:
+            if current_line:
+                lines.append(' '.join(current_line))
+            current_line = [word]
+    if current_line:
+        lines.append(' '.join(current_line))
+    return lines
+
 def create_screen(config, output_path):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     
@@ -220,7 +239,7 @@ def create_screen(config, output_path):
         y_card = 680
         cards = config['feature_cards']
         
-        card_title_font = get_font(FONT_BOLD, 50)
+        card_title_font = get_font(FONT_BOLD, 48)
         card_desc_font = get_font(FONT_REGULAR, 34)
         
         for badge_color, icon_type, title, desc in cards:
@@ -231,9 +250,15 @@ def create_screen(config, output_path):
             # Circular Vector Icon Badge
             draw_icon_badge(c_draw, 40, 50, 96, badge_color, icon_type)
             
-            # Title & Desc
-            c_draw.text((165, 48), title, font=card_title_font, fill=(255, 255, 255))
-            c_draw.text((165, 115), desc, font=card_desc_font, fill=(148, 163, 184))
+            # Title
+            c_draw.text((165, 42), title, font=card_title_font, fill=(255, 255, 255))
+            
+            # Multiline Description Text (Word-Wrapped)
+            desc_lines = wrap_text(desc, card_desc_font, max_width=710)
+            desc_y = 110
+            for line in desc_lines:
+                c_draw.text((165, desc_y), line, font=card_desc_font, fill=(148, 163, 184))
+                desc_y += 44
             
             c_shadow = add_drop_shadow(card, radius=20, offset=(0, 12))
             bg.paste(c_shadow, (80, y_card), c_shadow)
