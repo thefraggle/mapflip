@@ -269,12 +269,12 @@ def main():
             'raw_image': f"{RAW_DIR}/raw_chat.png",
             'is_chat': True,
             'callout_text_1': '⚡ Apple Maps Link angetippt',
-            'callout_text_2': '➔ Öffnet sich direkt in Google Maps!'
+            'callout_text_2': '→ Öffnet sich direkt in Google Maps!'
         },
         {
             'category': 'DATENSCHUTZ & FREIHEIT',
             'headline': '100% Kostenlos,\nOhne Werbung & Privat',
-            'subtitle': 'Vom Entwickler von FamWake gebauet.',
+            'subtitle': 'Vom Entwickler von FamWake gebaut.',
             'is_features': True,
             'feature_cards': [
                 ("🔒", "100% Datenschutz", "Keine Datenerfassung, kein Tracking, keine Server."),
@@ -306,7 +306,7 @@ def main():
             'raw_image': f"{RAW_DIR}/raw_chat.png",
             'is_chat': True,
             'callout_text_1': '⚡ Tapped Apple Maps Link',
-            'callout_text_2': '➔ Opens directly in Google Maps!'
+            'callout_text_2': '→ Opens directly in Google Maps!'
         },
         {
             'category': 'PRIVACY & FREEDOM',
@@ -326,7 +326,7 @@ def main():
     for idx, screen in enumerate(de_screens, 1):
         create_screen(screen, f"{OUTPUT_BASE}/de-DE/screen_{idx}.png")
     create_feature_graphic({
-        'subtitle': 'Apple Maps ➔ Google Maps',
+        'subtitle': 'Apple Maps → Google Maps',
         'tagline': 'Automatisch. Unsichtbar. Datenschutzfreundlich.'
     }, f"{OUTPUT_BASE}/de-DE/feature_graphic.png")
 
@@ -334,7 +334,7 @@ def main():
     for idx, screen in enumerate(en_screens, 1):
         create_screen(screen, f"{OUTPUT_BASE}/en-US/screen_{idx}.png")
     create_feature_graphic({
-        'subtitle': 'Apple Maps ➔ Google Maps',
+        'subtitle': 'Apple Maps → Google Maps',
         'tagline': 'Automatic. Invisible. Privacy-First.'
     }, f"{OUTPUT_BASE}/en-US/feature_graphic.png")
 
