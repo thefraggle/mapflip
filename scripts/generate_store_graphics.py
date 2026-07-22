@@ -112,11 +112,11 @@ def create_screen(config, output_path):
     bg.paste(glow, (600, 1200), glow)
     
     # 2. Text Content Top Section
-    category_font = get_font(FONT_BOLD, 28)
-    headline_font = get_font(FONT_BOLD, 54)
-    subtitle_font = get_font(FONT_REGULAR, 34)
+    category_font = get_font(FONT_BOLD, 38)
+    headline_font = get_font(FONT_BOLD, 76)
+    subtitle_font = get_font(FONT_REGULAR, 46)
     
-    y_offset = 120
+    y_offset = 100
     
     # Category Pill
     cat_text = config['category'].upper()
@@ -124,8 +124,8 @@ def create_screen(config, output_path):
     cat_w = cat_bbox[2] - cat_bbox[0]
     cat_h = cat_bbox[3] - cat_bbox[1]
     
-    pill_padding_x = 24
-    pill_padding_y = 10
+    pill_padding_x = 30
+    pill_padding_y = 12
     pill_x = 80
     pill_w = cat_w + pill_padding_x * 2
     pill_h = cat_h + pill_padding_y * 2
@@ -133,22 +133,22 @@ def create_screen(config, output_path):
     draw_rounded_rect(
         draw,
         (pill_x, y_offset, pill_x + pill_w, y_offset + pill_h),
-        radius=14,
+        radius=16,
         fill=(99, 102, 241, 60),
         outline=(129, 140, 248, 120),
         width=2
     )
     draw.text((pill_x + pill_padding_x, y_offset + pill_padding_y - 2), cat_text, font=category_font, fill=(199, 210, 254))
     
-    y_offset += pill_h + 30
+    y_offset += pill_h + 35
     
     # Headline
     lines = config['headline'].split('\n')
     for line in lines:
         draw.text((80, y_offset), line, font=headline_font, fill=(255, 255, 255))
-        y_offset += 68
+        y_offset += 92
         
-    y_offset += 15
+    y_offset += 20
     
     # Subtitle
     draw.text((80, y_offset), config['subtitle'], font=subtitle_font, fill=(203, 213, 225))
@@ -172,23 +172,24 @@ def create_screen(config, output_path):
             framed.paste(raw_img, (20, 20), raw_img)
             
             shadow_img = add_drop_shadow(framed, radius=30, offset=(0, 20))
-            bg.paste(shadow_img, (60, 680), shadow_img)
+            bg.paste(shadow_img, (60, 720), shadow_img)
             
             # Draw callout badge underneath
-            badge_font = get_font(FONT_BOLD, 34)
-            callout = Image.new("RGBA", (840, 140), (0, 0, 0, 0))
+            badge_font = get_font(FONT_BOLD, 40)
+            callout_sub_font = get_font(FONT_REGULAR, 36)
+            callout = Image.new("RGBA", (860, 160), (0, 0, 0, 0))
             c_draw = ImageDraw.Draw(callout)
-            draw_rounded_rect(c_draw, (0, 0, 840, 140), radius=24, fill=(16, 185, 129, 230))
+            draw_rounded_rect(c_draw, (0, 0, 860, 160), radius=28, fill=(16, 185, 129, 230))
             
             # Vector icons on callout
-            draw_vector_icon(c_draw, 50, 48, 30, 'check', color=(255, 255, 255))
-            c_draw.text((80, 28), config['callout_text_1'], font=badge_font, fill=(255, 255, 255))
+            draw_vector_icon(c_draw, 55, 52, 34, 'check', color=(255, 255, 255))
+            c_draw.text((90, 30), config['callout_text_1'], font=badge_font, fill=(255, 255, 255))
             
-            draw_vector_icon(c_draw, 50, 96, 30, 'arrow', color=(236, 253, 245))
-            c_draw.text((80, 78), config['callout_text_2'], font=subtitle_font, fill=(236, 253, 245))
+            draw_vector_icon(c_draw, 55, 108, 34, 'arrow', color=(236, 253, 245))
+            c_draw.text((90, 88), config['callout_text_2'], font=callout_sub_font, fill=(236, 253, 245))
             
             c_shadow = add_drop_shadow(callout, radius=20, offset=(0, 10))
-            bg.paste(c_shadow, (100, 1350), c_shadow)
+            bg.paste(c_shadow, (90, 1400), c_shadow)
             
         else:
             # Full device screenshot mockup
@@ -212,31 +213,31 @@ def create_screen(config, output_path):
             bezel.paste(framed, (8, 8), framed)
             
             shadow_img = add_drop_shadow(bezel, radius=35, offset=(0, 25))
-            bg.paste(shadow_img, ((SCREEN_W - shadow_img.width) // 2, 580), shadow_img)
+            bg.paste(shadow_img, ((SCREEN_W - shadow_img.width) // 2, 700), shadow_img)
             
     elif config.get('is_features'):
         # Custom Feature Cards Grid (Screen 4)
-        y_card = 600
+        y_card = 680
         cards = config['feature_cards']
         
-        card_title_font = get_font(FONT_BOLD, 42)
-        card_desc_font = get_font(FONT_REGULAR, 30)
+        card_title_font = get_font(FONT_BOLD, 50)
+        card_desc_font = get_font(FONT_REGULAR, 34)
         
         for badge_color, icon_type, title, desc in cards:
-            card = Image.new("RGBA", (920, 260), (0, 0, 0, 0))
+            card = Image.new("RGBA", (920, 290), (0, 0, 0, 0))
             c_draw = ImageDraw.Draw(card)
-            draw_rounded_rect(c_draw, (0, 0, 920, 260), radius=28, fill=(30, 41, 59, 230), outline=(71, 85, 105, 180), width=2)
+            draw_rounded_rect(c_draw, (0, 0, 920, 290), radius=28, fill=(30, 41, 59, 230), outline=(71, 85, 105, 180), width=2)
             
             # Circular Vector Icon Badge
-            draw_icon_badge(c_draw, 40, 45, 80, badge_color, icon_type)
+            draw_icon_badge(c_draw, 40, 50, 96, badge_color, icon_type)
             
             # Title & Desc
-            c_draw.text((150, 45), title, font=card_title_font, fill=(255, 255, 255))
-            c_draw.text((150, 105), desc, font=card_desc_font, fill=(148, 163, 184))
+            c_draw.text((165, 48), title, font=card_title_font, fill=(255, 255, 255))
+            c_draw.text((165, 115), desc, font=card_desc_font, fill=(148, 163, 184))
             
             c_shadow = add_drop_shadow(card, radius=20, offset=(0, 12))
             bg.paste(c_shadow, (80, y_card), c_shadow)
-            y_card += 310
+            y_card += 340
 
     bg.save(output_path, "PNG")
     print(f"Generated Promo Screen: {output_path}")
