@@ -92,10 +92,20 @@ jobs:
           APK_PATH=$(find app/build/outputs/apk/release -name "*.apk" | head -n 1)
           cp "$APK_PATH" MapFlip-v${{ steps.metadata.outputs.app_version }}-release.apk
 
-      - name: Generate Play Store Metadata
+      - name: Prepare Release Notes
         run: |
-          pip3 install deep-translator==1.11.4
-          python3 scripts/generate_metadata.py
+          python3 -c "
+          import re, os
+          def get_latest(f):
+              if not os.path.exists(f): return 'Release notes automatically published.'
+              m = re.search(r'## \d+\.\d+\.\d+.*?\n(.*?)(?=\n## \d+\.\d+\.\d+|$)', open(f, encoding='utf-8').read(), re.DOTALL)
+              return m.group(1).strip() if m else 'Release notes automatically published.'
+          de = get_latest('docs/CHANGELOG.md')
+          en = get_latest('docs/CHANGELOG.en.md')
+          os.makedirs('release-notes', exist_ok=True)
+          for loc in ['de-DE']: open(f'release-notes/whatsnew-{loc}', 'w', encoding='utf-8').write(de)
+          for loc in ['en-US', 'da-DK', 'fr-FR', 'it-IT', 'ja-JP', 'nl-NL', 'no-NO', 'pl-PL', 'pt-BR', 'pt-PT', 'sv-SE', 'es-ES', 'tr-TR']: open(f'release-notes/whatsnew-{loc}', 'w', encoding='utf-8').write(en)
+          "
 
       # Create GitHub Release with signed AAB & APK
       - name: Create GitHub Release
