@@ -1,3 +1,8 @@
+## 1.0.2
+- Improved recognition of map links shared in chat apps and messages
+- Added support for route links with start and destination locations
+- Faster and even more reliable redirect to Google Maps
+
 ## 1.0.1
 - Added direct feedback button to report issues and suggestions
 - New pulsing indicator visualizes active background service status

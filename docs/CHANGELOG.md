@@ -1,3 +1,8 @@
+## 1.0.2
+- Erkennung von Karten-Links aus Chats und Nachrichten verbessert
+- Unterstützung für Routen mit Start- und Zielort hinzugefügt
+- Noch schnellere und zuverlässigere Weiterleitung zu Google Maps
+
 ## 1.0.1
 - Feedback-Button zum schnellen Melden von Wünschen und Fehlern hinzugefügt
 - Neue pulsierende Anzeige signalisiert die aktive Hintergrundfunktion

@@ -14,7 +14,7 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
-val appVersion = project.findProperty("versionName")?.toString() ?: "1.0.1"
+val appVersion = project.findProperty("versionName")?.toString() ?: "1.0.2"
 
 val versionCodeTimestamp = try {
     // Minutes since January 1st, 2026
