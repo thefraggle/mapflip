@@ -38,6 +38,9 @@ import de.goork.mapflip.ui.theme.Green500
 import de.goork.mapflip.ui.theme.Red500
 import java.util.Locale
 
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+
 private const val PREFS_NAME = "mapflip"
 private const val PREFS_KEY_LANG = "lang"
 private const val PREFS_KEY_PAUSED = "is_paused"
@@ -49,12 +52,17 @@ private const val URL_NOTTHOFF = "https://notthoff.org"
 fun MainScreen() {
     val context = LocalContext.current
     val prefs = remember { context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
-    val systemLang = Locale.getDefault().language
-    var lang by remember {
-        mutableStateOf(prefs.getString(PREFS_KEY_LANG, if (systemLang == "de") "de" else "en") ?: "en")
+    var langPref by remember {
+        mutableStateOf(prefs.getString(PREFS_KEY_LANG, "auto") ?: "auto")
     }
+    val activeLangCode = Strings.resolveLanguage(langPref)
+    val s = Strings.getStrings(activeLangCode)
+
     var isPaused by remember { mutableStateOf(prefs.getBoolean(PREFS_KEY_PAUSED, false)) }
-    val s = if (lang == "de") Strings.DE else Strings.EN
+    var showLanguageSheet by remember { mutableStateOf(false) }
+
+    val currentLangItem = Strings.SUPPORTED_LANGUAGES.find { it.code == langPref }
+        ?: Strings.SUPPORTED_LANGUAGES.first()
 
     var linksActive by remember { mutableStateOf<Boolean?>(null) }
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -96,21 +104,79 @@ fun MainScreen() {
                     .padding(top = 16.dp, bottom = 8.dp),
                 contentAlignment = Alignment.TopEnd
             ) {
-                // Language toggle – top right
+                // Language toggle – top right with flag
                 FilledTonalButton(
-                    onClick = {
-                        lang = if (lang == "de") "en" else "de"
-                        prefs.edit().putString(PREFS_KEY_LANG, lang).apply()
-                    },
-                    modifier = Modifier.height(32.dp),
+                    onClick = { showLanguageSheet = true },
+                    modifier = Modifier.height(34.dp),
                     contentPadding = PaddingValues(horizontal = 12.dp, vertical = 0.dp),
-                    shape = RoundedCornerShape(8.dp)
+                    shape = RoundedCornerShape(10.dp)
                 ) {
                     Text(
-                        s.langToggle,
+                        "${currentLangItem.flag} ${if (currentLangItem.code == "auto") "AUTO" else currentLangItem.code.uppercase()}",
                         style = MaterialTheme.typography.labelSmall,
                         fontWeight = FontWeight.SemiBold
                     )
+                }
+            }
+
+            // Language Selection Modal BottomSheet
+            if (showLanguageSheet) {
+                ModalBottomSheet(
+                    onDismissRequest = { showLanguageSheet = false },
+                    sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 24.dp, vertical = 12.dp)
+                    ) {
+                        Text(
+                            text = s.selectLanguageTitle,
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Spacer(Modifier.height(16.dp))
+
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .heightIn(max = 420.dp)
+                        ) {
+                            items(Strings.SUPPORTED_LANGUAGES) { item ->
+                                val isSelected = item.code == langPref
+                                Surface(
+                                    onClick = {
+                                        langPref = item.code
+                                        prefs.edit().putString(PREFS_KEY_LANG, item.code).apply()
+                                        showLanguageSheet = false
+                                    },
+                                    shape = RoundedCornerShape(12.dp),
+                                    color = if (isSelected) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+                                            else Color.Transparent,
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(horizontal = 16.dp, vertical = 12.dp),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text(item.flag, fontSize = 20.sp)
+                                        Spacer(Modifier.width(16.dp))
+                                        Text(
+                                            text = if (item.code == "auto") s.systemLanguageAuto else item.nativeName,
+                                            style = MaterialTheme.typography.bodyLarge.copy(
+                                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                                            ),
+                                            color = if (isSelected) MaterialTheme.colorScheme.primary
+                                                    else MaterialTheme.colorScheme.onSurface
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                        Spacer(Modifier.height(24.dp))
+                    }
                 }
             }
 

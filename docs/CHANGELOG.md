@@ -1,3 +1,7 @@
+## 1.0.6
+- In-App Mehrsprachigkeit für alle 14 Store-Sprachen hinzugefügt
+- Automatische Erkennung der Systemsprache mit einfachem Sprachwahl-Menü
+
 ## 1.0.5
 - Browser-Weiterleitung im pausierten Zustand für neuere Android-Versionen korrigiert
 - Zuverlässiges Öffnen der originalen Karten-Links beim Pausieren

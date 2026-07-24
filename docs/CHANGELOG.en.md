@@ -1,3 +1,7 @@
+## 1.0.6
+- Added in-app multi-language support for all 14 store languages
+- Automatic system language detection with easy language picker menu
+
 ## 1.0.5
 - Fixed browser forwarding for paused links on modern Android versions
 - Reliable opening of original map links when paused
