@@ -40,6 +40,7 @@ import java.util.Locale
 
 private const val PREFS_NAME = "mapflip"
 private const val PREFS_KEY_LANG = "lang"
+private const val PREFS_KEY_PAUSED = "is_paused"
 private const val URL_FAMWAKE = "https://play.google.com/store/apps/details?id=de.familienwecker.famwake"
 private const val URL_NOTTHOFF = "https://notthoff.org"
 
@@ -52,6 +53,7 @@ fun MainScreen() {
     var lang by remember {
         mutableStateOf(prefs.getString(PREFS_KEY_LANG, if (systemLang == "de") "de" else "en") ?: "en")
     }
+    var isPaused by remember { mutableStateOf(prefs.getBoolean(PREFS_KEY_PAUSED, false)) }
     val s = if (lang == "de") Strings.DE else Strings.EN
 
     var linksActive by remember { mutableStateOf<Boolean?>(null) }
@@ -189,6 +191,51 @@ fun MainScreen() {
 
             Spacer(Modifier.height(24.dp))
 
+            // Pause switch card – prominent, clean toggle
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+                )
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp, vertical = 14.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = s.pauseTitle,
+                            style = MaterialTheme.typography.titleMedium.copy(
+                                fontWeight = FontWeight.SemiBold
+                            ),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Spacer(Modifier.height(2.dp))
+                        Text(
+                            text = s.pauseDesc,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                        )
+                    }
+                    Spacer(Modifier.width(16.dp))
+                    Switch(
+                        checked = isPaused,
+                        onCheckedChange = { checked ->
+                            isPaused = checked
+                            prefs.edit().putBoolean(PREFS_KEY_PAUSED, checked).apply()
+                        }
+                    )
+                }
+            }
+
+            Spacer(Modifier.height(16.dp))
+
             // Settings button – prominent but elegant
             Button(
                 onClick = {
@@ -235,7 +282,7 @@ fun MainScreen() {
                 onClick = {
                     val intent = Intent(Intent.ACTION_SENDTO).apply {
                         data = Uri.parse("mailto:daniel.notthoff@gmail.com")
-                        putExtra(Intent.EXTRA_SUBJECT, "[MapFlip v1.0.1 Feedback]")
+                        putExtra(Intent.EXTRA_SUBJECT, "[MapFlip v1.0.3 Feedback]")
                     }
                     try {
                         context.startActivity(intent)
@@ -264,10 +311,11 @@ fun MainScreen() {
             Spacer(Modifier.height(16.dp))
 
             // Status indicator – refined
-            when (linksActive) {
-                true -> StatusBadge(text = s.statusActive, active = true)
-                false -> StatusBadge(text = s.statusInactive, active = false)
-                null -> Row(
+            when {
+                isPaused -> StatusBadge(text = s.statusPaused, active = false, isPaused = true)
+                linksActive == true -> StatusBadge(text = s.statusActive, active = true, isPaused = false)
+                linksActive == false -> StatusBadge(text = s.statusInactive, active = false, isPaused = false)
+                else -> Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(horizontal = 20.dp)
                 ) {
@@ -404,13 +452,22 @@ private fun SetupStep(number: Int, text: String, isLast: Boolean) {
 }
 
 @Composable
-private fun StatusBadge(text: String, active: Boolean) {
+private fun StatusBadge(text: String, active: Boolean, isPaused: Boolean = false) {
+    val targetBg = when {
+        isPaused -> MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.4f)
+        active -> Green500.copy(alpha = 0.08f)
+        else -> Red500.copy(alpha = 0.08f)
+    }
     val bgColor by animateColorAsState(
-        targetValue = if (active) Green500.copy(alpha = 0.08f) else Red500.copy(alpha = 0.08f),
+        targetValue = targetBg,
         animationSpec = tween(300),
         label = "statusBg"
     )
-    val contentColor = if (active) Green500 else Red500
+    val contentColor = when {
+        isPaused -> MaterialTheme.colorScheme.tertiary
+        active -> Green500
+        else -> Red500
+    }
 
     val infiniteTransition = rememberInfiniteTransition(label = "pulse")
     val pulseAlpha by infiniteTransition.animateFloat(

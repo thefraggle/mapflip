@@ -1,3 +1,7 @@
+## 1.0.3
+- Neuer Pause-Schalter in der App zum vorübergehenden Deaktivieren der Weiterleitung
+- Statusanzeige signalisiert jetzt auch den pausierten Zustand
+
 ## 1.0.2
 - Erkennung von Karten-Links aus Chats und Nachrichten verbessert
 - Unterstützung für Routen mit Start- und Zielort hinzugefügt

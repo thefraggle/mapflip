@@ -25,6 +25,9 @@ object Strings {
         val copyright: String,
         val langToggle: String,
         val btnFeedback: String,
+        val pauseTitle: String,
+        val pauseDesc: String,
+        val statusPaused: String,
     )
 
     val DE = AppStrings(
@@ -46,6 +49,9 @@ object Strings {
         copyright = "\u00a9 2026 Daniel Notthoff \u2022 notthoff.org",
         langToggle = "EN",
         btnFeedback = "Feedback & Bugs melden",
+        pauseTitle = "Weiterleitung pausieren",
+        pauseDesc = "Vorübergehend alle Umleitungen aussetzen",
+        statusPaused = "Weiterleitung ist pausiert",
     )
 
     val EN = AppStrings(
@@ -67,5 +73,8 @@ object Strings {
         copyright = "\u00a9 2026 Daniel Notthoff \u2022 notthoff.org",
         langToggle = "DE",
         btnFeedback = "Report Feedback & Bugs",
+        pauseTitle = "Pause Redirect",
+        pauseDesc = "Temporarily suspend all link redirects",
+        statusPaused = "Redirect is paused",
     )
 }

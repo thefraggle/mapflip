@@ -1,3 +1,7 @@
+## 1.0.3
+- Added in-app pause toggle switch to temporarily suspend redirects
+- Status indicator now highlights paused state
+
 ## 1.0.2
 - Improved recognition of map links shared in chat apps and messages
 - Added support for route links with start and destination locations
