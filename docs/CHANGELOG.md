@@ -1,3 +1,7 @@
+## 1.0.5
+- Browser-Weiterleitung im pausierten Zustand für neuere Android-Versionen korrigiert
+- Zuverlässiges Öffnen der originalen Karten-Links beim Pausieren
+
 ## 1.0.4
 - Fehler beim Öffnen von Links im pausierten Zustand behoben
 - Nahtloses Öffnen von Apple-Maps-Links im Browser bei pausierter Weiterleitung

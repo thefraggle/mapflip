@@ -1,3 +1,7 @@
+## 1.0.5
+- Fixed browser forwarding for paused links on modern Android versions
+- Reliable opening of original map links when paused
+
 ## 1.0.4
 - Fixed an issue when opening links while redirect is paused
 - Seamlessly opens Apple Maps links in web browser when paused

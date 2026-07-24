@@ -49,25 +49,40 @@ class RedirectActivity : Activity() {
 
     /**
      * Forwards original Apple Maps URL to standard web browser when redirect is paused.
-     * Uses a generic web URL to discover the browser package name to prevent recursive
-     * activity launching loops back into MapFlip.
+     * Uses generic HTTPS query to discover browser package name with CATEGORY_APP_BROWSER fallback.
      */
     private fun forwardOriginalUrl(uri: Uri) {
         val genericWebIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com")).apply {
             addCategory(Intent.CATEGORY_BROWSABLE)
         }
+
         val browserPackage = packageManager.queryIntentActivities(genericWebIntent, 0)
-            .firstOrNull { it.activityInfo.packageName != packageName }?.activityInfo?.packageName
+            .map { it.activityInfo.packageName }
+            .firstOrNull { it != packageName }
 
         if (browserPackage != null) {
             val targetIntent = Intent(Intent.ACTION_VIEW, uri).apply {
                 addCategory(Intent.CATEGORY_BROWSABLE)
                 setPackage(browserPackage)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
             try {
                 startActivity(targetIntent)
+                return
             } catch (_: Exception) {}
         }
+
+        // Fallback: browser selector intent
+        try {
+            val selectorIntent = Intent(Intent.ACTION_MAIN).apply {
+                addCategory(Intent.CATEGORY_APP_BROWSER)
+            }
+            val browserIntent = Intent(Intent.ACTION_VIEW, uri).apply {
+                selector = selectorIntent
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            startActivity(browserIntent)
+        } catch (_: Exception) {}
     }
 
     /** Suppress enter/exit animation so the redirect is invisible. */
