@@ -1,3 +1,7 @@
+## 1.0.4
+- Fehler beim Öffnen von Links im pausierten Zustand behoben
+- Nahtloses Öffnen von Apple-Maps-Links im Browser bei pausierter Weiterleitung
+
 ## 1.0.3
 - Neuer Pause-Schalter in der App zum vorübergehenden Deaktivieren der Weiterleitung
 - Statusanzeige signalisiert jetzt auch den pausierten Zustand

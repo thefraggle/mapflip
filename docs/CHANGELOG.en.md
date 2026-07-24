@@ -1,3 +1,7 @@
+## 1.0.4
+- Fixed an issue when opening links while redirect is paused
+- Seamlessly opens Apple Maps links in web browser when paused
+
 ## 1.0.3
 - Added in-app pause toggle switch to temporarily suspend redirects
 - Status indicator now highlights paused state
