@@ -5,7 +5,7 @@ import sys
 LISTINGS = {
     'en-US': {
         'title': 'MapFlip - Apple to Google',
-        'shortDescription': 'Automatically open Apple Maps links directly in Google Maps.',
+        'shortDescription': 'Open Apple Maps links in Google Maps. Includes Pause tile.',
         'fullDescription': """Your friends send you Apple Maps links – but you use Google Maps?
 
 MapFlip solves this problem. Set it up once, and everything happens automatically: Every Apple Maps link opens directly in Google Maps. No copying, no pasting, no browser detours.
@@ -17,6 +17,7 @@ MapFlip solves this problem. Set it up once, and everything happens automaticall
 4. Done! Apple Maps links are now automatically redirected.
 
 ✨ Features:
+• Pause mode & Quick Settings Tile – Suspend redirect anytime directly from notification shade
 • Automatic redirect – no manual copying needed
 • Invisible background operation – no extra screens
 • Supports search queries, coordinates, addresses, and navigation
@@ -34,7 +35,7 @@ MapFlip was built for Android users who regularly receive Apple Maps links from 
     },
     'de-DE': {
         'title': 'MapFlip - Apple zu Google',
-        'shortDescription': 'Apple Maps Links automatisch in Google Maps öffnen.',
+        'shortDescription': 'Apple Maps Links in Google Maps öffnen. Mit Pausen-Kachel.',
         'fullDescription': """Deine Freunde schicken dir Apple Maps Links – aber du nutzt Google Maps?
 
 MapFlip löst dieses Problem. Einmal einrichten, danach passiert alles automatisch: Jeder Apple Maps Link öffnet sich direkt in Google Maps. Kein Kopieren, kein Einfügen, kein Umweg über den Browser.
@@ -46,6 +47,7 @@ MapFlip löst dieses Problem. Einmal einrichten, danach passiert alles automatis
 4. Fertig! Ab jetzt werden Apple Maps Links automatisch umgeleitet.
 
 ✨ Features:
+• Pausen-Modus & Schnelleinstellungs-Kachel – Umleitung jederzeit im Kontrollzentrum pausieren
 • Automatische Umleitung – kein manuelles Kopieren nötig
 • Unsichtbar im Hintergrund – keine störenden Zusatz-Bildschirme
 • Unterstützt Suchanfragen, Koordinaten, Adressen und Navigation
@@ -63,7 +65,7 @@ MapFlip wurde für Android-Nutzer entwickelt, die regelmäßig Apple Maps Links 
     },
     'da-DK': {
         'title': 'MapFlip - Apple til Google',
-        'shortDescription': 'Åbn Apple Maps-links automatisk i Google Maps.',
+        'shortDescription': 'Åbn Apple Maps-links automatisk i Google Maps. Med pause-knap.',
         'fullDescription': """Dine venner sender dig Apple Maps-links – men du bruger Google Maps?
 
 MapFlip løser dette problem. Sæt det op én gang, og alt sker automatisk: Hvert Apple Maps-link åbnes direkte i Google Maps. Ingen kopiering, ingen indsættelse, ingen omveje via browseren.
@@ -75,6 +77,7 @@ MapFlip løser dette problem. Sæt det op én gang, og alt sker automatisk: Hver
 4. Færdig! Apple Maps-links omdirigeres nu automatisk.
 
 ✨ Funktioner:
+• Pause-tilstand & Hurtigindstillinger-knap – Sæt omdirigering på pause i meddelelsespanelet
 • Automatisk omdirigering – ingen manuel kopiering
 • Usynlig baggrundsdrift – ingen ekstra skærme
 • Understøtter søgninger, koordinater, adresser og navigation
@@ -92,7 +95,7 @@ MapFlip er bygget til Android-brugere, der regelmæssigt modtager Apple Maps-lin
     },
     'fr-FR': {
         'title': 'MapFlip - Apple à Google',
-        'shortDescription': 'Ouvrez automatiquement les liens Apple Maps dans Google Maps.',
+        'shortDescription': 'Ouvrir les liens Apple Maps dans Google Maps. Avec mode pause.',
         'fullDescription': """Vos amis vous envoient des liens Apple Maps – mais vous utilisez Google Maps ?
 
 MapFlip résout ce problème. Configurez-le une fois, et tout se fait automatiquement : chaque lien Apple Maps s'ouvre directement dans Google Maps. Pas de copier-coller, pas de détour par le navigateur.
@@ -104,6 +107,7 @@ MapFlip résout ce problème. Configurez-le une fois, et tout se fait automatiqu
 4. Terminé ! Les liens Apple Maps sont désormais redirigés automatiquement.
 
 ✨ Fonctionnalités :
+• Mode pause & Tuile Paramètres rapides – Interrompez la redirection depuis le panneau de notification
 • Redirection automatique – pas besoin de copier manuellement
 • Fonctionnement invisible en arrière-plan – pas d'écrans supplémentaires
 • Prise en charge des recherches, coordonnées, adresses et navigation
@@ -121,7 +125,7 @@ MapFlip a été conçu pour les utilisateurs d'Android qui reçoivent régulièr
     },
     'it-IT': {
         'title': 'MapFlip - Apple a Google',
-        'shortDescription': 'Apri automaticamente i link di Apple Maps in Google Maps.',
+        'shortDescription': 'Apri i link Apple Maps in Google Maps. Con tessera di pausa.',
         'fullDescription': """I tuoi amici ti inviano link di Apple Maps – ma tu usi Google Maps?
 
 MapFlip risolve questo problema. Configuralo una volta e tutto avverrà automaticamente: ogni link di Apple Maps si aprirà direttamente in Google Maps. Nessun copia-incolla, nessun passaggio dal browser.
@@ -179,7 +183,7 @@ MapFlipは、iPhoneユーザーからApple Mapsのリンクをよく受け取る
     },
     'nl-NL': {
         'title': 'MapFlip - Apple naar Google',
-        'shortDescription': 'Open Apple Maps-links automatisch in Google Maps.',
+        'shortDescription': 'Open Apple Maps-links automatisch in Google Maps. Met pauze-tegel.',
         'fullDescription': """Je vrienden sturen je Apple Maps-links – maar jij gebruikt Google Maps?
 
 MapFlip lost dit probleem op. Stel het één keer in en alles gebeurt automatisch: elke Apple Maps-link opent direct in Google Maps. Geen kopiëren, geen plakken, geen omwegen via de browser.
@@ -208,7 +212,7 @@ MapFlip is gebouwd voor Android-gebruikers die regelmatig Apple Maps-links ontva
     },
     'no-NO': {
         'title': 'MapFlip - Apple til Google',
-        'shortDescription': 'Åpne Apple Maps-lenker automatisk i Google Maps.',
+        'shortDescription': 'Åpne Apple Maps-lenker automatisk i Google Maps. Med pause-knapp.',
         'fullDescription': """Vennene dine sender deg Apple Maps-lenker – men du bruker Google Maps?
 
 MapFlip løser dette problemet. Sett det opp én gang, og alt skjer automatisk: Hver Apple Maps-lenke åpnes direkte i Google Maps. Ingen kopiering, ingen liming, ingen omveier via nettleseren.
@@ -237,7 +241,7 @@ MapFlip er bygget for Android-brukere som regelmessig mottar Apple Maps-lenker f
     },
     'pl-PL': {
         'title': 'MapFlip - Apple na Google',
-        'shortDescription': 'Automatycznie otwieraj linki Apple Maps w Google Maps.',
+        'shortDescription': 'Otwieraj linki Apple Maps w Google Maps. Z kafelkiem pauzy.',
         'fullDescription': """Znajomi przysyłają Ci linki z Apple Maps – ale Ty używasz Google Maps?
 
 MapFlip rozwiązuje ten problem. Skonfiguruj raz, a wszystko stanie się automatycznie: każdy link Apple Maps otworzy się bezpośrednio w Google Maps. Bez kopiowania, bez wklejania, bez przechodzenia przez przeglądarkę.
@@ -324,7 +328,7 @@ O MapFlip foi desenvolvido para utilizadores de Android que recebem frequentemen
     },
     'sv-SE': {
         'title': 'MapFlip - Apple till Google',
-        'shortDescription': 'Öppna Apple Maps-länkar automatiskt i Google Maps.',
+        'shortDescription': 'Öppna Apple Maps-länkar i Google Maps. Med paus-knapp.',
         'fullDescription': """Dina vänner skickar Apple Maps-länkar – men du använder Google Maps?
 
 MapFlip löser detta problem. Ställ in det en gång så sker allt automatiskt: Varje Apple Maps-länk öppnas direkt i Google Maps. Ingen kopiering, ingen klistra in, inga omvägar via webbläsaren.
@@ -394,6 +398,7 @@ MapFlip bu sorunu çözer. Bir kez kurun, her şey otomatik gerçekleşsin: Her 
 4. Tamam! Apple Maps bağlantıları artık otomatik olarak yönlendirilir.
 
 ✨ Özellikler:
+• Duraklatma modu ve Hızlı Ayarlar kutusu – Yönlendirmeyi bildirim panelinden duraklatın
 • Otomatik yönlendirme – manuel kopyalamaya gerek yok
 • Arka planda görünmez çalışma – ekstra ekran yok
 • Aramaları, koordinatları, adresleri ve navigasyonu destekler
