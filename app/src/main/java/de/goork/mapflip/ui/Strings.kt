@@ -112,7 +112,12 @@ object Strings {
         pauseDesc = "Vorübergehend alle Umleitungen aussetzen",
         statusPaused = "Weiterleitung ist pausiert",
         selectLanguageTitle = "Sprache wählen",
-        systemLanguageAuto = "Systemstandard (Automatisch)"
+        systemLanguageAuto = "Systemstandard (Automatisch)",
+        testLinkTitle = "Link-Tester & Zwischenablage",
+        testLinkHint = "Apple Maps Link hier eingeben...",
+        btnPasteClipboard = "Einfügen",
+        btnTestLink = "In Google Maps testen",
+        testLinkConvertedLabel = "Umgewandelte Ziel-URI:"
     )
 
     val EN = AppStrings(
@@ -157,7 +162,12 @@ object Strings {
         pauseDesc = "Midlertidigt afbryd alle linkomdirigeringer",
         statusPaused = "Omdirigering er sat på pause",
         selectLanguageTitle = "Vælg sprog",
-        systemLanguageAuto = "Systemstandard (Automatisk)"
+        systemLanguageAuto = "Systemstandard (Automatisk)",
+        testLinkTitle = "Link-tester & udklipsholder",
+        testLinkHint = "Indtast Apple Maps-link her...",
+        btnPasteClipboard = "Indsæt",
+        btnTestLink = "Test i Google Maps",
+        testLinkConvertedLabel = "Konverteret mål-URI:"
     )
 
     val FR = EN.copy(
@@ -176,7 +186,12 @@ object Strings {
         pauseDesc = "Suspendre temporairement toutes les redirections",
         statusPaused = "La redirection est en pause",
         selectLanguageTitle = "Choisir la langue",
-        systemLanguageAuto = "Par défaut du système (Auto)"
+        systemLanguageAuto = "Par défaut du système (Auto)",
+        testLinkTitle = "Testeur de liens & presse-papiers",
+        testLinkHint = "Entrez le lien Apple Maps ici...",
+        btnPasteClipboard = "Coller",
+        btnTestLink = "Tester dans Google Maps",
+        testLinkConvertedLabel = "URI cible convertie :"
     )
 
     val IT = EN.copy(
@@ -195,7 +210,12 @@ object Strings {
         pauseDesc = "Sospendi temporaneamente tutti i reindirizzamenti",
         statusPaused = "Il reindirizzamento è in pausa",
         selectLanguageTitle = "Seleziona lingua",
-        systemLanguageAuto = "Predefinita di sistema (Auto)"
+        systemLanguageAuto = "Predefinita di sistema (Auto)",
+        testLinkTitle = "Tester di link e appunti",
+        testLinkHint = "Inserisci qui il link di Apple Maps...",
+        btnPasteClipboard = "Incolla",
+        btnTestLink = "Testa in Google Maps",
+        testLinkConvertedLabel = "URI di destinazione convertito:"
     )
 
     val JA = EN.copy(
@@ -214,7 +234,12 @@ object Strings {
         pauseDesc = "すべてのリンク転送を一時的に停止します",
         statusPaused = "転送は一時停止中です",
         selectLanguageTitle = "言語を選択",
-        systemLanguageAuto = "システムデフォルト (自動)"
+        systemLanguageAuto = "システムデフォルト (自動)",
+        testLinkTitle = "リンクテスター＆クリップボード",
+        testLinkHint = "Apple Mapsリンクをここに入力...",
+        btnPasteClipboard = "貼り付け",
+        btnTestLink = "Google Mapsでテスト",
+        testLinkConvertedLabel = "変換されたターゲットURI:"
     )
 
     val NL = EN.copy(
@@ -233,7 +258,12 @@ object Strings {
         pauseDesc = "Tijdelijk alle link-omleidingen onderbreken",
         statusPaused = "Omleiding is gepauzeerd",
         selectLanguageTitle = "Taal selecteren",
-        systemLanguageAuto = "Systeemstandaard (Automatisk)"
+        systemLanguageAuto = "Systeemstandaard (Automatisk)",
+        testLinkTitle = "Link-tester & klembord",
+        testLinkHint = "Voer hier Apple Maps-link in...",
+        btnPasteClipboard = "Plakken",
+        btnTestLink = "Testen in Google Maps",
+        testLinkConvertedLabel = "Geconverteerde doel-URI:"
     )
 
     val NO = EN.copy(
@@ -252,7 +282,12 @@ object Strings {
         pauseDesc = "Avbryt midlertidig alle lenke-viderekoblinger",
         statusPaused = "Viderekobling er satt på pause",
         selectLanguageTitle = "Velg språk",
-        systemLanguageAuto = "Systemstandard (Automatisk)"
+        systemLanguageAuto = "Systemstandard (Automatisk)",
+        testLinkTitle = "Lenketester & utklippstavle",
+        testLinkHint = "Skriv inn Apple Maps-lenke her...",
+        btnPasteClipboard = "Lim inn",
+        btnTestLink = "Test i Google Maps",
+        testLinkConvertedLabel = "Konvertert mål-URI:"
     )
 
     val PL = EN.copy(
@@ -271,7 +306,12 @@ object Strings {
         pauseDesc = "Tymczasowo zawieś wszystkie przekierowania",
         statusPaused = "Przekierowanie jest wstrzymane",
         selectLanguageTitle = "Wybierz język",
-        systemLanguageAuto = "Domyślny systemu (Auto)"
+        systemLanguageAuto = "Domyślny systemu (Auto)",
+        testLinkTitle = "Tester linków i schowek",
+        testLinkHint = "Wpisz tutaj link Apple Maps...",
+        btnPasteClipboard = "Wklej",
+        btnTestLink = "Testuj w Google Maps",
+        testLinkConvertedLabel = "Przekonwertowany URI docelowy:"
     )
 
     val PT = EN.copy(
@@ -290,7 +330,12 @@ object Strings {
         pauseDesc = "Suspender temporariamente todos os redirecionamentos",
         statusPaused = "O redirecionamento está pausado",
         selectLanguageTitle = "Selecionar idioma",
-        systemLanguageAuto = "Padrão do sistema (Auto)"
+        systemLanguageAuto = "Padrão do sistema (Auto)",
+        testLinkTitle = "Testador de links e área de transferência",
+        testLinkHint = "Digite o link do Apple Maps aqui...",
+        btnPasteClipboard = "Colar",
+        btnTestLink = "Testar no Google Maps",
+        testLinkConvertedLabel = "URI de destino convertido:"
     )
 
     val SV = EN.copy(
@@ -309,7 +354,12 @@ object Strings {
         pauseDesc = "Avbryt tillfälligt alla länkomdirigeringar",
         statusPaused = "Omdirigering är pausad",
         selectLanguageTitle = "Välj språk",
-        systemLanguageAuto = "Systemstandard (Automatisk)"
+        systemLanguageAuto = "Systemstandard (Automatisk)",
+        testLinkTitle = "Länktester & urklipp",
+        testLinkHint = "Ange Apple Maps-länk här...",
+        btnPasteClipboard = "Klistra in",
+        btnTestLink = "Testa i Google Maps",
+        testLinkConvertedLabel = "Konverterad mål-URI:"
     )
 
     val ES = EN.copy(
@@ -328,7 +378,12 @@ object Strings {
         pauseDesc = "Suspender temporalmente todas las redirecciones de enlaces",
         statusPaused = "La redirección está pausada",
         selectLanguageTitle = "Seleccionar idioma",
-        systemLanguageAuto = "Predeterminado del sistema (Auto)"
+        systemLanguageAuto = "Predeterminado del sistema (Auto)",
+        testLinkTitle = "Probador de enlaces y portapapeles",
+        testLinkHint = "Introduce aquí el enlace de Apple Maps...",
+        btnPasteClipboard = "Pegar",
+        btnTestLink = "Probar en Google Maps",
+        testLinkConvertedLabel = "URI de destino convertida:"
     )
 
     val TR = EN.copy(
@@ -347,6 +402,11 @@ object Strings {
         pauseDesc = "Tüm bağlantı yönlendirmelerini geçici olarak durdurun",
         statusPaused = "Yönlendirme duraklatıldı",
         selectLanguageTitle = "Dil Seçin",
-        systemLanguageAuto = "Sistem Varsayılanı (Otomatik)"
+        systemLanguageAuto = "Sistem Varsayılanı (Otomatik)",
+        testLinkTitle = "Bağlantı Test Edici ve Pano",
+        testLinkHint = "Buraya Apple Maps bağlantısını girin...",
+        btnPasteClipboard = "Yapıştır",
+        btnTestLink = "Google Maps'te Test Et",
+        testLinkConvertedLabel = "Dönüştürülen Hedef URI:"
     )
 }
