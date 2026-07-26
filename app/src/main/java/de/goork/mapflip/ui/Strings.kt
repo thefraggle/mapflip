@@ -55,6 +55,11 @@ object Strings {
         val statusPaused: String,
         val selectLanguageTitle: String,
         val systemLanguageAuto: String,
+        val testLinkTitle: String = "Link-Tester & Zwischenablage",
+        val testLinkHint: String = "Apple Maps Link hier eingeben...",
+        val btnPasteClipboard: String = "Einfügen",
+        val btnTestLink: String = "In Google Maps testen",
+        val testLinkConvertedLabel: String = "Umgewandelte Ziel-URI:"
     )
 
     fun resolveLanguage(savedPref: String?): String {

@@ -90,12 +90,12 @@ object AppleMapsParser {
     }
 
     private fun normalizeUrl(url: String): String {
-        val trimmed = url.trim()
-        return if (!trimmed.startsWith("http://") && !trimmed.startsWith("https://")) {
-            "https://$trimmed"
-        } else {
-            trimmed
+        var trimmed = url.trim()
+        if (!trimmed.startsWith("http://") && !trimmed.startsWith("https://")) {
+            trimmed = "https://$trimmed"
         }
+        // Replace unencoded spaces with %20 to avoid URISyntaxException in java.net.URI
+        return trimmed.replace(" ", "%20")
     }
 
     private fun parseQueryParams(query: String): Map<String, String> {
@@ -103,9 +103,13 @@ object AppleMapsParser {
         return query.split("&").mapNotNull { param ->
             val parts = param.split("=", limit = 2)
             if (parts.size == 2) {
-                val key = URLDecoder.decode(parts[0], "UTF-8").lowercase().trim()
-                val value = URLDecoder.decode(parts[1], "UTF-8").trim()
-                key to value
+                try {
+                    val key = URLDecoder.decode(parts[0], "UTF-8").lowercase().trim()
+                    val value = URLDecoder.decode(parts[1], "UTF-8").trim()
+                    key to value
+                } catch (_: Exception) {
+                    null
+                }
             } else null
         }.toMap()
     }

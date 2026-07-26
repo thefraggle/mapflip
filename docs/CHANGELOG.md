@@ -1,3 +1,7 @@
+## 1.0.8
+- In-App Link-Tester & Zwischenablage-Button zum schnellen Ausprobieren von Links hinzugefügt
+- Verbesserte Stabilität und Zuverlässigkeit bei der Link-Umwandlung
+
 ## 1.0.7
 - Schnelleinstellungs-Kachel für die Android-Benachrichtigungsleiste hinzugefügt
 - Pausieren und Fortsetzen der Umleitung direkt über das Kontrollzentrum möglich

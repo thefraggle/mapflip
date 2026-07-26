@@ -21,25 +21,28 @@ class RedirectActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val prefs = getSharedPreferences("mapflip", Context.MODE_PRIVATE)
-        val isPaused = prefs.getBoolean("is_paused", false)
-        val appleUrl = intent?.data?.toString()
+        val prefs = getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE)
+        val isPaused = prefs.getBoolean(AppConstants.PREFS_KEY_PAUSED, false)
+        val dataUri = intent?.data
 
-        if (appleUrl != null) {
+        if (dataUri != null) {
+            val appleUrl = dataUri.toString()
             if (isPaused) {
                 // When paused: forward original URL to non-MapFlip apps (e.g. browser)
-                forwardOriginalUrl(intent?.data!!)
+                forwardOriginalUrl(dataUri)
             } else {
                 val googleUri = AppleMapsParser.convert(appleUrl)
                 try {
                     // Try Google Maps app first
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(googleUri)).apply {
-                        setPackage(GOOGLE_MAPS_PACKAGE)
+                        setPackage(AppConstants.GOOGLE_MAPS_PACKAGE)
                     })
                 } catch (_: ActivityNotFoundException) {
                     // Fallback: open in any available maps app or browser
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(googleUri)))
-                }
+                    try {
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(googleUri)))
+                    } catch (_: Exception) {}
+                } catch (_: Exception) {}
             }
         }
 
@@ -56,9 +59,13 @@ class RedirectActivity : Activity() {
             addCategory(Intent.CATEGORY_BROWSABLE)
         }
 
-        val browserPackage = packageManager.queryIntentActivities(genericWebIntent, 0)
-            .map { it.activityInfo.packageName }
-            .firstOrNull { it != packageName }
+        val browserPackage = try {
+            packageManager.queryIntentActivities(genericWebIntent, 0)
+                .map { it.activityInfo.packageName }
+                .firstOrNull { it != packageName }
+        } catch (_: Exception) {
+            null
+        }
 
         if (browserPackage != null) {
             val targetIntent = Intent(Intent.ACTION_VIEW, uri).apply {
@@ -93,9 +100,5 @@ class RedirectActivity : Activity() {
             @Suppress("DEPRECATION")
             overridePendingTransition(0, 0)
         }
-    }
-
-    companion object {
-        private const val GOOGLE_MAPS_PACKAGE = "com.google.android.apps.maps"
     }
 }

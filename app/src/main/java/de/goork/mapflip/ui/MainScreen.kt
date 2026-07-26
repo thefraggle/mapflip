@@ -40,6 +40,10 @@ import java.util.Locale
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.outlined.Clear
+import androidx.compose.ui.platform.LocalClipboardManager
+import de.goork.mapflip.AppConstants
+import de.goork.mapflip.AppleMapsParser
 
 private const val PREFS_NAME = "mapflip"
 private const val PREFS_KEY_LANG = "lang"
@@ -51,15 +55,21 @@ private const val URL_NOTTHOFF = "https://notthoff.org"
 @Composable
 fun MainScreen() {
     val context = LocalContext.current
-    val prefs = remember { context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
+    val prefs = remember { context.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE) }
     var langPref by remember {
-        mutableStateOf(prefs.getString(PREFS_KEY_LANG, "auto") ?: "auto")
+        mutableStateOf(prefs.getString(AppConstants.PREFS_KEY_LANG, "auto") ?: "auto")
     }
     val activeLangCode = Strings.resolveLanguage(langPref)
     val s = Strings.getStrings(activeLangCode)
 
-    var isPaused by remember { mutableStateOf(prefs.getBoolean(PREFS_KEY_PAUSED, false)) }
+    var isPaused by remember { mutableStateOf(prefs.getBoolean(AppConstants.PREFS_KEY_PAUSED, false)) }
     var showLanguageSheet by remember { mutableStateOf(false) }
+
+    val clipboardManager = LocalClipboardManager.current
+    var inputLink by remember { mutableStateOf("") }
+    val convertedUri = remember(inputLink) {
+        if (inputLink.isNotBlank()) AppleMapsParser.convert(inputLink) else null
+    }
 
     val currentLangItem = Strings.SUPPORTED_LANGUAGES.find { it.code == langPref }
         ?: Strings.SUPPORTED_LANGUAGES.first()
@@ -147,7 +157,7 @@ fun MainScreen() {
                                 Surface(
                                     onClick = {
                                         langPref = item.code
-                                        prefs.edit().putString(PREFS_KEY_LANG, item.code).apply()
+                                        prefs.edit().putString(AppConstants.PREFS_KEY_LANG, item.code).apply()
                                         showLanguageSheet = false
                                     },
                                     shape = RoundedCornerShape(12.dp),
@@ -294,9 +304,111 @@ fun MainScreen() {
                         checked = isPaused,
                         onCheckedChange = { checked ->
                             isPaused = checked
-                            prefs.edit().putBoolean(PREFS_KEY_PAUSED, checked).apply()
+                            prefs.edit().putBoolean(AppConstants.PREFS_KEY_PAUSED, checked).apply()
                         }
                     )
+                }
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            // Link-Tester Card (Issue #14)
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+                )
+            ) {
+                Column(modifier = Modifier.padding(20.dp)) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = s.testLinkTitle,
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        TextButton(
+                            onClick = {
+                                val clipText = clipboardManager.getText()?.text
+                                if (!clipText.isNullOrBlank()) {
+                                    inputLink = clipText
+                                }
+                            }
+                        ) {
+                            Icon(
+                                Icons.Outlined.Info,
+                                contentDescription = null,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(Modifier.width(4.dp))
+                            Text(s.btnPasteClipboard)
+                        }
+                    }
+                    Spacer(Modifier.height(4.dp))
+                    OutlinedTextField(
+                        value = inputLink,
+                        onValueChange = { inputLink = it },
+                        placeholder = { Text(s.testLinkHint, style = MaterialTheme.typography.bodySmall) },
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true,
+                        shape = RoundedCornerShape(12.dp),
+                        trailingIcon = if (inputLink.isNotEmpty()) {
+                            {
+                                IconButton(onClick = { inputLink = "" }) {
+                                    Icon(Icons.Outlined.Clear, contentDescription = null, modifier = Modifier.size(18.dp))
+                                }
+                            }
+                        } else null
+                    )
+
+                    if (!convertedUri.isNullOrBlank()) {
+                        Spacer(Modifier.height(12.dp))
+                        Surface(
+                            color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                            shape = RoundedCornerShape(10.dp),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Column(Modifier.padding(12.dp)) {
+                                Text(
+                                    text = s.testLinkConvertedLabel,
+                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                                Spacer(Modifier.height(4.dp))
+                                Text(
+                                    text = convertedUri,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                        Spacer(Modifier.height(12.dp))
+                        Button(
+                            onClick = {
+                                try {
+                                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(convertedUri)).apply {
+                                        setPackage(AppConstants.GOOGLE_MAPS_PACKAGE)
+                                    })
+                                } catch (_: Exception) {
+                                    try {
+                                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(convertedUri)))
+                                    } catch (_: Exception) {}
+                                }
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(44.dp),
+                            shape = RoundedCornerShape(12.dp)
+                        ) {
+                            Text(s.btnTestLink)
+                        }
+                    }
                 }
             }
 
@@ -348,7 +460,7 @@ fun MainScreen() {
                 onClick = {
                     val intent = Intent(Intent.ACTION_SENDTO).apply {
                         data = Uri.parse("mailto:daniel.notthoff@gmail.com")
-                        putExtra(Intent.EXTRA_SUBJECT, "[MapFlip v1.0.3 Feedback]")
+                        putExtra(Intent.EXTRA_SUBJECT, "[MapFlip Feedback]")
                     }
                     try {
                         context.startActivity(intent)

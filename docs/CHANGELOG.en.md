@@ -1,3 +1,7 @@
+## 1.0.8
+- Added in-app Link Tester & Clipboard button for quick link testing
+- Improved stability and robustness for link conversions
+
 ## 1.0.7
 - Added Quick Settings Tile for the Android notification shade
 - Quickly pause and resume redirects directly from control center
