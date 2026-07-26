@@ -14,10 +14,40 @@ FEATURE_W, FEATURE_H = 1024, 500
 FONT_BOLD = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
 FONT_REGULAR = "/System/Library/Fonts/Supplemental/Arial.ttf"
 
-def get_font(path, size):
+CJK_FONT_FALLBACKS = [
+    "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
+    "/System/Library/Fonts/STHeiti Light.ttc",
+    "/System/Library/Fonts/Supplemental/AppleGothic.ttf",
+    "/System/Library/Fonts/PingFang.ttc",
+    "/System/Library/Fonts/Hiragino Sans W3.ttc"
+]
+
+def get_font(path, size, text=None):
+    """
+    Returns an ImageFont. If text contains CJK or extended Unicode (> 0x024F),
+    or if standard font fails, uses CJK Unicode fallback fonts.
+    """
+    is_cjk_or_extended = False
+    if text:
+        is_cjk_or_extended = any(ord(char) > 0x024F for char in str(text))
+
+    if is_cjk_or_extended:
+        for cjk_path in CJK_FONT_FALLBACKS:
+            if os.path.exists(cjk_path):
+                try:
+                    return ImageFont.truetype(cjk_path, size)
+                except Exception:
+                    continue
+
     try:
         return ImageFont.truetype(path, size)
     except Exception:
+        for cjk_path in CJK_FONT_FALLBACKS:
+            if os.path.exists(cjk_path):
+                try:
+                    return ImageFont.truetype(cjk_path, size)
+                except Exception:
+                    continue
         return ImageFont.load_default()
 
 def draw_gradient_background(w, h, color1, color2):
@@ -97,22 +127,41 @@ def add_drop_shadow(image, radius=20, offset=(0, 15), shadow_color=(0, 0, 0, 120
     return result
 
 def wrap_text(text, font, max_width):
-    """Splits text into lines that fit within max_width."""
-    words = text.split(' ')
+    """Splits text into lines that fit within max_width (supports CJK & space-separated languages)."""
     lines = []
-    current_line = []
-    for word in words:
-        test_line = ' '.join(current_line + [word])
-        bbox = font.getbbox(test_line)
-        w = bbox[2] - bbox[0]
-        if w <= max_width:
-            current_line.append(word)
-        else:
+    paragraphs = text.split('\n')
+    for paragraph in paragraphs:
+        if not paragraph:
+            continue
+        if ' ' in paragraph:
+            words = paragraph.split(' ')
+            current_line = []
+            for word in words:
+                test_line = ' '.join(current_line + [word])
+                bbox = font.getbbox(test_line)
+                w = bbox[2] - bbox[0]
+                if w <= max_width:
+                    current_line.append(word)
+                else:
+                    if current_line:
+                        lines.append(' '.join(current_line))
+                    current_line = [word]
             if current_line:
                 lines.append(' '.join(current_line))
-            current_line = [word]
-    if current_line:
-        lines.append(' '.join(current_line))
+        else:
+            current_line = ""
+            for char in paragraph:
+                test_line = current_line + char
+                bbox = font.getbbox(test_line)
+                w = bbox[2] - bbox[0]
+                if w <= max_width:
+                    current_line += char
+                else:
+                    if current_line:
+                        lines.append(current_line)
+                    current_line = char
+            if current_line:
+                lines.append(current_line)
     return lines
 
 def create_screen(config, output_path):
@@ -131,9 +180,9 @@ def create_screen(config, output_path):
     bg.paste(glow, (600, 1200), glow)
     
     # 2. Text Content Top Section
-    category_font = get_font(FONT_BOLD, 36)
-    headline_font = get_font(FONT_BOLD, 68)
-    subtitle_font = get_font(FONT_REGULAR, 40)
+    category_font = get_font(FONT_BOLD, 36, text=config['category'])
+    headline_font = get_font(FONT_BOLD, 68, text=config['headline'])
+    subtitle_font = get_font(FONT_REGULAR, 40, text=config['subtitle'])
     
     y_offset = 95
     
@@ -199,8 +248,8 @@ def create_screen(config, output_path):
             bg.paste(shadow_img, (60, 720), shadow_img)
             
             # Draw callout badge underneath
-            badge_font = get_font(FONT_BOLD, 40)
-            callout_sub_font = get_font(FONT_REGULAR, 36)
+            badge_font = get_font(FONT_BOLD, 40, text=config['callout_text_1'])
+            callout_sub_font = get_font(FONT_REGULAR, 36, text=config['callout_text_2'])
             callout = Image.new("RGBA", (860, 160), (0, 0, 0, 0))
             c_draw = ImageDraw.Draw(callout)
             draw_rounded_rect(c_draw, (0, 0, 860, 160), radius=28, fill=(16, 185, 129, 230))
@@ -244,10 +293,9 @@ def create_screen(config, output_path):
         y_card = 680
         cards = config['feature_cards']
         
-        card_title_font = get_font(FONT_BOLD, 48)
-        card_desc_font = get_font(FONT_REGULAR, 34)
-        
         for badge_color, icon_type, title, desc in cards:
+            card_title_font = get_font(FONT_BOLD, 48, text=title)
+            card_desc_font = get_font(FONT_REGULAR, 34, text=desc)
             card = Image.new("RGBA", (920, 290), (0, 0, 0, 0))
             c_draw = ImageDraw.Draw(card)
             draw_rounded_rect(c_draw, (0, 0, 920, 290), radius=28, fill=(30, 41, 59, 230), outline=(71, 85, 105, 180), width=2)
@@ -287,9 +335,10 @@ def create_feature_graphic(config, output_path):
     bg.paste(glow, (-50, -50), glow)
     bg.paste(glow, (600, 100), glow)
     
+    pill_text = config['tagline']
     title_font = get_font(FONT_BOLD, 72)
     sub_font = get_font(FONT_BOLD, 36)
-    tagline_font = get_font(FONT_REGULAR, 28)
+    tagline_font = get_font(FONT_REGULAR, 28, text=pill_text)
     
     # Left Text Block
     draw.text((70, 90), "MapFlip", font=title_font, fill=(255, 255, 255))

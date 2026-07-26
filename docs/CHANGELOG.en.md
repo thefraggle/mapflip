@@ -1,3 +1,7 @@
+## 1.0.7
+- Added Quick Settings Tile for the Android notification shade
+- Quickly pause and resume redirects directly from control center
+
 ## 1.0.6
 - Added in-app multi-language support for all 14 store languages
 - Automatic system language detection with easy language picker menu

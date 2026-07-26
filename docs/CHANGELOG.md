@@ -1,3 +1,7 @@
+## 1.0.7
+- Schnelleinstellungs-Kachel für die Android-Benachrichtigungsleiste hinzugefügt
+- Pausieren und Fortsetzen der Umleitung direkt über das Kontrollzentrum möglich
+
 ## 1.0.6
 - In-App Mehrsprachigkeit für alle 14 Store-Sprachen hinzugefügt
 - Automatische Erkennung der Systemsprache mit einfachem Sprachwahl-Menü
