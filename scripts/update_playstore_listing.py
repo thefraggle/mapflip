@@ -137,6 +137,7 @@ MapFlip risolve questo problema. Configuralo una volta e tutto avverrà automati
 4. Fatto! I link di Apple Maps verranno reindirizzati automaticamente.
 
 ✨ Caratteristiche:
+• Modalità pausa e tessera Impostazioni rapide – Sospendi il reindirizzamento dal pannello notifiche
 • Reindirizzamento automatico – nessuna copia manuale
 • Funzionamento invisibile in background – nessuna schermata aggiuntiva
 • Supporta ricerche, coordinate, indirizzi e navigazione
@@ -166,6 +167,7 @@ MapFlipがその問題を解決します。一度設定するだけで、すべ�
 4. 完了！これ以降、Apple Mapsのリンクは自動的に転送されます。
 
 ✨ 特徴：
+• 一時停止モード＆クイック設定タイル – 通知シェードからいつでも転送を一時停止可能
 • 完全自動転送 – 手動でのコピー不要
 • バックグラウンドで透明動作 – 余計な画面が出ません
 • 検索ワード、GPS座標、住所、ルート案内をサポート
@@ -195,6 +197,7 @@ MapFlip lost dit probleem op. Stel het één keer in en alles gebeurt automatisc
 4. Klaar! Apple Maps-links worden nu automatisch omgeleid.
 
 ✨ Functies:
+• Pauzemodus & Snelle instellingen-tegel – Omleiding pauzeren vanuit de meldingenbalk
 • Automatische omleiding – niet handmatig kopiëren
 • Onzichtbare achtergrondwerking – geen extra schermen
 • Ondersteunt zoekopdrachten, coördinaten, adressen en navigatie
@@ -224,6 +227,7 @@ MapFlip løser dette problemet. Sett det opp én gang, og alt skjer automatisk: 
 4. Ferdig! Apple Maps-lenker viderekobles nå automatisk.
 
 ✨ Funksjoner:
+• Pausemodus & Hurtiginnstillinger-knapp – Sett viderekobling på pause i varslingspanelet
 • Automatisk viderekobling – ingen manuell kopiering
 • Usynlig bakgrunnsdrift – ingen ekstra skjermer
 • Støtter søk, koordinater, adresser og navigasjon
@@ -253,6 +257,7 @@ MapFlip rozwiązuje ten problem. Skonfiguruj raz, a wszystko stanie się automat
 4. Gotowe! Linki Apple Maps będą teraz przekierowywane automatycznie.
 
 ✨ Funkcje:
+• Tryb pauzy i kafelek szybkich ustawień – Wstrzymuj przekierowanie z panelu powiadomień
 • Automatyczne przekierowanie – bez ręcznego kopiowania
 • Niewidoczna praca w tle – bez dodatkowych ekranów
 • Obsługuje wyszukiwania, współrzędne, adresy i nawigację
@@ -282,6 +287,7 @@ O MapFlip resolve esse problema. Configure uma vez e tudo acontece automaticamen
 4. Pronto! Os links do Apple Maps agora são redirecionados automaticamente.
 
 ✨ Recursos:
+• Modo pausa e atalho de Configurações Rápidas – Pause o redirecionamento no painel de notificações
 • Redirecionamento automático – sem cópia manual
 • Operação invisível em segundo plano – sem telas extras
 • Suporta buscas, coordenadas, endereços e navegação
@@ -311,6 +317,7 @@ O MapFlip resolve este problema. Configure uma vez e tudo acontece automaticamen
 4. Concluído! Os links do Apple Maps são agora redirecionados automaticamente.
 
 ✨ Funcionalidades:
+• Modo pausa e atalho de Definições Rápidas – Pause o redirecionamento no painel de notificações
 • Redirecionamento automático – sem cópia manual
 • Funcionamento invisível em segundo plano – sem ecrãs adicionais
 • Suporta pesquisas, coordenadas, endereços e navegação
@@ -340,6 +347,7 @@ MapFlip löser detta problem. Ställ in det en gång så sker allt automatiskt: 
 4. Klart! Apple Maps-länkar omdirigeras nu automatiskt.
 
 ✨ Funktioner:
+• Pausläge & Snabbinställnings-knapp – Pausa omdirigeringen från aviseringspanelen
 • Automatisk omdirigering – ingen manuell kopiering
 • Osynlig bakgrundsdrift – inga extra skärmar
 • Stöder sökningar, koordinater, adresser och navigering
@@ -369,6 +377,7 @@ MapFlip soluciona este problema. Configúralo una vez y todo sucederá automáti
 4. ¡Listo! Los enlaces de Apple Maps ahora se redirigen automáticamente.
 
 ✨ Características:
+• Modo pausa y atajo de Ajustes Rápidos – Pausa la redirección desde el panel de notificaciones
 • Redirección automática – sin copiado manual
 • Funcionamiento invisible en segundo plano – sin pantallas adicionales
 • Soporta búsquedas, coordenadas, direcciones y navegación
