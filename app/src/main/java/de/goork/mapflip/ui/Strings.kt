@@ -55,11 +55,11 @@ object Strings {
         val statusPaused: String,
         val selectLanguageTitle: String,
         val systemLanguageAuto: String,
-        val testLinkTitle: String = "Link-Tester & Zwischenablage",
-        val testLinkHint: String = "Apple Maps Link hier eingeben...",
-        val btnPasteClipboard: String = "Einfügen",
-        val btnTestLink: String = "In Google Maps testen",
-        val testLinkConvertedLabel: String = "Umgewandelte Ziel-URI:"
+        val testLinkTitle: String = "Link Tester & Clipboard",
+        val testLinkHint: String = "Enter Apple Maps link here...",
+        val btnPasteClipboard: String = "Paste",
+        val btnTestLink: String = "Test in Google Maps",
+        val testLinkConvertedLabel: String = "Converted Target URI:"
     )
 
     fun resolveLanguage(savedPref: String?): String {
@@ -143,7 +143,12 @@ object Strings {
         pauseDesc = "Temporarily suspend all link redirects",
         statusPaused = "Redirect is paused",
         selectLanguageTitle = "Select Language",
-        systemLanguageAuto = "System Default (Auto)"
+        systemLanguageAuto = "System Default (Auto)",
+        testLinkTitle = "Link Tester & Clipboard",
+        testLinkHint = "Enter Apple Maps link here...",
+        btnPasteClipboard = "Paste",
+        btnTestLink = "Test in Google Maps",
+        testLinkConvertedLabel = "Converted Target URI:"
     )
 
     val DA = EN.copy(

@@ -323,31 +323,32 @@ fun MainScreen() {
                 )
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
+                    // Title row with paste button
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Text(
                             text = s.testLinkTitle,
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
-                            color = MaterialTheme.colorScheme.onSurface
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.weight(1f)
                         )
-                        TextButton(
+                        FilledTonalButton(
                             onClick = {
                                 val clipText = clipboardManager.getText()?.text
                                 if (!clipText.isNullOrBlank()) {
                                     inputLink = clipText
                                 }
-                            }
+                            },
+                            modifier = Modifier.height(32.dp),
+                            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 0.dp),
+                            shape = RoundedCornerShape(8.dp)
                         ) {
-                            Icon(
-                                Icons.Outlined.Info,
-                                contentDescription = null,
-                                modifier = Modifier.size(16.dp)
+                            Text(
+                                "📋 ${s.btnPasteClipboard}",
+                                style = MaterialTheme.typography.labelSmall
                             )
-                            Spacer(Modifier.width(4.dp))
-                            Text(s.btnPasteClipboard)
                         }
                     }
                     Spacer(Modifier.height(4.dp))
