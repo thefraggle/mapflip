@@ -1,3 +1,7 @@
+## 1.0.9
+- Link Tester now displays in the correct language – including English, Japanese, and all others
+- Paste button label no longer gets squashed, regardless of translation length
+
 ## 1.0.8
 - Added in-app Link Tester & Clipboard button for quick link testing
 - Improved stability and robustness for link conversions

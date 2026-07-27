@@ -1,3 +1,7 @@
+## 1.0.9
+- Link-Tester zeigt jetzt in der richtigen Sprache an – auch bei Englisch, Japanisch und allen anderen
+- Kachel-Beschriftung passt sich nicht mehr ab, egal wie lang die Übersetzung ist
+
 ## 1.0.8
 - In-App Link-Tester & Zwischenablage-Button zum schnellen Ausprobieren von Links hinzugefügt
 - Verbesserte Stabilität und Zuverlässigkeit bei der Link-Umwandlung
