@@ -1,3 +1,6 @@
+## 1.1.1
+- Einstellungen aufgeräumt: Menü vereinfacht und Lesbarkeit verbessert
+
 ## 1.1.0
 - Neuer Bewertungs-Button zum schnellen Bewerten der App im Google Play Store
 - Dezenten Datenschutzhinweis in der App-UI hinzugefügt (100% lokal, kein Datentracking)

@@ -1,3 +1,6 @@
+## 1.1.1
+- Cleaned up settings: simplified the menu and improved readability
+
 ## 1.1.0
 - Added direct rating button to easily rate the app on the Google Play Store
 - Added a clear privacy note in the app (100% local, no data tracking)
