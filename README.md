@@ -28,7 +28,7 @@ Download the latest APK from [Releases](https://github.com/thefraggle/mapflip/re
 ## Tech Stack
 
 - Kotlin + Jetpack Compose (Material 3)
-- Min SDK 26 (Android 8.0), Target SDK 35
+- Min SDK 26 (Android 8.0), Target SDK 36
 - No external dependencies beyond AndroidX
 
 ## Build

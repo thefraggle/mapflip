@@ -18,6 +18,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CheckCircle
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Lock
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -456,35 +458,77 @@ fun MainScreen() {
 
             Spacer(Modifier.height(12.dp))
 
-            // Feedback button for testers
-            OutlinedButton(
-                onClick = {
-                    val intent = Intent(Intent.ACTION_SENDTO).apply {
-                        data = Uri.parse("mailto:daniel.notthoff@gmail.com")
-                        putExtra(Intent.EXTRA_SUBJECT, "[MapFlip Feedback]")
-                    }
-                    try {
-                        context.startActivity(intent)
-                    } catch (_: Exception) {}
-                },
+            // Feedback & Rate buttons row (Issue #19)
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 20.dp)
-                    .height(48.dp),
-                shape = RoundedCornerShape(14.dp)
+                    .padding(horizontal = 20.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                Icon(
-                    Icons.Outlined.Email,
-                    contentDescription = null,
-                    modifier = Modifier.size(18.dp)
-                )
-                Spacer(Modifier.width(8.dp))
-                Text(
-                    s.btnFeedback,
-                    style = MaterialTheme.typography.labelMedium.copy(
-                        fontWeight = FontWeight.Medium
+                // Feedback button
+                OutlinedButton(
+                    onClick = {
+                        val intent = Intent(Intent.ACTION_SENDTO).apply {
+                            data = Uri.parse("mailto:daniel.notthoff@gmail.com")
+                            putExtra(Intent.EXTRA_SUBJECT, "[MapFlip Feedback]")
+                        }
+                        try {
+                            context.startActivity(intent)
+                        } catch (_: Exception) {}
+                    },
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(48.dp),
+                    shape = RoundedCornerShape(14.dp)
+                ) {
+                    Icon(
+                        Icons.Outlined.Email,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp)
                     )
-                )
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        s.btnFeedback,
+                        style = MaterialTheme.typography.labelMedium.copy(
+                            fontWeight = FontWeight.Medium
+                        ),
+                        maxLines = 1
+                    )
+                }
+
+                // Rate App button
+                OutlinedButton(
+                    onClick = {
+                        val rateIntent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${context.packageName}")).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                        }
+                        try {
+                            context.startActivity(rateIntent)
+                        } catch (_: Exception) {
+                            try {
+                                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=${context.packageName}")))
+                            } catch (_: Exception) {}
+                        }
+                    },
+                    modifier = Modifier
+                        .weight(1f)
+                        .height(48.dp),
+                    shape = RoundedCornerShape(14.dp)
+                ) {
+                    Icon(
+                        Icons.Outlined.Star,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        s.btnRateApp,
+                        style = MaterialTheme.typography.labelMedium.copy(
+                            fontWeight = FontWeight.Medium
+                        ),
+                        maxLines = 1
+                    )
+                }
             }
 
             Spacer(Modifier.height(16.dp))
@@ -579,7 +623,38 @@ fun MainScreen() {
                 }
             }
 
-            Spacer(Modifier.height(32.dp))
+            Spacer(Modifier.height(20.dp))
+
+            // Privacy/Datenschutz info card (Issue #20)
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp),
+                shape = RoundedCornerShape(14.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.6f)
+                )
+            ) {
+                Row(
+                    modifier = Modifier.padding(14.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Lock,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(Modifier.width(10.dp))
+                    Text(
+                        text = s.privacyNote,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f)
+                    )
+                }
+            }
+
+            Spacer(Modifier.height(24.dp))
 
             // Copyright footer
             Text(

@@ -8,7 +8,7 @@ LISTINGS = {
         'shortDescription': 'Open Apple Maps links in Google Maps. Includes Pause tile.',
         'fullDescription': """Your friends send you Apple Maps links – but you use Google Maps?
 
-MapFlip solves this problem. Set it up once, and everything happens automatically: Every Apple Maps link opens directly in Google Maps. No copying, no pasting, no browser detours.
+MapFlip is the ultimate Apple Maps solution and link converter for Android. Set it up once, and everything works automatically as a Google Maps redirect: Every Apple Maps link opens directly in Google Maps. No copying, no pasting, no browser detours.
 
 🔧 How it works:
 1. Open MapFlip
@@ -38,7 +38,7 @@ MapFlip was built for Android users who regularly receive Apple Maps links from 
         'shortDescription': 'Apple Maps Links in Google Maps öffnen. Mit Pausen-Kachel.',
         'fullDescription': """Deine Freunde schicken dir Apple Maps Links – aber du nutzt Google Maps?
 
-MapFlip löst dieses Problem. Einmal einrichten, danach passiert alles automatisch: Jeder Apple Maps Link öffnet sich direkt in Google Maps. Kein Kopieren, kein Einfügen, kein Umweg über den Browser.
+MapFlip ist die ultimative Apple Maps Lösung und der Link-Konverter für Android. Einmal einrichten, danach läuft alles automatisch als Google Maps Weiterleitung: Jeder Apple Maps Link öffnet sich direkt in Google Maps. Kein Kopieren, kein Einfügen, kein Umweg über den Browser.
 
 🔧 So funktioniert's:
 1. Öffne MapFlip
