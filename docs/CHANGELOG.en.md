@@ -1,3 +1,6 @@
+## 1.1.5
+- Introduced static VersionCode for reliable F-Droid Reproducible Builds
+
 ## 1.1.4
 - Optimized build configuration for F-Droid Reproducible Builds (JDK 21, dependenciesInfo)
 - Internal adjustments

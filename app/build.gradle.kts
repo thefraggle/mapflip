@@ -14,15 +14,9 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
-val appVersion = project.findProperty("versionName")?.toString() ?: "1.1.4"
+val appVersion = project.findProperty("versionName")?.toString() ?: "1.1.5"
 
-val versionCodeTimestamp = try {
-    // Minutes since January 1st, 2026
-    val startTime = 1767222000000L // 2026-01-01 00:00:00 UTC
-    ((System.currentTimeMillis() - startTime) / (1000 * 60)).toInt()
-} catch (e: Exception) {
-    1
-}
+val appVersionCode = 312500
 
 android {
     namespace = "de.goork.mapflip"
@@ -32,7 +26,7 @@ android {
         applicationId = "de.goork.mapflip"
         minSdk = 26
         targetSdk = 36
-        versionCode = versionCodeTimestamp
+        versionCode = appVersionCode
         versionName = appVersion
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
