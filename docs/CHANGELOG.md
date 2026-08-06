@@ -1,5 +1,6 @@
 ## 1.1.1
 - Einstellungen aufgeräumt: Menü vereinfacht und Lesbarkeit verbessert
+- Build-Flavors hinzugefügt zur Vorbereitung des F-Droid-Releases
 
 ## 1.1.0
 - Neuer Bewertungs-Button zum schnellen Bewerten der App im Google Play Store

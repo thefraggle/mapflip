@@ -1,5 +1,6 @@
 ## 1.1.1
 - Cleaned up settings: simplified the menu and improved readability
+- Added build flavors to prepare for the F-Droid store release
 
 ## 1.1.0
 - Added direct rating button to easily rate the app on the Google Play Store
