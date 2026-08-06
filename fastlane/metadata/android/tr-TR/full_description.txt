@@ -1,0 +1,26 @@
+Arkadaşlarınız size Apple Maps bağlantıları gönderiyor ama siz Google Maps mi kullanıyorsunuz?
+
+MapFlip, Android için nihai Apple Maps çözümü ve bağlantı dönüştürücüsüdür. Bir kez kurun, Google Maps yönlendirmesi olarak her şey otomatik çalışsın: Her Apple Maps bağlantısı doğrudan Google Maps'te açılır. Kopyalama yok, yapıştırma yok, tarayıcıyla uğraşmak yok.
+
+🔧 Nasıl çalışır:
+1. MapFlip'i açın
+2. "Ayarları Aç"a dokunun
+3. maps.apple.com için bağlantı yönlendirmesini etkinleştirin
+4. Tamam! Apple Maps bağlantıları artık otomatik olarak yönlendirilir.
+
+✨ Özellikler:
+• Duraklatma modu ve Hızlı Ayarlar kutusu – Yönlendirmeyi bildirim panelinden duraklatın
+• Otomatik yönlendirme – manuel kopyalamaya gerek yok
+• Arka planda görünmez çalışma – ekstra ekran yok
+• Aramaları, koordinatları, adresleri ve navigasyonu destekler
+• Gizlilik dostu – hiçbir veri toplanmaz veya gönderilmez
+• Tamamen ücretsiz, reklam yok
+
+🗺️ Desteklenen bağlantı formatları:
+• Arama sorguları (ör. "Eyfel Kulesi")
+• GPS koordinatları
+• Adresler
+• Navigasyon tarifleri
+• Yer işaretleri
+
+MapFlip, iPhone kullanıcılarından (WhatsApp, e-posta, SMS veya sosyal medya üzerinden) düzenli olarak Apple Maps bağlantısı alan Android kullanıcıları için tasarlanmıştır.

@@ -1,3 +1,7 @@
+## 1.1.2
+- Internal security updates for build processes
+- Metadata updates to prepare for the F-Droid release
+
 ## 1.1.1
 - Cleaned up settings: simplified the menu and improved readability
 - Added build flavors to prepare for the F-Droid store release

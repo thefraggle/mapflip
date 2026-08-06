@@ -1,0 +1,1 @@
+Apple MapsのリンクをGoogle Mapsで自動的に開きます。

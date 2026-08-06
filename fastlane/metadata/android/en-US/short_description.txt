@@ -1,0 +1,1 @@
+Open Apple Maps links in Google Maps. Includes Pause tile.

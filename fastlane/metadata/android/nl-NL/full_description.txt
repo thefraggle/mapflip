@@ -1,0 +1,26 @@
+Je vrienden sturen je Apple Maps-links – maar jij gebruikt Google Maps?
+
+MapFlip is de ultieme Apple Maps-oplossing en link-converter voor Android. Stel het één keer in en alles werkt automatisch als een Google Maps-omleiding: elke Apple Maps-link opent direct in Google Maps. Geen kopiëren, geen plakken, geen omwegen via de browser.
+
+🔧 Hoe het werkt:
+1. Open MapFlip
+2. Tik op "Instellingen openen"
+3. Schakel link-omleiding in voor maps.apple.com
+4. Klaar! Apple Maps-links worden nu automatisch omgeleid.
+
+✨ Functies:
+• Pauzemodus & Snelle instellingen-tegel – Omleiding pauzeren vanuit de meldingenbalk
+• Automatische omleiding – niet handmatig kopiëren
+• Onzichtbare achtergrondwerking – geen extra schermen
+• Ondersteunt zoekopdrachten, coördinaten, adressen en navigatie
+• Privacyvriendelijk – geen gegevens verzameld of verzonden
+• Volledig gratis, geen advertenties
+
+🗺️ Ondersteunde linkformaten:
+• Zoekopdrachten (bijv. "Eiffeltoren")
+• GPS-coördinaten
+• Adressen
+• Navigatie-aanwijzingen
+• Locatiemarkeringen
+
+MapFlip is gebouwd voor Android-gebruikers die regelmatig Apple Maps-links ontvangen van iPhone-gebruikers – via WhatsApp, e-mail, sms of sociale media.

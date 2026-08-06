@@ -1,0 +1,26 @@
+Vennene dine sender deg Apple Maps-lenker – men du bruker Google Maps?
+
+MapFlip er den ultimate Apple Maps-løsningen og lenkekonverteren for Android. Sett det opp én gang, og alt fungerer automatisk som en viderekobling til Google Maps: Hver Apple Maps-lenke åpnes direkte i Google Maps. Ingen kopiering, ingen liming, ingen omveier via nettleseren.
+
+🔧 Slik fungerer det:
+1. Åpne MapFlip
+2. Trykk på "Åpne innstillinger"
+3. Aktiver lenke-viderekobling for maps.apple.com
+4. Ferdig! Apple Maps-lenker viderekobles nå automatisk.
+
+✨ Funksjoner:
+• Pausemodus & Hurtiginnstillinger-knapp – Sett viderekobling på pause i varslingspanelet
+• Automatisk viderekobling – ingen manuell kopiering
+• Usynlig bakgrunnsdrift – ingen ekstra skjermer
+• Støtter søk, koordinater, adresser og navigasjon
+• Personvernvennlig – ingen data samles inn eller sendes
+• Helt gratis, ingen reklame
+
+🗺️ Støttede lenkeformater:
+• Søk (f.eks. "Eiffeltårnet")
+• GPS-koordinater
+• Adresser
+• Navigasjonsinstruksjoner
+• Stedmarkører
+
+MapFlip er bygget for Android-brukere som regelmessig mottar Apple Maps-lenker fra iPhone-brukere – enten via WhatsApp, e-post, SMS eller sosiale medier.

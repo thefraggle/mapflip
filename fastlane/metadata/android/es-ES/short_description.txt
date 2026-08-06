@@ -1,0 +1,1 @@
+Abre enlaces de Apple Maps directamente en Google Maps.

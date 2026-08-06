@@ -1,3 +1,7 @@
+## 1.1.2
+- Interne Sicherheits-Updates für Build-Prozesse
+- Metadaten-Updates zur Vorbereitung des F-Droid-Releases
+
 ## 1.1.1
 - Einstellungen aufgeräumt: Menü vereinfacht und Lesbarkeit verbessert
 - Build-Flavors hinzugefügt zur Vorbereitung des F-Droid-Releases

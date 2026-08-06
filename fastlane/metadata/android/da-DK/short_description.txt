@@ -1,0 +1,1 @@
+Åbn Apple Maps-links automatisk i Google Maps. Med pause-knap.

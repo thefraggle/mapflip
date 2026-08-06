@@ -1,0 +1,1 @@
+Open Apple Maps-links automatisch in Google Maps. Met pauze-tegel.
