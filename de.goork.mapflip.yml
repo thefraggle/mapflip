@@ -6,6 +6,8 @@ IssueTracker: https://github.com/thefraggle/mapflip/issues
 
 RepoType: git
 Repo: https://github.com/thefraggle/mapflip.git
+AllowedAPKSigningKeys: 41ffbc0caf78f98bfa9e6072a2d3af83abf06bad0233109c2bff6382b351f19b
+Binaries: https://github.com/thefraggle/mapflip/releases/download/v%v/MapFlip-v%v-foss-release.apk
 
 Builds:
   - versionName: 1.1.3
