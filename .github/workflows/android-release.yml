@@ -57,7 +57,7 @@ jobs:
           python3 -c "import re, os; content = open('docs/CHANGELOG.en.md', encoding='utf-8').read(); m = re.search(r'## \d+\.\d+\.\d+.*?\n(.*?)(?=\n## \d+\.\d+\.\d+|$)', content, re.DOTALL); open('release_body.md', 'w', encoding='utf-8').write(m.group(1).strip() if m else 'Release notes automatically published.')"
 
       - name: Run Unit Tests
-        run: ./gradlew :app:testDebugUnitTest --build-cache
+        run: ./gradlew :app:testPlayDebugUnitTest :app:testFossDebugUnitTest --build-cache
 
       - name: Decode Keystore & Configure signing
         env:
@@ -77,7 +77,7 @@ jobs:
 
       - name: Build Signed Release APK & AAB
         run: |
-          ./gradlew :app:assembleRelease :app:bundleRelease \
+          ./gradlew :app:assemblePlayRelease :app:bundlePlayRelease :app:assembleFossRelease \
             --build-cache --parallel --configuration-cache \
             -PversionName=${{ steps.metadata.outputs.app_version }} \
             -PcommitHash=${{ steps.metadata.outputs.hash }} \
@@ -86,11 +86,14 @@ jobs:
 
       - name: Copy Signed Artifacts
         run: |
-          AAB_PATH=$(find app/build/outputs/bundle/release -name "*.aab" | head -n 1)
-          cp "$AAB_PATH" MapFlip-v${{ steps.metadata.outputs.app_version }}-release.aab
+          PLAY_AAB_PATH=$(find app/build/outputs/bundle/playRelease -name "*.aab" | head -n 1)
+          cp "$PLAY_AAB_PATH" MapFlip-v${{ steps.metadata.outputs.app_version }}-play-release.aab
           
-          APK_PATH=$(find app/build/outputs/apk/release -name "*.apk" | head -n 1)
-          cp "$APK_PATH" MapFlip-v${{ steps.metadata.outputs.app_version }}-release.apk
+          PLAY_APK_PATH=$(find app/build/outputs/apk/play/release -name "*.apk" | head -n 1)
+          cp "$PLAY_APK_PATH" MapFlip-v${{ steps.metadata.outputs.app_version }}-play-release.apk
+          
+          FOSS_APK_PATH=$(find app/build/outputs/apk/foss/release -name "*.apk" | head -n 1)
+          cp "$FOSS_APK_PATH" MapFlip-v${{ steps.metadata.outputs.app_version }}-foss-release.apk
 
       - name: Prepare Release Notes
         run: |
@@ -113,8 +116,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            MapFlip-v${{ steps.metadata.outputs.app_version }}-release.aab
-            MapFlip-v${{ steps.metadata.outputs.app_version }}-release.apk
+            MapFlip-v${{ steps.metadata.outputs.app_version }}-play-release.aab
+            MapFlip-v${{ steps.metadata.outputs.app_version }}-play-release.apk
+            MapFlip-v${{ steps.metadata.outputs.app_version }}-foss-release.apk
           name: Release ${{ github.ref_name }}
           body_path: release_body.md
           prerelease: false
@@ -127,7 +131,7 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           packageName: de.goork.mapflip
-          releaseFiles: MapFlip-v${{ steps.metadata.outputs.app_version }}-release.aab
+          releaseFiles: MapFlip-v${{ steps.metadata.outputs.app_version }}-play-release.aab
           tracks: alpha
           status: completed
           whatsNewDirectory: ${{ github.workspace }}/release-notes

@@ -43,6 +43,7 @@ import java.util.Locale
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import de.goork.mapflip.AppConstants
+import de.goork.mapflip.BuildConfig
 
 private const val PREFS_NAME = "mapflip"
 private const val PREFS_KEY_LANG = "lang"
@@ -388,38 +389,40 @@ fun MainScreen() {
                     )
                 }
 
-                // Rate App button
-                OutlinedButton(
-                    onClick = {
-                        val rateIntent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${context.packageName}")).apply {
-                            addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
-                        }
-                        try {
-                            context.startActivity(rateIntent)
-                        } catch (_: Exception) {
+                if (BuildConfig.FLAVOR == "play") {
+                    // Rate App button
+                    OutlinedButton(
+                        onClick = {
+                            val rateIntent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${context.packageName}")).apply {
+                                addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                            }
                             try {
-                                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=${context.packageName}")))
-                            } catch (_: Exception) {}
-                        }
-                    },
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(48.dp),
-                    shape = RoundedCornerShape(14.dp)
-                ) {
-                    Icon(
-                        Icons.Outlined.Star,
-                        contentDescription = null,
-                        modifier = Modifier.size(18.dp)
-                    )
-                    Spacer(Modifier.width(6.dp))
-                    Text(
-                        s.btnRateApp,
-                        style = MaterialTheme.typography.labelMedium.copy(
-                            fontWeight = FontWeight.Medium
-                        ),
-                        maxLines = 1
-                    )
+                                context.startActivity(rateIntent)
+                            } catch (_: Exception) {
+                                try {
+                                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=${context.packageName}")))
+                                } catch (_: Exception) {}
+                            }
+                        },
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(48.dp),
+                        shape = RoundedCornerShape(14.dp)
+                    ) {
+                        Icon(
+                            Icons.Outlined.Star,
+                            contentDescription = null,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(Modifier.width(6.dp))
+                        Text(
+                            s.btnRateApp,
+                            style = MaterialTheme.typography.labelMedium.copy(
+                                fontWeight = FontWeight.Medium
+                            ),
+                            maxLines = 1
+                        )
+                    }
                 }
             }
 
