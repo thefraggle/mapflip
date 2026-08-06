@@ -42,10 +42,7 @@ import java.util.Locale
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.outlined.Clear
-import androidx.compose.ui.platform.LocalClipboardManager
 import de.goork.mapflip.AppConstants
-import de.goork.mapflip.AppleMapsParser
 
 private const val PREFS_NAME = "mapflip"
 private const val PREFS_KEY_LANG = "lang"
@@ -67,11 +64,7 @@ fun MainScreen() {
     var isPaused by remember { mutableStateOf(prefs.getBoolean(AppConstants.PREFS_KEY_PAUSED, false)) }
     var showLanguageSheet by remember { mutableStateOf(false) }
 
-    val clipboardManager = LocalClipboardManager.current
-    var inputLink by remember { mutableStateOf("") }
-    val convertedUri = remember(inputLink) {
-        if (inputLink.isNotBlank()) AppleMapsParser.convert(inputLink) else null
-    }
+
 
     val currentLangItem = Strings.SUPPORTED_LANGUAGES.find { it.code == langPref }
         ?: Strings.SUPPORTED_LANGUAGES.first()
@@ -314,108 +307,7 @@ fun MainScreen() {
 
             Spacer(Modifier.height(16.dp))
 
-            // Link-Tester Card (Issue #14)
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp),
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
-                )
-            ) {
-                Column(modifier = Modifier.padding(20.dp)) {
-                    // Title row with paste button
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(
-                            text = s.testLinkTitle,
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
-                            color = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier.weight(1f)
-                        )
-                        FilledTonalButton(
-                            onClick = {
-                                val clipText = clipboardManager.getText()?.text
-                                if (!clipText.isNullOrBlank()) {
-                                    inputLink = clipText
-                                }
-                            },
-                            modifier = Modifier.height(32.dp),
-                            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 0.dp),
-                            shape = RoundedCornerShape(8.dp)
-                        ) {
-                            Text(
-                                "📋 ${s.btnPasteClipboard}",
-                                style = MaterialTheme.typography.labelSmall
-                            )
-                        }
-                    }
-                    Spacer(Modifier.height(4.dp))
-                    OutlinedTextField(
-                        value = inputLink,
-                        onValueChange = { inputLink = it },
-                        placeholder = { Text(s.testLinkHint, style = MaterialTheme.typography.bodySmall) },
-                        modifier = Modifier.fillMaxWidth(),
-                        singleLine = true,
-                        shape = RoundedCornerShape(12.dp),
-                        trailingIcon = if (inputLink.isNotEmpty()) {
-                            {
-                                IconButton(onClick = { inputLink = "" }) {
-                                    Icon(Icons.Outlined.Clear, contentDescription = null, modifier = Modifier.size(18.dp))
-                                }
-                            }
-                        } else null
-                    )
 
-                    if (!convertedUri.isNullOrBlank()) {
-                        Spacer(Modifier.height(12.dp))
-                        Surface(
-                            color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Column(Modifier.padding(12.dp)) {
-                                Text(
-                                    text = s.testLinkConvertedLabel,
-                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                                    color = MaterialTheme.colorScheme.primary
-                                )
-                                Spacer(Modifier.height(4.dp))
-                                Text(
-                                    text = convertedUri,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                        }
-                        Spacer(Modifier.height(12.dp))
-                        Button(
-                            onClick = {
-                                try {
-                                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(convertedUri)).apply {
-                                        setPackage(AppConstants.GOOGLE_MAPS_PACKAGE)
-                                    })
-                                } catch (_: Exception) {
-                                    try {
-                                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(convertedUri)))
-                                    } catch (_: Exception) {}
-                                }
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(44.dp),
-                            shape = RoundedCornerShape(12.dp)
-                        ) {
-                            Text(s.btnTestLink)
-                        }
-                    }
-                }
-            }
-
-            Spacer(Modifier.height(16.dp))
 
             // Settings button – prominent but elegant
             Button(
