@@ -1,3 +1,7 @@
+## 1.1.3
+- Grafische Assets für Fastlane und F-Droid-Store hinzugefügt
+- Interne Bereinigung der Ressourcen
+
 ## 1.1.2
 - Interne Sicherheits-Updates für Build-Prozesse
 - Metadaten-Updates zur Vorbereitung des F-Droid-Releases
