@@ -11,9 +11,10 @@ Builds:
   - versionName: 1.1.3
     versionCode: 31250
     commit: v1.1.3
+    subdir: app
     gradle:
       - yes
-    gradleFlavor: foss
+    flavor: foss
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
