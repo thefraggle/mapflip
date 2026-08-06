@@ -11,9 +11,9 @@ AllowedAPKSigningKeys: 41ffbc0caf78f98bfa9e6072a2d3af83abf06bad0233109c2bff6382b
 Binaries: https://github.com/thefraggle/mapflip/releases/download/v%v/MapFlip-v%v-foss-release.apk
 
 Builds:
-  - versionName: 1.1.4
-    versionCode: 31250
-    commit: ca261c2f481eb249ea84db9c58adb81e623e59cb
+  - versionName: 1.1.5
+    versionCode: 312500
+    commit: ef52ec307d112c7e844295c2239d75fc29f6def9
     subdir: app
     sudo:
       - echo "deb https://deb.debian.org/debian trixie main" > /etc/apt/sources.list.d/trixie.list
@@ -25,5 +25,5 @@ Builds:
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: 1.1.4
-CurrentVersionCode: 31250
+CurrentVersion: 1.1.5
+CurrentVersionCode: 312500
