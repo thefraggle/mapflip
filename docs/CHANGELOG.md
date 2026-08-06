@@ -1,3 +1,8 @@
+## 1.1.0
+- Neuer Bewertungs-Button zum schnellen Bewerten der App im Google Play Store
+- Dezenten Datenschutzhinweis in der App-UI hinzugefügt (100% lokal, kein Datentracking)
+- App-Beschreibung für bessere Auffindbarkeit im App Store optimiert
+
 ## 1.0.9
 - Link-Tester zeigt jetzt in der richtigen Sprache an – auch bei Englisch, Japanisch und allen anderen
 - Kachel-Beschriftung passt sich nicht mehr ab, egal wie lang die Übersetzung ist

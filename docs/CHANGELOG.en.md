@@ -1,3 +1,8 @@
+## 1.1.0
+- Added direct rating button to easily rate the app on the Google Play Store
+- Added a clear privacy note in the app (100% local, no data tracking)
+- Optimized app store description for better visibility
+
 ## 1.0.9
 - Link Tester now displays in the correct language – including English, Japanese, and all others
 - Paste button label no longer gets squashed, regardless of translation length
