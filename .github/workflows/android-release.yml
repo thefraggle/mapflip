@@ -102,7 +102,10 @@ jobs:
           def get_latest(f):
               if not os.path.exists(f): return 'Release notes automatically published.'
               m = re.search(r'## \d+\.\d+\.\d+.*?\n(.*?)(?=\n## \d+\.\d+\.\d+|$)', open(f, encoding='utf-8').read(), re.DOTALL)
-              return m.group(1).strip() if m else 'Release notes automatically published.'
+              if not m: return 'Release notes automatically published.'
+              lines = m.group(1).strip().split('\n')
+              filtered = [l for l in lines if 'f-droid' not in l.lower() and 'foss' not in l.lower()]
+              return '\n'.join(filtered).strip()
           de = get_latest('docs/CHANGELOG.md')
           en = get_latest('docs/CHANGELOG.en.md')
           os.makedirs('release-notes', exist_ok=True)
