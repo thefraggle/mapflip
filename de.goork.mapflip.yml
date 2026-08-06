@@ -1,6 +1,7 @@
 Categories:
   - Navigation
 License: MIT
+AuthorName: Daniel Notthoff
 SourceCode: https://github.com/thefraggle/mapflip
 IssueTracker: https://github.com/thefraggle/mapflip/issues
 
@@ -12,7 +13,7 @@ Binaries: https://github.com/thefraggle/mapflip/releases/download/v%v/MapFlip-v%
 Builds:
   - versionName: 1.1.3
     versionCode: 31250
-    commit: v1.1.3
+    commit: d095e45f60c47b50d89fb4b811f5967f497877e6
     subdir: app
     gradle:
       - foss
