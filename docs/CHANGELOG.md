@@ -1,3 +1,7 @@
+## 1.1.4
+- Build-Konfiguration für F-Droid Reproducible Builds optimiert (JDK 21, dependenciesInfo)
+- Interne Anpassungen
+
 ## 1.1.3
 - Grafische Assets für Fastlane und F-Droid-Store hinzugefügt
 - Interne Bereinigung der Ressourcen

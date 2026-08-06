@@ -14,7 +14,7 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
-val appVersion = project.findProperty("versionName")?.toString() ?: "1.1.3"
+val appVersion = project.findProperty("versionName")?.toString() ?: "1.1.4"
 
 val versionCodeTimestamp = try {
     // Minutes since January 1st, 2026
@@ -59,13 +59,18 @@ android {
         }
     }
 
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "21"
     }
 
     buildFeatures {
