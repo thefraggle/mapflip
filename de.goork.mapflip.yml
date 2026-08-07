@@ -23,7 +23,7 @@ Builds:
     gradle:
       - foss
 
-AutoUpdateMode: Version
+AutoUpdateMode: Version v%v
 UpdateCheckMode: Tags
 CurrentVersion: 1.1.5
 CurrentVersionCode: 315001
