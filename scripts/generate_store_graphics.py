@@ -357,8 +357,8 @@ def create_feature_graphic(config, output_path):
     draw.text((90, 283), pill_text, font=tagline_font, fill=(255, 255, 255))
     
     # Right Image Preview
-    raw_img_path = f"{RAW_DIR}/raw_mainscreen.png"
-    if os.path.exists(raw_img_path):
+    raw_img_path = config.get('raw_image')
+    if raw_img_path and os.path.exists(raw_img_path):
         raw_img = Image.open(raw_img_path).convert("RGBA")
         target_h = 420
         ratio = target_h / float(raw_img.height)
@@ -941,8 +941,20 @@ def main():
             
         # Feature Graphic
         feature_path = f"{OUTPUT_BASE}/{locale}/feature_graphic.png"
+        
+        # Look for localized screenshot for the feature graphic too!
+        feature_raw_image = f"{RAW_DIR}/raw_mainscreen.png"
+        search_pattern = f"fastlane/metadata/android/{locale}/images/phoneScreenshots/main_screen_*.png"
+        found_files = glob.glob(search_pattern)
+        if found_files:
+            feature_raw_image = found_files[-1]
+            print(f"  Using localized screengrab screenshot for feature graphic: {found_files[-1]}")
+        else:
+            print(f"  Warning: No localized screengrab screenshot found for {locale} feature graphic, using default.")
+            
         create_feature_graphic({
-            'tagline': data['tagline']
+            'tagline': data['tagline'],
+            'raw_image': feature_raw_image
         }, feature_path)
         
         # Copy feature graphic to fastlane
