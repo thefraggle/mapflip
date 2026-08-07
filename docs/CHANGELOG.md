@@ -1,3 +1,7 @@
+## 1.1.6
+- Neue Funktion: Umleitung vorübergehend pausieren (für 1 Stunde, 8 Stunden oder bis zum nächsten Morgen) mit automatischer Reaktivierung
+- Pausenzustand wird jetzt auch in der System-Kachel detailliert angezeigt
+
 ## 1.1.5
 - Statischen VersionCode für zuverlässige F-Droid Reproducible Builds eingeführt
 - Interne Stabilitäts-Updates für den Build-Prozess

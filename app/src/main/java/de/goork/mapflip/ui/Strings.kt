@@ -61,7 +61,12 @@ object Strings {
         val testLinkHint: String = "Enter Apple Maps link here...",
         val btnPasteClipboard: String = "Paste",
         val btnTestLink: String = "Test in Google Maps",
-        val testLinkConvertedLabel: String = "Converted Target URI:"
+        val testLinkConvertedLabel: String = "Converted Target URI:",
+        val pauseIndefinitely: String = "Indefinitely",
+        val pause1Hour: String = "1 Hour",
+        val pause8Hours: String = "8 Hours",
+        val pauseUntilTomorrow: String = "Until tomorrow morning",
+        val dialogPauseTitle: String = "Select Pause Duration"
     )
 
     fun resolveLanguage(savedPref: String?): String {
@@ -121,7 +126,12 @@ object Strings {
         testLinkHint = "Apple Maps Link hier eingeben...",
         btnPasteClipboard = "Einfügen",
         btnTestLink = "In Google Maps testen",
-        testLinkConvertedLabel = "Umgewandelte Ziel-URI:"
+        testLinkConvertedLabel = "Umgewandelte Ziel-URI:",
+        pauseIndefinitely = "Unbegrenzt",
+        pause1Hour = "1 Stunde",
+        pause8Hours = "8 Stunden",
+        pauseUntilTomorrow = "Bis morgen früh",
+        dialogPauseTitle = "Pausendauer wählen"
     )
 
     val EN = AppStrings(

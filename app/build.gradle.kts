@@ -14,9 +14,9 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
-val appVersion = "1.1.5"
+val appVersion = "1.1.6"
 
-val appVersionCode = 315001
+val appVersionCode = 315002
 
 android {
     namespace = "de.goork.mapflip"
@@ -26,8 +26,8 @@ android {
         applicationId = "de.goork.mapflip"
         minSdk = 26
         targetSdk = 36
-        versionCode = 315001
-        versionName = "1.1.5"
+        versionCode = 315002
+        versionName = "1.1.6"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -59,12 +59,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "21"
+        jvmTarget = "17"
     }
 
     buildFeatures {

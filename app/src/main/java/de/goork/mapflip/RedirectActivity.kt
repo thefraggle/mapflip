@@ -21,8 +21,7 @@ class RedirectActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val prefs = getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE)
-        val isPaused = prefs.getBoolean(AppConstants.PREFS_KEY_PAUSED, false)
+        val isPaused = PauseHelper.isCurrentlyPaused(this)
         val dataUri = intent?.data
 
         if (dataUri != null) {

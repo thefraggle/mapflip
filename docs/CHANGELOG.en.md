@@ -1,3 +1,7 @@
+## 1.1.6
+- New feature: Temporarily pause redirect (for 1 hour, 8 hours, or until next morning) with automatic reactivation
+- Pause state details are now shown in the Quick Settings Tile
+
 ## 1.1.5
 - Introduced static VersionCode for reliable F-Droid Reproducible Builds
 - Internal stability updates for the build process

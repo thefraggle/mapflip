@@ -38,12 +38,11 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import de.goork.mapflip.ui.theme.Green500
 import de.goork.mapflip.ui.theme.Red500
-import java.util.Locale
-
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import de.goork.mapflip.AppConstants
 import de.goork.mapflip.BuildConfig
+import de.goork.mapflip.PauseHelper
 
 private const val PREFS_NAME = "mapflip"
 private const val PREFS_KEY_LANG = "lang"
@@ -62,10 +61,9 @@ fun MainScreen() {
     val activeLangCode = Strings.resolveLanguage(langPref)
     val s = Strings.getStrings(activeLangCode)
 
-    var isPaused by remember { mutableStateOf(prefs.getBoolean(AppConstants.PREFS_KEY_PAUSED, false)) }
+    var isPaused by remember { mutableStateOf(PauseHelper.isCurrentlyPaused(context)) }
     var showLanguageSheet by remember { mutableStateOf(false) }
-
-
+    var showPauseDialog by remember { mutableStateOf(false) }
 
     val currentLangItem = Strings.SUPPORTED_LANGUAGES.find { it.code == langPref }
         ?: Strings.SUPPORTED_LANGUAGES.first()
@@ -76,6 +74,7 @@ fun MainScreen() {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
                 linksActive = checkLinksEnabled(context)
+                isPaused = PauseHelper.isCurrentlyPaused(context)
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
@@ -299,11 +298,73 @@ fun MainScreen() {
                     Switch(
                         checked = isPaused,
                         onCheckedChange = { checked ->
-                            isPaused = checked
-                            prefs.edit().putBoolean(AppConstants.PREFS_KEY_PAUSED, checked).apply()
+                            if (checked) {
+                                showPauseDialog = true
+                            } else {
+                                isPaused = false
+                                prefs.edit()
+                                    .putBoolean(AppConstants.PREFS_KEY_PAUSED, false)
+                                    .putLong(PauseHelper.PREFS_KEY_PAUSED_UNTIL, 0L)
+                                    .apply()
+                            }
                         }
                     )
                 }
+            }
+
+            if (showPauseDialog) {
+                AlertDialog(
+                    onDismissRequest = {
+                        showPauseDialog = false
+                        isPaused = PauseHelper.isCurrentlyPaused(context)
+                    },
+                    title = {
+                        Text(text = s.dialogPauseTitle)
+                    },
+                    text = {
+                        Column {
+                            val options = listOf(
+                                s.pause1Hour to 1 * 60 * 60 * 1000L,
+                                s.pause8Hours to 8 * 60 * 60 * 1000L,
+                                s.pauseUntilTomorrow to -1L,
+                                s.pauseIndefinitely to 0L
+                            )
+                            options.forEach { (label, durationMs) ->
+                                TextButton(
+                                    onClick = {
+                                        val untilTimestamp = when (durationMs) {
+                                            0L -> 0L
+                                            -1L -> PauseHelper.getTomorrowMorningTimestamp()
+                                            else -> System.currentTimeMillis() + durationMs
+                                        }
+                                        prefs.edit()
+                                            .putBoolean(AppConstants.PREFS_KEY_PAUSED, true)
+                                            .putLong(PauseHelper.PREFS_KEY_PAUSED_UNTIL, untilTimestamp)
+                                            .apply()
+                                        isPaused = true
+                                        showPauseDialog = false
+                                    },
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Text(
+                                        text = label,
+                                        modifier = Modifier.fillMaxWidth(),
+                                        textAlign = TextAlign.Start
+                                    )
+                                }
+                            }
+                        }
+                    },
+                    confirmButton = {},
+                    dismissButton = {
+                        TextButton(onClick = {
+                            showPauseDialog = false
+                            isPaused = PauseHelper.isCurrentlyPaused(context)
+                        }) {
+                            Text(text = context.getString(android.R.string.cancel))
+                        }
+                    }
+                )
             }
 
             Spacer(Modifier.height(16.dp))
