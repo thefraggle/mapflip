@@ -12,8 +12,8 @@ Binaries: https://github.com/thefraggle/mapflip/releases/download/v%v/MapFlip-v%
 
 Builds:
   - versionName: 1.1.5
-    versionCode: 312500
-    commit: 3179fd90f10e26d618f254fc7284cd046b30b184
+    versionCode: 315000
+    commit: ece49f219a7d7f0ccff33796409874ba12857cb8
     subdir: app
     sudo:
       - echo "deb https://deb.debian.org/debian trixie main" > /etc/apt/sources.list.d/trixie.list
@@ -26,4 +26,4 @@ Builds:
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
 CurrentVersion: 1.1.5
-CurrentVersionCode: 312500
+CurrentVersionCode: 315000
