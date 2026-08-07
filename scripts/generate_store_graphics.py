@@ -914,13 +914,41 @@ LOCALES = {
 }
 
 def main():
+    import glob
+    import shutil
     for locale, data in LOCALES.items():
         print(f"Generating store graphics for locale: {locale}...")
         for idx, screen in enumerate(data['screens'], 1):
-            create_screen(screen, f"{OUTPUT_BASE}/{locale}/screen_{idx}.png")
+            # For screen 1, look for a localized screengrab screenshot first
+            if idx == 1:
+                search_pattern = f"fastlane/metadata/android/{locale}/images/phoneScreenshots/main_screen_*.png"
+                found_files = glob.glob(search_pattern)
+                if found_files:
+                    # Use the latest generated main screen screenshot
+                    screen['raw_image'] = found_files[-1]
+                    print(f"  Using localized screengrab screenshot for screen 1: {found_files[-1]}")
+                else:
+                    print(f"  Warning: No localized screengrab screenshot found for {locale}, using default.")
+            
+            # Create screen in temp output base
+            output_path = f"{OUTPUT_BASE}/{locale}/screen_{idx}.png"
+            create_screen(screen, output_path)
+            
+            # Copy to fastlane/metadata/android/
+            fastlane_dest_dir = f"fastlane/metadata/android/{locale}/images/phoneScreenshots"
+            os.makedirs(fastlane_dest_dir, exist_ok=True)
+            shutil.copy(output_path, f"{fastlane_dest_dir}/screen_{idx}.png")
+            
+        # Feature Graphic
+        feature_path = f"{OUTPUT_BASE}/{locale}/feature_graphic.png"
         create_feature_graphic({
             'tagline': data['tagline']
-        }, f"{OUTPUT_BASE}/{locale}/feature_graphic.png")
+        }, feature_path)
+        
+        # Copy feature graphic to fastlane
+        fastlane_feat_dir = f"fastlane/metadata/android/{locale}/images"
+        os.makedirs(fastlane_feat_dir, exist_ok=True)
+        shutil.copy(feature_path, f"{fastlane_feat_dir}/featureGraphic.png")
 
 if __name__ == "__main__":
     main()

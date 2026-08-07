@@ -23,6 +23,7 @@ docs/assets/playstore/
 docs/assets/raw/
 docs/PLAYSTORE_LISTING.md
 scripts/generate_metadata.py
-
-
-
+vendor/
+.bundle/
+fastlane/report.xml
+fastlane/metadata/android/screenshots.html

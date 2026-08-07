@@ -1,0 +1,18 @@
+default_platform(:android)
+
+platform :android do
+  desc "Generates localized screenshots for the Play Store using Screengrab"
+  lane :generate_screenshots do
+    # 1. Compile the app and instrumentation test apks
+    gradle(
+      task: "assemblePlayDebug assemblePlayDebugAndroidTest",
+      project_dir: "."
+    )
+
+    # 2. Run Screengrab UI tests on the emulator
+    screengrab(
+      app_apk_path: "app/build/outputs/apk/play/debug/app-play-debug.apk",
+      tests_apk_path: "app/build/outputs/apk/androidTest/play/debug/app-play-debug-androidTest.apk"
+    )
+  end
+end

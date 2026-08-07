@@ -1,0 +1,24 @@
+# Screengrabfile configuration
+app_package_name("de.goork.mapflip")
+use_tests_in_packages(["de.goork.mapflip"])
+
+# Locales to capture screenshots for (all 14 supported languages)
+locales([
+  "de-DE",
+  "en-US",
+  "da-DK",
+  "fr-FR",
+  "it-IT",
+  "ja-JP",
+  "nl-NL",
+  "no-NO",
+  "pl-PL",
+  "pt-BR",
+  "pt-PT",
+  "sv-SE",
+  "es-ES",
+  "tr-TR"
+])
+
+# Clear screenshots directory before running to replace the old ones
+clear_previous_screenshots(true)

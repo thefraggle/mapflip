@@ -729,6 +729,10 @@ private fun StatusBadge(text: String, active: Boolean, isPaused: Boolean = false
 }
 
 private fun checkLinksEnabled(context: Context): Boolean? {
+    val prefs = context.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE)
+    if (prefs.getBoolean("mock_links_active", false)) {
+        return true
+    }
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         return try {
             val manager = context.getSystemService(
