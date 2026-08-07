@@ -4,11 +4,12 @@ License: MIT
 AuthorName: Daniel Notthoff
 SourceCode: https://github.com/thefraggle/mapflip
 IssueTracker: https://github.com/thefraggle/mapflip/issues
-
 AutoName: MapFlip
+
 RepoType: git
 Repo: https://github.com/thefraggle/mapflip.git
-Binaries: https://github.com/thefraggle/mapflip/releases/download/v%v/MapFlip-v%v-foss-release.apk
+Binaries:
+  https://github.com/thefraggle/mapflip/releases/download/v%v/MapFlip-v%v-foss-release.apk
 
 Builds:
   - versionName: 1.1.5
