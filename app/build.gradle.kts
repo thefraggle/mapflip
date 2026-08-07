@@ -14,9 +14,9 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
-val appVersion = "1.1.6"
+val appVersion = "1.2.0"
 
-val appVersionCode = 315002
+val appVersionCode = 315003
 
 android {
     namespace = "de.goork.mapflip"
@@ -26,8 +26,8 @@ android {
         applicationId = "de.goork.mapflip"
         minSdk = 26
         targetSdk = 36
-        versionCode = 315002
-        versionName = "1.1.6"
+        versionCode = 315003
+        versionName = "1.2.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

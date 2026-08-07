@@ -1,3 +1,8 @@
+## 1.2.0
+- New feature: Temporarily pause redirect (for 1 hour, 8 hours, or until next morning) with automatic reactivation
+- Pause state details are now shown in the Quick Settings Tile
+- Internal improvements and cleanups
+
 ## 1.1.6
 - New feature: Temporarily pause redirect (for 1 hour, 8 hours, or until next morning) with automatic reactivation
 - Pause state details are now shown in the Quick Settings Tile

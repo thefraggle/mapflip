@@ -523,63 +523,65 @@ fun MainScreen() {
 
             Spacer(Modifier.height(28.dp))
 
-            // FamWake promo – subtle, premium
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp),
-                shape = RoundedCornerShape(20.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
-                ),
-                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
-            ) {
-                Column(
-                    Modifier.padding(24.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+            if (BuildConfig.FLAVOR == "play") {
+                // FamWake promo – subtle, premium
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp),
+                    shape = RoundedCornerShape(20.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+                    ),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
                 ) {
-                    Text(
-                        text = s.famwakePromo,
-                        style = MaterialTheme.typography.labelSmall.copy(
-                            letterSpacing = 1.5.sp,
-                            fontWeight = FontWeight.Medium
-                        ),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
-                    )
-                    Spacer(Modifier.height(10.dp))
-                    Text(
-                        text = s.famwakeTitle,
-                        style = MaterialTheme.typography.titleMedium.copy(
-                            fontWeight = FontWeight.SemiBold
-                        )
-                    )
-                    Spacer(Modifier.height(6.dp))
-                    Text(
-                        text = s.famwakeDesc,
-                        style = MaterialTheme.typography.bodySmall.copy(lineHeight = 18.sp),
-                        textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
-                    )
-                    Spacer(Modifier.height(16.dp))
-                    OutlinedButton(
-                        onClick = {
-                            context.startActivity(Intent(
-                                Intent.ACTION_VIEW,
-                                Uri.parse(URL_FAMWAKE)
-                            ))
-                        },
-                        shape = RoundedCornerShape(12.dp),
-                        border = ButtonDefaults.outlinedButtonBorder(enabled = true)
+                    Column(
+                        Modifier.padding(24.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            s.famwakeButton,
-                            style = MaterialTheme.typography.labelMedium
+                            text = s.famwakePromo,
+                            style = MaterialTheme.typography.labelSmall.copy(
+                                letterSpacing = 1.5.sp,
+                                fontWeight = FontWeight.Medium
+                            ),
+                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
                         )
+                        Spacer(Modifier.height(10.dp))
+                        Text(
+                            text = s.famwakeTitle,
+                            style = MaterialTheme.typography.titleMedium.copy(
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        )
+                        Spacer(Modifier.height(6.dp))
+                        Text(
+                            text = s.famwakeDesc,
+                            style = MaterialTheme.typography.bodySmall.copy(lineHeight = 18.sp),
+                            textAlign = TextAlign.Center,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                        )
+                        Spacer(Modifier.height(16.dp))
+                        OutlinedButton(
+                            onClick = {
+                                context.startActivity(Intent(
+                                    Intent.ACTION_VIEW,
+                                    Uri.parse(URL_FAMWAKE)
+                                ))
+                            },
+                            shape = RoundedCornerShape(12.dp),
+                            border = ButtonDefaults.outlinedButtonBorder(enabled = true)
+                        ) {
+                            Text(
+                                s.famwakeButton,
+                                style = MaterialTheme.typography.labelMedium
+                            )
+                        }
                     }
                 }
-            }
 
-            Spacer(Modifier.height(20.dp))
+                Spacer(Modifier.height(20.dp))
+            }
 
             // Privacy/Datenschutz info card (Issue #20)
             Card(

@@ -1,3 +1,8 @@
+## 1.2.0
+- Neue Funktion: Umleitung vorübergehend pausieren (für 1 Stunde, 8 Stunden oder bis zum nächsten Morgen) mit automatischer Reaktivierung
+- Pausenzustand wird jetzt in der System-Kachel detailliert angezeigt
+- Interne Verbesserungen und Bereinigungen
+
 ## 1.1.6
 - Neue Funktion: Umleitung vorübergehend pausieren (für 1 Stunde, 8 Stunden oder bis zum nächsten Morgen) mit automatischer Reaktivierung
 - Pausenzustand wird jetzt auch in der System-Kachel detailliert angezeigt
