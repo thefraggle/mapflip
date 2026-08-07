@@ -16,7 +16,7 @@ if (keystorePropertiesFile.exists()) {
 
 val appVersion = project.findProperty("versionName")?.toString() ?: "1.1.5"
 
-val appVersionCode = 312500
+val appVersionCode = 315000
 
 android {
     namespace = "de.goork.mapflip"
