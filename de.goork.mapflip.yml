@@ -4,11 +4,12 @@ License: MIT
 AuthorName: Daniel Notthoff
 SourceCode: https://github.com/thefraggle/mapflip
 IssueTracker: https://github.com/thefraggle/mapflip/issues
+AutoName: MapFlip
 
 RepoType: git
 Repo: https://github.com/thefraggle/mapflip.git
-AllowedAPKSigningKeys: 41ffbc0caf78f98bfa9e6072a2d3af83abf06bad0233109c2bff6382b351f19b
-Binaries: https://github.com/thefraggle/mapflip/releases/download/v%v/MapFlip-v%v-foss-release.apk
+Binaries:
+  - https://github.com/thefraggle/mapflip/releases/download/v%v/MapFlip-v%v-foss-release.apk
 
 Builds:
   - versionName: 1.1.5
@@ -22,6 +23,8 @@ Builds:
       - update-alternatives --auto java
     gradle:
       - foss
+
+AllowedAPKSigningKeys: 41ffbc0caf78f98bfa9e6072a2d3af83abf06bad0233109c2bff6382b351f19b
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
