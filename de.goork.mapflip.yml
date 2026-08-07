@@ -27,6 +27,6 @@ Builds:
 AllowedAPKSigningKeys: 41ffbc0caf78f98bfa9e6072a2d3af83abf06bad0233109c2bff6382b351f19b
 
 AutoUpdateMode: Version
-UpdateCheckMode: Tags
+UpdateCheckMode: Tags ^v[0-9]+\.[0-9]+\.0$
 CurrentVersion: 1.1.5
 CurrentVersionCode: 315001
