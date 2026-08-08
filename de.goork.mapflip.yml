@@ -16,11 +16,6 @@ Builds:
     versionCode: 315003
     commit: a549d59ba9c82621522389e10b7595125c6b1a0a
     subdir: app
-    sudo:
-      - echo "deb https://deb.debian.org/debian trixie main" > /etc/apt/sources.list.d/trixie.list
-      - apt-get update
-      - apt-get install -y -t trixie openjdk-21-jdk-headless
-      - update-alternatives --auto java
     gradle:
       - foss
 
