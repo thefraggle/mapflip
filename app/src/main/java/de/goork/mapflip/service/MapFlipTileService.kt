@@ -64,7 +64,7 @@ class MapFlipTileService : TileService() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 val pausedUntil = prefs.getLong(PauseHelper.PREFS_KEY_PAUSED_UNTIL, 0L)
                 if (pausedUntil > 0L) {
-                    val timeStr = java.text.SimpleDateFormat.getTimeInstance(java.text.SimpleDateFormat.SHORT).format(java.util.Date(pausedUntil))
+                    val timeStr = android.text.format.DateFormat.getTimeFormat(this).format(java.util.Date(pausedUntil))
                     tile.subtitle = "${s.statusPaused} ($timeStr)"
                 } else {
                     tile.subtitle = s.statusPaused
