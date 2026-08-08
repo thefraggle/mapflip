@@ -52,7 +52,10 @@ private const val URL_NOTTHOFF = "https://notthoff.org"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    showPauseDialogDefault: Boolean = false,
+    onPauseDialogDismissed: () -> Unit = {}
+) {
     val context = LocalContext.current
     val prefs = remember { context.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE) }
     var langPref by remember {
@@ -64,6 +67,12 @@ fun MainScreen() {
     var isPaused by remember { mutableStateOf(PauseHelper.isCurrentlyPaused(context)) }
     var showLanguageSheet by remember { mutableStateOf(false) }
     var showPauseDialog by remember { mutableStateOf(false) }
+
+    LaunchedEffect(showPauseDialogDefault) {
+        if (showPauseDialogDefault) {
+            showPauseDialog = true
+        }
+    }
 
     val currentLangItem = Strings.SUPPORTED_LANGUAGES.find { it.code == langPref }
         ?: Strings.SUPPORTED_LANGUAGES.first()
@@ -317,6 +326,7 @@ fun MainScreen() {
                     onDismissRequest = {
                         showPauseDialog = false
                         isPaused = PauseHelper.isCurrentlyPaused(context)
+                        onPauseDialogDismissed()
                     },
                     title = {
                         Text(text = s.dialogPauseTitle)
@@ -343,6 +353,7 @@ fun MainScreen() {
                                             .apply()
                                         isPaused = true
                                         showPauseDialog = false
+                                        onPauseDialogDismissed()
                                     },
                                     modifier = Modifier.fillMaxWidth()
                                 ) {
@@ -360,6 +371,7 @@ fun MainScreen() {
                         TextButton(onClick = {
                             showPauseDialog = false
                             isPaused = PauseHelper.isCurrentlyPaused(context)
+                            onPauseDialogDismissed()
                         }) {
                             Text(text = context.getString(android.R.string.cancel))
                         }

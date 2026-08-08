@@ -1,3 +1,8 @@
+## 1.2.1
+- Kachel-Verhalten verbessert: Wenn die Umleitung aktiv ist, öffnet ein Klick auf die Schnelleinstellungs-Kachel nun direkt die App mit dem Pausen-Auswahldialog
+- Kachel-Direkt-Fortsetzen: Wenn MapFlip pausiert ist, reaktiviert ein Klick auf die Kachel die App sofort weiterhin per Ein-Klick-Aktion
+- Interne gradle Bereinigungen
+
 ## 1.2.0
 - Neue Funktion: Umleitung vorübergehend pausieren (für 1 Stunde, 8 Stunden oder bis zum nächsten Morgen) mit automatischer Reaktivierung
 - Pausenzustand wird jetzt in der System-Kachel detailliert angezeigt

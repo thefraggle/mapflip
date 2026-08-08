@@ -14,9 +14,9 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
-val appVersion = "1.2.0"
+val appVersion = "1.2.1"
 
-val appVersionCode = 315003
+val appVersionCode = 315004
 
 android {
     namespace = "de.goork.mapflip"

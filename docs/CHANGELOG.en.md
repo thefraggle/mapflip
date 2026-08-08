@@ -1,3 +1,8 @@
+## 1.2.1
+- Improved Quick Settings Tile: Tapping the active tile now collapses the shade and opens the app directly showing the pause duration options
+- Quick One-Tap Resume: Tapping a paused tile continues to instantly reactivate the app with a single click
+- Internal gradle cleanups
+
 ## 1.2.0
 - New feature: Temporarily pause redirect (for 1 hour, 8 hours, or until next morning) with automatic reactivation
 - Pause state details are now shown in the Quick Settings Tile

@@ -1,11 +1,14 @@
 package de.goork.mapflip.service
 
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import androidx.annotation.RequiresApi
 import de.goork.mapflip.AppConstants
+import de.goork.mapflip.MainActivity
 import de.goork.mapflip.PauseHelper
 import de.goork.mapflip.ui.Strings
 
@@ -26,13 +29,25 @@ class MapFlipTileService : TileService() {
                 .putBoolean(AppConstants.PREFS_KEY_PAUSED, false)
                 .putLong(PauseHelper.PREFS_KEY_PAUSED_UNTIL, 0L)
                 .apply()
+            updateTileState()
         } else {
-            prefs.edit()
-                .putBoolean(AppConstants.PREFS_KEY_PAUSED, true)
-                .putLong(PauseHelper.PREFS_KEY_PAUSED_UNTIL, 0L)
-                .apply()
+            val intent = Intent(this, MainActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                putExtra("show_pause_dialog", true)
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                val pendingIntent = PendingIntent.getActivity(
+                    this,
+                    0,
+                    intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                )
+                startActivityAndCollapse(pendingIntent)
+            } else {
+                @Suppress("DEPRECATION")
+                startActivityAndCollapse(intent)
+            }
         }
-        updateTileState()
     }
 
     private fun updateTileState() {
