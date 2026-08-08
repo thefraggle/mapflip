@@ -74,6 +74,18 @@ fun MainScreen(
         }
     }
 
+    DisposableEffect(context) {
+        val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
+            if (key == AppConstants.PREFS_KEY_PAUSED || key == PauseHelper.PREFS_KEY_PAUSED_UNTIL) {
+                isPaused = PauseHelper.isCurrentlyPaused(context)
+            }
+        }
+        prefs.registerOnSharedPreferenceChangeListener(listener)
+        onDispose {
+            prefs.unregisterOnSharedPreferenceChangeListener(listener)
+        }
+    }
+
     val currentLangItem = Strings.SUPPORTED_LANGUAGES.find { it.code == langPref }
         ?: Strings.SUPPORTED_LANGUAGES.first()
 

@@ -62,7 +62,13 @@ class MapFlipTileService : TileService() {
             tile.state = Tile.STATE_INACTIVE
             tile.label = s.headline
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                tile.subtitle = s.statusPaused
+                val pausedUntil = prefs.getLong(PauseHelper.PREFS_KEY_PAUSED_UNTIL, 0L)
+                if (pausedUntil > 0L) {
+                    val timeStr = java.text.SimpleDateFormat.getTimeInstance(java.text.SimpleDateFormat.SHORT).format(java.util.Date(pausedUntil))
+                    tile.subtitle = "${s.statusPaused} ($timeStr)"
+                } else {
+                    tile.subtitle = s.statusPaused
+                }
             }
         } else {
             tile.state = Tile.STATE_ACTIVE
