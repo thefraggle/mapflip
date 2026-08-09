@@ -43,6 +43,17 @@ import androidx.compose.foundation.lazy.items
 import de.goork.mapflip.AppConstants
 import de.goork.mapflip.BuildConfig
 import de.goork.mapflip.PauseHelper
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.border
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.foundation.BorderStroke
 
 private const val PREFS_NAME = "mapflip"
 private const val PREFS_KEY_LANG = "lang"
@@ -107,13 +118,26 @@ fun MainScreen(
     Scaffold(
         containerColor = surfaceColor,
     ) { padding ->
-        Column(
+        BoxWithConstraints(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
-                .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(padding),
+            contentAlignment = Alignment.TopCenter
         ) {
+            val isWideScreen = maxWidth >= 600.dp
+            val contentModifier = if (isWideScreen) {
+                Modifier
+                    .width(560.dp)
+                    .verticalScroll(rememberScrollState())
+            } else {
+                Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+            }
+            Column(
+                modifier = contentModifier,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
             // Header with gradient background
             Box(
                 modifier = Modifier
@@ -151,9 +175,21 @@ fun MainScreen(
                     onDismissRequest = { showLanguageSheet = false },
                     sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
                 ) {
+                    val sheetFocusRequester = remember { FocusRequester() }
+                    LaunchedEffect(Unit) {
+                        sheetFocusRequester.requestFocus()
+                    }
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .focusRequester(sheetFocusRequester)
+                            .focusable()
+                            .onPreviewKeyEvent { keyEvent ->
+                                if (keyEvent.type == KeyEventType.KeyDown && keyEvent.key == Key.Escape) {
+                                    showLanguageSheet = false
+                                    true
+                                } else false
+                            }
                             .padding(horizontal = 24.dp, vertical = 12.dp)
                     ) {
                         Text(
@@ -246,12 +282,17 @@ fun MainScreen(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 20.dp),
+                    .padding(horizontal = 20.dp)
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f),
+                        shape = RoundedCornerShape(20.dp)
+                    ),
                 shape = RoundedCornerShape(20.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.8f)
                 ),
-                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
             ) {
                 Column(Modifier.padding(24.dp)) {
                     Text(
@@ -287,10 +328,15 @@ fun MainScreen(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 20.dp),
+                    .padding(horizontal = 20.dp)
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f),
+                        shape = RoundedCornerShape(16.dp)
+                    ),
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.8f)
                 )
             ) {
                 Row(
@@ -344,7 +390,23 @@ fun MainScreen(
                         Text(text = s.dialogPauseTitle)
                     },
                     text = {
-                        Column {
+                        val dialogFocusRequester = remember { FocusRequester() }
+                        LaunchedEffect(Unit) {
+                            dialogFocusRequester.requestFocus()
+                        }
+                        Column(
+                            modifier = Modifier
+                                .focusRequester(dialogFocusRequester)
+                                .focusable()
+                                .onPreviewKeyEvent { keyEvent ->
+                                    if (keyEvent.type == KeyEventType.KeyDown && keyEvent.key == Key.Escape) {
+                                        showPauseDialog = false
+                                        isPaused = PauseHelper.isCurrentlyPaused(context)
+                                        onPauseDialogDismissed()
+                                        true
+                                    } else false
+                                }
+                        ) {
                             val options = listOf(
                                 s.pause1Hour to 1 * 60 * 60 * 1000L,
                                 s.pause8Hours to 8 * 60 * 60 * 1000L,
@@ -552,10 +614,15 @@ fun MainScreen(
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 20.dp),
+                        .padding(horizontal = 20.dp)
+                        .border(
+                            width = 1.dp,
+                            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f),
+                            shape = RoundedCornerShape(20.dp)
+                        ),
                     shape = RoundedCornerShape(20.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+                        containerColor = MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.8f)
                     ),
                     elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
                 ) {
@@ -611,10 +678,15 @@ fun MainScreen(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 20.dp),
+                    .padding(horizontal = 20.dp)
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.2f),
+                        shape = RoundedCornerShape(14.dp)
+                    ),
                 shape = RoundedCornerShape(14.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.6f)
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.5f)
                 )
             ) {
                 Row(
@@ -653,6 +725,7 @@ fun MainScreen(
             Spacer(Modifier.height(40.dp))
         }
     }
+}
 }
 
 @Composable
@@ -706,12 +779,21 @@ private fun StatusBadge(text: String, active: Boolean, isPaused: Boolean = false
     }
 
     val infiniteTransition = rememberInfiniteTransition(label = "pulse")
-    val pulseAlpha by infiniteTransition.animateFloat(
-        initialValue = 0.3f,
-        targetValue = 1.0f,
+    val pulseScale by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = 2.5f,
         animationSpec = infiniteRepeatable(
-            animation = tween(1000, easing = LinearEasing),
-            repeatMode = RepeatMode.Reverse
+            animation = tween(1400, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "pulseScale"
+    )
+    val pulseAlpha by infiniteTransition.animateFloat(
+        initialValue = 0.6f,
+        targetValue = 0.0f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1400, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Restart
         ),
         label = "pulseAlpha"
     )
@@ -719,7 +801,13 @@ private fun StatusBadge(text: String, active: Boolean, isPaused: Boolean = false
     Surface(
         color = bgColor,
         shape = RoundedCornerShape(12.dp),
-        modifier = Modifier.padding(horizontal = 20.dp)
+        modifier = Modifier
+            .padding(horizontal = 20.dp)
+            .border(
+                width = 1.dp,
+                color = contentColor.copy(alpha = 0.25f),
+                shape = RoundedCornerShape(12.dp)
+            )
     ) {
         Row(
             Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
@@ -727,11 +815,27 @@ private fun StatusBadge(text: String, active: Boolean, isPaused: Boolean = false
         ) {
             if (active) {
                 Box(
-                    modifier = Modifier
-                        .size(10.dp)
-                        .clip(CircleShape)
-                        .background(Green500.copy(alpha = pulseAlpha))
-                )
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier.size(16.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(8.dp)
+                            .graphicsLayer {
+                                scaleX = pulseScale
+                                scaleY = pulseScale
+                                alpha = pulseAlpha
+                            }
+                            .clip(CircleShape)
+                            .background(Green500)
+                    )
+                    Box(
+                        modifier = Modifier
+                            .size(7.dp)
+                            .clip(CircleShape)
+                            .background(Green500)
+                    )
+                }
             } else {
                 Icon(
                     Icons.Outlined.Info,
