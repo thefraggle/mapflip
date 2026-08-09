@@ -1,3 +1,9 @@
+## 1.2.2
+- Modernized user interface: Added premium typography styling and subtle glassmorphic borders to cards
+- Improved animations: New animated pulsing radar status indicator for active redirects
+- Responsive layouts: Centered and scaled column presentation for tablets, foldables, and landscape mode
+- Dialog ergonomics: Modal sheets and dialogs can now be dismissed using physical ESC key and backdrop clicks
+
 ## 1.2.1
 - Improved Quick Settings Tile: Tapping the active tile now collapses the shade and opens the app directly showing the pause duration options
 - Quick One-Tap Resume: Tapping a paused tile continues to instantly reactivate the app with a single click

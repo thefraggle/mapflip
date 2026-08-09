@@ -1,3 +1,9 @@
+## 1.2.2
+- Modernisierte Benutzeroberfläche: Premium-Typografie und Glassmorphism-Kartenrahmen hinzugefügt
+- Verbesserte Animationen: Neuer pulsierender Radar-Status-Glow zeigt die App-Aktivität noch lebendiger an
+- Responsive Darstellung: Optimiertes, zentriertes Layout für Tablets, Foldables und Querformat
+- Dialog-Ergonomie: Dialoge und Sprachwahl lassen sich per physischer ESC-Taste und Klick auf das Backdrop schließen
+
 ## 1.2.1
 - Kachel-Verhalten verbessert: Wenn die Umleitung aktiv ist, öffnet ein Klick auf die Schnelleinstellungs-Kachel nun direkt die App mit dem Pausen-Auswahldialog
 - Kachel-Direkt-Fortsetzen: Wenn MapFlip pausiert ist, reaktiviert ein Klick auf die Kachel die App sofort weiterhin per Ein-Klick-Aktion
