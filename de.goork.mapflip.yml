@@ -1,3 +1,7 @@
+AntiFeatures:
+  NonFreeAdd:
+    en-US: This app redirects links to the proprietary Google Maps service.
+
 Categories:
   - Navigation
 License: MIT
@@ -5,14 +9,11 @@ AuthorName: Daniel Notthoff
 SourceCode: https://github.com/thefraggle/mapflip
 IssueTracker: https://github.com/thefraggle/mapflip/issues
 
-AntiFeatures:
-  NonFreeAdd:
-    en-US: This app redirects links to the proprietary Google Maps service.
-
 AutoName: MapFlip
+
 RepoType: git
 Repo: https://github.com/thefraggle/mapflip.git
-Binaries: 
+Binaries:
   https://github.com/thefraggle/mapflip/releases/download/v%v/MapFlip-v%v-foss-release.apk
 
 Builds:
