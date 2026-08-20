@@ -61,6 +61,9 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.runtime.CompositionLocalProvider
 
 import android.content.ClipboardManager
 import androidx.compose.material.icons.outlined.Search
@@ -131,10 +134,12 @@ fun MainScreen(
     }
 
     val surfaceColor = MaterialTheme.colorScheme.surface
+    val isRtl = activeLangCode == "ar"
 
-    Scaffold(
-        containerColor = surfaceColor,
-    ) { padding ->
+    CompositionLocalProvider(LocalLayoutDirection provides (if (isRtl) LayoutDirection.Rtl else LayoutDirection.Ltr)) {
+        Scaffold(
+            containerColor = surfaceColor,
+        ) { padding ->
         BoxWithConstraints(
             modifier = Modifier
                 .fillMaxSize()
@@ -872,6 +877,7 @@ fun MainScreen(
             Spacer(Modifier.height(40.dp))
         }
     }
+}
 }
 }
 
