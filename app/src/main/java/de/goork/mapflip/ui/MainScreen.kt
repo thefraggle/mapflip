@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
@@ -570,7 +571,8 @@ fun MainScreen(
                                     text = convertedTargetUri,
                                     style = MaterialTheme.typography.bodySmall.copy(
                                         fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
-                                        fontSize = 12.sp
+                                        fontSize = 12.sp,
+                                        textDirection = TextDirection.Ltr
                                     ),
                                     color = MaterialTheme.colorScheme.primary,
                                     modifier = Modifier.padding(10.dp)
@@ -866,7 +868,8 @@ fun MainScreen(
             Text(
                 text = s.copyright,
                 style = MaterialTheme.typography.bodySmall.copy(
-                    letterSpacing = 0.3.sp
+                    letterSpacing = 0.3.sp,
+                    textDirection = TextDirection.Ltr
                 ),
                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f),
                 modifier = Modifier.clickable {
