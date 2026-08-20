@@ -6,7 +6,8 @@ SourceCode: https://github.com/thefraggle/mapflip
 IssueTracker: https://github.com/thefraggle/mapflip/issues
 
 AntiFeatures:
-  - NonFreeAddons
+  NonFreeAddons:
+    en-US: This app redirects links to the proprietary Google Maps service.
 
 AutoName: MapFlip
 RepoType: git
