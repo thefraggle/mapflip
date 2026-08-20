@@ -1,26 +1,27 @@
 Vennene dine sender deg Apple Maps-lenker – men du bruker Google Maps?
 
-MapFlip er den ultimate Apple Maps-løsningen og lenkekonverteren for Android. Sett det opp én gang, og alt fungerer automatisk som en viderekobling til Google Maps: Hver Apple Maps-lenke åpnes direkte i Google Maps. Ingen kopiering, ingen liming, ingen omveier via nettleseren.
+MapFlip er den ultimate Apple Maps-konverteren og viderekoblingsløsningen for Android. Sett det opp én gang, og alt fungerer automatisk som en viderekobling til Google Maps: Hver Apple Maps-lenke, URL eller posisjon åpnes direkte i Google Maps. Ingen kopiering, ingen liming, ingen omveier via nettleseren.
+
+Enten du trenger Apple Maps for Android eller en automatisk Apple til Google Maps-konverter, håndterer MapFlip alle lenker sømløst i bakgrunnen.
 
 🔧 Slik fungerer det:
 1. Åpne MapFlip
 2. Trykk på "Åpne innstillinger"
 3. Aktiver lenke-viderekobling for maps.apple.com
-4. Ferdig! Apple Maps-lenker viderekobles nå automatisk.
+4. Ferdig! Apple Maps-lenker åpnes nå direkte i Google Maps.
 
-✨ Funksjoner:
-• Pausemodus & Hurtiginnstillinger-knapp – Sett viderekobling på pause i varslingspanelet
-• Automatisk viderekobling – ingen manuell kopiering
-• Usynlig bakgrunnsdrift – ingen ekstra skjermer
-• Støtter søk, koordinater, adresser og navigasjon
-• Personvernvennlig – ingen data samles inn eller sendes
-• Helt gratis, ingen reklame
+✨ Funksjoner & Personvern:
+• 🚗 Turn-by-turn navigasjon & Android Auto – Starter umiddelbart ruteveiledning i Google Maps
+• 🔄 Automatisk viderekobling – Apple Maps til Google Maps lenkekonverter
+• 🔒 100% frakoblet & privat – Null internetttillatelser (ingen android.permission.INTERNET), ingen sporing, ingen reklame
+• ⏸️ Pausemodus & Hurtiginnstillinger-knapp – Sett viderekobling på pause i varslingspanelet
+• 💬 Universell app-kompatibilitet – Fungerer sømløst med WhatsApp, Telegram, Signal, SMS, Slack og e-post
+• 👻 Usynlig bakgrunnsdrift – Ingen ekstra skjermer, null batteribruk
 
 🗺️ Støttede lenkeformater:
-• Søk (f.eks. "Eiffeltårnet")
-• GPS-koordinater
-• Adresser
+• Apple Maps URL-er & søk (f.eks. "Eiffeltårnet")
+• GPS-koordinater & delte posisjoner
+• Adresser & stedmarkører
 • Navigasjonsinstruksjoner
-• Stedmarkører
 
-MapFlip er bygget for Android-brukere som regelmessig mottar Apple Maps-lenker fra iPhone-brukere – enten via WhatsApp, e-post, SMS eller sosiale medier.
+MapFlip er bygget for Android-brukere som regelmessig mottar Apple Maps-lenker fra iPhone-brukere.

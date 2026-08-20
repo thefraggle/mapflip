@@ -1,1 +1,1 @@
-Apple Maps bağlantılarını otomatik olarak Google Maps'te açın.
+Apple Maps bağlantı & URL'lerini Google Maps'te açın. Hızlı harita dönüştürücü.

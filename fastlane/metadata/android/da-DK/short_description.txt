@@ -1,1 +1,1 @@
-Åbn Apple Maps-links automatisk i Google Maps. Med pause-knap.
+Åbn Apple Maps-links & URL'er i Google Maps. Hurtig Apple Maps-konverter.

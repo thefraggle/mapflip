@@ -1,0 +1,23 @@
+Teman Anda mengirim tautan Apple Maps, tetapi Anda menggunakan Google Maps di Android?
+
+MapFlip adalah alat pengonversi dan pengalih tautan Apple Maps terbaik untuk Android. Cukup atur sekali, dan semua tautan, URL, atau lokasi Apple Maps akan terbuka secara otomatis di Google Maps. Tanpa salin-tempel dan tanpa membuka browser.
+
+🔧 Cara Penggunaan:
+1. Buka MapFlip
+2. Ketuk "Buka Pengaturan"
+3. Aktifkan penerusan tautan untuk maps.apple.com
+4. Selesai! Tautan Apple Maps sekarang langsung terbuka di Google Maps.
+
+✨ Fitur & Privasi:
+• 🚗 Navigasi Belokan demi Belokan & Android Auto – Langsung meluncurkan rute asli di Google Maps
+• 🔄 Pengalihan Otomatis – Konversi tautan instan di dalam perangkat
+• 🔒 100% Offline & Privasi Terjaga – Tanpa izin internet (0 Permissions), tanpa pelacakan, tanpa iklan
+• ⏸️ Mode Jeda & Ubin Pengaturan Cepat – Jeda kapan saja dari panel notifikasi
+• 💬 Kompatibel dengan Semua Aplikasi – WhatsApp, Telegram, Signal, SMS, Slack, dan email
+• 👻 Berjalan Halus di Latar Belakang – Hemat baterai tanpa gangguan
+
+🗺️ Format tautan yang didukung:
+• URL & pencarian Apple Maps
+• Koordinat GPS & lokasi bersama
+• Alamat & penanda tempat
+• Petunjuk arah navigasi

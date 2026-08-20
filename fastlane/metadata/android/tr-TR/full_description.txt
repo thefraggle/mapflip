@@ -1,26 +1,27 @@
 Arkadaşlarınız size Apple Maps bağlantıları gönderiyor ama siz Google Maps mi kullanıyorsunuz?
 
-MapFlip, Android için nihai Apple Maps çözümü ve bağlantı dönüştürücüsüdür. Bir kez kurun, Google Maps yönlendirmesi olarak her şey otomatik çalışsın: Her Apple Maps bağlantısı doğrudan Google Maps'te açılır. Kopyalama yok, yapıştırma yok, tarayıcıyla uğraşmak yok.
+MapFlip, Android için nihai Apple Maps dönüştürücüsü ve bağlantı yönlendirme aracıdır. Bir kez kurun, Google Maps yönlendirmesi olarak her şey otomatik çalışsın: Her Apple Maps bağlantısı, URL veya konum doğrudan Google Maps'te açılır. Kopyalama yok, yapıştırma yok, tarayıcıyla uğraşmak yok.
+
+İster Android için Apple Maps çözümüne ister otomatik Apple'dan Google Maps'e dönüştürücüye ihtiyacınız olsun, MapFlip tüm bağlantıları arka planda anında çözer.
 
 🔧 Nasıl çalışır:
 1. MapFlip'i açın
 2. "Ayarları Aç"a dokunun
 3. maps.apple.com için bağlantı yönlendirmesini etkinleştirin
-4. Tamam! Apple Maps bağlantıları artık otomatik olarak yönlendirilir.
+4. Tamam! Apple Maps bağlantıları artık doğrudan Google Maps'te açılır.
 
-✨ Özellikler:
-• Duraklatma modu ve Hızlı Ayarlar kutusu – Yönlendirmeyi bildirim panelinden duraklatın
-• Otomatik yönlendirme – manuel kopyalamaya gerek yok
-• Arka planda görünmez çalışma – ekstra ekran yok
-• Aramaları, koordinatları, adresleri ve navigasyonu destekler
-• Gizlilik dostu – hiçbir veri toplanmaz veya gönderilmez
-• Tamamen ücretsiz, reklam yok
+✨ Özellikler & Gizlilik:
+• 🚗 Adım adım navigasyon ve Android Auto – Google Maps'te anında rota ve canlı navigasyon başlatır
+• 🔄 Otomatik yönlendirme – Apple Maps'ten Google Maps'e bağlantı dönüştürücü
+• 🔒 %100 çevrimdışı ve gizli – Sıfır internet izni (android.permission.INTERNET izni yok), takip yok, reklam yok
+• ⏸️ Duraklatma modu ve Hızlı Ayarlar kutusu – Yönlendirmeyi bildirim panelinden duraklatın
+• 💬 Evrensel uygulama uyumluluğu – WhatsApp, Telegram, Signal, SMS, Slack ve e-posta ile sorunsuz çalışır
+• 👻 Arka planda görünmez çalışma – Ekstra ekran yok, sıfır pil tüketimi
 
 🗺️ Desteklenen bağlantı formatları:
-• Arama sorguları (ör. "Eyfel Kulesi")
-• GPS koordinatları
-• Adresler
+• Apple Maps URL'leri & arama sorguları (ör. "Eyfel Kulesi")
+• GPS koordinatları & paylaşılan konumlar
+• Adresler & yer işaretleri
 • Navigasyon tarifleri
-• Yer işaretleri
 
-MapFlip, iPhone kullanıcılarından (WhatsApp, e-posta, SMS veya sosyal medya üzerinden) düzenli olarak Apple Maps bağlantısı alan Android kullanıcıları için tasarlanmıştır.
+MapFlip, iPhone kullanıcılarından düzenli olarak Apple Maps bağlantısı alan Android kullanıcıları için tasarlanmıştır.

@@ -1,3 +1,9 @@
+## 1.2.3
+- Smarter Link Detection: Automatically detects even more shared Apple Maps links, navigation routes, and chat messages
+- In-App Link Tester: Paste and test any Apple Maps link directly inside the app with a single tap
+- 6 New Languages: Added support for Korean, Simplified Chinese, Traditional Chinese, Arabic, Russian, and Indonesian (20 languages total)
+- Haptic Feedback: Subtle touch vibrations when interacting with buttons and switches
+
 ## 1.2.2
 - Modernized user interface: Added premium typography styling and subtle glassmorphic borders to cards
 - Improved animations: New animated pulsing radar status indicator for active redirects

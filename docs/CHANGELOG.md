@@ -1,3 +1,9 @@
+## 1.2.3
+- Zuverlässigere Link-Erkennung: Erkennt jetzt noch mehr geteilte Apple-Karten-Links, Routen und Messenger-Nachrichten direkt
+- Link-Tester & Zwischenablage: Apple-Maps-Links können jetzt direkt in der App eingefügt und sofort in Google Maps getestet werden
+- 6 neue Sprachen: MapFlip spricht jetzt zusätzlich Koreanisch, Chinesisch (Vereinfacht & Traditionell), Arabisch, Russisch und Indonesisch (insgesamt 20 Sprachen)
+- Spürbares Feedback: Dezente Vibrationen beim Tippen auf Tasten und Schalter
+
 ## 1.2.2
 - Modernisierte Benutzeroberfläche: Premium-Typografie und Glassmorphism-Kartenrahmen hinzugefügt
 - Verbesserte Animationen: Neuer pulsierender Radar-Status-Glow zeigt die App-Aktivität noch lebendiger an

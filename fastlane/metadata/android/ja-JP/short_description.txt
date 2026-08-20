@@ -1,1 +1,1 @@
-Apple MapsのリンクをGoogle Mapsで自動的に開きます。
+Apple MapsのリンクやURLをGoogle Mapsで開く。高速マップ変換ツール。

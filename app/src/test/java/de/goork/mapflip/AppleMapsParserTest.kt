@@ -115,5 +115,61 @@ class AppleMapsParserTest {
         assertEquals("https://www.google.com/maps",
             AppleMapsParser.convert("http://invalid^url|test"))
     }
+
+    @Test
+    fun `extracts map url from text snippet`() {
+        val snippet = "Hey! Let's meet at https://maps.apple.com/?q=Brandenburg+Gate."
+        assertEquals("https://maps.apple.com/?q=Brandenburg+Gate", AppleMapsParser.extractMapUrl(snippet))
+        assertEquals("geo:0,0?q=Brandenburg+Gate", AppleMapsParser.convert(snippet))
+    }
+
+    @Test
+    fun `handles applemaps custom scheme`() {
+        assertEquals("geo:0,0?q=Berlin",
+            AppleMapsParser.convert("applemaps://maps.apple.com/?q=Berlin"))
+    }
+
+    @Test
+    fun `converts directions with travel mode`() {
+        assertEquals("https://www.google.com/maps/dir/?api=1&origin=Berlin&destination=Potsdam&travelmode=transit",
+            AppleMapsParser.convert("https://maps.apple.com/?saddr=Berlin&daddr=Potsdam&dirflg=r"))
+        assertEquals("https://www.google.com/maps/dir/?api=1&origin=Berlin&destination=Potsdam&travelmode=walking",
+            AppleMapsParser.convert("https://maps.apple.com/?saddr=Berlin&daddr=Potsdam&dirflg=w"))
+        assertEquals("https://www.google.com/maps/dir/?api=1&origin=Berlin&destination=Potsdam&travelmode=bicycling",
+            AppleMapsParser.convert("https://maps.apple.com/?saddr=Berlin&daddr=Potsdam&dirflg=b"))
+    }
+
+    @Test
+    fun `converts navigation with mode`() {
+        assertEquals("google.navigation:q=Munich&mode=w",
+            AppleMapsParser.convert("https://maps.apple.com/?daddr=Munich&dirflg=w"))
+        assertEquals("google.navigation:q=Munich&mode=b",
+            AppleMapsParser.convert("https://maps.apple.com/?daddr=Munich&dirflg=b"))
+    }
+
+    @Test
+    fun `converts center and coordinate parameters`() {
+        assertEquals("geo:40.7128,-74.0060",
+            AppleMapsParser.convert("https://maps.apple.com/?coordinate=40.7128,-74.0060"))
+        assertEquals("geo:48.8566,2.3522?q=Paris",
+            AppleMapsParser.convert("https://maps.apple.com/?center=48.8566,2.3522&q=Paris"))
+    }
+
+    @Test
+    fun `supports all 20 languages in Strings registry`() {
+        val supportedCodes = de.goork.mapflip.ui.Strings.SUPPORTED_LANGUAGES.map { it.code }
+        org.junit.Assert.assertEquals(20, supportedCodes.size)
+        val expected = listOf(
+            "auto", "de", "en", "da", "fr", "it", "ja", "nl", "no", "pl",
+            "pt", "sv", "es", "tr", "ko", "zh", "zh-tw", "ar", "ru", "id"
+        )
+        org.junit.Assert.assertEquals(expected, supportedCodes)
+        for (code in expected) {
+            val strings = de.goork.mapflip.ui.Strings.getStrings(code)
+            org.junit.Assert.assertFalse(strings.setupTitle.isBlank())
+            org.junit.Assert.assertFalse(strings.tagline.isBlank())
+            org.junit.Assert.assertFalse(strings.testLinkTitle.isBlank())
+        }
+    }
 }
 

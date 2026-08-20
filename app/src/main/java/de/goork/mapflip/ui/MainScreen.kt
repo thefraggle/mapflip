@@ -54,6 +54,18 @@ import androidx.compose.foundation.focusable
 import androidx.compose.foundation.border
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
+
+import android.content.ClipboardManager
+import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.Share
+import de.goork.mapflip.AppleMapsParser
 
 private const val PREFS_NAME = "mapflip"
 private const val PREFS_KEY_LANG = "lang"
@@ -75,9 +87,14 @@ fun MainScreen(
     val activeLangCode = Strings.resolveLanguage(langPref)
     val s = Strings.getStrings(activeLangCode)
 
+    val haptic = LocalHapticFeedback.current
     var isPaused by remember { mutableStateOf(PauseHelper.isCurrentlyPaused(context)) }
     var showLanguageSheet by remember { mutableStateOf(false) }
     var showPauseDialog by remember { mutableStateOf(false) }
+    var testInputUrl by remember { mutableStateOf("") }
+    val convertedTargetUri = remember(testInputUrl) {
+        if (testInputUrl.isNotBlank()) AppleMapsParser.convert(testInputUrl) else ""
+    }
 
     LaunchedEffect(showPauseDialogDefault) {
         if (showPauseDialogDefault) {
@@ -208,6 +225,7 @@ fun MainScreen(
                                 val isSelected = item.code == langPref
                                 Surface(
                                     onClick = {
+                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                         langPref = item.code
                                         prefs.edit().putString(AppConstants.PREFS_KEY_LANG, item.code).apply()
                                         showLanguageSheet = false
@@ -365,6 +383,7 @@ fun MainScreen(
                     Switch(
                         checked = isPaused,
                         onCheckedChange = { checked ->
+                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                             if (checked) {
                                 showPauseDialog = true
                             } else {
@@ -416,6 +435,7 @@ fun MainScreen(
                             options.forEach { (label, durationMs) ->
                                 TextButton(
                                     onClick = {
+                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                         val untilTimestamp = when (durationMs) {
                                             0L -> 0L
                                             -1L -> PauseHelper.getTomorrowMorningTimestamp()
@@ -455,11 +475,136 @@ fun MainScreen(
 
             Spacer(Modifier.height(16.dp))
 
+            // Link Tester Card (Issue #7 & Issue #23 integration)
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp)
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f),
+                        shape = RoundedCornerShape(16.dp)
+                    ),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.8f)
+                )
+            ) {
+                Column(Modifier.padding(18.dp)) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Search,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(
+                            text = s.testLinkTitle,
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
 
+                    Spacer(Modifier.height(12.dp))
+
+                    OutlinedTextField(
+                        value = testInputUrl,
+                        onValueChange = { testInputUrl = it },
+                        placeholder = {
+                            Text(
+                                text = s.testLinkHint,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                            )
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(12.dp),
+                        singleLine = true,
+                        trailingIcon = {
+                            TextButton(
+                                onClick = {
+                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+                                    val clipText = clipboard?.primaryClip?.getItemAt(0)?.text?.toString()
+                                    if (!clipText.isNullOrBlank()) {
+                                        testInputUrl = clipText.trim()
+                                    }
+                                }
+                            ) {
+                                Text(
+                                    text = s.btnPasteClipboard,
+                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
+                        }
+                    )
+
+                    AnimatedVisibility(
+                        visible = convertedTargetUri.isNotBlank(),
+                        enter = fadeIn() + expandVertically(),
+                        exit = fadeOut() + shrinkVertically()
+                    ) {
+                        Column(Modifier.padding(top = 12.dp)) {
+                            Text(
+                                text = s.testLinkConvertedLabel,
+                                style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Medium),
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f)
+                            )
+                            Spacer(Modifier.height(4.dp))
+                            Surface(
+                                color = MaterialTheme.colorScheme.surfaceContainerHighest.copy(alpha = 0.6f),
+                                shape = RoundedCornerShape(8.dp),
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Text(
+                                    text = convertedTargetUri,
+                                    style = MaterialTheme.typography.bodySmall.copy(
+                                        fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                                        fontSize = 12.sp
+                                    ),
+                                    color = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.padding(10.dp)
+                                )
+                            }
+                            Spacer(Modifier.height(10.dp))
+                            FilledTonalButton(
+                                onClick = {
+                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                    try {
+                                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(convertedTargetUri))
+                                        context.startActivity(intent)
+                                    } catch (_: Exception) {}
+                                },
+                                modifier = Modifier.fillMaxWidth(),
+                                shape = RoundedCornerShape(10.dp)
+                            ) {
+                                Icon(
+                                    Icons.Outlined.Share,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                                Spacer(Modifier.width(8.dp))
+                                Text(
+                                    text = s.btnTestLink,
+                                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold)
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            Spacer(Modifier.height(16.dp))
 
             // Settings button – prominent but elegant
             Button(
                 onClick = {
+                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                         context.startActivity(Intent(
                             Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS,
@@ -508,6 +653,7 @@ fun MainScreen(
                 // Feedback button
                 OutlinedButton(
                     onClick = {
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                         val intent = Intent(Intent.ACTION_SENDTO).apply {
                             data = Uri.parse("mailto:daniel.notthoff@gmail.com")
                             putExtra(Intent.EXTRA_SUBJECT, "[MapFlip Feedback]")
@@ -540,6 +686,7 @@ fun MainScreen(
                     // Rate App button
                     OutlinedButton(
                         onClick = {
+                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             val rateIntent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${context.packageName}")).apply {
                                 addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
                             }

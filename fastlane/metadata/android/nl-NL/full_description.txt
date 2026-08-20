@@ -1,26 +1,27 @@
 Je vrienden sturen je Apple Maps-links – maar jij gebruikt Google Maps?
 
-MapFlip is de ultieme Apple Maps-oplossing en link-converter voor Android. Stel het één keer in en alles werkt automatisch als een Google Maps-omleiding: elke Apple Maps-link opent direct in Google Maps. Geen kopiëren, geen plakken, geen omwegen via de browser.
+MapFlip is de ultieme Apple Maps-converter en link-omleiding voor Android. Stel het één keer in en alles werkt automatisch als een Google Maps-omleiding: elke Apple Maps-link, URL of locatie opent direct in Google Maps. Geen kopiëren, geen plakken, geen omwegen via de browser.
+
+Of je nu een Apple Maps voor Android-oplossing zoekt of een automatische Apple naar Google Maps converter, MapFlip verwerkt alle links naadloos op de achtergrond.
 
 🔧 Hoe het werkt:
 1. Open MapFlip
 2. Tik op "Instellingen openen"
 3. Schakel link-omleiding in voor maps.apple.com
-4. Klaar! Apple Maps-links worden nu automatisch omgeleid.
+4. Klaar! Apple Maps-links openen nu direct in Google Maps.
 
-✨ Functies:
-• Pauzemodus & Snelle instellingen-tegel – Omleiding pauzeren vanuit de meldingenbalk
-• Automatische omleiding – niet handmatig kopiëren
-• Onzichtbare achtergrondwerking – geen extra schermen
-• Ondersteunt zoekopdrachten, coördinaten, adressen en navigatie
-• Privacyvriendelijk – geen gegevens verzameld of verzonden
-• Volledig gratis, geen advertenties
+✨ Functies & Privacy:
+• 🚗 Turn-by-turn navigatie & Android Auto – Start direct routebeschrijving in Google Maps
+• 🔄 Automatische omleiding – Apple Maps naar Google Maps link-converter
+• 🔒 100% offline & privacyvriendelijk – Geen internetrechten (geen android.permission.INTERNET), geen tracking, geen advertenties
+• ⏸️ Pauzemodus & Snelle instellingen-tegel – Omleiding pauzeren vanuit de meldingenbalk
+• 💬 Universele app-compatibiliteit – Werkt naadloos met WhatsApp, Telegram, Signal, SMS, Slack en e-mail
+• 👻 Onzichtbare achtergrondwerking – Geen extra schermen, geen batterijverbruik
 
 🗺️ Ondersteunde linkformaten:
-• Zoekopdrachten (bijv. "Eiffeltoren")
-• GPS-coördinaten
-• Adressen
+• Apple Maps URL's & zoekopdrachten (bijv. "Eiffeltoren")
+• GPS-coördinaten & gedeelde locaties
+• Adressen & locatiemarkeringen
 • Navigatie-aanwijzingen
-• Locatiemarkeringen
 
-MapFlip is gebouwd voor Android-gebruikers die regelmatig Apple Maps-links ontvangen van iPhone-gebruikers – via WhatsApp, e-mail, sms of sociale media.
+MapFlip is gebouwd voor Android-gebruikers die regelmatig Apple Maps-links ontvangen van iPhone-gebruikers.

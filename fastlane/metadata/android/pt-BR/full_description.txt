@@ -1,26 +1,27 @@
 Seus amigos enviam links do Apple Maps – mas você usa o Google Maps?
 
-O MapFlip é a solução definitiva para o Apple Maps e o conversor de links para Android. Configure uma vez e tudo funcionará automaticamente como um redirecionamento para o Google Maps: cada link do Apple Maps abre diretamente no Google Maps. Sem copiar, sem colar, sem atalhos pelo navegador.
+O MapFlip é o conversor definitivo de Apple Maps e redirecionador de links para Android. Configure uma vez e tudo funcionará automaticamente como um redirecionamento para o Google Maps: cada link, URL ou localização do Apple Maps abre diretamente no Google Maps. Sem copiar, sem colar, sem atalhos pelo navegador.
+
+Quer você precise do Apple Maps para Android ou de um conversor automático de Apple para Google Maps, o MapFlip processa tudo em segundo plano.
 
 🔧 Como funciona:
 1. Abra o MapFlip
 2. Toque em "Abrir configurações"
 3. Ative o redirecionamento de links para maps.apple.com
-4. Pronto! Os links do Apple Maps agora são redirecionados automaticamente.
+4. Pronto! Os links do Apple Maps agora abrem diretamente no Google Maps.
 
-✨ Recursos:
-• Modo pausa e atalho de Configurações Rápidas – Pause o redirecionamento no painel de notificações
-• Redirecionamento automático – sem cópia manual
-• Operação invisível em segundo plano – sem telas extras
-• Suporta buscas, coordenadas, endereços e navegação
-• Respeito à privacidade – nenhum dado é coletado ou enviado
-• Totalmente gratuito, sem anúncios
+✨ Recursos & Privacidade:
+• 🚗 Navegação curva a curva & Android Auto – Inicia instantaneamente a rota no Google Maps
+• 🔄 Redirecionamento automático – Conversor de links Apple Maps para Google Maps
+• 🔒 100% offline e seguro – Zero permissões de internet (sem android.permission.INTERNET), sem rastreamento, sem anúncios
+• ⏸️ Modo pausa e atalho de Configurações Rápidas – Pause o redirecionamento no painel de notificações
+• 💬 Compatibilidade universal – Funciona perfeitamente com WhatsApp, Telegram, Signal, SMS, Slack e e-mail
+• 👻 Operação invisível em segundo plano – Sem telas extras, sem consumo de bateria
 
 🗺️ Formatos de links suportados:
-• Buscas (ex: "Torre Eiffel")
-• Coordenadas GPS
-• Endereços
+• URLs do Apple Maps & buscas (ex: "Torre Eiffel")
+• Coordenadas GPS & localizações compartilhadas
+• Endereços & marcadores de locais
 • Instruções de navegação
-• Marcadores de locais
 
-O MapFlip foi feito para usuários de Android que recebem frequentemente links do Apple Maps de usuários de iPhone – seja pelo WhatsApp, e-mail, SMS ou redes sociais.
+O MapFlip foi feito para usuários de Android que recebem frequentemente links do Apple Maps de usuários de iPhone.

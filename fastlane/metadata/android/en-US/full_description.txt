@@ -1,26 +1,27 @@
 Your friends send you Apple Maps links – but you use Google Maps?
 
-MapFlip is the ultimate Apple Maps solution and link converter for Android. Set it up once, and everything works automatically as a Google Maps redirect: Every Apple Maps link opens directly in Google Maps. No copying, no pasting, no browser detours.
+MapFlip is the ultimate Apple Maps converter and link redirect tool for Android. Set it up once, and everything works automatically as a seamless Google Maps redirect: Every Apple Maps link, URL, or location opens directly in Google Maps. No copying, no pasting, no browser detours.
+
+Whether you need an Apple Maps for Android solution or an automatic Apple to Google Maps converter, MapFlip handles all Apple Maps URLs in the background.
 
 🔧 How it works:
 1. Open MapFlip
 2. Tap "Open Settings"
 3. Enable link forwarding for maps.apple.com
-4. Done! Apple Maps links are now automatically redirected.
+4. Done! Apple Maps links now open directly in Google Maps.
 
-✨ Features:
-• Pause mode & Quick Settings Tile – Suspend redirect anytime directly from notification shade
-• Automatic redirect – no manual copying needed
-• Invisible background operation – no extra screens
-• Supports search queries, coordinates, addresses, and navigation
-• Privacy-friendly – no data collected or sent
-• Completely free, no ads
+✨ Features & Privacy:
+• 🚗 Turn-by-Turn Navigation & Android Auto – Instantly launches native routing in Google Maps
+• 🔄 Automatic Apple to Google redirect – Instant on-device link converter
+• 🔒 100% Offline & Private – Zero internet permissions (no android.permission.INTERNET), zero tracking, zero ads
+• ⏸️ Pause Mode & Quick Settings Tile – Suspend redirect anytime directly from your notification shade
+• 💬 Universal App Compatibility – Works seamlessly with WhatsApp, Telegram, Signal, SMS, Slack, and email
+• 👻 Invisible Background Operation – No extra screens or battery drain
 
 🗺️ Supported link formats:
-• Search queries (e.g. "Eiffel Tower")
-• GPS coordinates
-• Addresses
+• Apple Maps URLs & search queries (e.g. "Eiffel Tower")
+• GPS coordinates & shared locations
+• Addresses & place markers
 • Navigation directions
-• Place markers
 
-MapFlip was built for Android users who regularly receive Apple Maps links from iPhone users – whether via WhatsApp, email, SMS, or social media.
+MapFlip was built for Android users who regularly receive Apple Maps links from iPhone users.

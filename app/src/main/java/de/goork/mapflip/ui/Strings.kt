@@ -28,7 +28,13 @@ object Strings {
         LanguageItem("pt", "Português", "🇵🇹"),
         LanguageItem("sv", "Svenska", "🇸🇪"),
         LanguageItem("es", "Español", "🇪🇸"),
-        LanguageItem("tr", "Türkçe", "🇹🇷")
+        LanguageItem("tr", "Türkçe", "🇹🇷"),
+        LanguageItem("ko", "한국어", "🇰🇷"),
+        LanguageItem("zh", "简体中文", "🇨🇳"),
+        LanguageItem("zh-tw", "繁體中文", "🇹🇼"),
+        LanguageItem("ar", "العربية", "🇸🇦"),
+        LanguageItem("ru", "Русский", "🇷🇺"),
+        LanguageItem("id", "Bahasa Indonesia", "🇮🇩")
     )
 
     data class AppStrings(
@@ -73,9 +79,17 @@ object Strings {
         if (!savedPref.isNullOrBlank() && savedPref != "auto") {
             return savedPref
         }
-        val sysLang = Locale.getDefault().language.lowercase()
-        val supportedCodes = listOf("de", "da", "fr", "it", "ja", "nl", "no", "pl", "pt", "sv", "es", "tr", "en")
-        return if (supportedCodes.contains(sysLang)) sysLang else "en"
+        val locale = Locale.getDefault()
+        val lang = locale.language.lowercase()
+        val country = locale.country.uppercase()
+        if (lang == "zh") {
+            return if (country == "TW" || country == "HK" || country == "MO") "zh-tw" else "zh"
+        }
+        val supportedCodes = listOf(
+            "de", "da", "fr", "it", "ja", "nl", "no", "pl", "pt", "sv", "es", "tr",
+            "ko", "zh", "zh-tw", "ar", "ru", "id", "en"
+        )
+        return if (supportedCodes.contains(lang)) lang else "en"
     }
 
     fun getStrings(langCode: String): AppStrings {
@@ -92,6 +106,12 @@ object Strings {
             "sv" -> SV
             "es" -> ES
             "tr" -> TR
+            "ko" -> KO
+            "zh" -> ZH_CN
+            "zh-tw" -> ZH_TW
+            "ar" -> AR
+            "ru" -> RU
+            "id" -> ID
             else -> EN
         }
     }
@@ -451,5 +471,191 @@ object Strings {
         btnPasteClipboard = "Yapıştır",
         btnTestLink = "Google Maps'te Test Et",
         testLinkConvertedLabel = "Dönüştürülen Hedef URI:"
+    )
+
+    val KO = EN.copy(
+        tagline = "자동. 투명함.",
+        setupTitle = "설정 방법",
+        step1 = "아래 버튼을 탭하세요",
+        step2 = "maps.apple.com에 대해 \"지원되는 링크 열기\"를 활성화하세요",
+        step3 = "완료! 이제 Apple Maps 링크가 Google Maps에서 자동으로 열립니다.",
+        btnSettings = "설정 열기",
+        statusActive = "링크가 활성화되었습니다",
+        statusInactive = "링크가 아직 활성화되지 않았습니다",
+        statusHint = "이전 Android 버전에서는 상태를 확인할 수 없습니다.",
+        langToggle = "KO",
+        btnFeedback = "지원 및 문의",
+        pauseTitle = "리디렉션 일시중지",
+        pauseDesc = "모든 지도 링크 리디렉션을 일시적으로 중지합니다",
+        statusPaused = "리디렉션이 일시중지됨",
+        selectLanguageTitle = "언어 선택",
+        systemLanguageAuto = "시스템 기본값 (자동)",
+        btnRateApp = "앱 평가하기",
+        privacyNote = "100% 개인정보 보호: 모든 링크는 기기 내에서 로컬로 변환되며 데이터를 수집하지 않습니다.",
+        testLinkTitle = "링크 테스터 및 클립보드",
+        testLinkHint = "Apple Maps 링크를 여기에 입력하세요...",
+        btnPasteClipboard = "붙여넣기",
+        btnTestLink = "Google Maps에서 테스트",
+        testLinkConvertedLabel = "변환된 대상 URI:",
+        pauseIndefinitely = "무기한",
+        pause1Hour = "1시간",
+        pause8Hours = "8시간",
+        pauseUntilTomorrow = "내일 아침까지",
+        dialogPauseTitle = "일시중지 시간 선택"
+    )
+
+    val ZH_CN = EN.copy(
+        tagline = "自动。无缝。",
+        setupTitle = "使用方法",
+        step1 = "点击下方按钮",
+        step2 = "为 maps.apple.com 启用“打开支持的链接”",
+        step3 = "完成！Apple Maps 链接将自动在 Google Maps 中打开。",
+        btnSettings = "打开设置",
+        statusActive = "链接已启用",
+        statusInactive = "链接尚未激活",
+        statusHint = "旧版 Android 无法检查此状态。",
+        langToggle = "ZH",
+        btnFeedback = "技术支持",
+        pauseTitle = "暂停重定向",
+        pauseDesc = "暂时停用所有地图链接重定向",
+        statusPaused = "重定向已暂停",
+        selectLanguageTitle = "选择语言",
+        systemLanguageAuto = "系统默认（自动）",
+        btnRateApp = "评价应用",
+        privacyNote = "100% 保护隐私：所有链接均在本地转换，不收集任何数据。",
+        testLinkTitle = "链接测试与剪贴板",
+        testLinkHint = "在此输入 Apple Maps 链接...",
+        btnPasteClipboard = "粘贴",
+        btnTestLink = "在 Google Maps 中测试",
+        testLinkConvertedLabel = "转换后的目标 URI:",
+        pauseIndefinitely = "无限期",
+        pause1Hour = "1 小时",
+        pause8Hours = "8 小时",
+        pauseUntilTomorrow = "直到明早",
+        dialogPauseTitle = "选择暂停时长"
+    )
+
+    val ZH_TW = EN.copy(
+        tagline = "自動。無縫。",
+        setupTitle = "使用步驟",
+        step1 = "點擊下方按鈕",
+        step2 = "為 maps.apple.com 啟用「開啟支援的連結」",
+        step3 = "完成！Apple Maps 連結將自動在 Google Maps 中開啟。",
+        btnSettings = "開啟設定",
+        statusActive = "連結已啟用",
+        statusInactive = "連結尚未啟用",
+        statusHint = "舊版 Android 無法檢查此狀態。",
+        langToggle = "ZH-TW",
+        btnFeedback = "技術支援",
+        pauseTitle = "暫停重新導向",
+        pauseDesc = "暫時停止所有地圖連結轉向",
+        statusPaused = "重新導向已暫停",
+        selectLanguageTitle = "選擇語言",
+        systemLanguageAuto = "系統預設（自動）",
+        btnRateApp = "為應用評分",
+        privacyNote = "100% 重視隱私：所有轉換均在裝置本機完成，絕不收集任何資料。",
+        testLinkTitle = "連結測試與剪貼簿",
+        testLinkHint = "在此輸入 Apple Maps 連結...",
+        btnPasteClipboard = "貼上",
+        btnTestLink = "在 Google Maps 中測試",
+        testLinkConvertedLabel = "轉換後的目標 URI:",
+        pauseIndefinitely = "無限期",
+        pause1Hour = "1 小時",
+        pause8Hours = "8 小時",
+        pauseUntilTomorrow = "直到明天早上",
+        dialogPauseTitle = "選擇暫停時間"
+    )
+
+    val AR = EN.copy(
+        tagline = "تلقائي. غير مرئي.",
+        setupTitle = "كيفية البدء",
+        step1 = "اضغط على الزر أدناه",
+        step2 = "فعّل \"فتح الروابط المعتمدة\" لـ maps.apple.com",
+        step3 = "تم! ستفتح روابط Apple Maps تلقائياً في Google Maps.",
+        btnSettings = "فتح الإعدادات",
+        statusActive = "الروابط مفعلة",
+        statusInactive = "الروابط غير مفعلة بعد",
+        statusHint = "لا يمكن التحقق من الحالة في إصدارات أندرويد القديمة.",
+        langToggle = "AR",
+        btnFeedback = "الدعم والمساعدة",
+        pauseTitle = "إيقاف مؤقت لإعادة التوجيه",
+        pauseDesc = "تعطيل إعادة التوجيه مؤقتاً لجميع الروابط",
+        statusPaused = "إعادة التوجيه متوقفة مؤقتاً",
+        selectLanguageTitle = "اختر اللغة",
+        systemLanguageAuto = "افتراضي النظام (تلقائي)",
+        btnRateApp = "تقييم التطبيق",
+        privacyNote = "خصوصية 100%: تتم جميع التحويلات محلياً على جهازك دون جمع أي بيانات.",
+        testLinkTitle = "اختبار الروابط والحافظة",
+        testLinkHint = "أدخل رابط Apple Maps هنا...",
+        btnPasteClipboard = "لصق",
+        btnTestLink = "اختبار في Google Maps",
+        testLinkConvertedLabel = "الرابط الهدف المحول:",
+        pauseIndefinitely = "إلى أجل غير مسمى",
+        pause1Hour = "ساعة واحدة",
+        pause8Hours = "8 ساعات",
+        pauseUntilTomorrow = "حتى صباح الغد",
+        dialogPauseTitle = "اختر مدة الإيقاف المؤقت"
+    )
+
+    val RU = EN.copy(
+        tagline = "Автоматически. Незаметно.",
+        setupTitle = "Как это работает",
+        step1 = "Нажмите кнопку ниже",
+        step2 = "Включите «Открывать поддерживаемые ссылки» для maps.apple.com",
+        step3 = "Готово! Ссылки Apple Maps теперь автоматически открываются в Google Maps.",
+        btnSettings = "Открыть настройки",
+        statusActive = "Ссылки включены",
+        statusInactive = "Ссылки еще не активны",
+        statusHint = "Статус нельзя проверить на старых версиях Android.",
+        langToggle = "RU",
+        btnFeedback = "Поддержка",
+        pauseTitle = "Приостановить перенаправление",
+        pauseDesc = "Временно отключить все перенаправления ссылок",
+        statusPaused = "Перенаправление приостановлено",
+        selectLanguageTitle = "Выбрать язык",
+        systemLanguageAuto = "Системный (авто)",
+        btnRateApp = "Оценить приложение",
+        privacyNote = "100% конфиденциальность: вся обработка выполняется локально на устройстве. Без сбора данных.",
+        testLinkTitle = "Тестер ссылок и буфер обмена",
+        testLinkHint = "Введите ссылку Apple Maps здесь...",
+        btnPasteClipboard = "Вставить",
+        btnTestLink = "Проверить в Google Maps",
+        testLinkConvertedLabel = "Преобразованный URI:",
+        pauseIndefinitely = "Бессрочно",
+        pause1Hour = "1 час",
+        pause8Hours = "8 часов",
+        pauseUntilTomorrow = "До завтрашнего утра",
+        dialogPauseTitle = "Выберите время паузы"
+    )
+
+    val ID = EN.copy(
+        tagline = "Otomatis. Tak Terlihat.",
+        setupTitle = "Cara Penggunaan",
+        step1 = "Ketuk tombol di bawah",
+        step2 = "Aktifkan \"Buka tautan yang didukung\" untuk maps.apple.com",
+        step3 = "Selesai! Tautan Apple Maps akan otomatis dibuka di Google Maps.",
+        btnSettings = "Buka Pengaturan",
+        statusActive = "Tautan aktif",
+        statusInactive = "Tautan belum aktif",
+        statusHint = "Status tidak dapat diperiksa pada versi Android lama.",
+        langToggle = "ID",
+        btnFeedback = "Bantuan & Dukungan",
+        pauseTitle = "Jeda Pengalihan",
+        pauseDesc = "Hentikan sementara semua pengalihan tautan peta",
+        statusPaused = "Pengalihan dijeda",
+        selectLanguageTitle = "Pilih Bahasa",
+        systemLanguageAuto = "Default Sistem (Otomatis)",
+        btnRateApp = "Beri Nilai Aplikasi",
+        privacyNote = "100% ramah privasi: Semua konversi diproses secara lokal di perangkat. Tanpa pengumpulan data.",
+        testLinkTitle = "Penguji Tautan & Papan Klip",
+        testLinkHint = "Masukkan tautan Apple Maps di sini...",
+        btnPasteClipboard = "Tempel",
+        btnTestLink = "Uji di Google Maps",
+        testLinkConvertedLabel = "URI Tujuan Terkonversi:",
+        pauseIndefinitely = "Tanpa batas",
+        pause1Hour = "1 Jam",
+        pause8Hours = "8 Jam",
+        pauseUntilTomorrow = "Hingga besok pagi",
+        dialogPauseTitle = "Pilih Durasi Jeda"
     )
 }

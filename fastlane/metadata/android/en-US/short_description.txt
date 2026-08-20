@@ -1,1 +1,1 @@
-Open Apple Maps links in Google Maps. Includes Pause tile.
+Open Apple Maps links & URLs in Google Maps. Fast Apple Maps converter.
