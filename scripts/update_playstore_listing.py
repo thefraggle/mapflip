@@ -652,7 +652,7 @@ def main():
 
         print("Committing edit session to Google Play...")
         service.edits().commit(packageName=package_name, editId=edit_id).execute()
-        print("🚀 All 14 Play Store listings updated successfully!")
+        print(f"🚀 All {len(LISTINGS)} Play Store listings updated successfully!")
 
     except Exception as e:
         print(f"❌ Error updating Play Store listings: {e}")

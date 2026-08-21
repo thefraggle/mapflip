@@ -110,7 +110,7 @@ jobs:
           en = get_latest('docs/CHANGELOG.en.md')
           os.makedirs('release-notes', exist_ok=True)
           for loc in ['de-DE']: open(f'release-notes/whatsnew-{loc}', 'w', encoding='utf-8').write(de)
-          for loc in ['en-US', 'da-DK', 'fr-FR', 'it-IT', 'ja-JP', 'nl-NL', 'no-NO', 'pl-PL', 'pt-BR', 'pt-PT', 'sv-SE', 'es-ES', 'tr-TR']: open(f'release-notes/whatsnew-{loc}', 'w', encoding='utf-8').write(en)
+          for loc in ['en-US', 'da-DK', 'fr-FR', 'it-IT', 'ja-JP', 'nl-NL', 'no-NO', 'pl-PL', 'pt-BR', 'pt-PT', 'sv-SE', 'es-ES', 'tr-TR', 'ko-KR', 'zh-CN', 'zh-TW', 'ar', 'ru-RU', 'id']: open(f'release-notes/whatsnew-{loc}', 'w', encoding='utf-8').write(en)
           "
 
       # Create GitHub Release with signed AAB & APK
