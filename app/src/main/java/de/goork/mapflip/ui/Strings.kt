@@ -78,6 +78,13 @@ object Strings {
         val appVersionLabel: String = "Version",
         val btnClose: String = "Close",
         val sectionLanguage: String = "Language",
+        val sectionTheme: String = "Appearance",
+        val themeSystem: String = "System default",
+        val themeLight: String = "Light",
+        val themeDark: String = "Dark",
+        val btnDonate: String = "Donate",
+        val donateSubtitle: String = "Support the development on Ko-fi",
+        val privacyPolicyTitle: String = "Privacy Policy",
         val sectionGeneral: String = "General",
         val sectionAbout: String = "About",
         val quickGuideTitle: String = "Setup Guide"
@@ -129,7 +136,7 @@ object Strings {
         subtitle = "Apple Maps \u2192 Google Maps",
         tagline = "Automatisch. Unsichtbar.",
         setupTitle = "So geht\u2019s",
-        step1 = "Tippe auf den Button unten",
+        step1 = "Tippe auf den Button \"Einstellungen öffnen\"",
         step2 = "Aktiviere \"Links \u00f6ffnen\" f\u00fcr maps.apple.com",
         step3 = "Fertig! Apple Maps Links \u00f6ffnen sich ab jetzt automatisch in Google Maps.",
         btnSettings = "Einstellungen \u00f6ffnen",
@@ -165,6 +172,13 @@ object Strings {
         appVersionLabel = "Version",
         btnClose = "Schließen",
         sectionLanguage = "Sprache",
+        sectionTheme = "Erscheinungsbild",
+        themeSystem = "Systemstandard",
+        themeLight = "Hell",
+        themeDark = "Dunkel",
+        btnDonate = "Spenden",
+        donateSubtitle = "Unterstütze die Entwicklung auf Ko-fi",
+        privacyPolicyTitle = "Datenschutzerklärung",
         sectionGeneral = "Allgemein",
         sectionAbout = "Über die App",
         quickGuideTitle = "Kurzanleitung"
@@ -175,7 +189,7 @@ object Strings {
         subtitle = "Apple Maps \u2192 Google Maps",
         tagline = "Automatic. Invisible.",
         setupTitle = "How it works",
-        step1 = "Tap the button below",
+        step1 = "Tap the \"Open Settings\" button",
         step2 = "Enable \"Open links\" for maps.apple.com",
         step3 = "Done! Apple Maps links will now open automatically in Google Maps.",
         btnSettings = "Open Settings",
@@ -206,7 +220,7 @@ object Strings {
     val DA = EN.copy(
         tagline = "Automatisk. Usynlig.",
         setupTitle = "Sådan virker det",
-        step1 = "Tryk på knappen nedenfor",
+        step1 = "Tryk på knappen \"Åbn indstillinger\"",
         step2 = "Aktivér \"Åbn links\" for maps.apple.com",
         step3 = "Færdig! Apple Maps links åbnes nu automatisk i Google Maps.",
         btnSettings = "Åbn indstillinger",
@@ -236,7 +250,7 @@ object Strings {
     val FR = EN.copy(
         tagline = "Automatique. Invisible.",
         setupTitle = "Comment ça marche",
-        step1 = "Appuyez sur le bouton ci-dessous",
+        step1 = "Appuyez sur le bouton \"Ouvrir les paramètres\"",
         step2 = "Activez \"Ouvrir les liens\" pour maps.apple.com",
         step3 = "Terminé! Les liens Apple Maps s'ouvriront désormais automatiquement dans Google Maps.",
         btnSettings = "Ouvrir les paramètres",
@@ -266,7 +280,7 @@ object Strings {
     val IT = EN.copy(
         tagline = "Automatico. Invisibile.",
         setupTitle = "Come funziona",
-        step1 = "Tocca il pulsante qui sotto",
+        step1 = "Tocca il pulsante \"Apri Impostazioni\"",
         step2 = "Attiva \"Apri link\" per maps.apple.com",
         step3 = "Fatto! I link di Apple Maps si apriranno ora automaticamente in Google Maps.",
         btnSettings = "Apri Impostazioni",
@@ -296,7 +310,7 @@ object Strings {
     val JA = EN.copy(
         tagline = "自動。バックグラウンド。",
         setupTitle = "使い方",
-        step1 = "下のボタンをタップ",
+        step1 = "「設定を開く」ボタンをタップ",
         step2 = "maps.apple.com の「リンクを開く」を有効化",
         step3 = "完了！Apple Maps のリンクが Google Maps で自動的に開きます。",
         btnSettings = "設定を開く",
@@ -326,7 +340,7 @@ object Strings {
     val NL = EN.copy(
         tagline = "Automatisch. Onzichtbaar.",
         setupTitle = "Hoe het werkt",
-        step1 = "Tik op de knop hieronder",
+        step1 = "Tik op de knop \"Instellingen openen\"",
         step2 = "Schakel \"Links openen\" in voor maps.apple.com",
         step3 = "Klaar! Apple Maps-links openen vanaf nu automatisch in Google Maps.",
         btnSettings = "Instellingen openen",
@@ -356,7 +370,7 @@ object Strings {
     val NO = EN.copy(
         tagline = "Automatisk. Usynlig.",
         setupTitle = "Slik fungerer det",
-        step1 = "Trykk på knappen nedenfor",
+        step1 = "Trykk på knappen \"Åpne innstillinger\"",
         step2 = "Aktiver \"Åpne lenker\" for maps.apple.com",
         step3 = "Ferdig! Apple Maps-lenker åpnes nå automatisk i Google Maps.",
         btnSettings = "Åpne innstillinger",
@@ -364,7 +378,7 @@ object Strings {
         statusInactive = "Lenker er ikke aktive ennå",
         statusHint = "Status kan ikke sjekkes på eldre Android-versjoner.",
         famwakeTitle = "FamWake – Familiealarm",
-        famwakePromo = "Fra samme utvikler",
+        famwakePromo = "Fra samme udvikler",
         famwakeDesc = "FamWake koordinerer morgenen for hele familien – baderomstider, frokost og oppvåkning.",
         famwakeButton = "Finn ut mer",
         langToggle = "NO",
@@ -386,7 +400,7 @@ object Strings {
     val PL = EN.copy(
         tagline = "Automatycznie. Niewidocznie.",
         setupTitle = "Jak to działa",
-        step1 = "Dotknij przycisku poniżej",
+        step1 = "Dotknij przycisku \"Otwórz ustawienia\"",
         step2 = "Włącz \"Otwieraj linki\" dla maps.apple.com",
         step3 = "Gotowe! Linki Apple Maps będą teraz automatycznie otwierać się w Google Maps.",
         btnSettings = "Otwórz ustawienia",
@@ -416,7 +430,7 @@ object Strings {
     val PT = EN.copy(
         tagline = "Automático. Invisível.",
         setupTitle = "Como funciona",
-        step1 = "Toque no botão abaixo",
+        step1 = "Toque no botão \"Abrir Configurações\"",
         step2 = "Ative \"Abrir links\" para maps.apple.com",
         step3 = "Concluído! Os links do Apple Maps serão abertos automaticamente no Google Maps.",
         btnSettings = "Abrir Configurações",
@@ -446,7 +460,7 @@ object Strings {
     val SV = EN.copy(
         tagline = "Automatiskt. Osynligt.",
         setupTitle = "Hur det fungerar",
-        step1 = "Tryck på knappen nedan",
+        step1 = "Tryck på knappen \"Öppna inställningar\"",
         step2 = "Aktivera \"Öppna länkar\" för maps.apple.com",
         step3 = "Klart! Apple Maps-länkar öppnas nu automatiskt i Google Maps.",
         btnSettings = "Öppna inställningar",
@@ -476,7 +490,7 @@ object Strings {
     val ES = EN.copy(
         tagline = "Automático. Invisible.",
         setupTitle = "Cómo funciona",
-        step1 = "Toca el botón de abajo",
+        step1 = "Toca el botón \"Abrir Ajustes\"",
         step2 = "Activa \"Abrir enlaces\" para maps.apple.com",
         step3 = "¡Listo! Los enlaces de Apple Maps se abrirán automáticamente en Google Maps.",
         btnSettings = "Abrir Ajustes",
@@ -506,7 +520,7 @@ object Strings {
     val TR = EN.copy(
         tagline = "Otomatik. Görünmez.",
         setupTitle = "Nasıl çalışır",
-        step1 = "Aşağıdaki düğmeye dokunun",
+        step1 = "Aşağıdaki \"Ayarları Aç\" düğmesine dokunun",
         step2 = "maps.apple.com için \"Bağlantıları aç\"ı etkinleştirin",
         step3 = "Bitti! Apple Maps bağlantıları artık Google Maps'te otomatik açılacak.",
         btnSettings = "Ayarları Aç",
@@ -536,7 +550,7 @@ object Strings {
     val KO = EN.copy(
         tagline = "자동. 투명함.",
         setupTitle = "설정 방법",
-        step1 = "아래 버튼을 탭하세요",
+        step1 = "\"설정 열기\" 버튼을 탭하세요",
         step2 = "maps.apple.com에 대해 \"지원되는 링크 열기\"를 활성화하세요",
         step3 = "완료! 이제 Apple Maps 링크가 Google Maps에서 자동으로 열립니다.",
         btnSettings = "설정 열기",
@@ -571,7 +585,7 @@ object Strings {
     val ZH_CN = EN.copy(
         tagline = "自动。无缝。",
         setupTitle = "使用方法",
-        step1 = "点击下方按钮",
+        step1 = "点击“打开设置”按钮",
         step2 = "为 maps.apple.com 启用“打开支持的链接”",
         step3 = "完成！Apple Maps 链接将自动在 Google Maps 中打开。",
         btnSettings = "打开设置",
@@ -606,7 +620,7 @@ object Strings {
     val ZH_TW = EN.copy(
         tagline = "自動。無縫。",
         setupTitle = "使用步驟",
-        step1 = "點擊下方按鈕",
+        step1 = "點擊「開啟設定」按鈕",
         step2 = "為 maps.apple.com 啟用「開啟支援的連結」",
         step3 = "完成！Apple Maps 連結將自動在 Google Maps 中開啟。",
         btnSettings = "開啟設定",
@@ -641,7 +655,7 @@ object Strings {
     val AR = EN.copy(
         tagline = "تلقائي. غير مرئي.",
         setupTitle = "كيفية البدء",
-        step1 = "اضغط على الزر أدناه",
+        step1 = "اضغط على زر \"فتح الإعدادات\"",
         step2 = "فعّل \"فتح الروابط المعتمدة\" لـ maps.apple.com",
         step3 = "تم! ستفتح روابط Apple Maps تلقائياً في Google Maps.",
         btnSettings = "فتح الإعدادات",
@@ -676,7 +690,7 @@ object Strings {
     val RU = EN.copy(
         tagline = "Автоматически. Незаметно.",
         setupTitle = "Как это работает",
-        step1 = "Нажмите кнопку ниже",
+        step1 = "Нажмите кнопку «Открыть настройки»",
         step2 = "Включите «Открывать поддерживаемые ссылки» для maps.apple.com",
         step3 = "Готово! Ссылки Apple Maps теперь автоматически открываются в Google Maps.",
         btnSettings = "Открыть настройки",
@@ -711,7 +725,7 @@ object Strings {
     val ID = EN.copy(
         tagline = "Otomatis. Tak Terlihat.",
         setupTitle = "Cara Penggunaan",
-        step1 = "Ketuk tombol di bawah",
+        step1 = "Ketuk tombol \"Buka Pengaturan\"",
         step2 = "Aktifkan \"Buka tautan yang didukung\" untuk maps.apple.com",
         step3 = "Selesai! Tautan Apple Maps akan otomatis dibuka di Google Maps.",
         btnSettings = "Buka Pengaturan",

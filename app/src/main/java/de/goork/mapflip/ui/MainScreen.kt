@@ -76,6 +76,9 @@ fun MainScreen(
     var langPref by remember {
         mutableStateOf(prefs.getString(AppConstants.PREFS_KEY_LANG, "auto") ?: "auto")
     }
+    var themePref by remember {
+        mutableStateOf(prefs.getString(AppConstants.PREFS_KEY_THEME, "system") ?: "system")
+    }
     val activeLangCode = Strings.resolveLanguage(langPref)
     val s = Strings.getStrings(activeLangCode)
 
@@ -97,8 +100,16 @@ fun MainScreen(
 
     DisposableEffect(context) {
         val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-            if (key == AppConstants.PREFS_KEY_PAUSED || key == PauseHelper.PREFS_KEY_PAUSED_UNTIL) {
-                isPaused = PauseHelper.isCurrentlyPaused(context)
+            when (key) {
+                AppConstants.PREFS_KEY_PAUSED, PauseHelper.PREFS_KEY_PAUSED_UNTIL -> {
+                    isPaused = PauseHelper.isCurrentlyPaused(context)
+                }
+                AppConstants.PREFS_KEY_THEME -> {
+                    themePref = prefs.getString(AppConstants.PREFS_KEY_THEME, "system") ?: "system"
+                }
+                AppConstants.PREFS_KEY_LANG -> {
+                    langPref = prefs.getString(AppConstants.PREFS_KEY_LANG, "auto") ?: "auto"
+                }
             }
         }
         prefs.registerOnSharedPreferenceChangeListener(listener)
@@ -136,28 +147,7 @@ fun MainScreen(
                         )
                     },
                     actions = {
-                        // Language Quick Switcher Badge
-                        val currentLangItem = Strings.SUPPORTED_LANGUAGES.find { it.code == langPref }
-                            ?: Strings.SUPPORTED_LANGUAGES.first()
-                        FilledTonalButton(
-                            onClick = {
-                                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                showSettingsSheet = true
-                            },
-                            modifier = Modifier
-                                .height(36.dp)
-                                .padding(end = 4.dp),
-                            contentPadding = PaddingValues(horizontal = 10.dp, vertical = 0.dp),
-                            shape = RoundedCornerShape(10.dp)
-                        ) {
-                            Text(
-                                text = "${currentLangItem.flag} ${if (currentLangItem.code == "auto") "AUTO" else currentLangItem.code.uppercase()}",
-                                style = MaterialTheme.typography.labelSmall,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        }
-
-                        // Settings & About Button
+                        // Settings & About Button (opens full settings sheet including language and theme)
                         IconButton(
                             onClick = {
                                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -303,12 +293,13 @@ fun MainScreen(
                                 .fillMaxWidth()
                                 .padding(18.dp)
                         ) {
+                            val isGuideVisible = isSetupGuideExpanded || linksActive == false || linksActive == null
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .clickable {
                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                        isSetupGuideExpanded = !isSetupGuideExpanded
+                                        isSetupGuideExpanded = !isGuideVisible
                                     },
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.SpaceBetween
@@ -319,15 +310,15 @@ fun MainScreen(
                                     color = MaterialTheme.colorScheme.onSurface
                                 )
                                 Icon(
-                                    imageVector = if (isSetupGuideExpanded) Icons.Outlined.ExpandLess else Icons.Outlined.ExpandMore,
+                                    imageVector = if (isGuideVisible) Icons.Outlined.ExpandLess else Icons.Outlined.ExpandMore,
                                     contentDescription = null,
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
 
-                            // Expandable Setup Steps (default shown when inactive or expanded)
+                            // Expandable Setup Steps (default open when inactive/first start or explicitly expanded)
                             AnimatedVisibility(
-                                visible = isSetupGuideExpanded || linksActive == false,
+                                visible = isGuideVisible,
                                 enter = fadeIn() + expandVertically(),
                                 exit = fadeOut() + shrinkVertically()
                             ) {
@@ -464,6 +455,11 @@ fun MainScreen(
                         }
                     }
 
+                    Spacer(Modifier.height(24.dp))
+
+                    // Standardized App Footer (Version, Copyright, Privacy Policy)
+                    AppFooter(s = s)
+
                     Spacer(Modifier.height(32.dp))
                 }
             }
@@ -491,9 +487,14 @@ fun MainScreen(
             SettingsSheet(
                 s = s,
                 currentLangCode = langPref,
+                currentThemePref = themePref,
                 onLanguageSelected = { newLang ->
                     langPref = newLang
                     prefs.edit().putString(AppConstants.PREFS_KEY_LANG, newLang).apply()
+                },
+                onThemeSelected = { newTheme ->
+                    themePref = newTheme
+                    prefs.edit().putString(AppConstants.PREFS_KEY_THEME, newTheme).apply()
                 },
                 onDismiss = { showSettingsSheet = false }
             )

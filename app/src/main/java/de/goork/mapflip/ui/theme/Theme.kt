@@ -58,16 +58,23 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun MapFlipTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    themePref: String = "system",
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
+    val isSystemDark = isSystemInDarkTheme()
+    val useDarkTheme = when (themePref) {
+        "dark" -> true
+        "light" -> false
+        else -> isSystemDark
+    }
+
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            if (darkTheme) dynamicDarkColorScheme(LocalContext.current)
+            if (useDarkTheme) dynamicDarkColorScheme(LocalContext.current)
             else dynamicLightColorScheme(LocalContext.current)
         }
-        darkTheme -> DarkColorScheme
+        useDarkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
     MaterialTheme(
