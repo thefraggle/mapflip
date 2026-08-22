@@ -2,22 +2,18 @@ package de.goork.mapflip.ui
 
 import java.util.Locale
 
-/**
- * App strings for all 14 supported Play Store languages.
- * Custom solution supporting runtime language switching without activity restarts.
- */
 object Strings {
 
     data class LanguageItem(
         val code: String,
         val nativeName: String,
-        val flag: String,
+        val flag: String
     )
 
     val SUPPORTED_LANGUAGES = listOf(
-        LanguageItem("auto", "Systemstandard", "🌐"),
+        LanguageItem("auto", "System", "🌐"),
         LanguageItem("de", "Deutsch", "🇩🇪"),
-        LanguageItem("en", "English", "🇬🇧"),
+        LanguageItem("en", "English", "🇺🇸"),
         LanguageItem("da", "Dansk", "🇩🇰"),
         LanguageItem("fr", "Français", "🇫🇷"),
         LanguageItem("it", "Italiano", "🇮🇹"),
@@ -61,33 +57,33 @@ object Strings {
         val statusPaused: String,
         val selectLanguageTitle: String,
         val systemLanguageAuto: String,
-        val btnRateApp: String = "Rate App",
-        val privacyNote: String = "100% privacy-friendly: All redirects are processed locally. No data collection.",
-        val testLinkTitle: String = "Link Tester & Clipboard",
-        val testLinkHint: String = "Enter Apple Maps link here...",
-        val btnPasteClipboard: String = "Paste",
-        val btnTestLink: String = "Test in Google Maps",
-        val testLinkConvertedLabel: String = "Converted Target URI:",
-        val pauseIndefinitely: String = "Indefinitely",
-        val pause1Hour: String = "1 Hour",
-        val pause8Hours: String = "8 Hours",
-        val pauseUntilTomorrow: String = "Until tomorrow morning",
-        val dialogPauseTitle: String = "Select Pause Duration",
-        val menuSettingsAbout: String = "Settings & About",
-        val aboutTitle: String = "About MapFlip",
-        val appVersionLabel: String = "Version",
-        val btnClose: String = "Close",
-        val sectionLanguage: String = "Language",
-        val sectionTheme: String = "Appearance",
-        val themeSystem: String = "System default",
-        val themeLight: String = "Light",
-        val themeDark: String = "Dark",
-        val btnDonate: String = "Donate",
-        val donateSubtitle: String = "Support the development on Ko-fi",
-        val privacyPolicyTitle: String = "Privacy Policy",
-        val sectionGeneral: String = "General",
-        val sectionAbout: String = "About",
-        val quickGuideTitle: String = "Setup Guide"
+        val btnRateApp: String,
+        val privacyNote: String,
+        val testLinkTitle: String,
+        val testLinkHint: String,
+        val btnPasteClipboard: String,
+        val btnTestLink: String,
+        val testLinkConvertedLabel: String,
+        val pauseIndefinitely: String,
+        val pause1Hour: String,
+        val pause8Hours: String,
+        val pauseUntilTomorrow: String,
+        val dialogPauseTitle: String,
+        val menuSettingsAbout: String,
+        val aboutTitle: String,
+        val appVersionLabel: String,
+        val btnClose: String,
+        val sectionLanguage: String,
+        val sectionTheme: String,
+        val themeSystem: String,
+        val themeLight: String,
+        val themeDark: String,
+        val btnDonate: String,
+        val donateSubtitle: String,
+        val privacyPolicyTitle: String,
+        val sectionGeneral: String,
+        val sectionAbout: String,
+        val quickGuideTitle: String
     )
 
     fun resolveLanguage(savedPref: String?): String {
@@ -100,16 +96,16 @@ object Strings {
         if (lang == "zh") {
             return if (country == "TW" || country == "HK" || country == "MO") "zh-tw" else "zh"
         }
-        val supportedCodes = listOf(
-            "de", "da", "fr", "it", "ja", "nl", "no", "pl", "pt", "sv", "es", "tr",
-            "ko", "zh", "zh-tw", "ar", "ru", "id", "en"
-        )
-        return if (supportedCodes.contains(lang)) lang else "en"
+        return when (lang) {
+            "de", "en", "da", "fr", "it", "ja", "nl", "no", "pl", "pt", "sv", "es", "tr", "ko", "ar", "ru", "id" -> lang
+            else -> "en"
+        }
     }
 
     fun getStrings(langCode: String): AppStrings {
         return when (langCode.lowercase()) {
             "de" -> DE
+            "en" -> EN
             "da" -> DA
             "fr" -> FR
             "it" -> IT
@@ -214,7 +210,27 @@ object Strings {
         testLinkHint = "Enter Apple Maps link here...",
         btnPasteClipboard = "Paste",
         btnTestLink = "Test in Google Maps",
-        testLinkConvertedLabel = "Converted Target URI:"
+        testLinkConvertedLabel = "Converted Target URI:",
+        pauseIndefinitely = "Indefinitely",
+        pause1Hour = "1 Hour",
+        pause8Hours = "8 Hours",
+        pauseUntilTomorrow = "Until tomorrow morning",
+        dialogPauseTitle = "Select Pause Duration",
+        menuSettingsAbout = "Settings & About",
+        aboutTitle = "About MapFlip",
+        appVersionLabel = "Version",
+        btnClose = "Close",
+        sectionLanguage = "Language",
+        sectionTheme = "Appearance",
+        themeSystem = "System default",
+        themeLight = "Light",
+        themeDark = "Dark",
+        btnDonate = "Donate",
+        donateSubtitle = "Support the development on Ko-fi",
+        privacyPolicyTitle = "Privacy Policy",
+        sectionGeneral = "General",
+        sectionAbout = "About",
+        quickGuideTitle = "Setup Guide"
     )
 
     val DA = EN.copy(
@@ -244,7 +260,27 @@ object Strings {
         testLinkHint = "Indtast Apple Maps-link her...",
         btnPasteClipboard = "Indsæt",
         btnTestLink = "Test i Google Maps",
-        testLinkConvertedLabel = "Konverteret mål-URI:"
+        testLinkConvertedLabel = "Konverteret mål-URI:",
+        pauseIndefinitely = "Ubegrænset",
+        pause1Hour = "1 time",
+        pause8Hours = "8 timer",
+        pauseUntilTomorrow = "Indtil i morgen tidlig",
+        dialogPauseTitle = "Vælg pauseduration",
+        menuSettingsAbout = "Indstillinger & Om",
+        aboutTitle = "Om MapFlip",
+        appVersionLabel = "Version",
+        btnClose = "Luk",
+        sectionLanguage = "Sprog",
+        sectionTheme = "Udseende",
+        themeSystem = "Systemstandard",
+        themeLight = "Lyst",
+        themeDark = "Mørkt",
+        btnDonate = "Donér",
+        donateSubtitle = "Støt udviklingen på Ko-fi",
+        privacyPolicyTitle = "Privatlivspolitik",
+        sectionGeneral = "Generelt",
+        sectionAbout = "Om appen",
+        quickGuideTitle = "Startguide"
     )
 
     val FR = EN.copy(
@@ -274,7 +310,27 @@ object Strings {
         testLinkHint = "Entrez le lien Apple Maps ici...",
         btnPasteClipboard = "Coller",
         btnTestLink = "Tester dans Google Maps",
-        testLinkConvertedLabel = "URI cible convertie :"
+        testLinkConvertedLabel = "URI cible convertie :",
+        pauseIndefinitely = "Indéfiniment",
+        pause1Hour = "1 heure",
+        pause8Hours = "8 heures",
+        pauseUntilTomorrow = "Jusqu'à demain matin",
+        dialogPauseTitle = "Sélectionner la durée de pause",
+        menuSettingsAbout = "Paramètres & À propos",
+        aboutTitle = "À propos de MapFlip",
+        appVersionLabel = "Version",
+        btnClose = "Fermer",
+        sectionLanguage = "Langue",
+        sectionTheme = "Apparence",
+        themeSystem = "Par défaut du système",
+        themeLight = "Clair",
+        themeDark = "Sombre",
+        btnDonate = "Faire un don",
+        donateSubtitle = "Soutenir le développement sur Ko-fi",
+        privacyPolicyTitle = "Politique de confidentialité",
+        sectionGeneral = "Général",
+        sectionAbout = "À propos de l'application",
+        quickGuideTitle = "Guide de configuration"
     )
 
     val IT = EN.copy(
@@ -304,7 +360,27 @@ object Strings {
         testLinkHint = "Inserisci qui il link di Apple Maps...",
         btnPasteClipboard = "Incolla",
         btnTestLink = "Testa in Google Maps",
-        testLinkConvertedLabel = "URI di destinazione convertito:"
+        testLinkConvertedLabel = "URI di destinazione convertito:",
+        pauseIndefinitely = "A tempo indeterminato",
+        pause1Hour = "1 ora",
+        pause8Hours = "8 ore",
+        pauseUntilTomorrow = "Fino a domani mattina",
+        dialogPauseTitle = "Seleziona durata pausa",
+        menuSettingsAbout = "Impostazioni e Informazioni",
+        aboutTitle = "Informazioni su MapFlip",
+        appVersionLabel = "Version",
+        btnClose = "Chiudi",
+        sectionLanguage = "Lingua",
+        sectionTheme = "Aspetto",
+        themeSystem = "Predefinito di sistema",
+        themeLight = "Chiaro",
+        themeDark = "Scuro",
+        btnDonate = "Donazione",
+        donateSubtitle = "Sostieni lo sviluppo su Ko-fi",
+        privacyPolicyTitle = "Informativa sulla privacy",
+        sectionGeneral = "Generale",
+        sectionAbout = "Informazioni sull'app",
+        quickGuideTitle = "Guida introduttiva"
     )
 
     val JA = EN.copy(
@@ -334,7 +410,27 @@ object Strings {
         testLinkHint = "Apple Mapsリンクをここに入力...",
         btnPasteClipboard = "貼り付け",
         btnTestLink = "Google Mapsでテスト",
-        testLinkConvertedLabel = "変換されたターゲットURI:"
+        testLinkConvertedLabel = "変換されたターゲットURI:",
+        pauseIndefinitely = "無制限",
+        pause1Hour = "1時間",
+        pause8Hours = "8時間",
+        pauseUntilTomorrow = "明日の朝まで",
+        dialogPauseTitle = "一時停止期間を選択",
+        menuSettingsAbout = "設定と情報",
+        aboutTitle = "MapFlipについて",
+        appVersionLabel = "バージョン",
+        btnClose = "閉じる",
+        sectionLanguage = "言語",
+        sectionTheme = "テーマ",
+        themeSystem = "システムデフォルト",
+        themeLight = "ライト",
+        themeDark = "ダーク",
+        btnDonate = "寄付する",
+        donateSubtitle = "Ko-fiで開発をサポート",
+        privacyPolicyTitle = "プライバシーポリシー",
+        sectionGeneral = "一般",
+        sectionAbout = "アプリについて",
+        quickGuideTitle = "クイックガイド"
     )
 
     val NL = EN.copy(
@@ -357,14 +453,34 @@ object Strings {
         pauseDesc = "Tijdelijk alle link-omleidingen onderbreken",
         statusPaused = "Omleiding is gepauzeerd",
         selectLanguageTitle = "Taal selecteren",
-        systemLanguageAuto = "Systeemstandaard (Automatisk)",
+        systemLanguageAuto = "Systeemstandaard (Automatisch)",
         btnRateApp = "Beoordeel app",
         privacyNote = "100% privacyvriendelijk: alle omleidingen vinden lokaal plaats. Geen gegevensverzameling.",
         testLinkTitle = "Link-tester & klembord",
         testLinkHint = "Voer hier Apple Maps-link in...",
         btnPasteClipboard = "Plakken",
         btnTestLink = "Testen in Google Maps",
-        testLinkConvertedLabel = "Geconverteerde doel-URI:"
+        testLinkConvertedLabel = "Geconverteerde doel-URI:",
+        pauseIndefinitely = "Onbeperkt",
+        pause1Hour = "1 uur",
+        pause8Hours = "8 uur",
+        pauseUntilTomorrow = "Tot morgenochtend",
+        dialogPauseTitle = "Pauzeduur selecteren",
+        menuSettingsAbout = "Instellingen & Over",
+        aboutTitle = "Over MapFlip",
+        appVersionLabel = "Versie",
+        btnClose = "Sluiten",
+        sectionLanguage = "Taal",
+        sectionTheme = "Weergave",
+        themeSystem = "Systeemstandaard",
+        themeLight = "Licht",
+        themeDark = "Donker",
+        btnDonate = "Doneren",
+        donateSubtitle = "Ondersteun de ontwikkeling op Ko-fi",
+        privacyPolicyTitle = "Privacybeleid",
+        sectionGeneral = "Algemeen",
+        sectionAbout = "Over de app",
+        quickGuideTitle = "Snelstartgids"
     )
 
     val NO = EN.copy(
@@ -378,7 +494,7 @@ object Strings {
         statusInactive = "Lenker er ikke aktive ennå",
         statusHint = "Status kan ikke sjekkes på eldre Android-versjoner.",
         famwakeTitle = "FamWake – Familiealarm",
-        famwakePromo = "Fra samme udvikler",
+        famwakePromo = "Fra samme utvikler",
         famwakeDesc = "FamWake koordinerer morgenen for hele familien – baderomstider, frokost og oppvåkning.",
         famwakeButton = "Finn ut mer",
         langToggle = "NO",
@@ -389,12 +505,32 @@ object Strings {
         selectLanguageTitle = "Velg språk",
         systemLanguageAuto = "Systemstandard (Automatisk)",
         btnRateApp = "Vurder appen",
-        privacyNote = "100% personvernvennlig: Alle viderekoblinger skjer lokalt. Ingen datainnsamling.",
+        privacyNote = "100% personvernvennlig: Alle viderekoblinger skjer lokalt. Ingen dataindsamling.",
         testLinkTitle = "Lenketester & utklippstavle",
         testLinkHint = "Skriv inn Apple Maps-lenke her...",
         btnPasteClipboard = "Lim inn",
         btnTestLink = "Test i Google Maps",
-        testLinkConvertedLabel = "Konvertert mål-URI:"
+        testLinkConvertedLabel = "Konvertert mål-URI:",
+        pauseIndefinitely = "Ubegrenset",
+        pause1Hour = "1 time",
+        pause8Hours = "8 timer",
+        pauseUntilTomorrow = "Til i morgen tidlig",
+        dialogPauseTitle = "Velg pausedurasjon",
+        menuSettingsAbout = "Innstillinger og info",
+        aboutTitle = "Om MapFlip",
+        appVersionLabel = "Versjon",
+        btnClose = "Lukk",
+        sectionLanguage = "Språk",
+        sectionTheme = "Utseende",
+        themeSystem = "Systemstandard",
+        themeLight = "Lyst",
+        themeDark = "Mørkt",
+        btnDonate = "Doner",
+        donateSubtitle = "Støtt utviklingen på Ko-fi",
+        privacyPolicyTitle = "Personvernerklæring",
+        sectionGeneral = "Generelt",
+        sectionAbout = "Om appen",
+        quickGuideTitle = "Hurtigveiledning"
     )
 
     val PL = EN.copy(
@@ -424,7 +560,27 @@ object Strings {
         testLinkHint = "Wpisz tutaj link Apple Maps...",
         btnPasteClipboard = "Wklej",
         btnTestLink = "Testuj w Google Maps",
-        testLinkConvertedLabel = "Przekonwertowany URI docelowy:"
+        testLinkConvertedLabel = "Przekonwertowany URI docelowy:",
+        pauseIndefinitely = "Na czas nieokreślony",
+        pause1Hour = "1 godzina",
+        pause8Hours = "8 godzin",
+        pauseUntilTomorrow = "Do jutra rano",
+        dialogPauseTitle = "Wybierz czas wstrzymania",
+        menuSettingsAbout = "Ustawienia i informacje",
+        aboutTitle = "O aplikacji MapFlip",
+        appVersionLabel = "Wersja",
+        btnClose = "Zamknij",
+        sectionLanguage = "Język",
+        sectionTheme = "Wygląd",
+        themeSystem = "Domyślny systemu",
+        themeLight = "Jasny",
+        themeDark = "Ciemny",
+        btnDonate = "Wesprzyj",
+        donateSubtitle = "Wesprzyj rozwój na Ko-fi",
+        privacyPolicyTitle = "Polityka prywatności",
+        sectionGeneral = "Ogólne",
+        sectionAbout = "O aplikacji",
+        quickGuideTitle = "Szybki przewodnik"
     )
 
     val PT = EN.copy(
@@ -454,7 +610,27 @@ object Strings {
         testLinkHint = "Digite o link do Apple Maps aqui...",
         btnPasteClipboard = "Colar",
         btnTestLink = "Testar no Google Maps",
-        testLinkConvertedLabel = "URI de destino convertido:"
+        testLinkConvertedLabel = "URI de destino convertido:",
+        pauseIndefinitely = "Indefinidamente",
+        pause1Hour = "1 hora",
+        pause8Hours = "8 horas",
+        pauseUntilTomorrow = "Até amanhã de manhã",
+        dialogPauseTitle = "Selecionar duração da pausa",
+        menuSettingsAbout = "Configurações e Sobre",
+        aboutTitle = "Sobre o MapFlip",
+        appVersionLabel = "Versão",
+        btnClose = "Fechar",
+        sectionLanguage = "Idioma",
+        sectionTheme = "Aparência",
+        themeSystem = "Padrão do sistema",
+        themeLight = "Claro",
+        themeDark = "Escuro",
+        btnDonate = "Doar",
+        donateSubtitle = "Apoie o desenvolvimento no Ko-fi",
+        privacyPolicyTitle = "Política de Privacidade",
+        sectionGeneral = "Geral",
+        sectionAbout = "Sobre a aplicação",
+        quickGuideTitle = "Guia rápido"
     )
 
     val SV = EN.copy(
@@ -484,7 +660,27 @@ object Strings {
         testLinkHint = "Ange Apple Maps-länk här...",
         btnPasteClipboard = "Klistra in",
         btnTestLink = "Testa i Google Maps",
-        testLinkConvertedLabel = "Konverterad mål-URI:"
+        testLinkConvertedLabel = "Konverterad mål-URI:",
+        pauseIndefinitely = "Tills vidare",
+        pause1Hour = "1 timme",
+        pause8Hours = "8 timmar",
+        pauseUntilTomorrow = "Till imorgon bitti",
+        dialogPauseTitle = "Välj pauslängd",
+        menuSettingsAbout = "Inställningar och Om",
+        aboutTitle = "Om MapFlip",
+        appVersionLabel = "Version",
+        btnClose = "Stäng",
+        sectionLanguage = "Språk",
+        sectionTheme = "Utseende",
+        themeSystem = "Systemstandard",
+        themeLight = "Ljust",
+        themeDark = "Mörkt",
+        btnDonate = "Donera",
+        donateSubtitle = "Stöd utvecklingen på Ko-fi",
+        privacyPolicyTitle = "Integritetspolicy",
+        sectionGeneral = "Allmänt",
+        sectionAbout = "Om appen",
+        quickGuideTitle = "Snabbguide"
     )
 
     val ES = EN.copy(
@@ -514,7 +710,27 @@ object Strings {
         testLinkHint = "Introduce aquí el enlace de Apple Maps...",
         btnPasteClipboard = "Pegar",
         btnTestLink = "Probar en Google Maps",
-        testLinkConvertedLabel = "URI de destino convertida:"
+        testLinkConvertedLabel = "URI de destino convertida:",
+        pauseIndefinitely = "Indefinidamente",
+        pause1Hour = "1 hora",
+        pause8Hours = "8 horas",
+        pauseUntilTomorrow = "Hasta mañana por la mañana",
+        dialogPauseTitle = "Seleccionar duración de pausa",
+        menuSettingsAbout = "Ajustes e Información",
+        aboutTitle = "Acerca de MapFlip",
+        appVersionLabel = "Versión",
+        btnClose = "Cerrar",
+        sectionLanguage = "Idioma",
+        sectionTheme = "Apariencia",
+        themeSystem = "Predeterminado del sistema",
+        themeLight = "Claro",
+        themeDark = "Oscuro",
+        btnDonate = "Donar",
+        donateSubtitle = "Apoya el desarrollo en Ko-fi",
+        privacyPolicyTitle = "Política de privacidad",
+        sectionGeneral = "General",
+        sectionAbout = "Acerca de la app",
+        quickGuideTitle = "Guía rápida"
     )
 
     val TR = EN.copy(
@@ -544,7 +760,27 @@ object Strings {
         testLinkHint = "Buraya Apple Maps bağlantısını girin...",
         btnPasteClipboard = "Yapıştır",
         btnTestLink = "Google Maps'te Test Et",
-        testLinkConvertedLabel = "Dönüştürülen Hedef URI:"
+        testLinkConvertedLabel = "Dönüştürülen Hedef URI:",
+        pauseIndefinitely = "Süresiz",
+        pause1Hour = "1 Saat",
+        pause8Hours = "8 Saat",
+        pauseUntilTomorrow = "Yarın sabaha kadar",
+        dialogPauseTitle = "Duraklatma Süresi Seçin",
+        menuSettingsAbout = "Ayarlar & Hakkında",
+        aboutTitle = "MapFlip Hakkında",
+        appVersionLabel = "Sürüm",
+        btnClose = "Kapat",
+        sectionLanguage = "Dil",
+        sectionTheme = "Görünüm",
+        themeSystem = "Sistem varsayılanı",
+        themeLight = "Açık",
+        themeDark = "Koyu",
+        btnDonate = "Bağış Yap",
+        donateSubtitle = "Geliştirmeyi Ko-fi üzerinden destekleyin",
+        privacyPolicyTitle = "Gizlilik Politikası",
+        sectionGeneral = "Genel",
+        sectionAbout = "Uygulama hakkında",
+        quickGuideTitle = "Kurulum Kılavuzu"
     )
 
     val KO = EN.copy(
@@ -579,7 +815,22 @@ object Strings {
         pause1Hour = "1시간",
         pause8Hours = "8시간",
         pauseUntilTomorrow = "내일 아침까지",
-        dialogPauseTitle = "일시중지 시간 선택"
+        dialogPauseTitle = "일시중지 시간 선택",
+        menuSettingsAbout = "설정 및 정보",
+        aboutTitle = "MapFlip 정보",
+        appVersionLabel = "버전",
+        btnClose = "닫기",
+        sectionLanguage = "언어",
+        sectionTheme = "화면 테마",
+        themeSystem = "시스템 기본값",
+        themeLight = "라이트 모드",
+        themeDark = "다크 모드",
+        btnDonate = "후원하기",
+        donateSubtitle = "Ko-fi에서 개발 후원하기",
+        privacyPolicyTitle = "개인정보 처리방침",
+        sectionGeneral = "일반",
+        sectionAbout = "앱 정보",
+        quickGuideTitle = "빠른 시작 가이드"
     )
 
     val ZH_CN = EN.copy(
@@ -614,7 +865,22 @@ object Strings {
         pause1Hour = "1 小时",
         pause8Hours = "8 小时",
         pauseUntilTomorrow = "直到明早",
-        dialogPauseTitle = "选择暂停时长"
+        dialogPauseTitle = "选择暂停时长",
+        menuSettingsAbout = "设置与关于",
+        aboutTitle = "关于 MapFlip",
+        appVersionLabel = "版本",
+        btnClose = "关闭",
+        sectionLanguage = "语言",
+        sectionTheme = "外观",
+        themeSystem = "跟随系统",
+        themeLight = "浅色",
+        themeDark = "深色",
+        btnDonate = "赞助支持",
+        donateSubtitle = "在 Ko-fi 上支持开发者",
+        privacyPolicyTitle = "隐私政策",
+        sectionGeneral = "通用",
+        sectionAbout = "关于应用",
+        quickGuideTitle = "快速指南"
     )
 
     val ZH_TW = EN.copy(
@@ -649,7 +915,22 @@ object Strings {
         pause1Hour = "1 小時",
         pause8Hours = "8 小時",
         pauseUntilTomorrow = "直到明天早上",
-        dialogPauseTitle = "選擇暫停時間"
+        dialogPauseTitle = "選擇暫停時間",
+        menuSettingsAbout = "設定與關於",
+        aboutTitle = "關於 MapFlip",
+        appVersionLabel = "版本",
+        btnClose = "關閉",
+        sectionLanguage = "語言",
+        sectionTheme = "外觀",
+        themeSystem = "系統預設",
+        themeLight = "淺色",
+        themeDark = "深色",
+        btnDonate = "贊助支持",
+        donateSubtitle = "在 Ko-fi 上支持開發者",
+        privacyPolicyTitle = "隱私權政策",
+        sectionGeneral = "一般",
+        sectionAbout = "關於應用程式",
+        quickGuideTitle = "快速上手"
     )
 
     val AR = EN.copy(
@@ -684,7 +965,22 @@ object Strings {
         pause1Hour = "ساعة واحدة",
         pause8Hours = "8 ساعات",
         pauseUntilTomorrow = "حتى صباح الغد",
-        dialogPauseTitle = "اختر مدة الإيقاف المؤقت"
+        dialogPauseTitle = "اختر مدة الإيقاف المؤقت",
+        menuSettingsAbout = "الإعدادات وحول التطبيق",
+        aboutTitle = "حول MapFlip",
+        appVersionLabel = "الإصدار",
+        btnClose = "إغلاق",
+        sectionLanguage = "اللغة",
+        sectionTheme = "المظهر",
+        themeSystem = "افتراضي النظام",
+        themeLight = "فاتح",
+        themeDark = "داكن",
+        btnDonate = "تبرع",
+        donateSubtitle = "ادعم التطوير على Ko-fi",
+        privacyPolicyTitle = "سياسة الخصوصية",
+        sectionGeneral = "عام",
+        sectionAbout = "حول التطبيق",
+        quickGuideTitle = "دليل الإعداد السريع"
     )
 
     val RU = EN.copy(
@@ -719,7 +1015,22 @@ object Strings {
         pause1Hour = "1 час",
         pause8Hours = "8 часов",
         pauseUntilTomorrow = "До завтрашнего утра",
-        dialogPauseTitle = "Выберите время паузы"
+        dialogPauseTitle = "Выберите время паузы",
+        menuSettingsAbout = "Настройки и о приложении",
+        aboutTitle = "О приложении MapFlip",
+        appVersionLabel = "Версия",
+        btnClose = "Закрыть",
+        sectionLanguage = "Язык",
+        sectionTheme = "Тема оформления",
+        themeSystem = "Системная",
+        themeLight = "Светлая",
+        themeDark = "Темная",
+        btnDonate = "Поддержать",
+        donateSubtitle = "Поддержать разработку на Ko-fi",
+        privacyPolicyTitle = "Политика конфиденциальности",
+        sectionGeneral = "Общие",
+        sectionAbout = "О приложении",
+        quickGuideTitle = "Инструкция"
     )
 
     val ID = EN.copy(
@@ -754,6 +1065,21 @@ object Strings {
         pause1Hour = "1 Jam",
         pause8Hours = "8 Jam",
         pauseUntilTomorrow = "Hingga besok pagi",
-        dialogPauseTitle = "Pilih Durasi Jeda"
+        dialogPauseTitle = "Pilih Durasi Jeda",
+        menuSettingsAbout = "Pengaturan & Info",
+        aboutTitle = "Tentang MapFlip",
+        appVersionLabel = "Versi",
+        btnClose = "Tutup",
+        sectionLanguage = "Bahasa",
+        sectionTheme = "Tampilan",
+        themeSystem = "Default sistem",
+        themeLight = "Terang",
+        themeDark = "Gelap",
+        btnDonate = "Donasi",
+        donateSubtitle = "Dukung pengembangan di Ko-fi",
+        privacyPolicyTitle = "Kebijakan Privasi",
+        sectionGeneral = "Umum",
+        sectionAbout = "Tentang aplikasi",
+        quickGuideTitle = "Panduan Penyiapan"
     )
 }
