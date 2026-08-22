@@ -1,3 +1,9 @@
+## 1.2.5
+- Individuelles Erscheinungsbild: Wahl zwischen Systemeinstellung, Hell- und Dunkelmodus in den Einstellungen
+- Aufgeräumterer Startbildschirm: Link-Tester lässt sich bei Bedarf ein- und ausklappen
+- Verbesserte Übersicht: Einstellungen und Kurzanleitung noch verständlicher gestaltet
+- Vollständige Übersetzungen für alle 20 unterstützten Sprachen
+
 ## 1.2.4
 - Übersichtlicherer Startbildschirm: Wichtigste Status-Infos und Pause-Funktion auf einen Blick
 - Neues Einstellungs- und Info-Menü: Schneller Zugriff auf Sprache, Hilfe, Datenschutz und Feedback

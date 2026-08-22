@@ -1,3 +1,9 @@
+## 1.2.5
+- Appearance Theme Option: Choose between System default, Light, and Dark mode in Settings
+- Cleaner Home Screen: In-app Link Tester is now collapsible to keep the layout tidy
+- Streamlined Experience: Refined setup guidance and settings overview
+- Complete localization for all 20 supported languages
+
 ## 1.2.4
 - Cleaner Home Screen: Key status information and pause control right at a glance
 - New Settings & Info Menu: Quick access to language options, help, privacy info, and support
