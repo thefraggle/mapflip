@@ -31,6 +31,7 @@ import androidx.compose.material.icons.outlined.ExpandLess
 import androidx.compose.material.icons.outlined.ExpandMore
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Language
+import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.OpenInNew
 import androidx.compose.material.icons.outlined.PauseCircleOutline
@@ -86,6 +87,7 @@ fun MainScreen(
     var showPauseSheet by remember { mutableStateOf(false) }
     var showSettingsSheet by remember { mutableStateOf(false) }
     var isSetupGuideExpanded by remember { mutableStateOf(false) }
+    var isLinkTesterExpanded by remember { mutableStateOf(false) }
 
     var testInputUrl by remember { mutableStateOf("") }
     val convertedTargetUri = remember(testInputUrl) {
@@ -333,7 +335,7 @@ fun MainScreen(
 
                     Spacer(Modifier.height(16.dp))
 
-                    // Link Tester Tool Card
+                    // Link Tester Tool Card (collapsible accordion)
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -349,113 +351,163 @@ fun MainScreen(
                     ) {
                         Column(Modifier.padding(18.dp)) {
                             Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable {
+                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                        isLinkTesterExpanded = !isLinkTesterExpanded
+                                    },
                                 verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier.fillMaxWidth()
+                                horizontalArrangement = Arrangement.SpaceBetween
                             ) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Search,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier.size(18.dp)
+                                    )
+                                    Spacer(Modifier.width(8.dp))
+                                    Text(
+                                        text = s.testLinkTitle,
+                                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                }
                                 Icon(
-                                    imageVector = Icons.Outlined.Search,
+                                    imageVector = if (isLinkTesterExpanded) Icons.Outlined.ExpandLess else Icons.Outlined.ExpandMore,
                                     contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(18.dp)
-                                )
-                                Spacer(Modifier.width(8.dp))
-                                Text(
-                                    text = s.testLinkTitle,
-                                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
-                                    color = MaterialTheme.colorScheme.onSurface
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
 
-                            Spacer(Modifier.height(12.dp))
-
-                            OutlinedTextField(
-                                value = testInputUrl,
-                                onValueChange = { testInputUrl = it },
-                                placeholder = {
-                                    Text(
-                                        text = s.testLinkHint,
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
-                                    )
-                                },
-                                modifier = Modifier.fillMaxWidth(),
-                                shape = RoundedCornerShape(12.dp),
-                                singleLine = true,
-                                trailingIcon = {
-                                    TextButton(
-                                        onClick = {
-                                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                            val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
-                                            val clipText = clipboard?.primaryClip?.getItemAt(0)?.text?.toString()
-                                            if (!clipText.isNullOrBlank()) {
-                                                testInputUrl = clipText.trim()
-                                            }
-                                        }
-                                    ) {
-                                        Text(
-                                            text = s.btnPasteClipboard,
-                                            style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                                            color = MaterialTheme.colorScheme.primary
-                                        )
-                                    }
-                                }
-                            )
-
                             AnimatedVisibility(
-                                visible = convertedTargetUri.isNotBlank(),
+                                visible = isLinkTesterExpanded,
                                 enter = fadeIn() + expandVertically(),
                                 exit = fadeOut() + shrinkVertically()
                             ) {
-                                Column(Modifier.padding(top = 12.dp)) {
-                                    Surface(
-                                        color = MaterialTheme.colorScheme.surfaceContainerHighest.copy(alpha = 0.6f),
-                                        shape = RoundedCornerShape(8.dp),
-                                        modifier = Modifier.fillMaxWidth()
-                                    ) {
-                                        Text(
-                                            text = convertedTargetUri,
-                                            style = MaterialTheme.typography.bodySmall.copy(
-                                                fontFamily = FontFamily.Monospace,
-                                                fontSize = 12.sp,
-                                                textDirection = TextDirection.Ltr
-                                            ),
-                                            color = MaterialTheme.colorScheme.primary,
-                                            modifier = Modifier.padding(10.dp)
-                                        )
-                                    }
-                                    Spacer(Modifier.height(10.dp))
-                                    FilledTonalButton(
-                                        onClick = {
-                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                            try {
-                                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(convertedTargetUri)).apply {
-                                                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                                }
-                                                context.startActivity(intent)
-                                            } catch (_: Exception) {
-                                                Toast.makeText(context, "Google Maps could not be opened", Toast.LENGTH_SHORT).show()
-                                            }
+                                Column(Modifier.padding(top = 14.dp)) {
+                                    OutlinedTextField(
+                                        value = testInputUrl,
+                                        onValueChange = { testInputUrl = it },
+                                        placeholder = {
+                                            Text(
+                                                text = s.testLinkHint,
+                                                style = MaterialTheme.typography.bodySmall,
+                                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                                            )
                                         },
                                         modifier = Modifier.fillMaxWidth(),
-                                        shape = RoundedCornerShape(10.dp)
+                                        shape = RoundedCornerShape(12.dp),
+                                        singleLine = true,
+                                        trailingIcon = {
+                                            TextButton(
+                                                onClick = {
+                                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                                    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+                                                    val clipText = clipboard?.primaryClip?.getItemAt(0)?.text?.toString()
+                                                    if (!clipText.isNullOrBlank()) {
+                                                        testInputUrl = clipText.trim()
+                                                    }
+                                                }
+                                            ) {
+                                                Text(
+                                                    text = s.btnPasteClipboard,
+                                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                                                    color = MaterialTheme.colorScheme.primary
+                                                )
+                                            }
+                                        }
+                                    )
+
+                                    AnimatedVisibility(
+                                        visible = convertedTargetUri.isNotBlank(),
+                                        enter = fadeIn() + expandVertically(),
+                                        exit = fadeOut() + shrinkVertically()
                                     ) {
-                                        Icon(
-                                            Icons.AutoMirrored.Outlined.OpenInNew,
-                                            contentDescription = null,
-                                            modifier = Modifier.size(16.dp)
-                                        )
-                                        Spacer(Modifier.width(8.dp))
-                                        Text(
-                                            text = s.btnTestLink,
-                                            style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold)
-                                        )
+                                        Column(Modifier.padding(top = 12.dp)) {
+                                            Surface(
+                                                color = MaterialTheme.colorScheme.surfaceContainerHighest.copy(alpha = 0.6f),
+                                                shape = RoundedCornerShape(8.dp),
+                                                modifier = Modifier.fillMaxWidth()
+                                            ) {
+                                                Text(
+                                                    text = convertedTargetUri,
+                                                    style = MaterialTheme.typography.bodySmall.copy(
+                                                        fontFamily = FontFamily.Monospace,
+                                                        fontSize = 12.sp,
+                                                        textDirection = TextDirection.Ltr
+                                                    ),
+                                                    color = MaterialTheme.colorScheme.primary,
+                                                    modifier = Modifier.padding(10.dp)
+                                                )
+                                            }
+                                            Spacer(Modifier.height(10.dp))
+                                            FilledTonalButton(
+                                                onClick = {
+                                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                    try {
+                                                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(convertedTargetUri)).apply {
+                                                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                                        }
+                                                        context.startActivity(intent)
+                                                    } catch (_: Exception) {
+                                                        Toast.makeText(context, "Google Maps could not be opened", Toast.LENGTH_SHORT).show()
+                                                    }
+                                                },
+                                                modifier = Modifier.fillMaxWidth(),
+                                                shape = RoundedCornerShape(10.dp)
+                                            ) {
+                                                Icon(
+                                                    Icons.AutoMirrored.Outlined.OpenInNew,
+                                                    contentDescription = null,
+                                                    modifier = Modifier.size(16.dp)
+                                                )
+                                                Spacer(Modifier.width(8.dp))
+                                                Text(
+                                                    text = s.btnTestLink,
+                                                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold)
+                                                )
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
 
-                    Spacer(Modifier.height(24.dp))
+                    Spacer(Modifier.height(16.dp))
+
+                    // Privacy Note Card (100% datenschutzfreundlich)
+                    Surface(
+                        shape = RoundedCornerShape(14.dp),
+                        color = MaterialTheme.colorScheme.surfaceContainerLow,
+                        border = androidx.compose.foundation.BorderStroke(
+                            1.dp,
+                            MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f)
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Lock,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Spacer(Modifier.width(14.dp))
+                            Text(
+                                text = s.privacyNote,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+
+                    Spacer(Modifier.height(20.dp))
 
                     // Standardized App Footer (Version, Copyright, Privacy Policy)
                     AppFooter(s = s)

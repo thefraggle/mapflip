@@ -352,37 +352,6 @@ fun SettingsSheet(
                         }
                     }
 
-                    Spacer(Modifier.height(10.dp))
-
-                    // Privacy Note Card
-                    Surface(
-                        shape = RoundedCornerShape(14.dp),
-                        color = MaterialTheme.colorScheme.surfaceContainer,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Row(
-                            modifier = Modifier.padding(16.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Lock,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(20.dp)
-                            )
-                            Spacer(Modifier.width(14.dp))
-                            Text(
-                                text = s.privacyNote,
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-                    }
-
-                    Spacer(Modifier.height(24.dp))
-
-                    // Standardized App Footer (Version, Copyright, Privacy Policy)
-                    AppFooter(s = s)
                 }
             }
         }
