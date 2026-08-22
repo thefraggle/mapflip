@@ -1,3 +1,8 @@
+## 1.2.4
+- Cleaner Home Screen: Key status information and pause control right at a glance
+- New Settings & Info Menu: Quick access to language options, help, privacy info, and support
+- Enhanced Look & Feel: Refined colors, typography, and contrast for both light and dark themes
+
 ## 1.2.3
 - Smarter Link Detection: Automatically detects even more shared Apple Maps links, navigation routes, and chat messages
 - In-App Link Tester: Paste and test any Apple Maps link directly inside the app with a single tap

@@ -1,3 +1,8 @@
+## 1.2.4
+- Übersichtlicherer Startbildschirm: Wichtigste Status-Infos und Pause-Funktion auf einen Blick
+- Neues Einstellungs- und Info-Menü: Schneller Zugriff auf Sprache, Hilfe, Datenschutz und Feedback
+- Verbessertes Design: Harmonischere Farben und Kontraste im Hell- und Dunkelmodus
+
 ## 1.2.3
 - Zuverlässigere Link-Erkennung: Erkennt jetzt noch mehr geteilte Apple-Karten-Links, Routen und Messenger-Nachrichten direkt
 - Link-Tester & Zwischenablage: Apple-Maps-Links können jetzt direkt in der App eingefügt und sofort in Google Maps getestet werden

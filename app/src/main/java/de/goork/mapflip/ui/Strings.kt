@@ -72,7 +72,15 @@ object Strings {
         val pause1Hour: String = "1 Hour",
         val pause8Hours: String = "8 Hours",
         val pauseUntilTomorrow: String = "Until tomorrow morning",
-        val dialogPauseTitle: String = "Select Pause Duration"
+        val dialogPauseTitle: String = "Select Pause Duration",
+        val menuSettingsAbout: String = "Settings & About",
+        val aboutTitle: String = "About MapFlip",
+        val appVersionLabel: String = "Version",
+        val btnClose: String = "Close",
+        val sectionLanguage: String = "Language",
+        val sectionGeneral: String = "General",
+        val sectionAbout: String = "About",
+        val quickGuideTitle: String = "Setup Guide"
     )
 
     fun resolveLanguage(savedPref: String?): String {
@@ -151,7 +159,15 @@ object Strings {
         pause1Hour = "1 Stunde",
         pause8Hours = "8 Stunden",
         pauseUntilTomorrow = "Bis morgen früh",
-        dialogPauseTitle = "Pausendauer wählen"
+        dialogPauseTitle = "Pausendauer wählen",
+        menuSettingsAbout = "Einstellungen & Info",
+        aboutTitle = "Über MapFlip",
+        appVersionLabel = "Version",
+        btnClose = "Schließen",
+        sectionLanguage = "Sprache",
+        sectionGeneral = "Allgemein",
+        sectionAbout = "Über die App",
+        quickGuideTitle = "Kurzanleitung"
     )
 
     val EN = AppStrings(
