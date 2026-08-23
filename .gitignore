@@ -27,3 +27,8 @@ vendor/
 .bundle/
 fastlane/report.xml
 fastlane/metadata/android/screenshots.html
+xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+DerivedData/
+.build/

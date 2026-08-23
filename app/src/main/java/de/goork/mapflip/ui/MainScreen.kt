@@ -54,8 +54,9 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import de.goork.mapflip.AppConstants
-import de.goork.mapflip.AppleMapsParser
 import de.goork.mapflip.data.PreferencesRepository
+import de.goork.mapflip.navigation.NavigationIntentBuilder
+import de.goork.mapflip.parser.UniversalMapParser
 import de.goork.mapflip.ui.theme.Green500
 import de.goork.mapflip.ui.theme.Red500
 
@@ -68,6 +69,7 @@ fun MainScreen(
 ) {
     val context = LocalContext.current
     val haptic = LocalHapticFeedback.current
+
     val userPreferences by repository.preferences.collectAsStateWithLifecycle()
 
     val activeLangCode = Strings.resolveLanguage(userPreferences.language)
@@ -79,8 +81,11 @@ fun MainScreen(
     var isLinkTesterExpanded by remember { mutableStateOf(false) }
 
     var testInputUrl by remember { mutableStateOf("") }
-    val convertedTargetUri = remember(testInputUrl) {
-        if (testInputUrl.isNotBlank()) AppleMapsParser.convert(testInputUrl) else ""
+    val convertedTargetUri = remember(testInputUrl, userPreferences.targetApp) {
+        if (testInputUrl.isNotBlank()) {
+            val loc = UniversalMapParser.parse(testInputUrl)
+            NavigationIntentBuilder.buildUriString(loc, userPreferences.targetApp)
+        } else ""
     }
 
     LaunchedEffect(showPauseDialogDefault) {
@@ -138,51 +143,41 @@ fun MainScreen(
             },
             containerColor = MaterialTheme.colorScheme.surface
         ) { padding ->
-            BoxWithConstraints(
+            Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(padding),
-                contentAlignment = Alignment.TopCenter
+                    .padding(padding)
             ) {
-                val isWideScreen = maxWidth >= 600.dp
-                val contentModifier = if (isWideScreen) {
-                    Modifier
-                        .width(560.dp)
-                        .verticalScroll(rememberScrollState())
-                } else {
-                    Modifier
+                Column(
+                    modifier = Modifier
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
-                }
-
-                Column(
-                    modifier = contentModifier.padding(horizontal = 20.dp, vertical = 8.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                        .padding(horizontal = 24.dp)
                 ) {
-                    // Animation
-                    MapFlipAnimation()
+                    Spacer(Modifier.height(8.dp))
 
-                    Spacer(Modifier.height(12.dp))
-
-                    // Subtitle & Tagline
+                    // Subtitle / Claim
                     Text(
                         text = s.subtitle,
                         style = MaterialTheme.typography.titleMedium.copy(
-                            fontWeight = FontWeight.Medium,
-                            letterSpacing = 0.5.sp
+                            fontWeight = FontWeight.SemiBold,
+                            lineHeight = 22.sp
                         ),
                         color = MaterialTheme.colorScheme.onSurface
                     )
+
                     Spacer(Modifier.height(4.dp))
+
+                    // Tagline
                     Text(
                         text = s.tagline,
                         style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
 
-                    Spacer(Modifier.height(24.dp))
+                    Spacer(Modifier.height(20.dp))
 
-                    // Main Status & Control Card
+                    // Status & Control Card (Active / Paused Status + Pause Switch)
                     StatusAndControlCard(
                         s = s,
                         isPaused = userPreferences.isPaused,
@@ -233,14 +228,15 @@ fun MainScreen(
                             s.btnSettings,
                             style = MaterialTheme.typography.labelLarge.copy(
                                 fontWeight = FontWeight.Bold,
-                                letterSpacing = 0.3.sp
+                                fontSize = 16.sp
                             )
                         )
                     }
 
                     Spacer(Modifier.height(20.dp))
 
-                    // Setup Accordion / Quick Guide
+                    // Collapsible Setup Instructions Card (Accordion)
+                    val guideExpandDesc = if (isSetupGuideExpanded) "Einklappen" else "Ausklappen"
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -257,46 +253,46 @@ fun MainScreen(
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(18.dp)
+                                .padding(horizontal = 20.dp, vertical = 16.dp)
                         ) {
-                            val isGuideVisible = isSetupGuideExpanded || linksActive == false || linksActive == null
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .defaultMinSize(minHeight = 48.dp)
-                                    .semantics {
-                                        role = Role.Button
-                                        stateDescription = if (isGuideVisible) "Expanded" else "Collapsed"
-                                    }
                                     .clickable {
                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                        isSetupGuideExpanded = !isGuideVisible
+                                        isSetupGuideExpanded = !isSetupGuideExpanded
+                                    }
+                                    .semantics {
+                                        role = Role.Button
+                                        stateDescription = guideExpandDesc
                                     },
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
-                                    text = s.setupTitle,
-                                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+                                    text = s.quickGuideTitle,
+                                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                                     color = MaterialTheme.colorScheme.onSurface
                                 )
                                 Icon(
-                                    imageVector = if (isGuideVisible) Icons.Outlined.ExpandLess else Icons.Outlined.ExpandMore,
-                                    contentDescription = if (isGuideVisible) s.quickGuideTitle else s.setupTitle,
+                                    imageVector = if (isSetupGuideExpanded) Icons.Outlined.ExpandLess else Icons.Outlined.ExpandMore,
+                                    contentDescription = guideExpandDesc,
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
 
-                            // Expandable Setup Steps (default open when inactive/first start or explicitly expanded)
                             AnimatedVisibility(
-                                visible = isGuideVisible,
+                                visible = isSetupGuideExpanded,
                                 enter = fadeIn() + expandVertically(),
                                 exit = fadeOut() + shrinkVertically()
                             ) {
-                                Column(Modifier.padding(top = 16.dp)) {
-                                    SetupStep(number = 1, text = s.step1, isLast = false)
-                                    SetupStep(number = 2, text = s.step2, isLast = false)
-                                    SetupStep(number = 3, text = s.step3, isLast = true)
+                                Column(modifier = Modifier.padding(top = 16.dp)) {
+                                    StepItem(number = "1", title = s.step1)
+                                    Spacer(Modifier.height(12.dp))
+                                    StepItem(number = "2", title = s.step2)
+                                    Spacer(Modifier.height(12.dp))
+                                    StepItem(number = "3", title = s.step3)
                                 }
                             }
                         }
@@ -304,7 +300,8 @@ fun MainScreen(
 
                     Spacer(Modifier.height(16.dp))
 
-                    // Link Tester Tool Card (collapsible accordion)
+                    // Collapsible Link Tester Card (Accordion)
+                    val testerExpandDesc = if (isLinkTesterExpanded) "Einklappen" else "Ausklappen"
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -318,39 +315,34 @@ fun MainScreen(
                             containerColor = MaterialTheme.colorScheme.surfaceContainerLow
                         )
                     ) {
-                        Column(Modifier.padding(18.dp)) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 20.dp, vertical = 16.dp)
+                        ) {
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .defaultMinSize(minHeight = 48.dp)
-                                    .semantics {
-                                        role = Role.Button
-                                        stateDescription = if (isLinkTesterExpanded) "Expanded" else "Collapsed"
-                                    }
                                     .clickable {
                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                         isLinkTesterExpanded = !isLinkTesterExpanded
+                                    }
+                                    .semantics {
+                                        role = Role.Button
+                                        stateDescription = testerExpandDesc
                                     },
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Icon(
-                                        imageVector = Icons.Outlined.Search,
-                                        contentDescription = null,
-                                        tint = MaterialTheme.colorScheme.primary,
-                                        modifier = Modifier.size(18.dp)
-                                    )
-                                    Spacer(Modifier.width(8.dp))
-                                    Text(
-                                        text = s.testLinkTitle,
-                                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
-                                        color = MaterialTheme.colorScheme.onSurface
-                                    )
-                                }
+                                Text(
+                                    text = s.testLinkTitle,
+                                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
                                 Icon(
                                     imageVector = if (isLinkTesterExpanded) Icons.Outlined.ExpandLess else Icons.Outlined.ExpandMore,
-                                    contentDescription = s.testLinkTitle,
+                                    contentDescription = testerExpandDesc,
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
@@ -360,20 +352,27 @@ fun MainScreen(
                                 enter = fadeIn() + expandVertically(),
                                 exit = fadeOut() + shrinkVertically()
                             ) {
-                                Column(Modifier.padding(top = 14.dp)) {
+                                Column(modifier = Modifier.padding(top = 16.dp)) {
                                     OutlinedTextField(
                                         value = testInputUrl,
                                         onValueChange = { testInputUrl = it },
                                         placeholder = {
                                             Text(
-                                                text = s.testLinkHint,
-                                                style = MaterialTheme.typography.bodySmall,
-                                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+                                                s.testLinkHint,
+                                                style = MaterialTheme.typography.bodySmall
+                                            )
+                                        },
+                                        leadingIcon = {
+                                            Icon(
+                                                Icons.Outlined.Search,
+                                                contentDescription = null,
+                                                tint = MaterialTheme.colorScheme.onSurfaceVariant
                                             )
                                         },
                                         modifier = Modifier.fillMaxWidth(),
                                         shape = RoundedCornerShape(12.dp),
                                         singleLine = true,
+                                        textStyle = MaterialTheme.typography.bodyMedium,
                                         trailingIcon = {
                                             TextButton(
                                                 onClick = {
@@ -421,12 +420,20 @@ fun MainScreen(
                                                 onClick = {
                                                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                                     try {
-                                                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(convertedTargetUri)).apply {
+                                                        val loc = UniversalMapParser.parse(testInputUrl)
+                                                        val intent = NavigationIntentBuilder.buildIntent(loc, userPreferences.targetApp).apply {
                                                             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                                         }
                                                         context.startActivity(intent)
                                                     } catch (_: Exception) {
-                                                        Toast.makeText(context, "Google Maps could not be opened", Toast.LENGTH_SHORT).show()
+                                                        try {
+                                                            val fallback = Intent(Intent.ACTION_VIEW, Uri.parse(convertedTargetUri)).apply {
+                                                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                                            }
+                                                            context.startActivity(fallback)
+                                                        } catch (_: Exception) {
+                                                            Toast.makeText(context, "Target app could not be opened", Toast.LENGTH_SHORT).show()
+                                                        }
                                                     }
                                                 },
                                                 modifier = Modifier.fillMaxWidth(),
@@ -513,11 +520,15 @@ fun MainScreen(
                 s = s,
                 currentLangCode = userPreferences.language,
                 currentThemePref = userPreferences.theme,
+                currentTargetApp = userPreferences.targetApp,
                 onLanguageSelected = { newLang ->
                     repository.setLanguage(newLang)
                 },
                 onThemeSelected = { newTheme ->
                     repository.setTheme(newTheme)
+                },
+                onTargetAppSelected = { newApp ->
+                    repository.setTargetApp(newApp)
                 },
                 onDismiss = { showSettingsSheet = false }
             )
@@ -538,173 +549,186 @@ private fun StatusAndControlCard(
             .border(
                 width = 1.dp,
                 color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
-                shape = RoundedCornerShape(20.dp)
+                shape = RoundedCornerShape(16.dp)
             ),
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainerLow
         )
     ) {
-        Column(Modifier.padding(20.dp)) {
-            // Live Status Row
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp)
+        ) {
+            // Status Header Row
             Row(
                 modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                StatusIndicatorDot(active = linksActive == true && !isPaused, isPaused = isPaused)
-                Spacer(Modifier.width(12.dp))
-                Column(modifier = Modifier.weight(1f)) {
-                    val statusText = when {
-                        isPaused -> s.statusPaused
-                        linksActive == true -> s.statusActive
-                        linksActive == false -> s.statusInactive
-                        else -> s.statusHint
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    val statusDotColor = when {
+                        isPaused -> MaterialTheme.colorScheme.onSurfaceVariant
+                        linksActive == true -> Green500
+                        else -> Red500
                     }
+                    Box(
+                        modifier = Modifier
+                            .size(10.dp)
+                            .clip(CircleShape)
+                            .background(statusDotColor)
+                    )
+                    Spacer(Modifier.width(10.dp))
                     Text(
-                        text = statusText,
-                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
+                        text = when {
+                            isPaused -> s.statusPaused
+                            linksActive == true -> s.statusActive
+                            else -> s.statusInactive
+                        },
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.onSurface
                     )
+                }
+
+                if (isPaused) {
+                    Surface(
+                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
+                        Text(
+                            text = s.statusPaused.uppercase(),
+                            style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                        )
+                    }
                 }
             }
 
-            Spacer(Modifier.height(16.dp))
-            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
-            Spacer(Modifier.height(16.dp))
+            Spacer(Modifier.height(14.dp))
 
-            // Pause Quick Toggle Row
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+            // Pause toggle control row
+            Surface(
+                color = MaterialTheme.colorScheme.surfaceContainerHigh,
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier.fillMaxWidth()
             ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = s.pauseTitle,
-                        style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Spacer(Modifier.height(2.dp))
-                    Text(
-                        text = s.pauseDesc,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = s.pauseTitle,
+                            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Text(
+                            text = s.pauseDesc,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    Switch(
+                        checked = isPaused,
+                        onCheckedChange = onPauseToggle,
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = MaterialTheme.colorScheme.surface,
+                            checkedTrackColor = MaterialTheme.colorScheme.primary
+                        )
                     )
                 }
-                Spacer(Modifier.width(16.dp))
-                Switch(
-                    checked = isPaused,
-                    onCheckedChange = onPauseToggle
-                )
             }
         }
     }
 }
 
 @Composable
-private fun StatusIndicatorDot(active: Boolean, isPaused: Boolean) {
-    val targetColor = when {
-        isPaused -> MaterialTheme.colorScheme.tertiary
-        active -> Green500
-        else -> Red500
-    }
-
-    val infiniteTransition = rememberInfiniteTransition(label = "pulse")
-    val pulseScale by infiniteTransition.animateFloat(
-        initialValue = 1f,
-        targetValue = 2.2f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(1400, easing = FastOutSlowInEasing),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = "pulseScale"
-    )
-    val pulseAlpha by infiniteTransition.animateFloat(
-        initialValue = 0.6f,
-        targetValue = 0.0f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(1400, easing = FastOutSlowInEasing),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = "pulseAlpha"
-    )
-
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.size(24.dp)
+private fun StepItem(number: String, title: String) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        if (active) {
-            Box(
-                modifier = Modifier
-                    .size(12.dp)
-                    .graphicsLayer {
-                        scaleX = pulseScale
-                        scaleY = pulseScale
-                        alpha = pulseAlpha
-                    }
-                    .clip(CircleShape)
-                    .background(targetColor)
-            )
-        }
         Box(
             modifier = Modifier
-                .size(12.dp)
+                .size(28.dp)
                 .clip(CircleShape)
-                .background(targetColor)
-        )
-    }
-}
-
-@Composable
-private fun SetupStep(number: Int, text: String, isLast: Boolean) {
-    Row(
-        modifier = Modifier.padding(bottom = if (isLast) 0.dp else 16.dp),
-        verticalAlignment = Alignment.Top
-    ) {
-        Surface(
-            shape = CircleShape,
-            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
-            modifier = Modifier.size(30.dp)
+                .background(MaterialTheme.colorScheme.primaryContainer),
+            contentAlignment = Alignment.Center
         ) {
-            Box(contentAlignment = Alignment.Center) {
-                Text(
-                    text = number.toString(),
-                    color = MaterialTheme.colorScheme.primary,
-                    style = MaterialTheme.typography.labelMedium.copy(
-                        fontWeight = FontWeight.Bold
-                    )
-                )
-            }
+            Text(
+                text = number,
+                style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                color = MaterialTheme.colorScheme.primary
+            )
         }
-        Spacer(Modifier.width(12.dp))
+        Spacer(Modifier.width(14.dp))
         Text(
-            text = text,
-            style = MaterialTheme.typography.bodyMedium.copy(lineHeight = 22.sp),
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.85f),
-            modifier = Modifier.padding(top = 4.dp)
+            text = title,
+            style = MaterialTheme.typography.bodyMedium.copy(
+                lineHeight = 20.sp,
+                fontWeight = FontWeight.Normal
+            ),
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.weight(1f)
         )
     }
 }
 
 private fun checkLinksEnabled(context: Context): Boolean? {
-    val prefs = context.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE)
-    if (prefs.getBoolean("mock_links_active", false)) {
-        return true
-    }
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         return try {
-            val manager = context.getSystemService(
+            val domainVerificationManager = context.getSystemService(
                 android.content.pm.verify.domain.DomainVerificationManager::class.java
             )
-            val userState = manager.getDomainVerificationUserState(context.packageName)
-            val hostMap = userState?.hostToStateMap ?: return false
-            hostMap.any { (host, state) ->
-                host == "maps.apple.com" &&
-                        state == android.content.pm.verify.domain.DomainVerificationUserState.DOMAIN_STATE_SELECTED
-            }
+            val userState = domainVerificationManager?.getDomainVerificationUserState(context.packageName)
+            userState?.isLinkHandlingAllowed
         } catch (_: Exception) {
             null
         }
     }
     return null
+}
+
+@Composable
+private fun AppFooter(s: Strings.AppStrings) {
+    val context = LocalContext.current
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(
+            modifier = Modifier
+                .clickable {
+                    try {
+                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.URL_PRIVACY_POLICY)))
+                    } catch (_: Exception) {}
+                }
+                .padding(vertical = 4.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = s.privacyPolicyTitle,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Spacer(Modifier.width(4.dp))
+            Icon(
+                imageVector = Icons.AutoMirrored.Outlined.OpenInNew,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(12.dp)
+            )
+        }
+        Spacer(Modifier.height(2.dp))
+        Text(
+            text = "${s.copyright} • ${s.appVersionLabel} ${de.goork.mapflip.BuildConfig.VERSION_NAME}",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
 }

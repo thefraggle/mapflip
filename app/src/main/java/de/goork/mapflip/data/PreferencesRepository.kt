@@ -3,6 +3,7 @@ package de.goork.mapflip.data
 import android.content.Context
 import android.content.SharedPreferences
 import de.goork.mapflip.AppConstants
+import de.goork.mapflip.navigation.TargetNavigationApp
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,6 +12,7 @@ import java.util.Calendar
 data class UserPreferences(
     val language: String = "auto",
     val theme: String = "system",
+    val targetApp: TargetNavigationApp = TargetNavigationApp.GOOGLE_MAPS,
     val isPaused: Boolean = false,
     val pausedUntilTimestamp: Long = 0L
 )
@@ -46,6 +48,16 @@ class PreferencesRepository private constructor(context: Context) {
 
     fun setTheme(theme: String) {
         prefs.edit().putString(AppConstants.PREFS_KEY_THEME, theme).apply()
+        _preferences.value = readCurrentPreferences()
+    }
+
+    fun getTargetApp(): TargetNavigationApp {
+        val id = prefs.getString(AppConstants.PREFS_KEY_TARGET_APP, TargetNavigationApp.GOOGLE_MAPS.id)
+        return TargetNavigationApp.fromId(id)
+    }
+
+    fun setTargetApp(targetApp: TargetNavigationApp) {
+        prefs.edit().putString(AppConstants.PREFS_KEY_TARGET_APP, targetApp.id).apply()
         _preferences.value = readCurrentPreferences()
     }
 
@@ -103,6 +115,7 @@ class PreferencesRepository private constructor(context: Context) {
         return UserPreferences(
             language = getLanguage(),
             theme = getTheme(),
+            targetApp = getTargetApp(),
             isPaused = paused,
             pausedUntilTimestamp = pausedUntil
         )

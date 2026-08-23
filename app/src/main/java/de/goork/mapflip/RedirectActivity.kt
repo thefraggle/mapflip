@@ -7,41 +7,49 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import de.goork.mapflip.data.PreferencesRepository
+import de.goork.mapflip.navigation.NavigationIntentBuilder
+import de.goork.mapflip.parser.UniversalMapParser
 
 /**
- * Transparent activity that silently redirects Apple Maps links to Google Maps.
+ * Transparent activity that silently intercepts and redirects map links (Apple, Bing, OSM, Yandex)
+ * to the user's preferred navigation app (Google Maps, Waze, Organic Maps, OsmAnd, or System Picker).
  *
- * Registered in the manifest for `maps.apple.com` URLs. When triggered,
- * it converts the URL via [AppleMapsParser] and forwards to Google Maps.
- * If MapFlip is paused by the user, it forwards the original URL to a browser.
- * Uses no-animation transitions to remain completely invisible to the user.
+ * If MapFlip is paused by the user, it forwards the original URL directly to a web browser.
  */
 class RedirectActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val isPaused = PauseHelper.isCurrentlyPaused(this)
+        val repository = PreferencesRepository.getInstance(this)
+        val isPaused = repository.isCurrentlyPaused()
         val dataUri = intent?.data
 
         if (dataUri != null) {
-            val appleUrl = dataUri.toString()
+            val mapUrl = dataUri.toString()
             if (isPaused) {
-                // When paused: forward original URL to non-MapFlip apps (e.g. browser)
+                // When paused: forward original URL to non-MapFlip browser
                 forwardOriginalUrl(dataUri)
             } else {
-                val googleUri = AppleMapsParser.convert(appleUrl)
+                val parsedLocation = UniversalMapParser.parse(mapUrl)
+                val targetApp = repository.getTargetApp()
+                val targetIntent = NavigationIntentBuilder.buildIntent(parsedLocation, targetApp)
+
                 try {
-                    // Try Google Maps app first
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(googleUri)).apply {
-                        setPackage(AppConstants.GOOGLE_MAPS_PACKAGE)
-                    })
+                    startActivity(targetIntent)
                 } catch (_: ActivityNotFoundException) {
-                    // Fallback: open in any available maps app or browser
+                    // Fallback 1: Try generic geo intent (system picker)
                     try {
-                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(googleUri)))
-                    } catch (_: Exception) {}
-                } catch (_: Exception) {}
+                        val genericIntent = NavigationIntentBuilder.buildGenericGeoIntent(parsedLocation)
+                        startActivity(genericIntent)
+                    } catch (_: Exception) {
+                        // Fallback 2: Forward to web browser
+                        forwardOriginalUrl(dataUri)
+                    }
+                } catch (_: Exception) {
+                    forwardOriginalUrl(dataUri)
+                }
             }
         }
 
@@ -50,8 +58,7 @@ class RedirectActivity : Activity() {
     }
 
     /**
-     * Forwards original Apple Maps URL to standard web browser when redirect is paused.
-     * Uses generic HTTPS query to discover browser package name with CATEGORY_APP_BROWSER fallback.
+     * Forwards original map URL to standard web browser when redirect is paused or no native map app is found.
      */
     private fun forwardOriginalUrl(uri: Uri) {
         val genericWebIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com")).apply {

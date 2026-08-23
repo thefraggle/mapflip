@@ -7,8 +7,12 @@
             <category android:name="android.intent.category.BROWSABLE" />
             <data android:scheme="https" />
         </intent>
-        <!-- Package visibility query for Google Maps -->
+        <!-- Supported Navigation Apps -->
         <package android:name="com.google.android.apps.maps" />
+        <package android:name="com.waze" />
+        <package android:name="app.organicmaps" />
+        <package android:name="net.osmand" />
+        <package android:name="net.osmand.plus" />
     </queries>
 
     <application
@@ -33,12 +37,46 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:excludeFromRecents="true"
             android:noHistory="true">
+            <!-- 1. Apple Maps Links -->
             <intent-filter android:autoVerify="false">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" android:host="maps.apple.com" />
                 <data android:scheme="http" android:host="maps.apple.com" />
+            </intent-filter>
+
+            <!-- 2. Bing Maps Links -->
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="bing.com" android:pathPrefix="/maps" />
+                <data android:scheme="https" android:host="www.bing.com" android:pathPrefix="/maps" />
+                <data android:scheme="https" android:host="maps.bing.com" />
+            </intent-filter>
+
+            <!-- 3. OpenStreetMap Links -->
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="openstreetmap.org" />
+                <data android:scheme="https" android:host="www.openstreetmap.org" />
+                <data android:scheme="https" android:host="osm.org" />
+            </intent-filter>
+
+            <!-- 4. Yandex Maps Links -->
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="yandex.com" android:pathPrefix="/maps" />
+                <data android:scheme="https" android:host="www.yandex.com" android:pathPrefix="/maps" />
+                <data android:scheme="https" android:host="yandex.ru" android:pathPrefix="/maps" />
+                <data android:scheme="https" android:host="www.yandex.ru" android:pathPrefix="/maps" />
+                <data android:scheme="https" android:host="maps.yandex.com" />
+                <data android:scheme="https" android:host="maps.yandex.ru" />
             </intent-filter>
         </activity>
 

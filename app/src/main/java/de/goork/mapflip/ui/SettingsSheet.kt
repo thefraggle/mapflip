@@ -12,9 +12,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.outlined.DarkMode
 import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Explore
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.LightMode
+import androidx.compose.material.icons.outlined.Map
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material.icons.outlined.VolunteerActivism
@@ -41,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.goork.mapflip.AppConstants
 import de.goork.mapflip.BuildConfig
+import de.goork.mapflip.navigation.TargetNavigationApp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,8 +51,10 @@ fun SettingsSheet(
     s: Strings.AppStrings,
     currentLangCode: String,
     currentThemePref: String,
+    currentTargetApp: TargetNavigationApp,
     onLanguageSelected: (String) -> Unit,
     onThemeSelected: (String) -> Unit,
+    onTargetAppSelected: (TargetNavigationApp) -> Unit,
     onDismiss: () -> Unit
 ) {
     val context = LocalContext.current
@@ -57,6 +62,7 @@ fun SettingsSheet(
     val focusRequester = remember { FocusRequester() }
     var showLanguagePicker by remember { mutableStateOf(false) }
     var showThemePicker by remember { mutableStateOf(false) }
+    var showTargetAppPicker by remember { mutableStateOf(false) }
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -77,6 +83,7 @@ fun SettingsSheet(
                         when {
                             showLanguagePicker -> showLanguagePicker = false
                             showThemePicker -> showThemePicker = false
+                            showTargetAppPicker -> showTargetAppPicker = false
                             else -> onDismiss()
                         }
                         true
@@ -202,6 +209,61 @@ fun SettingsSheet(
                         Spacer(Modifier.height(4.dp))
                     }
                 }
+                showTargetAppPicker -> {
+                    // Target App picker subview
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            text = s.sectionTargetApp,
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        TextButton(onClick = { showTargetAppPicker = false }) {
+                            Text(s.btnClose)
+                        }
+                    }
+                    Spacer(Modifier.height(12.dp))
+                    TargetNavigationApp.entries.forEach { app ->
+                        val isSelected = currentTargetApp == app
+                        Surface(
+                            onClick = {
+                                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                onTargetAppSelected(app)
+                                showTargetAppPicker = false
+                            },
+                            shape = RoundedCornerShape(12.dp),
+                            color = if (isSelected) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f)
+                            else Color.Transparent,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 16.dp, vertical = 14.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = if (app.isSystemPicker) Icons.Outlined.Explore else Icons.Outlined.Map,
+                                    contentDescription = null,
+                                    tint = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                    modifier = Modifier.size(22.dp)
+                                )
+                                Spacer(Modifier.width(16.dp))
+                                Text(
+                                    text = if (app == TargetNavigationApp.SYSTEM_PICKER) s.targetAppAlwaysAsk else app.displayName,
+                                    style = MaterialTheme.typography.bodyLarge.copy(
+                                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                                    ),
+                                    color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+                                )
+                            }
+                        }
+                        Spacer(Modifier.height(4.dp))
+                    }
+                }
                 else -> {
                     // Main Settings / About Overview
                     Text(
@@ -211,7 +273,21 @@ fun SettingsSheet(
                     )
                     Spacer(Modifier.height(16.dp))
 
-                    // 1. Language Option
+                    // 1. Target Navigation App Option
+                    val targetAppLabel = if (currentTargetApp == TargetNavigationApp.SYSTEM_PICKER) s.targetAppAlwaysAsk else currentTargetApp.displayName
+                    SettingsItem(
+                        icon = Icons.Outlined.Map,
+                        title = s.sectionTargetApp,
+                        subtitle = targetAppLabel,
+                        onClick = {
+                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                            showTargetAppPicker = true
+                        }
+                    )
+
+                    Spacer(Modifier.height(10.dp))
+
+                    // 2. Language Option
                     val currentLangItem = Strings.SUPPORTED_LANGUAGES.find { it.code == currentLangCode }
                         ?: Strings.SUPPORTED_LANGUAGES.first()
 
@@ -227,7 +303,7 @@ fun SettingsSheet(
 
                     Spacer(Modifier.height(10.dp))
 
-                    // 2. Theme Option (System / Light / Dark)
+                    // 3. Theme Option (System / Light / Dark)
                     val themeLabel = when (currentThemePref) {
                         "light" -> s.themeLight
                         "dark" -> s.themeDark
@@ -245,7 +321,7 @@ fun SettingsSheet(
 
                     Spacer(Modifier.height(10.dp))
 
-                    // 3. Support & Feedback
+                    // 4. Support & Feedback
                     SettingsItem(
                         icon = Icons.Outlined.Email,
                         title = s.btnFeedback,
@@ -278,7 +354,7 @@ fun SettingsSheet(
                         )
                     }
 
-                    // Flavor Specific: Play -> Rate App & FamWake Promo
+                    // Flavor Specific: Play -> Rate App
                     if (BuildConfig.FLAVOR == "play") {
                         Spacer(Modifier.height(10.dp))
                         SettingsItem(
@@ -299,99 +375,98 @@ fun SettingsSheet(
                                 }
                             }
                         )
+                    }
 
-                        Spacer(Modifier.height(10.dp))
-                        Surface(
-                            onClick = {
-                                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                try {
-                                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.URL_FAMWAKE)))
-                                } catch (_: Exception) {}
-                            },
-                            shape = RoundedCornerShape(14.dp),
-                            color = MaterialTheme.colorScheme.surfaceContainer,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
+                    Spacer(Modifier.height(20.dp))
+
+                    // App Metadata Card & Links
+                    Surface(
+                        shape = RoundedCornerShape(16.dp),
+                        color = MaterialTheme.colorScheme.surfaceContainerHigh.copy(alpha = 0.5f),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Column(modifier = Modifier.padding(16.dp)) {
                             Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Icon(
-                                    imageVector = Icons.Outlined.VolunteerActivism,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(22.dp)
+                                Text(
+                                    text = s.appVersionLabel,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
-                                Spacer(Modifier.width(16.dp))
-                                Column(modifier = Modifier.weight(1f)) {
-                                    Text(
-                                        text = s.famwakeTitle,
-                                        style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold),
-                                        color = MaterialTheme.colorScheme.onSurface
-                                    )
-                                    Spacer(Modifier.height(2.dp))
-                                    Text(
-                                        text = s.famwakeDesc,
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
-                                }
-                                Spacer(Modifier.width(8.dp))
-                                Icon(
-                                    imageVector = Icons.AutoMirrored.Outlined.OpenInNew,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-                                    modifier = Modifier.size(16.dp)
+                                Text(
+                                    text = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
+                                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                            }
+
+                            Spacer(Modifier.height(8.dp))
+                            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f))
+                            Spacer(Modifier.height(8.dp))
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = "Flavor",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                                Text(
+                                    text = BuildConfig.FLAVOR.uppercase(),
+                                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
+                                    color = MaterialTheme.colorScheme.primary
                                 )
                             }
                         }
                     }
 
+                    Spacer(Modifier.height(16.dp))
+
+                    // Privacy Policy link
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                try {
+                                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.URL_PRIVACY_POLICY)))
+                                } catch (_: Exception) {}
+                            }
+                            .padding(vertical = 4.dp),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = s.privacyPolicyTitle,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                        Spacer(Modifier.width(4.dp))
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Outlined.OpenInNew,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(12.dp)
+                        )
+                    }
+
+                    Spacer(Modifier.height(4.dp))
+
+                    Text(
+                        text = s.copyright,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
                 }
             }
         }
-    }
-}
-
-@Composable
-fun AppFooter(
-    s: Strings.AppStrings,
-    modifier: Modifier = Modifier
-) {
-    val context = LocalContext.current
-    Column(
-        modifier = modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "MapFlip v${BuildConfig.VERSION_NAME}",
-            style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
-        )
-        Spacer(Modifier.height(4.dp))
-        Text(
-            text = s.copyright,
-            style = MaterialTheme.typography.bodySmall.copy(textDirection = TextDirection.Ltr),
-            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
-            modifier = Modifier.clickable {
-                try {
-                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.URL_NOTTHOFF)))
-                } catch (_: Exception) {}
-            }
-        )
-        Spacer(Modifier.height(4.dp))
-        Text(
-            text = s.privacyPolicyTitle,
-            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Medium),
-            color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.clickable {
-                try {
-                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.URL_PRIVACY_POLICY)))
-                } catch (_: Exception) {}
-            }
-        )
     }
 }
 
@@ -404,21 +479,21 @@ private fun SettingsItem(
 ) {
     Surface(
         onClick = onClick,
-        shape = RoundedCornerShape(14.dp),
-        color = MaterialTheme.colorScheme.surfaceContainer,
+        shape = RoundedCornerShape(16.dp),
+        color = MaterialTheme.colorScheme.surfaceContainerHigh,
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 14.dp),
+                .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(22.dp)
+                modifier = Modifier.size(24.dp)
             )
             Spacer(Modifier.width(16.dp))
             Column(modifier = Modifier.weight(1f)) {
@@ -427,17 +502,16 @@ private fun SettingsItem(
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold),
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                Spacer(Modifier.height(2.dp))
                 Text(
                     text = subtitle,
-                    style = MaterialTheme.typography.bodySmall,
+                    style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             Icon(
                 imageVector = Icons.AutoMirrored.Outlined.OpenInNew,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                 modifier = Modifier.size(16.dp)
             )
         }

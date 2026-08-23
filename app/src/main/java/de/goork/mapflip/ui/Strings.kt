@@ -83,7 +83,9 @@ object Strings {
         val privacyPolicyTitle: String,
         val sectionGeneral: String,
         val sectionAbout: String,
-        val quickGuideTitle: String
+        val quickGuideTitle: String,
+        val sectionTargetApp: String = "Navigation App",
+        val targetAppAlwaysAsk: String = "Always ask (System Picker)"
     )
 
     fun resolveLanguage(savedPref: String?): String {
@@ -177,7 +179,9 @@ object Strings {
         privacyPolicyTitle = "Datenschutzerklärung",
         sectionGeneral = "Allgemein",
         sectionAbout = "Über die App",
-        quickGuideTitle = "Kurzanleitung"
+        quickGuideTitle = "Kurzanleitung",
+        sectionTargetApp = "Ziel-Navigations-App",
+        targetAppAlwaysAsk = "Immer fragen (Systemauswahl)"
     )
 
     val EN = AppStrings(
