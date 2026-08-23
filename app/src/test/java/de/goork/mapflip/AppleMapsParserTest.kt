@@ -12,7 +12,7 @@ class AppleMapsParserTest {
 
     @Test
     fun `converts coordinates`() {
-        assertEquals("geo:48.8584,2.2945",
+        assertEquals("geo:48.8584,2.2945?q=48.8584,2.2945",
             AppleMapsParser.convert("https://maps.apple.com/?ll=48.8584,2.2945"))
     }
 
@@ -26,6 +26,12 @@ class AppleMapsParserTest {
     fun `converts address`() {
         assertEquals("geo:0,0?q=Berlin",
             AppleMapsParser.convert("https://maps.apple.com/?address=Berlin"))
+    }
+
+    @Test
+    fun `converts auid parameter as search query`() {
+        assertEquals("geo:0,0?q=1234567890",
+            AppleMapsParser.convert("https://maps.apple.com/?auid=1234567890"))
     }
 
     @Test
@@ -73,7 +79,7 @@ class AppleMapsParserTest {
 
     @Test
     fun `converts pt coordinate parameter`() {
-        assertEquals("geo:52.5200,13.4050",
+        assertEquals("geo:52.5200,13.4050?q=52.5200,13.4050",
             AppleMapsParser.convert("https://maps.apple.com/?pt=52.5200,13.4050"))
     }
 
@@ -106,7 +112,7 @@ class AppleMapsParserTest {
 
     @Test
     fun `cleans spaces inside coordinates`() {
-        assertEquals("geo:52.5200,13.4050",
+        assertEquals("geo:52.5200,13.4050?q=52.5200,13.4050",
             AppleMapsParser.convert("https://maps.apple.com/?ll=%2052.5200,%2013.4050%20"))
     }
 
@@ -149,7 +155,7 @@ class AppleMapsParserTest {
 
     @Test
     fun `converts center and coordinate parameters`() {
-        assertEquals("geo:40.7128,-74.0060",
+        assertEquals("geo:40.7128,-74.0060?q=40.7128,-74.0060",
             AppleMapsParser.convert("https://maps.apple.com/?coordinate=40.7128,-74.0060"))
         assertEquals("geo:48.8566,2.3522?q=Paris",
             AppleMapsParser.convert("https://maps.apple.com/?center=48.8566,2.3522&q=Paris"))

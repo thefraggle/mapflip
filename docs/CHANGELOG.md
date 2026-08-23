@@ -1,3 +1,8 @@
+## 1.2.6
+- Höhere Zuverlässigkeit: Verbesserte Übergabe von Koordinaten und Apple-ID-Standorten an Navigations-Apps
+- Barrierefreiheit & Bedienung: Optimierte Sprachausgabe (TalkBack) und vergrößerte Touch-Flächen
+- Architektur-Modernisierung: Reaktives Einstellungs- und Statusmanagement im Hintergrund
+
 ## 1.2.5
 - Individuelles Erscheinungsbild: Wahl zwischen Systemeinstellung, Hell- und Dunkelmodus in den Einstellungen
 - Aufgeräumterer Startbildschirm: Link-Tester lässt sich bei Bedarf ein- und ausklappen

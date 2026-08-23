@@ -105,12 +105,13 @@ object AppleMapsParser {
                 return if (!searchQuery.isNullOrBlank()) {
                     "geo:$coords?q=${encode(searchQuery)}"
                 } else {
-                    "geo:$coords"
+                    // Include coordinates as search query parameter so third-party map apps drop a pin marker reliably
+                    "geo:$coords?q=$coords"
                 }
             }
 
-            // 5. Search, address, near, place name or auid queries
-            val searchQuery = params["q"] ?: params["address"] ?: params["near"] ?: params["name"]
+            // 5. Search, address, near, place name, auid or lsp queries
+            val searchQuery = params["q"] ?: params["address"] ?: params["near"] ?: params["name"] ?: params["auid"]
             if (!searchQuery.isNullOrBlank()) {
                 return "geo:0,0?q=${encode(searchQuery)}"
             }

@@ -1,3 +1,8 @@
+## 1.2.6
+- Improved Reliability: Enhanced coordinate pin dropping and Apple ID location parsing for navigation apps
+- Accessibility & Ergonomics: Optimized TalkBack screen reader support and larger touch targets
+- Architecture Modernization: Centralized reactive preferences and state management
+
 ## 1.2.5
 - Appearance Theme Option: Choose between System default, Light, and Dark mode in Settings
 - Cleaner Home Screen: In-app Link Tester is now collapsible to keep the layout tidy

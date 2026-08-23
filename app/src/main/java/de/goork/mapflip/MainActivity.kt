@@ -5,15 +5,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import de.goork.mapflip.data.PreferencesRepository
 import de.goork.mapflip.ui.MainScreen
 import de.goork.mapflip.ui.theme.MapFlipTheme
-
-import android.content.Context
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.DisposableEffect
 
 class MainActivity : ComponentActivity() {
     private val showPauseDialogState = mutableStateOf(false)
@@ -22,26 +20,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         handleIntent(intent)
+
+        val repository = PreferencesRepository.getInstance(applicationContext)
+
         setContent {
-            val prefs = remember { getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE) }
-            var themePref by remember {
-                mutableStateOf(prefs.getString(AppConstants.PREFS_KEY_THEME, "system") ?: "system")
-            }
+            val userPreferences by repository.preferences.collectAsStateWithLifecycle()
 
-            DisposableEffect(Unit) {
-                val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-                    if (key == AppConstants.PREFS_KEY_THEME) {
-                        themePref = prefs.getString(AppConstants.PREFS_KEY_THEME, "system") ?: "system"
-                    }
-                }
-                prefs.registerOnSharedPreferenceChangeListener(listener)
-                onDispose {
-                    prefs.unregisterOnSharedPreferenceChangeListener(listener)
-                }
-            }
-
-            MapFlipTheme(themePref = themePref) {
+            MapFlipTheme(themePref = userPreferences.theme) {
                 MainScreen(
+                    repository = repository,
                     showPauseDialogDefault = showPauseDialogState.value,
                     onPauseDialogDismissed = { showPauseDialogState.value = false }
                 )

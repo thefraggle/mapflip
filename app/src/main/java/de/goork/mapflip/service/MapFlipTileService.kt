@@ -10,10 +10,13 @@ import androidx.annotation.RequiresApi
 import de.goork.mapflip.AppConstants
 import de.goork.mapflip.MainActivity
 import de.goork.mapflip.PauseHelper
+import de.goork.mapflip.data.PreferencesRepository
 import de.goork.mapflip.ui.Strings
 
 @RequiresApi(Build.VERSION_CODES.N)
 class MapFlipTileService : TileService() {
+
+    private val repository by lazy { PreferencesRepository.getInstance(applicationContext) }
 
     override fun onStartListening() {
         super.onStartListening()
@@ -22,13 +25,9 @@ class MapFlipTileService : TileService() {
 
     override fun onClick() {
         super.onClick()
-        val currentlyPaused = PauseHelper.isCurrentlyPaused(this)
-        val prefs = getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE)
+        val currentlyPaused = repository.isCurrentlyPaused()
         if (currentlyPaused) {
-            prefs.edit()
-                .putBoolean(AppConstants.PREFS_KEY_PAUSED, false)
-                .putLong(PauseHelper.PREFS_KEY_PAUSED_UNTIL, 0L)
-                .apply()
+            repository.unpause()
             updateTileState()
         } else {
             val intent = Intent(this, MainActivity::class.java).apply {
@@ -52,9 +51,8 @@ class MapFlipTileService : TileService() {
 
     private fun updateTileState() {
         val tile = qsTile ?: return
-        val currentlyPaused = PauseHelper.isCurrentlyPaused(this)
-        val prefs = getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE)
-        val langPref = prefs.getString(AppConstants.PREFS_KEY_LANG, "auto") ?: "auto"
+        val currentlyPaused = repository.isCurrentlyPaused()
+        val langPref = repository.getLanguage()
         val langCode = Strings.resolveLanguage(langPref)
         val s = Strings.getStrings(langCode)
 
@@ -62,7 +60,7 @@ class MapFlipTileService : TileService() {
             tile.state = Tile.STATE_INACTIVE
             tile.label = s.headline
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                val pausedUntil = prefs.getLong(PauseHelper.PREFS_KEY_PAUSED_UNTIL, 0L)
+                val pausedUntil = repository.preferences.value.pausedUntilTimestamp
                 if (pausedUntil > 0L) {
                     val timeStr = android.text.format.DateFormat.getTimeFormat(this).format(java.util.Date(pausedUntil))
                     tile.subtitle = "${s.statusPaused} ($timeStr)"

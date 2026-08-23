@@ -1,6 +1,5 @@
 package de.goork.mapflip.ui
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.clickable
@@ -16,9 +15,7 @@ import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.LightMode
-import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Palette
-import androidx.compose.material.icons.outlined.Policy
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material.icons.outlined.VolunteerActivism
 import androidx.compose.material3.*

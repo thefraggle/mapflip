@@ -8,7 +8,6 @@ import android.os.Build
 import android.provider.Settings
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.*
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -24,17 +23,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
-import androidx.compose.material.icons.outlined.CheckCircle
-import androidx.compose.material.icons.outlined.ContentPaste
-import androidx.compose.material.icons.outlined.ErrorOutline
 import androidx.compose.material.icons.outlined.ExpandLess
 import androidx.compose.material.icons.outlined.ExpandMore
-import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.Lock
-import androidx.compose.material.icons.outlined.MoreVert
-import androidx.compose.material.icons.outlined.OpenInNew
-import androidx.compose.material.icons.outlined.PauseCircleOutline
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Tune
 import androidx.compose.material.icons.rounded.Settings
@@ -43,12 +34,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDirection
@@ -58,32 +52,27 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import de.goork.mapflip.AppConstants
 import de.goork.mapflip.AppleMapsParser
-import de.goork.mapflip.PauseHelper
+import de.goork.mapflip.data.PreferencesRepository
 import de.goork.mapflip.ui.theme.Green500
 import de.goork.mapflip.ui.theme.Red500
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
+    repository: PreferencesRepository,
     showPauseDialogDefault: Boolean = false,
     onPauseDialogDismissed: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val haptic = LocalHapticFeedback.current
-    val prefs = remember { context.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE) }
+    val userPreferences by repository.preferences.collectAsStateWithLifecycle()
 
-    var langPref by remember {
-        mutableStateOf(prefs.getString(AppConstants.PREFS_KEY_LANG, "auto") ?: "auto")
-    }
-    var themePref by remember {
-        mutableStateOf(prefs.getString(AppConstants.PREFS_KEY_THEME, "system") ?: "system")
-    }
-    val activeLangCode = Strings.resolveLanguage(langPref)
+    val activeLangCode = Strings.resolveLanguage(userPreferences.language)
     val s = Strings.getStrings(activeLangCode)
 
-    var isPaused by remember { mutableStateOf(PauseHelper.isCurrentlyPaused(context)) }
     var showPauseSheet by remember { mutableStateOf(false) }
     var showSettingsSheet by remember { mutableStateOf(false) }
     var isSetupGuideExpanded by remember { mutableStateOf(false) }
@@ -100,33 +89,12 @@ fun MainScreen(
         }
     }
 
-    DisposableEffect(context) {
-        val listener = android.content.SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-            when (key) {
-                AppConstants.PREFS_KEY_PAUSED, PauseHelper.PREFS_KEY_PAUSED_UNTIL -> {
-                    isPaused = PauseHelper.isCurrentlyPaused(context)
-                }
-                AppConstants.PREFS_KEY_THEME -> {
-                    themePref = prefs.getString(AppConstants.PREFS_KEY_THEME, "system") ?: "system"
-                }
-                AppConstants.PREFS_KEY_LANG -> {
-                    langPref = prefs.getString(AppConstants.PREFS_KEY_LANG, "auto") ?: "auto"
-                }
-            }
-        }
-        prefs.registerOnSharedPreferenceChangeListener(listener)
-        onDispose {
-            prefs.unregisterOnSharedPreferenceChangeListener(listener)
-        }
-    }
-
     var linksActive by remember { mutableStateOf<Boolean?>(null) }
     val lifecycleOwner = LocalLifecycleOwner.current
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
                 linksActive = checkLinksEnabled(context)
-                isPaused = PauseHelper.isCurrentlyPaused(context)
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
@@ -217,18 +185,14 @@ fun MainScreen(
                     // Main Status & Control Card
                     StatusAndControlCard(
                         s = s,
-                        isPaused = isPaused,
+                        isPaused = userPreferences.isPaused,
                         linksActive = linksActive,
                         onPauseToggle = { checked ->
                             haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                             if (checked) {
                                 showPauseSheet = true
                             } else {
-                                isPaused = false
-                                prefs.edit()
-                                    .putBoolean(AppConstants.PREFS_KEY_PAUSED, false)
-                                    .putLong(PauseHelper.PREFS_KEY_PAUSED_UNTIL, 0L)
-                                    .apply()
+                                repository.unpause()
                             }
                         }
                     )
@@ -299,6 +263,11 @@ fun MainScreen(
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
+                                    .defaultMinSize(minHeight = 48.dp)
+                                    .semantics {
+                                        role = Role.Button
+                                        stateDescription = if (isGuideVisible) "Expanded" else "Collapsed"
+                                    }
                                     .clickable {
                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                         isSetupGuideExpanded = !isGuideVisible
@@ -313,7 +282,7 @@ fun MainScreen(
                                 )
                                 Icon(
                                     imageVector = if (isGuideVisible) Icons.Outlined.ExpandLess else Icons.Outlined.ExpandMore,
-                                    contentDescription = null,
+                                    contentDescription = if (isGuideVisible) s.quickGuideTitle else s.setupTitle,
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
@@ -353,6 +322,11 @@ fun MainScreen(
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
+                                    .defaultMinSize(minHeight = 48.dp)
+                                    .semantics {
+                                        role = Role.Button
+                                        stateDescription = if (isLinkTesterExpanded) "Expanded" else "Collapsed"
+                                    }
                                     .clickable {
                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                         isLinkTesterExpanded = !isLinkTesterExpanded
@@ -376,7 +350,7 @@ fun MainScreen(
                                 }
                                 Icon(
                                     imageVector = if (isLinkTesterExpanded) Icons.Outlined.ExpandLess else Icons.Outlined.ExpandMore,
-                                    contentDescription = null,
+                                    contentDescription = s.testLinkTitle,
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
@@ -521,13 +495,12 @@ fun MainScreen(
         if (showPauseSheet) {
             PauseBottomSheet(
                 s = s,
+                repository = repository,
                 onDismiss = {
                     showPauseSheet = false
-                    isPaused = PauseHelper.isCurrentlyPaused(context)
                     onPauseDialogDismissed()
                 },
                 onPauseConfigured = {
-                    isPaused = true
                     showPauseSheet = false
                     onPauseDialogDismissed()
                 }
@@ -538,15 +511,13 @@ fun MainScreen(
         if (showSettingsSheet) {
             SettingsSheet(
                 s = s,
-                currentLangCode = langPref,
-                currentThemePref = themePref,
+                currentLangCode = userPreferences.language,
+                currentThemePref = userPreferences.theme,
                 onLanguageSelected = { newLang ->
-                    langPref = newLang
-                    prefs.edit().putString(AppConstants.PREFS_KEY_LANG, newLang).apply()
+                    repository.setLanguage(newLang)
                 },
                 onThemeSelected = { newTheme ->
-                    themePref = newTheme
-                    prefs.edit().putString(AppConstants.PREFS_KEY_THEME, newTheme).apply()
+                    repository.setTheme(newTheme)
                 },
                 onDismiss = { showSettingsSheet = false }
             )

@@ -1,6 +1,5 @@
 package de.goork.mapflip.ui
 
-import android.content.Context
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,12 +23,10 @@ import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import de.goork.mapflip.AppConstants
-import de.goork.mapflip.PauseHelper
+import de.goork.mapflip.data.PreferencesRepository
 
 private data class PauseOption(
     val label: String,
@@ -41,12 +38,11 @@ private data class PauseOption(
 @Composable
 fun PauseBottomSheet(
     s: Strings.AppStrings,
+    repository: PreferencesRepository,
     onDismiss: () -> Unit,
     onPauseConfigured: () -> Unit
 ) {
-    val context = LocalContext.current
     val haptic = LocalHapticFeedback.current
-    val prefs = remember { context.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE) }
     val focusRequester = remember { FocusRequester() }
 
     ModalBottomSheet(
@@ -96,15 +92,11 @@ fun PauseBottomSheet(
                 Surface(
                     onClick = {
                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        val untilTimestamp = when (option.durationMs) {
-                            0L -> 0L
-                            -1L -> PauseHelper.getTomorrowMorningTimestamp()
-                            else -> System.currentTimeMillis() + option.durationMs
+                        when (option.durationMs) {
+                            0L -> repository.pauseIndefinitely()
+                            -1L -> repository.pauseUntilTomorrowMorning()
+                            else -> repository.pauseForDuration(option.durationMs)
                         }
-                        prefs.edit()
-                            .putBoolean(AppConstants.PREFS_KEY_PAUSED, true)
-                            .putLong(PauseHelper.PREFS_KEY_PAUSED_UNTIL, untilTimestamp)
-                            .apply()
                         onPauseConfigured()
                     },
                     shape = RoundedCornerShape(14.dp),
