@@ -1,3 +1,8 @@
+## 1.2.7
+- Choose Your Navigation App: Select your preferred maps app in Settings (e.g. Google Maps, Waze, Organic Maps, OsmAnd) or choose to be asked every time
+- More Map Services: Now also seamlessly handles links from Bing Maps, OpenStreetMap, and Yandex Maps
+- Refined Look: Streamlined settings layout and updated setup guide
+
 ## 1.2.6
 - Improved Reliability: Enhanced coordinate pin dropping and Apple ID location parsing for navigation apps
 - Accessibility & Ergonomics: Optimized TalkBack screen reader support and larger touch targets

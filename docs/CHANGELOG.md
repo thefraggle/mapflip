@@ -1,3 +1,8 @@
+## 1.2.7
+- Freie Wahl der Navigations-App: Wähle in den Einstellungen deine bevorzugte Karten-App (z. B. Google Maps, Waze, Organic Maps, OsmAnd) oder lass dich jedes Mal fragen
+- Mehr Kartendienste: Unterstützt neben Apple Maps jetzt auch Links von Bing Maps, OpenStreetMap und Yandex Maps
+- Einheitliches Design: Aufgeräumte Einstellungen und aktualisierte Kurzanleitung
+
 ## 1.2.6
 - Höhere Zuverlässigkeit: Verbesserte Übergabe von Koordinaten und Apple-ID-Standorten an Navigations-Apps
 - Barrierefreiheit & Bedienung: Optimierte Sprachausgabe (TalkBack) und vergrößerte Touch-Flächen
