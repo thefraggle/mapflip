@@ -86,7 +86,22 @@ object Strings {
         val quickGuideTitle: String,
         val sectionTargetApp: String = "Navigation App",
         val targetAppAlwaysAsk: String = "Always ask (System Picker)"
-    )
+    ) {
+        fun testButtonLabel(targetApp: de.goork.mapflip.navigation.TargetNavigationApp): String {
+            val appName = when (targetApp) {
+                de.goork.mapflip.navigation.TargetNavigationApp.GOOGLE_MAPS -> "Google Maps"
+                de.goork.mapflip.navigation.TargetNavigationApp.WAZE -> "Waze"
+                de.goork.mapflip.navigation.TargetNavigationApp.ORGANIC_MAPS -> "Organic Maps"
+                de.goork.mapflip.navigation.TargetNavigationApp.OSMAND -> "OsmAnd"
+                de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> if (sectionTargetApp.isNotBlank()) sectionTargetApp else "Navigation App"
+            }
+            return try {
+                btnTestLink.format(appName)
+            } catch (_: Exception) {
+                "Test ($appName)"
+            }
+        }
+    }
 
     fun resolveLanguage(savedPref: String?): String {
         if (!savedPref.isNullOrBlank() && savedPref != "auto") {
@@ -158,7 +173,7 @@ object Strings {
         testLinkTitle = "Link-Tester & Zwischenablage",
         testLinkHint = "Karten-Link hier eingeben (Apple, Bing, OSM, Yandex)...",
         btnPasteClipboard = "Einfügen",
-        btnTestLink = "In Google Maps testen",
+        btnTestLink = "In %s testen",
         testLinkConvertedLabel = "Umgewandelte Ziel-URI:",
         pauseIndefinitely = "Unbegrenzt",
         pause1Hour = "1 Stunde",
@@ -213,7 +228,7 @@ object Strings {
         testLinkTitle = "Link Tester & Clipboard",
         testLinkHint = "Enter map link here (Apple, Bing, OSM, Yandex)...",
         btnPasteClipboard = "Paste",
-        btnTestLink = "Test in Google Maps",
+        btnTestLink = "Test in %s",
         testLinkConvertedLabel = "Converted Target URI:",
         pauseIndefinitely = "Indefinitely",
         pause1Hour = "1 Hour",
@@ -263,7 +278,7 @@ object Strings {
         testLinkTitle = "Link-tester & udklipsholder",
         testLinkHint = "Indtast Apple Maps-link her...",
         btnPasteClipboard = "Indsæt",
-        btnTestLink = "Test i Google Maps",
+        btnTestLink = "Test i %s",
         testLinkConvertedLabel = "Konverteret mål-URI:",
         pauseIndefinitely = "Ubegrænset",
         pause1Hour = "1 time",
@@ -313,7 +328,7 @@ object Strings {
         testLinkTitle = "Testeur de liens & presse-papiers",
         testLinkHint = "Entrez le lien Apple Maps ici...",
         btnPasteClipboard = "Coller",
-        btnTestLink = "Tester dans Google Maps",
+        btnTestLink = "Tester dans %s",
         testLinkConvertedLabel = "URI cible convertie :",
         pauseIndefinitely = "Indéfiniment",
         pause1Hour = "1 heure",
@@ -363,7 +378,7 @@ object Strings {
         testLinkTitle = "Tester di link e appunti",
         testLinkHint = "Inserisci qui il link di Apple Maps...",
         btnPasteClipboard = "Incolla",
-        btnTestLink = "Testa in Google Maps",
+        btnTestLink = "Testa in %s",
         testLinkConvertedLabel = "URI di destinazione convertito:",
         pauseIndefinitely = "A tempo indeterminato",
         pause1Hour = "1 ora",
@@ -413,7 +428,7 @@ object Strings {
         testLinkTitle = "リンクテスター＆クリップボード",
         testLinkHint = "Apple Mapsリンクをここに入力...",
         btnPasteClipboard = "貼り付け",
-        btnTestLink = "Google Mapsでテスト",
+        btnTestLink = "%sでテスト",
         testLinkConvertedLabel = "変換されたターゲットURI:",
         pauseIndefinitely = "無制限",
         pause1Hour = "1時間",
@@ -463,7 +478,7 @@ object Strings {
         testLinkTitle = "Link-tester & klembord",
         testLinkHint = "Voer hier Apple Maps-link in...",
         btnPasteClipboard = "Plakken",
-        btnTestLink = "Testen in Google Maps",
+        btnTestLink = "Testen in %s",
         testLinkConvertedLabel = "Geconverteerde doel-URI:",
         pauseIndefinitely = "Onbeperkt",
         pause1Hour = "1 uur",
@@ -513,7 +528,7 @@ object Strings {
         testLinkTitle = "Lenketester & utklippstavle",
         testLinkHint = "Skriv inn Apple Maps-lenke her...",
         btnPasteClipboard = "Lim inn",
-        btnTestLink = "Test i Google Maps",
+        btnTestLink = "Test i %s",
         testLinkConvertedLabel = "Konvertert mål-URI:",
         pauseIndefinitely = "Ubegrenset",
         pause1Hour = "1 time",
@@ -563,7 +578,7 @@ object Strings {
         testLinkTitle = "Tester linków i schowek",
         testLinkHint = "Wpisz tutaj link Apple Maps...",
         btnPasteClipboard = "Wklej",
-        btnTestLink = "Testuj w Google Maps",
+        btnTestLink = "Testuj w %s",
         testLinkConvertedLabel = "Przekonwertowany URI docelowy:",
         pauseIndefinitely = "Na czas nieokreślony",
         pause1Hour = "1 godzina",
@@ -613,7 +628,7 @@ object Strings {
         testLinkTitle = "Testador de links e área de transferência",
         testLinkHint = "Digite o link do Apple Maps aqui...",
         btnPasteClipboard = "Colar",
-        btnTestLink = "Testar no Google Maps",
+        btnTestLink = "Testar no %s",
         testLinkConvertedLabel = "URI de destino convertido:",
         pauseIndefinitely = "Indefinidamente",
         pause1Hour = "1 hora",
@@ -659,11 +674,11 @@ object Strings {
         selectLanguageTitle = "Välj språk",
         systemLanguageAuto = "Systemstandard (Automatisk)",
         btnRateApp = "Betygsätt appen",
-        privacyNote = "100% integritetsvänlig: alla omdirigeringar sker lokalt. Ingen datainsamling.",
+        privacyNote = "100% integritetsvänlig: alla omdirigeringar sker lokalt. Ingen dataindsamling.",
         testLinkTitle = "Länktester & urklipp",
         testLinkHint = "Ange Apple Maps-länk här...",
         btnPasteClipboard = "Klistra in",
-        btnTestLink = "Testa i Google Maps",
+        btnTestLink = "Testa i %s",
         testLinkConvertedLabel = "Konverterad mål-URI:",
         pauseIndefinitely = "Tills vidare",
         pause1Hour = "1 timme",
@@ -713,7 +728,7 @@ object Strings {
         testLinkTitle = "Probador de enlaces y portapapeles",
         testLinkHint = "Introduce aquí el enlace de Apple Maps...",
         btnPasteClipboard = "Pegar",
-        btnTestLink = "Probar en Google Maps",
+        btnTestLink = "Probar en %s",
         testLinkConvertedLabel = "URI de destino convertida:",
         pauseIndefinitely = "Indefinidamente",
         pause1Hour = "1 hora",
@@ -763,7 +778,7 @@ object Strings {
         testLinkTitle = "Bağlantı Test Edici ve Pano",
         testLinkHint = "Buraya Apple Maps bağlantısını girin...",
         btnPasteClipboard = "Yapıştır",
-        btnTestLink = "Google Maps'te Test Et",
+        btnTestLink = "%s'te Test Et",
         testLinkConvertedLabel = "Dönüştürülen Hedef URI:",
         pauseIndefinitely = "Süresiz",
         pause1Hour = "1 Saat",
@@ -813,7 +828,7 @@ object Strings {
         testLinkTitle = "링크 테스터 및 클립보드",
         testLinkHint = "Apple Maps 링크를 여기에 입력하세요...",
         btnPasteClipboard = "붙여넣기",
-        btnTestLink = "Google Maps에서 테스트",
+        btnTestLink = "%s에서 테스트",
         testLinkConvertedLabel = "변환된 대상 URI:",
         pauseIndefinitely = "무기한",
         pause1Hour = "1시간",
@@ -863,7 +878,7 @@ object Strings {
         testLinkTitle = "链接测试与剪贴板",
         testLinkHint = "在此输入 Apple Maps 链接...",
         btnPasteClipboard = "粘贴",
-        btnTestLink = "在 Google Maps 中测试",
+        btnTestLink = "在 %s 中测试",
         testLinkConvertedLabel = "转换后的目标 URI:",
         pauseIndefinitely = "无限期",
         pause1Hour = "1 小时",
@@ -913,7 +928,7 @@ object Strings {
         testLinkTitle = "連結測試與剪貼簿",
         testLinkHint = "在此輸入 Apple Maps 連結...",
         btnPasteClipboard = "貼上",
-        btnTestLink = "在 Google Maps 中測試",
+        btnTestLink = "在 %s 中測試",
         testLinkConvertedLabel = "轉換後的目標 URI:",
         pauseIndefinitely = "無限期",
         pause1Hour = "1 小時",
@@ -963,7 +978,7 @@ object Strings {
         testLinkTitle = "اختبار الروابط والحافظة",
         testLinkHint = "أدخل رابط Apple Maps هنا...",
         btnPasteClipboard = "لصق",
-        btnTestLink = "اختبار في Google Maps",
+        btnTestLink = "اختبار في %s",
         testLinkConvertedLabel = "الرابط الهدف المحول:",
         pauseIndefinitely = "إلى أجل غير مسمى",
         pause1Hour = "ساعة واحدة",
@@ -1013,7 +1028,7 @@ object Strings {
         testLinkTitle = "Тестер ссылок и буфер обмена",
         testLinkHint = "Введите ссылку Apple Maps здесь...",
         btnPasteClipboard = "Вставить",
-        btnTestLink = "Проверить в Google Maps",
+        btnTestLink = "Проверить в %s",
         testLinkConvertedLabel = "Преобразованный URI:",
         pauseIndefinitely = "Бессрочно",
         pause1Hour = "1 час",
@@ -1063,7 +1078,7 @@ object Strings {
         testLinkTitle = "Penguji Tautan & Papan Klip",
         testLinkHint = "Masukkan tautan Apple Maps di sini...",
         btnPasteClipboard = "Tempel",
-        btnTestLink = "Uji di Google Maps",
+        btnTestLink = "Uji di %s",
         testLinkConvertedLabel = "URI Tujuan Terkonversi:",
         pauseIndefinitely = "Tanpa batas",
         pause1Hour = "1 Jam",

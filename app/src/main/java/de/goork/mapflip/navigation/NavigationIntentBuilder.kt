@@ -1,5 +1,6 @@
 package de.goork.mapflip.navigation
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import de.goork.mapflip.parser.ParsedLocation
@@ -8,13 +9,13 @@ import java.net.URLEncoder
 
 object NavigationIntentBuilder {
 
-    fun buildIntent(location: ParsedLocation, targetApp: TargetNavigationApp): Intent {
+    fun buildIntent(location: ParsedLocation, targetApp: TargetNavigationApp, context: Context? = null): Intent {
         return when (targetApp) {
             TargetNavigationApp.GOOGLE_MAPS -> buildGoogleMapsIntent(location)
             TargetNavigationApp.WAZE -> buildWazeIntent(location)
             TargetNavigationApp.ORGANIC_MAPS -> buildOrganicMapsIntent(location)
-            TargetNavigationApp.OSMAND -> buildOsmAndIntent(location)
-            TargetNavigationApp.SYSTEM_PICKER -> buildGenericGeoIntent(location)
+            TargetNavigationApp.OSMAND -> buildOsmAndIntent(location, context)
+            TargetNavigationApp.SYSTEM_PICKER -> buildGenericGeoIntent(location, createChooser = true)
         }
     }
 
@@ -120,9 +121,21 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildOsmAndIntent(location: ParsedLocation): Intent {
+    fun buildOsmAndIntent(location: ParsedLocation, context: Context? = null): Intent {
+        val pkg = if (context != null) {
+            val pm = context.packageManager
+            val isPlusInstalled = try {
+                pm.getPackageInfo("net.osmand.plus", 0)
+                true
+            } catch (_: Exception) {
+                false
+            }
+            if (isPlusInstalled) "net.osmand.plus" else TargetNavigationApp.OSMAND.packageName
+        } else {
+            TargetNavigationApp.OSMAND.packageName
+        }
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildOsmAndUriString(location))).apply {
-            setPackage(TargetNavigationApp.OSMAND.packageName)
+            if (pkg != null) setPackage(pkg)
         }
     }
 
@@ -146,8 +159,13 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildGenericGeoIntent(location: ParsedLocation): Intent {
-        return Intent(Intent.ACTION_VIEW, Uri.parse(buildGenericGeoUriString(location)))
+    fun buildGenericGeoIntent(location: ParsedLocation, createChooser: Boolean = false): Intent {
+        val baseIntent = Intent(Intent.ACTION_VIEW, Uri.parse(buildGenericGeoUriString(location)))
+        return if (createChooser) {
+            Intent.createChooser(baseIntent, null)
+        } else {
+            baseIntent
+        }
     }
 
     private fun formatCoord(value: Double): String {

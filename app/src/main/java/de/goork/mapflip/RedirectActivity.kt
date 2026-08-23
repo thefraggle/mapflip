@@ -34,19 +34,14 @@ class RedirectActivity : Activity() {
             } else {
                 val parsedLocation = UniversalMapParser.parse(mapUrl)
                 val targetApp = repository.getTargetApp()
-                val targetIntent = NavigationIntentBuilder.buildIntent(parsedLocation, targetApp)
+                val targetIntent = NavigationIntentBuilder.buildIntent(parsedLocation, targetApp, this).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
 
                 try {
                     startActivity(targetIntent)
                 } catch (_: ActivityNotFoundException) {
-                    // Fallback 1: Try generic geo intent (system picker)
-                    try {
-                        val genericIntent = NavigationIntentBuilder.buildGenericGeoIntent(parsedLocation)
-                        startActivity(genericIntent)
-                    } catch (_: Exception) {
-                        // Fallback 2: Forward to web browser
-                        forwardOriginalUrl(dataUri)
-                    }
+                    handleTargetNotFoundFallback(targetApp, dataUri, parsedLocation)
                 } catch (_: Exception) {
                     forwardOriginalUrl(dataUri)
                 }
@@ -55,6 +50,43 @@ class RedirectActivity : Activity() {
 
         finish()
         suppressTransitionAnimation()
+    }
+
+    private fun handleTargetNotFoundFallback(
+        targetApp: de.goork.mapflip.navigation.TargetNavigationApp,
+        dataUri: Uri,
+        parsedLocation: de.goork.mapflip.parser.ParsedLocation
+    ) {
+        when (targetApp) {
+            de.goork.mapflip.navigation.TargetNavigationApp.WAZE -> {
+                // Try Waze web fallback or browser
+                try {
+                    val wazeWebUri = Uri.parse("https://waze.com/ul?${dataUri.query ?: ""}")
+                    val fallbackIntent = Intent(Intent.ACTION_VIEW, wazeWebUri).apply {
+                        addCategory(Intent.CATEGORY_BROWSABLE)
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
+                    startActivity(fallbackIntent)
+                } catch (_: Exception) {
+                    forwardOriginalUrl(dataUri)
+                }
+            }
+            de.goork.mapflip.navigation.TargetNavigationApp.OSMAND -> {
+                // Try OsmAnd Plus if standard OsmAnd wasn't found
+                try {
+                    val plusIntent = Intent(Intent.ACTION_VIEW, Uri.parse(NavigationIntentBuilder.buildOsmAndUriString(parsedLocation))).apply {
+                        setPackage("net.osmand.plus")
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
+                    startActivity(plusIntent)
+                } catch (_: Exception) {
+                    forwardOriginalUrl(dataUri)
+                }
+            }
+            else -> {
+                forwardOriginalUrl(dataUri)
+            }
+        }
     }
 
     /**

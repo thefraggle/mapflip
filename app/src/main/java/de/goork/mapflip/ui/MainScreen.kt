@@ -421,10 +421,16 @@ fun MainScreen(
                                                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                                     try {
                                                         val loc = UniversalMapParser.parse(testInputUrl)
-                                                        val intent = NavigationIntentBuilder.buildIntent(loc, userPreferences.targetApp).apply {
+                                                        val intent = NavigationIntentBuilder.buildIntent(loc, userPreferences.targetApp, context).apply {
                                                             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                                         }
                                                         context.startActivity(intent)
+                                                    } catch (_: android.content.ActivityNotFoundException) {
+                                                        val appName = when (userPreferences.targetApp) {
+                                                            de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> s.sectionTargetApp
+                                                            else -> userPreferences.targetApp.displayName
+                                                        }
+                                                        Toast.makeText(context, "$appName is not installed", Toast.LENGTH_SHORT).show()
                                                     } catch (_: Exception) {
                                                         try {
                                                             val fallback = Intent(Intent.ACTION_VIEW, Uri.parse(convertedTargetUri)).apply {
@@ -446,7 +452,7 @@ fun MainScreen(
                                                 )
                                                 Spacer(Modifier.width(8.dp))
                                                 Text(
-                                                    text = s.btnTestLink,
+                                                    text = s.testButtonLabel(userPreferences.targetApp),
                                                     style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold)
                                                 )
                                             }
