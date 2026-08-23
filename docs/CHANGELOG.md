@@ -1,3 +1,8 @@
+## 1.2.8
+- Dynamischer Link-Tester: Test-Button passt seine Beschriftung jetzt automatisch an die gewählte Navigations-App an (z. B. „In Waze testen“, „In Organic Maps testen“, „In OsmAnd testen“)
+- Zuverlässiger Intent-Fallback: Behebt ein Problem, bei dem das Öffnen von Links zu Drittanbieter-Karten (wie Waze oder OsmAnd) fälschlicherweise auf Google Maps zurückfiel
+- Verbesserte Kompatibilität: Automatische Erkennung von Varianten installierter Karten-Apps (z. B. OsmAnd+)
+
 ## 1.2.7
 - Freie Wahl der Navigations-App: Wähle in den Einstellungen deine bevorzugte Karten-App (z. B. Google Maps, Waze, Organic Maps, OsmAnd) oder lass dich jedes Mal fragen
 - Mehr Kartendienste: Unterstützt neben Apple Maps jetzt auch Links von Bing Maps, OpenStreetMap und Yandex Maps
