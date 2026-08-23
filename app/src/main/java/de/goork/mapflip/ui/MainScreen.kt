@@ -701,6 +701,18 @@ private fun AppFooter(s: Strings.AppStrings) {
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Text(
+            text = "${s.headline} v${de.goork.mapflip.BuildConfig.VERSION_NAME}",
+            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Medium),
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Spacer(Modifier.height(2.dp))
+        Text(
+            text = s.copyright,
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Spacer(Modifier.height(2.dp))
         Row(
             modifier = Modifier
                 .clickable {
@@ -708,7 +720,7 @@ private fun AppFooter(s: Strings.AppStrings) {
                         context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.URL_PRIVACY_POLICY)))
                     } catch (_: Exception) {}
                 }
-                .padding(vertical = 4.dp),
+                .padding(vertical = 2.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -724,11 +736,5 @@ private fun AppFooter(s: Strings.AppStrings) {
                 modifier = Modifier.size(12.dp)
             )
         }
-        Spacer(Modifier.height(2.dp))
-        Text(
-            text = "${s.copyright} • ${s.appVersionLabel} ${de.goork.mapflip.BuildConfig.VERSION_NAME}",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
     }
 }
