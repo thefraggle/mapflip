@@ -10,14 +10,15 @@ MapFlip 是專為 Android 設計的 Apple Maps 連結轉換與自動重新導向
 
 ✨ 核心功能與隱私保護：
 • 🚗 路線導航與 Android Auto – 立即啟動 Google Maps 原生導航與路線指引
+• 🧭 自由選擇目標導航應用 – 支援在 Google Maps、Waze、Organic Maps、OsmAnd 或系統選擇器中開啟
 • 🔄 全自動無縫轉向 – 本機即時轉換，流暢順暢
 • 🔒 100% 離線與隱私安全 – 無網路權限（0 權限），無追蹤，無廣告
 • ⏸️ 快速設定控制磚 – 從下拉通知欄隨時暫停與恢復重定向
 • 💬 完美支援各類通訊軟體 – LINE、WhatsApp、Telegram、Signal、簡訊與電子郵件
 • 👻 隱形背景運作 – 零干擾，不耗電
 
-🗺️ 支援的連結格式：
-• Apple Maps 網址與搜尋關鍵字
+🗺️ 支援的連結格式與地圖服務：
+• Apple Maps 網址與搜尋關鍵字 (maps.apple.com)
+• OpenStreetMap (osm.org)、Bing Maps 與 Yandex Maps
 • GPS 經緯度座標與共享定位
-• 地址與地點標籤
-• 導航路徑與路線指引
+• 地址、地點標籤與導航路線

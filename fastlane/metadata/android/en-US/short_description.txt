@@ -1,1 +1,1 @@
-Open Apple Maps links & URLs in Google Maps. Fast Apple Maps converter.
+Redirect Apple Maps links to Google Maps. Fast Apple to Google map converter.

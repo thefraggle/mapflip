@@ -12,16 +12,17 @@ Of je nu een Apple Maps voor Android-oplossing zoekt of een automatische Apple n
 
 ✨ Functies & Privacy:
 • 🚗 Turn-by-turn navigatie & Android Auto – Start direct routebeschrijving in Google Maps
+• 🧭 Kies je navigatie-app – Open bestemmingen in Google Maps, Waze, Organic Maps, OsmAnd of systeemkiezer
 • 🔄 Automatische omleiding – Apple Maps naar Google Maps link-converter
 • 🔒 100% offline & privacyvriendelijk – Geen internetrechten (geen android.permission.INTERNET), geen tracking, geen advertenties
 • ⏸️ Pauzemodus & Snelle instellingen-tegel – Omleiding pauzeren vanuit de meldingenbalk
 • 💬 Universele app-compatibiliteit – Werkt naadloos met WhatsApp, Telegram, Signal, SMS, Slack en e-mail
 • 👻 Onzichtbare achtergrondwerking – Geen extra schermen, geen batterijverbruik
 
-🗺️ Ondersteunde linkformaten:
-• Apple Maps URL's & zoekopdrachten (bijv. "Eiffeltoren")
+🗺️ Ondersteunde linkformaten & diensten:
+• Apple Maps URL's & zoekopdrachten (maps.apple.com)
+• OpenStreetMap (osm.org), Bing Maps & Yandex Maps
 • GPS-coördinaten & gedeelde locaties
-• Adressen & locatiemarkeringen
-• Navigatie-aanwijzingen
+• Adressen, locatiemarkeringen & navigatieroutes
 
 MapFlip is gebouwd voor Android-gebruikers die regelmatig Apple Maps-links ontvangen van iPhone-gebruikers.

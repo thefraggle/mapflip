@@ -12,14 +12,15 @@ Android용 Apple Maps 솔루션이나 자동 변환기가 필요할 때, MapFlip
 
 ✨ 주요 기능 및 개인정보 보호:
 • 🚗 턴바이턴 내비게이션 & Android Auto – Google Maps 기본 내비게이션 즉시 실행
+• 🧭 원하는 내비게이션 앱 선택 – Google Maps, Waze, Organic Maps, OsmAnd 또는 시스템 선택기로 열기
 • 🔄 자동 지도 리디렉션 – 실시간 기기 내 링크 변환
 • 🔒 100% 오프라인 & 프라이버시 – 인터넷 권한 없음(0 Permissions), 추적 없음, 광고 없음
 • ⏸️ 일시중지 모드 & 빠른 설정 타일 – 알림창에서 언제든 간편하게 일시중지
 • 💬 모든 메신저 호환 – WhatsApp, Telegram, Signal, SMS, Slack, 카카오톡, 이메일 완벽 지원
 • 👻 보이지 않는 백그라운드 작동 – 불필요한 화면이나 배터리 소모 없음
 
-🗺️ 지원되는 링크 형식:
-• Apple Maps URL 및 검색어
+🗺️ 지원되는 링크 형식 및 서비스:
+• Apple Maps URL 및 검색어 (maps.apple.com)
+• OpenStreetMap (osm.org), Bing Maps 및 Yandex Maps
 • GPS 좌표 및 공유된 위치
-• 주소 및 장소 마커
-• 내비게이션 경로 및 길찾기
+• 주소, 장소 마커 및 내비게이션 경로

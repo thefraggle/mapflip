@@ -12,16 +12,17 @@ MapFlip, Android için nihai Apple Maps dönüştürücüsü ve bağlantı yönl
 
 ✨ Özellikler & Gizlilik:
 • 🚗 Adım adım navigasyon ve Android Auto – Google Maps'te anında rota ve canlı navigasyon başlatır
+• 🧭 Navigasyon uygulamanızı seçin – Hedefleri Google Maps, Waze, Organic Maps, OsmAnd veya sistem seçici ile açın
 • 🔄 Otomatik yönlendirme – Apple Maps'ten Google Maps'e bağlantı dönüştürücü
 • 🔒 %100 çevrimdışı ve gizli – Sıfır internet izni (android.permission.INTERNET izni yok), takip yok, reklam yok
 • ⏸️ Duraklatma modu ve Hızlı Ayarlar kutusu – Yönlendirmeyi bildirim panelinden duraklatın
 • 💬 Evrensel uygulama uyumluluğu – WhatsApp, Telegram, Signal, SMS, Slack ve e-posta ile sorunsuz çalışır
 • 👻 Arka planda görünmez çalışma – Ekstra ekran yok, sıfır pil tüketimi
 
-🗺️ Desteklenen bağlantı formatları:
-• Apple Maps URL'leri & arama sorguları (ör. "Eyfel Kulesi")
+🗺️ Desteklenen bağlantı formatları & servisler:
+• Apple Maps URL'leri & aramalar (maps.apple.com)
+• OpenStreetMap (osm.org), Bing Maps & Yandex Maps
 • GPS koordinatları & paylaşılan konumlar
-• Adresler & yer işaretleri
-• Navigasyon tarifleri
+• Adresler, yer işaretleri & navigasyon rotaları
 
 MapFlip, iPhone kullanıcılarından düzenli olarak Apple Maps bağlantısı alan Android kullanıcıları için tasarlanmıştır.

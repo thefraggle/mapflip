@@ -12,16 +12,17 @@ AndroidでApple Mapsリンクを開きたい方や、AppleからGoogle Mapsへ�
 
 ✨ 特徴＆プライバシー：
 • 🚗 音声ナビ＆Android Auto対応 – Google Mapsで即座にルート案内を開始
+• 🧭 ナビアプリの選択 – Google Maps、Waze、Organic Maps、OsmAnd、またはシステム選択で開く
 • 🔄 完全自動転送 – Apple MapsリンクをGoogle Mapsへ自動変換
 • 🔒 100%オフライン＆プライバシー保護 – インターネット権限なし（0 Permissions）、追跡なし、広告なし
 • ⏸️ 一時停止モード＆クイック設定タイル – 通知シェードからいつでも転送を一時停止可能
 • 💬 主要アプリに対応 – LINE、WhatsApp、Telegram、SMS、Slack、メールなど
 • 👻 バックグラウンドで透明動作 – 余計な画面なし、バッテリー消費ゼロ
 
-🗺️ 対応リンクフォーマット：
-• Apple Maps URL＆検索クエリ（例：「東京タワー」）
+🗺️ 対応リンク形式＆サービス：
+• Apple Maps URL＆検索クエリ (maps.apple.com)
+• OpenStreetMap (osm.org)、Bing Maps、Yandex Maps
 • GPS座標＆共有された位置情報
-• 住所＆スポットピン
-• ルート案内
+• 住所、スポットピン＆ルート案内
 
 MapFlipは、iPhoneユーザーからApple Mapsのリンクをよく受け取るAndroidユーザーのために開発されました。

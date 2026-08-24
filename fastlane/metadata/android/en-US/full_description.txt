@@ -12,16 +12,17 @@ Whether you need an Apple Maps for Android solution or an automatic Apple to Goo
 
 ✨ Features & Privacy:
 • 🚗 Turn-by-Turn Navigation & Android Auto – Instantly launches native routing in Google Maps
+• 🧭 Choose Your Navigation App – Open destinations in Google Maps, Waze, Organic Maps, OsmAnd, or system picker
 • 🔄 Automatic Apple to Google redirect – Instant on-device link converter
 • 🔒 100% Offline & Private – Zero internet permissions (no android.permission.INTERNET), zero tracking, zero ads
 • ⏸️ Pause Mode & Quick Settings Tile – Suspend redirect anytime directly from your notification shade
 • 💬 Universal App Compatibility – Works seamlessly with WhatsApp, Telegram, Signal, SMS, Slack, and email
 • 👻 Invisible Background Operation – No extra screens or battery drain
 
-🗺️ Supported link formats:
-• Apple Maps URLs & search queries (e.g. "Eiffel Tower")
+🗺️ Supported link formats & services:
+• Apple Maps URLs & search queries (maps.apple.com)
+• OpenStreetMap (osm.org), Bing Maps & Yandex Maps
 • GPS coordinates & shared locations
-• Addresses & place markers
-• Navigation directions
+• Addresses, place markers & navigation routes
 
 MapFlip was built for Android users who regularly receive Apple Maps links from iPhone users.
