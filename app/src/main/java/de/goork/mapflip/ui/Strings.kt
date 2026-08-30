@@ -303,7 +303,9 @@ object Strings {
         privacyPolicyTitle = "Privatlivspolitik",
         sectionGeneral = "Generelt",
         sectionAbout = "Om appen",
-        quickGuideTitle = "Startguide"
+        quickGuideTitle = "Startguide",
+        btnCopyLink = "Kopier link",
+        linkCopiedToast = "Link kopieret til udklipsholder"
     )
 
     val FR = EN.copy(
@@ -353,7 +355,9 @@ object Strings {
         privacyPolicyTitle = "Politique de confidentialité",
         sectionGeneral = "Général",
         sectionAbout = "À propos de l'application",
-        quickGuideTitle = "Guide de configuration"
+        quickGuideTitle = "Guide de configuration",
+        btnCopyLink = "Copier le lien",
+        linkCopiedToast = "Lien copié dans le presse-papiers"
     )
 
     val IT = EN.copy(
@@ -403,7 +407,9 @@ object Strings {
         privacyPolicyTitle = "Informativa sulla privacy",
         sectionGeneral = "Generale",
         sectionAbout = "Informazioni sull'app",
-        quickGuideTitle = "Guida introduttiva"
+        quickGuideTitle = "Guida introduttiva",
+        btnCopyLink = "Copia link",
+        linkCopiedToast = "Link copiato negli appunti"
     )
 
     val JA = EN.copy(
@@ -453,7 +459,9 @@ object Strings {
         privacyPolicyTitle = "プライバシーポリシー",
         sectionGeneral = "一般",
         sectionAbout = "アプリについて",
-        quickGuideTitle = "クイックガイド"
+        quickGuideTitle = "クイックガイド",
+        btnCopyLink = "リンクをコピー",
+        linkCopiedToast = "リンクをクリップボードにコピーしました"
     )
 
     val NL = EN.copy(
@@ -503,7 +511,9 @@ object Strings {
         privacyPolicyTitle = "Privacybeleid",
         sectionGeneral = "Algemeen",
         sectionAbout = "Over de app",
-        quickGuideTitle = "Snelstartgids"
+        quickGuideTitle = "Snelstartgids",
+        btnCopyLink = "Link kopiëren",
+        linkCopiedToast = "Link gekopieerd naar klembord"
     )
 
     val NO = EN.copy(
@@ -553,7 +563,9 @@ object Strings {
         privacyPolicyTitle = "Personvernerklæring",
         sectionGeneral = "Generelt",
         sectionAbout = "Om appen",
-        quickGuideTitle = "Hurtigveiledning"
+        quickGuideTitle = "Hurtigveiledning",
+        btnCopyLink = "Kopier lenke",
+        linkCopiedToast = "Lenke kopiert til utklippstavlen"
     )
 
     val PL = EN.copy(
@@ -603,7 +615,9 @@ object Strings {
         privacyPolicyTitle = "Polityka prywatności",
         sectionGeneral = "Ogólne",
         sectionAbout = "O aplikacji",
-        quickGuideTitle = "Szybki przewodnik"
+        quickGuideTitle = "Szybki przewodnik",
+        btnCopyLink = "Kopiuj link",
+        linkCopiedToast = "Link skopiowany do schowka"
     )
 
     val PT = EN.copy(
@@ -653,7 +667,9 @@ object Strings {
         privacyPolicyTitle = "Política de Privacidade",
         sectionGeneral = "Geral",
         sectionAbout = "Sobre a aplicação",
-        quickGuideTitle = "Guia rápido"
+        quickGuideTitle = "Guia rápido",
+        btnCopyLink = "Copiar link",
+        linkCopiedToast = "Link copiado para a área de transferência"
     )
 
     val SV = EN.copy(
@@ -697,13 +713,15 @@ object Strings {
         sectionTheme = "Utseende",
         themeSystem = "Systemstandard",
         themeLight = "Ljust",
-        themeDark = "Mörkt",
+        themeDark = "Mørkt",
         btnDonate = "Donera",
         donateSubtitle = "Stöd utvecklingen på Ko-fi",
         privacyPolicyTitle = "Integritetspolicy",
         sectionGeneral = "Allmänt",
         sectionAbout = "Om appen",
-        quickGuideTitle = "Snabbguide"
+        quickGuideTitle = "Snabbguide",
+        btnCopyLink = "Kopiera länk",
+        linkCopiedToast = "Länk kopierad till urklipp"
     )
 
     val ES = EN.copy(
@@ -753,7 +771,9 @@ object Strings {
         privacyPolicyTitle = "Política de privacidad",
         sectionGeneral = "General",
         sectionAbout = "Acerca de la app",
-        quickGuideTitle = "Guía rápida"
+        quickGuideTitle = "Guía rápida",
+        btnCopyLink = "Copiar enlace",
+        linkCopiedToast = "Enlace copiado al portapapeles"
     )
 
     val TR = EN.copy(
@@ -803,7 +823,9 @@ object Strings {
         privacyPolicyTitle = "Gizlilik Politikası",
         sectionGeneral = "Genel",
         sectionAbout = "Uygulama hakkında",
-        quickGuideTitle = "Kurulum Kılavuzu"
+        quickGuideTitle = "Kurulum Kılavuzu",
+        btnCopyLink = "Bağlantıyı kopyala",
+        linkCopiedToast = "Bağlantı panoya kopyalandı"
     )
 
     val KO = EN.copy(
@@ -853,7 +875,9 @@ object Strings {
         privacyPolicyTitle = "개인정보 처리방침",
         sectionGeneral = "일반",
         sectionAbout = "앱 정보",
-        quickGuideTitle = "빠른 시작 가이드"
+        quickGuideTitle = "빠른 시작 가이드",
+        btnCopyLink = "링크 복사",
+        linkCopiedToast = "링크가 클립보드에 복사되었습니다"
     )
 
     val ZH_CN = EN.copy(
@@ -903,7 +927,9 @@ object Strings {
         privacyPolicyTitle = "隐私政策",
         sectionGeneral = "通用",
         sectionAbout = "关于应用",
-        quickGuideTitle = "快速指南"
+        quickGuideTitle = "快速指南",
+        btnCopyLink = "复制链接",
+        linkCopiedToast = "链接已复制到剪贴板"
     )
 
     val ZH_TW = EN.copy(
@@ -953,7 +979,9 @@ object Strings {
         privacyPolicyTitle = "隱私權政策",
         sectionGeneral = "一般",
         sectionAbout = "關於應用程式",
-        quickGuideTitle = "快速上手"
+        quickGuideTitle = "快速上手",
+        btnCopyLink = "複製連結",
+        linkCopiedToast = "連結已複製到剪貼簿"
     )
 
     val AR = EN.copy(
@@ -1003,7 +1031,9 @@ object Strings {
         privacyPolicyTitle = "سياسة الخصوصية",
         sectionGeneral = "عام",
         sectionAbout = "حول التطبيق",
-        quickGuideTitle = "دليل الإعداد السريع"
+        quickGuideTitle = "دليل الإعداد السريع",
+        btnCopyLink = "نسخ الرابط",
+        linkCopiedToast = "تم نسخ الرابط إلى الحافظة"
     )
 
     val RU = EN.copy(
@@ -1053,7 +1083,9 @@ object Strings {
         privacyPolicyTitle = "Политика конфиденциальности",
         sectionGeneral = "Общие",
         sectionAbout = "О приложении",
-        quickGuideTitle = "Инструкция"
+        quickGuideTitle = "Инструкция",
+        btnCopyLink = "Скопировать ссылку",
+        linkCopiedToast = "Ссылка скопирована в буфер обмена"
     )
 
     val ID = EN.copy(
@@ -1103,6 +1135,8 @@ object Strings {
         privacyPolicyTitle = "Kebijakan Privasi",
         sectionGeneral = "Umum",
         sectionAbout = "Tentang aplikasi",
-        quickGuideTitle = "Panduan Penyiapan"
+        quickGuideTitle = "Panduan Penyiapan",
+        btnCopyLink = "Salin tautan",
+        linkCopiedToast = "Tautan disalin ke papan klip"
     )
 }
