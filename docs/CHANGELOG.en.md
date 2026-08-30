@@ -1,3 +1,8 @@
+## 1.2.9
+- Link Tester Clipboard Support: Converted destination links can now be copied directly to the clipboard by tapping the link box or using the dedicated "Copy link" button
+- Enhanced Workflow: Easily share and export converted navigation URLs
+- Complete localization for all 20 supported languages
+
 ## 1.2.8
 - Dynamic Link Tester: The test button label now automatically adapts to your selected navigation app (e.g. "Test in Waze", "Test in Organic Maps", "Test in OsmAnd")
 - Reliable Intent Fallback: Fixed an issue where redirecting to third-party navigation apps (such as Waze or OsmAnd) could incorrectly fall back to Google Maps

@@ -1,3 +1,8 @@
+## 1.2.9
+- Link-Tester Zwischenablage: Konvertierte Ziel-Links können jetzt per Fingertipp oder über den neuen Button „Link kopieren“ direkt in die Zwischenablage kopiert werden
+- Optimierte Bedienung: Direktes Teilen und Weiterleiten umgewandelter Karten-Links erleichtert
+- Vollständige Übersetzungen für alle 20 unterstützten Sprachen
+
 ## 1.2.8
 - Dynamischer Link-Tester: Test-Button passt seine Beschriftung jetzt automatisch an die gewählte Navigations-App an (z. B. „In Waze testen“, „In Organic Maps testen“, „In OsmAnd testen“)
 - Zuverlässiger Intent-Fallback: Behebt ein Problem, bei dem das Öffnen von Links zu Drittanbieter-Karten (wie Waze oder OsmAnd) fälschlicherweise auf Google Maps zurückfiel
