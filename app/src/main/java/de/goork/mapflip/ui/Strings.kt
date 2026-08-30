@@ -85,7 +85,9 @@ object Strings {
         val sectionAbout: String,
         val quickGuideTitle: String,
         val sectionTargetApp: String = "Navigation App",
-        val targetAppAlwaysAsk: String = "Always ask (System Picker)"
+        val targetAppAlwaysAsk: String = "Always ask (System Picker)",
+        val btnCopyLink: String = "Copy link",
+        val linkCopiedToast: String = "Link copied to clipboard"
     ) {
         fun testButtonLabel(targetApp: de.goork.mapflip.navigation.TargetNavigationApp): String {
             val appName = when (targetApp) {
@@ -196,7 +198,9 @@ object Strings {
         sectionAbout = "Über die App",
         quickGuideTitle = "Kurzanleitung",
         sectionTargetApp = "Ziel-Navigations-App",
-        targetAppAlwaysAsk = "Immer fragen (Systemauswahl)"
+        targetAppAlwaysAsk = "Immer fragen (Systemauswahl)",
+        btnCopyLink = "Link kopieren",
+        linkCopiedToast = "Link in die Zwischenablage kopiert"
     )
 
     val EN = AppStrings(

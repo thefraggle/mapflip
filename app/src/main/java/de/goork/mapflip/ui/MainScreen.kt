@@ -1,5 +1,6 @@
 package de.goork.mapflip.ui
 
+import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
@@ -23,6 +24,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
+import androidx.compose.material.icons.outlined.ContentCopy
 import androidx.compose.material.icons.outlined.ExpandLess
 import androidx.compose.material.icons.outlined.ExpandMore
 import androidx.compose.material.icons.outlined.Lock
@@ -402,59 +404,111 @@ fun MainScreen(
                                             Surface(
                                                 color = MaterialTheme.colorScheme.surfaceContainerHighest.copy(alpha = 0.6f),
                                                 shape = RoundedCornerShape(8.dp),
-                                                modifier = Modifier.fillMaxWidth()
+                                                modifier = Modifier
+                                                    .fillMaxWidth()
+                                                    .clickable {
+                                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                                        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+                                                        val clip = ClipData.newPlainText("Converted Map URL", convertedTargetUri)
+                                                        clipboard?.setPrimaryClip(clip)
+                                                        Toast.makeText(context, s.linkCopiedToast, Toast.LENGTH_SHORT).show()
+                                                    }
                                             ) {
-                                                Text(
-                                                    text = convertedTargetUri,
-                                                    style = MaterialTheme.typography.bodySmall.copy(
-                                                        fontFamily = FontFamily.Monospace,
-                                                        fontSize = 12.sp,
-                                                        textDirection = TextDirection.Ltr
-                                                    ),
-                                                    color = MaterialTheme.colorScheme.primary,
-                                                    modifier = Modifier.padding(10.dp)
-                                                )
+                                                Row(
+                                                    modifier = Modifier
+                                                        .fillMaxWidth()
+                                                        .padding(horizontal = 10.dp, vertical = 8.dp),
+                                                    verticalAlignment = Alignment.CenterVertically
+                                                ) {
+                                                    Text(
+                                                        text = convertedTargetUri,
+                                                        style = MaterialTheme.typography.bodySmall.copy(
+                                                            fontFamily = FontFamily.Monospace,
+                                                            fontSize = 12.sp,
+                                                            textDirection = TextDirection.Ltr
+                                                        ),
+                                                        color = MaterialTheme.colorScheme.primary,
+                                                        modifier = Modifier.weight(1f)
+                                                    )
+                                                    Spacer(Modifier.width(8.dp))
+                                                    Icon(
+                                                        imageVector = Icons.Outlined.ContentCopy,
+                                                        contentDescription = s.btnCopyLink,
+                                                        tint = MaterialTheme.colorScheme.primary,
+                                                        modifier = Modifier.size(18.dp)
+                                                    )
+                                                }
                                             }
                                             Spacer(Modifier.height(10.dp))
-                                            FilledTonalButton(
-                                                onClick = {
-                                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                    try {
-                                                        val loc = UniversalMapParser.parse(testInputUrl)
-                                                        val intent = NavigationIntentBuilder.buildIntent(loc, userPreferences.targetApp, context).apply {
-                                                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                                        }
-                                                        context.startActivity(intent)
-                                                    } catch (_: android.content.ActivityNotFoundException) {
-                                                        val appName = when (userPreferences.targetApp) {
-                                                            de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> s.sectionTargetApp
-                                                            else -> userPreferences.targetApp.displayName
-                                                        }
-                                                        Toast.makeText(context, "$appName is not installed", Toast.LENGTH_SHORT).show()
-                                                    } catch (_: Exception) {
+                                            Row(
+                                                modifier = Modifier.fillMaxWidth(),
+                                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                            ) {
+                                                OutlinedButton(
+                                                    onClick = {
+                                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                                        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+                                                        val clip = ClipData.newPlainText("Converted Map URL", convertedTargetUri)
+                                                        clipboard?.setPrimaryClip(clip)
+                                                        Toast.makeText(context, s.linkCopiedToast, Toast.LENGTH_SHORT).show()
+                                                    },
+                                                    modifier = Modifier.weight(1f),
+                                                    shape = RoundedCornerShape(10.dp)
+                                                ) {
+                                                    Icon(
+                                                        Icons.Outlined.ContentCopy,
+                                                        contentDescription = null,
+                                                        modifier = Modifier.size(16.dp)
+                                                    )
+                                                    Spacer(Modifier.width(6.dp))
+                                                    Text(
+                                                        text = s.btnCopyLink,
+                                                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
+                                                        maxLines = 1
+                                                    )
+                                                }
+
+                                                FilledTonalButton(
+                                                    onClick = {
+                                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                                         try {
-                                                            val fallback = Intent(Intent.ACTION_VIEW, Uri.parse(convertedTargetUri)).apply {
+                                                            val loc = UniversalMapParser.parse(testInputUrl)
+                                                            val intent = NavigationIntentBuilder.buildIntent(loc, userPreferences.targetApp, context).apply {
                                                                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                                             }
-                                                            context.startActivity(fallback)
+                                                            context.startActivity(intent)
+                                                        } catch (_: android.content.ActivityNotFoundException) {
+                                                            val appName = when (userPreferences.targetApp) {
+                                                                de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> s.sectionTargetApp
+                                                                else -> userPreferences.targetApp.displayName
+                                                            }
+                                                            Toast.makeText(context, "$appName is not installed", Toast.LENGTH_SHORT).show()
                                                         } catch (_: Exception) {
-                                                            Toast.makeText(context, "Target app could not be opened", Toast.LENGTH_SHORT).show()
+                                                            try {
+                                                                val fallback = Intent(Intent.ACTION_VIEW, Uri.parse(convertedTargetUri)).apply {
+                                                                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                                                }
+                                                                context.startActivity(fallback)
+                                                            } catch (_: Exception) {
+                                                                Toast.makeText(context, "Target app could not be opened", Toast.LENGTH_SHORT).show()
+                                                            }
                                                         }
-                                                    }
-                                                },
-                                                modifier = Modifier.fillMaxWidth(),
-                                                shape = RoundedCornerShape(10.dp)
-                                            ) {
-                                                Icon(
-                                                    Icons.AutoMirrored.Outlined.OpenInNew,
-                                                    contentDescription = null,
-                                                    modifier = Modifier.size(16.dp)
-                                                )
-                                                Spacer(Modifier.width(8.dp))
-                                                Text(
-                                                    text = s.testButtonLabel(userPreferences.targetApp),
-                                                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold)
-                                                )
+                                                    },
+                                                    modifier = Modifier.weight(1f),
+                                                    shape = RoundedCornerShape(10.dp)
+                                                ) {
+                                                    Icon(
+                                                        Icons.AutoMirrored.Outlined.OpenInNew,
+                                                        contentDescription = null,
+                                                        modifier = Modifier.size(16.dp)
+                                                    )
+                                                    Spacer(Modifier.width(6.dp))
+                                                    Text(
+                                                        text = s.testButtonLabel(userPreferences.targetApp),
+                                                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
+                                                        maxLines = 1
+                                                    )
+                                                }
                                             }
                                         }
                                     }
