@@ -605,7 +605,7 @@ fun MainScreen(
                             )
                             Spacer(Modifier.width(14.dp))
                             Text(
-                                text = s.privacyNote,
+                                text = s.effectivePrivacyNote,
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
