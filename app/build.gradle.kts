@@ -14,9 +14,9 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
-val appVersion = "1.2.10"
+val appVersion = "1.2.11"
 
-val appVersionCode = 315013
+val appVersionCode = 315014
 
 android {
     namespace = "de.goork.mapflip"
@@ -96,6 +96,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     debugImplementation(libs.androidx.ui.tooling)
     testImplementation(libs.junit)
+    "playImplementation"("com.github.aptabase:aptabase-kotlin:0.0.8")
     androidTestImplementation("tools.fastlane:screengrab:2.1.1")
     androidTestImplementation("androidx.test:core:1.6.1")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")

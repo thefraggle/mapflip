@@ -1,3 +1,8 @@
+## 1.2.11
+- Stability & Performance: More reliable background processing and improved app responsiveness
+- Enhanced Compatibility: Refined link redirection for modern Android versions and third-party map apps
+- Polish: General quality improvements and optimizations under the hood
+
 ## 1.2.10
 - Direct Share Support: Share map links directly from WhatsApp or browsers to MapFlip via the Android share menu to open them instantly in your preferred navigation app
 - Smarter Link Tester: Automatic clipboard detection on expand plus new buttons to share and quickly clear inputs

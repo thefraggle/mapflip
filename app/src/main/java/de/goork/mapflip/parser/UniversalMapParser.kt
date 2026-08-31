@@ -31,4 +31,18 @@ object UniversalMapParser {
         // Fallback default: Try AppleMapsParser or search query
         return AppleMapsParser.parse(extracted)
     }
+
+    fun detectSourceService(url: String?): String {
+        if (url.isNullOrBlank()) return "unknown"
+        val lower = url.lowercase()
+        return when {
+            lower.contains("apple.com") -> "apple"
+            lower.contains("bing.com") -> "bing"
+            lower.contains("openstreetmap.org") || lower.contains("osm.org") -> "osm"
+            lower.contains("yandex.") -> "yandex"
+            lower.contains("here.com") -> "here"
+            lower.contains("waze.com") -> "waze"
+            else -> "other"
+        }
+    }
 }

@@ -1,3 +1,8 @@
+## 1.2.11
+- Stabilität & Performance: Zuverlässigere Hintergrund-Verarbeitung und optimierte App-Reaktionszeiten
+- Verbesserte Kompatibilität: Verfeinerte Weiterleitung für aktuelle Android-Versionen und Drittanbieter-Karten-Apps
+- Feinschliff: Allgemeine Qualitätsverbesserungen und Bereinigungen unter der Haube
+
 ## 1.2.10
 - Direktes Teilen: Links aus WhatsApp oder Browsern jetzt einfach über das Android-Teilen-Menü an MapFlip senden und sofort in deiner Lieblings-Karten-App öffnen
 - Komfortabler Link-Tester: Automatisches Einfügen aus der Zwischenablage beim Öffnen sowie neue Buttons zum Teilen und schnellen Leeren

@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi
 import de.goork.mapflip.AppConstants
 import de.goork.mapflip.MainActivity
 import de.goork.mapflip.PauseHelper
+import de.goork.mapflip.analytics.Analytics
 import de.goork.mapflip.data.PreferencesRepository
 import de.goork.mapflip.ui.Strings
 
@@ -27,9 +28,11 @@ class MapFlipTileService : TileService() {
         super.onClick()
         val currentlyPaused = repository.isCurrentlyPaused()
         if (currentlyPaused) {
+            Analytics.trackEvent("tile_clicked", mapOf("action" to "unpause"))
             repository.unpause()
             updateTileState()
         } else {
+            Analytics.trackEvent("tile_clicked", mapOf("action" to "open_pause_dialog"))
             val intent = Intent(this, MainActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 putExtra("show_pause_dialog", true)

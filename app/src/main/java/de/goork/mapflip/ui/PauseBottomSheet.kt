@@ -26,6 +26,7 @@ import androidx.compose.ui.input.key.type
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import de.goork.mapflip.analytics.Analytics
 import de.goork.mapflip.data.PreferencesRepository
 
 private data class PauseOption(
@@ -92,6 +93,14 @@ fun PauseBottomSheet(
                 Surface(
                     onClick = {
                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        val durationType = when (option.durationMs) {
+                            0L -> "indefinitely"
+                            -1L -> "tomorrow"
+                            1 * 60 * 60 * 1000L -> "1h"
+                            8 * 60 * 60 * 1000L -> "8h"
+                            else -> "${option.durationMs}ms"
+                        }
+                        Analytics.trackEvent("pause_configured", mapOf("duration_type" to durationType))
                         when (option.durationMs) {
                             0L -> repository.pauseIndefinitely()
                             -1L -> repository.pauseUntilTomorrowMorning()

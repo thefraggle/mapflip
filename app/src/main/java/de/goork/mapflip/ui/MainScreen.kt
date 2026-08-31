@@ -58,6 +58,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import de.goork.mapflip.AppConstants
+import de.goork.mapflip.analytics.Analytics
 import de.goork.mapflip.data.PreferencesRepository
 import de.goork.mapflip.navigation.NavigationIntentBuilder
 import de.goork.mapflip.parser.UniversalMapParser
@@ -192,6 +193,7 @@ fun MainScreen(
                                 showPauseSheet = true
                             } else {
                                 repository.unpause()
+                                Analytics.trackEvent("pause_toggled", mapOf("action" to "unpause"))
                             }
                         }
                     )
@@ -202,6 +204,7 @@ fun MainScreen(
                     Button(
                         onClick = {
                             haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                            Analytics.trackEvent("open_system_settings_clicked")
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                                 context.startActivity(Intent(
                                     Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS,
@@ -475,6 +478,7 @@ fun MainScreen(
                                                 OutlinedButton(
                                                     onClick = {
                                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                                        Analytics.trackEvent("tester_copy_clicked")
                                                         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
                                                         val clip = ClipData.newPlainText("Converted Map URL", convertedTargetUri)
                                                         clipboard?.setPrimaryClip(clip)
@@ -499,6 +503,7 @@ fun MainScreen(
                                                 OutlinedButton(
                                                     onClick = {
                                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                                        Analytics.trackEvent("tester_share_clicked")
                                                         val shareIntent = Intent(Intent.ACTION_SEND).apply {
                                                             type = "text/plain"
                                                             putExtra(Intent.EXTRA_TEXT, convertedTargetUri)
@@ -527,6 +532,10 @@ fun MainScreen(
                                             FilledTonalButton(
                                                 onClick = {
                                                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                    Analytics.trackEvent("link_tester_used", mapOf(
+                                                        "target_app" to userPreferences.targetApp.name.lowercase(),
+                                                        "source_service" to UniversalMapParser.detectSourceService(testInputUrl)
+                                                    ))
                                                     try {
                                                         val loc = UniversalMapParser.parse(testInputUrl)
                                                         val intent = NavigationIntentBuilder.buildIntent(loc, userPreferences.targetApp, context).apply {

@@ -7,6 +7,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import de.goork.mapflip.analytics.Analytics
 import de.goork.mapflip.data.PreferencesRepository
 import de.goork.mapflip.navigation.NavigationIntentBuilder
 import de.goork.mapflip.parser.UniversalMapParser
@@ -25,7 +26,8 @@ class RedirectActivity : Activity() {
         val repository = PreferencesRepository.getInstance(this)
         val isPaused = repository.isCurrentlyPaused()
         val incomingUri = intent?.data
-        val sharedText = if (intent?.action == Intent.ACTION_SEND) {
+        val isShareSheet = intent?.action == Intent.ACTION_SEND
+        val sharedText = if (isShareSheet) {
             intent?.getStringExtra(Intent.EXTRA_TEXT) ?: intent?.getStringExtra(Intent.EXTRA_SUBJECT)
         } else null
 
@@ -36,9 +38,11 @@ class RedirectActivity : Activity() {
         }
 
         if (mapUrl != null) {
+            val sourceService = UniversalMapParser.detectSourceService(mapUrl)
             val dataUri = incomingUri ?: Uri.parse(mapUrl)
             if (isPaused) {
                 // When paused: forward original URL to non-MapFlip browser
+                Analytics.trackEvent("redirect_paused", mapOf("source_service" to sourceService))
                 forwardOriginalUrl(dataUri)
             } else {
                 val parsedLocation = UniversalMapParser.parse(mapUrl)
@@ -46,6 +50,22 @@ class RedirectActivity : Activity() {
                 val targetIntent = NavigationIntentBuilder.buildIntent(parsedLocation, targetApp, this).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
+
+                val locationType = when (parsedLocation) {
+                    is de.goork.mapflip.parser.ParsedLocation.Coordinates -> "coordinates"
+                    is de.goork.mapflip.parser.ParsedLocation.SearchQuery -> "search_query"
+                    is de.goork.mapflip.parser.ParsedLocation.Navigation -> "navigation"
+                    is de.goork.mapflip.parser.ParsedLocation.Directions -> "directions"
+                    is de.goork.mapflip.parser.ParsedLocation.WebFallback -> "web_fallback"
+                    is de.goork.mapflip.parser.ParsedLocation.Home -> "home"
+                }
+
+                Analytics.trackEvent("redirect_performed", mapOf(
+                    "target_app" to targetApp.name.lowercase(),
+                    "source_service" to sourceService,
+                    "location_type" to locationType,
+                    "is_share_sheet" to isShareSheet
+                ))
 
                 try {
                     startActivity(targetIntent)

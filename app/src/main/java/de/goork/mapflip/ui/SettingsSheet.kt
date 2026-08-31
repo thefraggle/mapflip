@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.goork.mapflip.AppConstants
 import de.goork.mapflip.BuildConfig
+import de.goork.mapflip.analytics.Analytics
 import de.goork.mapflip.navigation.TargetNavigationApp
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -120,6 +121,7 @@ fun SettingsSheet(
                             Surface(
                                 onClick = {
                                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                    Analytics.trackEvent("language_changed", mapOf("language" to item.code))
                                     onLanguageSelected(item.code)
                                     showLanguagePicker = false
                                 },
@@ -176,6 +178,7 @@ fun SettingsSheet(
                         Surface(
                             onClick = {
                                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                Analytics.trackEvent("theme_changed", mapOf("theme" to mode))
                                 onThemeSelected(mode)
                                 showThemePicker = false
                             },
@@ -231,6 +234,7 @@ fun SettingsSheet(
                         Surface(
                             onClick = {
                                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                Analytics.trackEvent("target_app_changed", mapOf("target_app" to app.name.lowercase()))
                                 onTargetAppSelected(app)
                                 showTargetAppPicker = false
                             },
@@ -328,6 +332,7 @@ fun SettingsSheet(
                         subtitle = AppConstants.FEEDBACK_EMAIL,
                         onClick = {
                             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                            Analytics.trackEvent("feedback_clicked")
                             val intent = Intent(Intent.ACTION_SENDTO).apply {
                                 data = Uri.parse("mailto:${AppConstants.FEEDBACK_EMAIL}")
                                 putExtra(Intent.EXTRA_SUBJECT, "[MapFlip Feedback]")
@@ -347,6 +352,7 @@ fun SettingsSheet(
                             subtitle = s.donateSubtitle,
                             onClick = {
                                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                Analytics.trackEvent("donate_clicked")
                                 try {
                                     context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.URL_KOFI)))
                                 } catch (_: Exception) {}
@@ -363,6 +369,7 @@ fun SettingsSheet(
                             subtitle = "Google Play Store",
                             onClick = {
                                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                Analytics.trackEvent("rate_app_clicked")
                                 val rateIntent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${context.packageName}")).apply {
                                     addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
                                 }
