@@ -1,3 +1,8 @@
+## 1.2.10
+- Direct Share Support: Share map links directly from WhatsApp or browsers to MapFlip via the Android share menu to open them instantly in your preferred navigation app
+- Smarter Link Tester: Automatic clipboard detection on expand plus new buttons to share and quickly clear inputs
+- More Map Services: Added support for HERE WeGo and Waze web links, as well as HERE WeGo and Yandex Maps as target navigation apps
+
 ## 1.2.9
 - Link Tester Clipboard Support: Converted destination links can now be copied directly to the clipboard by tapping the link box or using the dedicated "Copy link" button
 - Enhanced Workflow: Easily share and export converted navigation URLs

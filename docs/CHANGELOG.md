@@ -1,3 +1,8 @@
+## 1.2.10
+- Direktes Teilen: Links aus WhatsApp oder Browsern jetzt einfach über das Android-Teilen-Menü an MapFlip senden und sofort in deiner Lieblings-Karten-App öffnen
+- Komfortabler Link-Tester: Automatisches Einfügen aus der Zwischenablage beim Öffnen sowie neue Buttons zum Teilen und schnellen Leeren
+- Mehr Kartendienste: Unterstützt jetzt auch Links von HERE WeGo und Waze im Web sowie HERE WeGo und Yandex Maps als Ziel-Apps
+
 ## 1.2.9
 - Link-Tester Zwischenablage: Konvertierte Ziel-Links können jetzt per Fingertipp oder über den neuen Button „Link kopieren“ direkt in die Zwischenablage kopiert werden
 - Optimierte Bedienung: Direktes Teilen und Weiterleiten umgewandelter Karten-Links erleichtert
