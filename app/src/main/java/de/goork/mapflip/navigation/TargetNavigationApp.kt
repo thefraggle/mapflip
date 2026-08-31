@@ -26,6 +26,16 @@ enum class TargetNavigationApp(
         displayName = "OsmAnd",
         packageName = "net.osmand"
     ),
+    HERE_WEGO(
+        id = "here_wego",
+        displayName = "HERE WeGo",
+        packageName = "com.here.app.maps"
+    ),
+    YANDEX_MAPS(
+        id = "yandex_maps",
+        displayName = "Yandex Maps",
+        packageName = "ru.yandex.yandexmaps"
+    ),
     SYSTEM_PICKER(
         id = "system_picker",
         displayName = "Always ask (System Picker)",

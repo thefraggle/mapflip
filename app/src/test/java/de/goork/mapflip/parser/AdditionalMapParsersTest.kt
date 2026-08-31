@@ -59,6 +59,38 @@ class AdditionalMapParsersTest {
         assertEquals("Berlin", coords.label)
     }
 
+    // HERE WeGo Tests
+    @Test
+    fun `here maps converts coordinates from share link`() {
+        val parsed = HereMapsParser.parse("https://share.here.com/l/52.5200,13.4050,16,Berlin")
+        assertTrue(parsed is ParsedLocation.Coordinates)
+        val coords = parsed as ParsedLocation.Coordinates
+        assertEquals(52.5200, coords.latitude, 0.0001)
+        assertEquals(13.4050, coords.longitude, 0.0001)
+    }
+
+    @Test
+    fun `here maps converts search query`() {
+        val parsed = HereMapsParser.parse("https://wego.here.com/search/Brandenburg+Gate")
+        assertEquals(ParsedLocation.SearchQuery("Brandenburg Gate"), parsed)
+    }
+
+    // Waze Tests
+    @Test
+    fun `waze converts coordinates link`() {
+        val parsed = WazeMapsParser.parse("https://waze.com/ul?ll=48.8584,2.2945&navigate=yes")
+        assertTrue(parsed is ParsedLocation.Coordinates)
+        val coords = parsed as ParsedLocation.Coordinates
+        assertEquals(48.8584, coords.latitude, 0.0001)
+        assertEquals(2.2945, coords.longitude, 0.0001)
+    }
+
+    @Test
+    fun `waze converts query link`() {
+        val parsed = WazeMapsParser.parse("https://waze.com/ul?q=Eiffel+Tower&navigate=yes")
+        assertEquals(ParsedLocation.SearchQuery("Eiffel Tower"), parsed)
+    }
+
     // Universal Dispatcher Tests
     @Test
     fun `universal parser dispatches correctly`() {
@@ -70,5 +102,11 @@ class AdditionalMapParsersTest {
 
         val osm = UniversalMapParser.parse("https://www.openstreetmap.org/?mlat=52.5&mlon=13.4")
         assertTrue(osm is ParsedLocation.Coordinates)
+
+        val here = UniversalMapParser.parse("https://share.here.com/l/52.52,13.40")
+        assertTrue(here is ParsedLocation.Coordinates)
+
+        val waze = UniversalMapParser.parse("https://waze.com/ul?q=Hamburg")
+        assertEquals(ParsedLocation.SearchQuery("Hamburg"), waze)
     }
 }

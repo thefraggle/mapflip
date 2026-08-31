@@ -62,6 +62,24 @@ class NavigationIntentBuilderTest {
     }
 
     @Test
+    fun `builds correct Here WeGo URIs`() {
+        val coords = ParsedLocation.Coordinates(52.5200, 13.4050, label = "Berlin")
+        assertEquals("https://share.here.com/l/52.5200,13.4050?msg=Berlin", NavigationIntentBuilder.buildHereWeGoUriString(coords))
+
+        val search = ParsedLocation.SearchQuery("Alexanderplatz")
+        assertEquals("https://wego.here.com/search/Alexanderplatz", NavigationIntentBuilder.buildHereWeGoUriString(search))
+    }
+
+    @Test
+    fun `builds correct Yandex Maps URIs`() {
+        val coords = ParsedLocation.Coordinates(52.5200, 13.4050, label = "Red Square")
+        assertEquals("yandexmaps://maps.yandex.ru/?ll=13.405,52.52&z=16&text=Red+Square", NavigationIntentBuilder.buildYandexMapsUriString(coords))
+
+        val search = ParsedLocation.SearchQuery("Kremlin")
+        assertEquals("yandexmaps://maps.yandex.ru/?text=Kremlin", NavigationIntentBuilder.buildYandexMapsUriString(search))
+    }
+
+    @Test
     fun `buildUriString dispatches to selected target app`() {
         val loc = ParsedLocation.Coordinates(48.8584, 2.2945)
 
@@ -77,6 +95,12 @@ class NavigationIntentBuilderTest {
         val osmandUri = NavigationIntentBuilder.buildUriString(loc, TargetNavigationApp.OSMAND)
         assertEquals("osmandmaps://?lat=48.8584&lon=2.2945&z=16", osmandUri)
 
+        val hereUri = NavigationIntentBuilder.buildUriString(loc, TargetNavigationApp.HERE_WEGO)
+        assertEquals("https://share.here.com/l/48.8584,2.2945", hereUri)
+
+        val yandexUri = NavigationIntentBuilder.buildUriString(loc, TargetNavigationApp.YANDEX_MAPS)
+        assertEquals("yandexmaps://maps.yandex.ru/?ll=2.2945,48.8584&z=16", yandexUri)
+
         val sysUri = NavigationIntentBuilder.buildUriString(loc, TargetNavigationApp.SYSTEM_PICKER)
         assertTrue(sysUri.startsWith("geo:48.8584,2.2945"))
     }
@@ -88,6 +112,8 @@ class NavigationIntentBuilderTest {
         assertEquals("In Waze testen", sDe.testButtonLabel(TargetNavigationApp.WAZE))
         assertEquals("In Organic Maps testen", sDe.testButtonLabel(TargetNavigationApp.ORGANIC_MAPS))
         assertEquals("In OsmAnd testen", sDe.testButtonLabel(TargetNavigationApp.OSMAND))
+        assertEquals("In HERE WeGo testen", sDe.testButtonLabel(TargetNavigationApp.HERE_WEGO))
+        assertEquals("In Yandex Maps testen", sDe.testButtonLabel(TargetNavigationApp.YANDEX_MAPS))
         assertEquals("In Ziel-Navigations-App testen", sDe.testButtonLabel(TargetNavigationApp.SYSTEM_PICKER))
 
         val sEn = Strings.getStrings("en")
@@ -95,6 +121,8 @@ class NavigationIntentBuilderTest {
         assertEquals("Test in Waze", sEn.testButtonLabel(TargetNavigationApp.WAZE))
         assertEquals("Test in Organic Maps", sEn.testButtonLabel(TargetNavigationApp.ORGANIC_MAPS))
         assertEquals("Test in OsmAnd", sEn.testButtonLabel(TargetNavigationApp.OSMAND))
+        assertEquals("Test in HERE WeGo", sEn.testButtonLabel(TargetNavigationApp.HERE_WEGO))
+        assertEquals("Test in Yandex Maps", sEn.testButtonLabel(TargetNavigationApp.YANDEX_MAPS))
         assertEquals("Test in Navigation App", sEn.testButtonLabel(TargetNavigationApp.SYSTEM_PICKER))
     }
 

@@ -6,7 +6,9 @@ object UniversalMapParser {
         AppleMapsParser,
         BingMapsParser,
         OpenStreetMapParser,
-        YandexMapsParser
+        YandexMapsParser,
+        HereMapsParser,
+        WazeMapsParser
     )
 
     fun extractMapUrl(text: String?): String? {

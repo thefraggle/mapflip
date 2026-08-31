@@ -15,6 +15,8 @@ object NavigationIntentBuilder {
             TargetNavigationApp.WAZE -> buildWazeIntent(location)
             TargetNavigationApp.ORGANIC_MAPS -> buildOrganicMapsIntent(location)
             TargetNavigationApp.OSMAND -> buildOsmAndIntent(location, context)
+            TargetNavigationApp.HERE_WEGO -> buildHereWeGoIntent(location)
+            TargetNavigationApp.YANDEX_MAPS -> buildYandexMapsIntent(location)
             TargetNavigationApp.SYSTEM_PICKER -> buildGenericGeoIntent(location, createChooser = true)
         }
     }
@@ -25,6 +27,8 @@ object NavigationIntentBuilder {
             TargetNavigationApp.WAZE -> buildWazeUriString(location)
             TargetNavigationApp.ORGANIC_MAPS -> buildOrganicMapsUriString(location)
             TargetNavigationApp.OSMAND -> buildOsmAndUriString(location)
+            TargetNavigationApp.HERE_WEGO -> buildHereWeGoUriString(location)
+            TargetNavigationApp.YANDEX_MAPS -> buildYandexMapsUriString(location)
             TargetNavigationApp.SYSTEM_PICKER -> buildGenericGeoUriString(location)
         }
     }
@@ -136,6 +140,48 @@ object NavigationIntentBuilder {
         }
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildOsmAndUriString(location))).apply {
             if (pkg != null) setPackage(pkg)
+        }
+    }
+
+    fun buildHereWeGoUriString(location: ParsedLocation): String {
+        return when (location) {
+            is ParsedLocation.Home -> "https://wego.here.com"
+            is ParsedLocation.Coordinates -> {
+                val latStr = formatCoord(location.latitude)
+                val lonStr = formatCoord(location.longitude)
+                val labelParam = if (!location.label.isNullOrBlank()) "?msg=${encode(location.label)}" else ""
+                "https://share.here.com/l/$latStr,$lonStr$labelParam"
+            }
+            is ParsedLocation.SearchQuery -> "https://wego.here.com/search/${encode(location.query)}"
+            is ParsedLocation.Navigation -> "https://wego.here.com/directions/drive//${encode(location.destination)}"
+            is ParsedLocation.Directions -> "https://wego.here.com/directions/drive/${encode(location.origin)}/${encode(location.destination)}"
+            is ParsedLocation.WebFallback -> "https://wego.here.com/search/${encode(location.fallbackUrl)}"
+        }
+    }
+
+    fun buildHereWeGoIntent(location: ParsedLocation): Intent {
+        return Intent(Intent.ACTION_VIEW, Uri.parse(buildHereWeGoUriString(location))).apply {
+            setPackage(TargetNavigationApp.HERE_WEGO.packageName)
+        }
+    }
+
+    fun buildYandexMapsUriString(location: ParsedLocation): String {
+        return when (location) {
+            is ParsedLocation.Home -> "yandexmaps://maps.yandex.ru"
+            is ParsedLocation.Coordinates -> {
+                val labelParam = if (!location.label.isNullOrBlank()) "&text=${encode(location.label)}" else ""
+                "yandexmaps://maps.yandex.ru/?ll=${location.longitude},${location.latitude}&z=16$labelParam"
+            }
+            is ParsedLocation.SearchQuery -> "yandexmaps://maps.yandex.ru/?text=${encode(location.query)}"
+            is ParsedLocation.Navigation -> "yandexmaps://maps.yandex.ru/?rtext=~${encode(location.destination)}&rtt=auto"
+            is ParsedLocation.Directions -> "yandexmaps://maps.yandex.ru/?rtext=${encode(location.origin)}~${encode(location.destination)}&rtt=auto"
+            is ParsedLocation.WebFallback -> "https://yandex.com/maps/?text=${encode(location.fallbackUrl)}"
+        }
+    }
+
+    fun buildYandexMapsIntent(location: ParsedLocation): Intent {
+        return Intent(Intent.ACTION_VIEW, Uri.parse(buildYandexMapsUriString(location))).apply {
+            setPackage(TargetNavigationApp.YANDEX_MAPS.packageName)
         }
     }
 
