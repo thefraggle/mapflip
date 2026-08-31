@@ -13,6 +13,8 @@
         <package android:name="app.organicmaps" />
         <package android:name="net.osmand" />
         <package android:name="net.osmand.plus" />
+        <package android:name="com.here.app.maps" />
+        <package android:name="ru.yandex.yandexmaps" />
     </queries>
 
     <application
@@ -38,6 +40,13 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:excludeFromRecents="true"
             android:noHistory="true">
+            <!-- 0. Android Share Sheet Receiver (ACTION_SEND) -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
             <!-- 1. Apple Maps Links -->
             <intent-filter android:autoVerify="false">
                 <action android:name="android.intent.action.VIEW" />
@@ -78,6 +87,29 @@
                 <data android:scheme="https" android:host="www.yandex.ru" android:pathPrefix="/maps" />
                 <data android:scheme="https" android:host="maps.yandex.com" />
                 <data android:scheme="https" android:host="maps.yandex.ru" />
+            </intent-filter>
+
+            <!-- 5. HERE WeGo Links -->
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="wego.here.com" />
+                <data android:scheme="https" android:host="share.here.com" />
+                <data android:scheme="https" android:host="maps.here.com" />
+                <data android:scheme="https" android:host="here.com" />
+                <data android:scheme="https" android:host="www.here.com" />
+            </intent-filter>
+
+            <!-- 6. Waze Web Links -->
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="waze.com" android:pathPrefix="/ul" />
+                <data android:scheme="https" android:host="www.waze.com" android:pathPrefix="/ul" />
+                <data android:scheme="https" android:host="waze.com" android:pathPrefix="/live-map" />
+                <data android:scheme="https" android:host="www.waze.com" android:pathPrefix="/live-map" />
             </intent-filter>
         </activity>
 

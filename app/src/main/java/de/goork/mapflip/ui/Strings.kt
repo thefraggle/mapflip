@@ -87,7 +87,9 @@ object Strings {
         val sectionTargetApp: String = "Navigation App",
         val targetAppAlwaysAsk: String = "Always ask (System Picker)",
         val btnCopyLink: String = "Copy link",
-        val linkCopiedToast: String = "Link copied to clipboard"
+        val linkCopiedToast: String = "Link copied to clipboard",
+        val btnShareLink: String = "Share link",
+        val btnClearInput: String = "Clear"
     ) {
         fun testButtonLabel(targetApp: de.goork.mapflip.navigation.TargetNavigationApp): String {
             val appName = when (targetApp) {
@@ -95,6 +97,8 @@ object Strings {
                 de.goork.mapflip.navigation.TargetNavigationApp.WAZE -> "Waze"
                 de.goork.mapflip.navigation.TargetNavigationApp.ORGANIC_MAPS -> "Organic Maps"
                 de.goork.mapflip.navigation.TargetNavigationApp.OSMAND -> "OsmAnd"
+                de.goork.mapflip.navigation.TargetNavigationApp.HERE_WEGO -> "HERE WeGo"
+                de.goork.mapflip.navigation.TargetNavigationApp.YANDEX_MAPS -> "Yandex Maps"
                 de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> if (sectionTargetApp.isNotBlank()) sectionTargetApp else "Navigation App"
             }
             return try {
@@ -200,7 +204,9 @@ object Strings {
         sectionTargetApp = "Ziel-Navigations-App",
         targetAppAlwaysAsk = "Immer fragen (Systemauswahl)",
         btnCopyLink = "Link kopieren",
-        linkCopiedToast = "Link in die Zwischenablage kopiert"
+        linkCopiedToast = "Link in die Zwischenablage kopiert",
+        btnShareLink = "Link teilen",
+        btnClearInput = "Löschen"
     )
 
     val EN = AppStrings(
@@ -305,7 +311,9 @@ object Strings {
         sectionAbout = "Om appen",
         quickGuideTitle = "Startguide",
         btnCopyLink = "Kopier link",
-        linkCopiedToast = "Link kopieret til udklipsholder"
+        linkCopiedToast = "Link kopieret til udklipsholder",
+        btnShareLink = "Del link",
+        btnClearInput = "Ryd"
     )
 
     val FR = EN.copy(
@@ -357,7 +365,9 @@ object Strings {
         sectionAbout = "À propos de l'application",
         quickGuideTitle = "Guide de configuration",
         btnCopyLink = "Copier le lien",
-        linkCopiedToast = "Lien copié dans le presse-papiers"
+        linkCopiedToast = "Lien copié dans le presse-papiers",
+        btnShareLink = "Partager le lien",
+        btnClearInput = "Effacer"
     )
 
     val IT = EN.copy(
@@ -409,7 +419,9 @@ object Strings {
         sectionAbout = "Informazioni sull'app",
         quickGuideTitle = "Guida introduttiva",
         btnCopyLink = "Copia link",
-        linkCopiedToast = "Link copiato negli appunti"
+        linkCopiedToast = "Link copiato negli appunti",
+        btnShareLink = "Condividi link",
+        btnClearInput = "Cancella"
     )
 
     val JA = EN.copy(
@@ -461,7 +473,9 @@ object Strings {
         sectionAbout = "アプリについて",
         quickGuideTitle = "クイックガイド",
         btnCopyLink = "リンクをコピー",
-        linkCopiedToast = "リンクをクリップボードにコピーしました"
+        linkCopiedToast = "リンクをクリップボードにコピーしました",
+        btnShareLink = "リンクを共有",
+        btnClearInput = "クリア"
     )
 
     val NL = EN.copy(
@@ -513,7 +527,9 @@ object Strings {
         sectionAbout = "Over de app",
         quickGuideTitle = "Snelstartgids",
         btnCopyLink = "Link kopiëren",
-        linkCopiedToast = "Link gekopieerd naar klembord"
+        linkCopiedToast = "Link gekopieerd naar klembord",
+        btnShareLink = "Link delen",
+        btnClearInput = "Wissen"
     )
 
     val NO = EN.copy(
@@ -565,7 +581,9 @@ object Strings {
         sectionAbout = "Om appen",
         quickGuideTitle = "Hurtigveiledning",
         btnCopyLink = "Kopier lenke",
-        linkCopiedToast = "Lenke kopiert til utklippstavlen"
+        linkCopiedToast = "Lenke kopiert til utklippstavlen",
+        btnShareLink = "Del lenke",
+        btnClearInput = "Tøm"
     )
 
     val PL = EN.copy(
@@ -617,7 +635,9 @@ object Strings {
         sectionAbout = "O aplikacji",
         quickGuideTitle = "Szybki przewodnik",
         btnCopyLink = "Kopiuj link",
-        linkCopiedToast = "Link skopiowany do schowka"
+        linkCopiedToast = "Link skopiowany do schowka",
+        btnShareLink = "Udostępnij link",
+        btnClearInput = "Wyczyść"
     )
 
     val PT = EN.copy(
@@ -669,7 +689,9 @@ object Strings {
         sectionAbout = "Sobre a aplicação",
         quickGuideTitle = "Guia rápido",
         btnCopyLink = "Copiar link",
-        linkCopiedToast = "Link copiado para a área de transferência"
+        linkCopiedToast = "Link copiado para a área de transferência",
+        btnShareLink = "Compartilhar link",
+        btnClearInput = "Limpar"
     )
 
     val SV = EN.copy(
@@ -721,7 +743,9 @@ object Strings {
         sectionAbout = "Om appen",
         quickGuideTitle = "Snabbguide",
         btnCopyLink = "Kopiera länk",
-        linkCopiedToast = "Länk kopierad till urklipp"
+        linkCopiedToast = "Länk kopierad till urklipp",
+        btnShareLink = "Dela länk",
+        btnClearInput = "Rensa"
     )
 
     val ES = EN.copy(
@@ -773,7 +797,9 @@ object Strings {
         sectionAbout = "Acerca de la app",
         quickGuideTitle = "Guía rápida",
         btnCopyLink = "Copiar enlace",
-        linkCopiedToast = "Enlace copiado al portapapeles"
+        linkCopiedToast = "Enlace copiado al portapapeles",
+        btnShareLink = "Compartir enlace",
+        btnClearInput = "Borrar"
     )
 
     val TR = EN.copy(
@@ -825,7 +851,9 @@ object Strings {
         sectionAbout = "Uygulama hakkında",
         quickGuideTitle = "Kurulum Kılavuzu",
         btnCopyLink = "Bağlantıyı kopyala",
-        linkCopiedToast = "Bağlantı panoya kopyalandı"
+        linkCopiedToast = "Bağlantı panoya kopyalandı",
+        btnShareLink = "Bağlantıyı paylaş",
+        btnClearInput = "Temizle"
     )
 
     val KO = EN.copy(
@@ -877,7 +905,9 @@ object Strings {
         sectionAbout = "앱 정보",
         quickGuideTitle = "빠른 시작 가이드",
         btnCopyLink = "링크 복사",
-        linkCopiedToast = "링크가 클립보드에 복사되었습니다"
+        linkCopiedToast = "링크가 클립보드에 복사되었습니다",
+        btnShareLink = "링크 공유",
+        btnClearInput = "지우기"
     )
 
     val ZH_CN = EN.copy(
@@ -929,7 +959,9 @@ object Strings {
         sectionAbout = "关于应用",
         quickGuideTitle = "快速指南",
         btnCopyLink = "复制链接",
-        linkCopiedToast = "链接已复制到剪贴板"
+        linkCopiedToast = "链接已复制到剪贴板",
+        btnShareLink = "分享链接",
+        btnClearInput = "清除"
     )
 
     val ZH_TW = EN.copy(
@@ -981,7 +1013,9 @@ object Strings {
         sectionAbout = "關於應用程式",
         quickGuideTitle = "快速上手",
         btnCopyLink = "複製連結",
-        linkCopiedToast = "連結已複製到剪貼簿"
+        linkCopiedToast = "連結已複製到剪貼簿",
+        btnShareLink = "分享連結",
+        btnClearInput = "清除"
     )
 
     val AR = EN.copy(
@@ -1033,7 +1067,9 @@ object Strings {
         sectionAbout = "حول التطبيق",
         quickGuideTitle = "دليل الإعداد السريع",
         btnCopyLink = "نسخ الرابط",
-        linkCopiedToast = "تم نسخ الرابط إلى الحافظة"
+        linkCopiedToast = "تم نسخ الرابط إلى الحافظة",
+        btnShareLink = "مشاركة الرابط",
+        btnClearInput = "مسح"
     )
 
     val RU = EN.copy(
@@ -1085,7 +1121,9 @@ object Strings {
         sectionAbout = "О приложении",
         quickGuideTitle = "Инструкция",
         btnCopyLink = "Скопировать ссылку",
-        linkCopiedToast = "Ссылка скопирована в буфер обмена"
+        linkCopiedToast = "Ссылка скопирована в буфер обмена",
+        btnShareLink = "Поделиться ссылкой",
+        btnClearInput = "Очистить"
     )
 
     val ID = EN.copy(
@@ -1137,6 +1175,8 @@ object Strings {
         sectionAbout = "Tentang aplikasi",
         quickGuideTitle = "Panduan Penyiapan",
         btnCopyLink = "Salin tautan",
-        linkCopiedToast = "Tautan disalin ke papan klip"
+        linkCopiedToast = "Tautan disalin ke papan klip",
+        btnShareLink = "Bagikan tautan",
+        btnClearInput = "Hapus"
     )
 }

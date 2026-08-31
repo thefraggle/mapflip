@@ -24,11 +24,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
+import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.ContentCopy
 import androidx.compose.material.icons.outlined.ExpandLess
 import androidx.compose.material.icons.outlined.ExpandMore
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material.icons.outlined.Tune
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.*
@@ -328,7 +330,18 @@ fun MainScreen(
                                     .defaultMinSize(minHeight = 48.dp)
                                     .clickable {
                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                        isLinkTesterExpanded = !isLinkTesterExpanded
+                                        val willExpand = !isLinkTesterExpanded
+                                        isLinkTesterExpanded = willExpand
+                                        if (willExpand && testInputUrl.isBlank()) {
+                                            val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+                                            val clipText = clipboard?.primaryClip?.getItemAt(0)?.text?.toString()
+                                            if (!clipText.isNullOrBlank()) {
+                                                val mapUrl = UniversalMapParser.extractMapUrl(clipText)
+                                                if (mapUrl != null) {
+                                                    testInputUrl = mapUrl
+                                                }
+                                            }
+                                        }
                                     }
                                     .semantics {
                                         role = Role.Button
@@ -376,21 +389,36 @@ fun MainScreen(
                                         singleLine = true,
                                         textStyle = MaterialTheme.typography.bodyMedium,
                                         trailingIcon = {
-                                            TextButton(
-                                                onClick = {
-                                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                                    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
-                                                    val clipText = clipboard?.primaryClip?.getItemAt(0)?.text?.toString()
-                                                    if (!clipText.isNullOrBlank()) {
-                                                        testInputUrl = clipText.trim()
+                                            if (testInputUrl.isNotEmpty()) {
+                                                IconButton(
+                                                    onClick = {
+                                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                                        testInputUrl = ""
                                                     }
+                                                ) {
+                                                    Icon(
+                                                        imageVector = Icons.Outlined.Close,
+                                                        contentDescription = s.btnClearInput,
+                                                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                                    )
                                                 }
-                                            ) {
-                                                Text(
-                                                    text = s.btnPasteClipboard,
-                                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                                                    color = MaterialTheme.colorScheme.primary
-                                                )
+                                            } else {
+                                                TextButton(
+                                                    onClick = {
+                                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                                        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+                                                        val clipText = clipboard?.primaryClip?.getItemAt(0)?.text?.toString()
+                                                        if (!clipText.isNullOrBlank()) {
+                                                            testInputUrl = clipText.trim()
+                                                        }
+                                                    }
+                                                ) {
+                                                    Text(
+                                                        text = s.btnPasteClipboard,
+                                                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                                                        color = MaterialTheme.colorScheme.primary
+                                                    )
+                                                }
                                             }
                                         }
                                     )
@@ -468,47 +496,74 @@ fun MainScreen(
                                                     )
                                                 }
 
-                                                FilledTonalButton(
+                                                OutlinedButton(
                                                     onClick = {
-                                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                                        try {
-                                                            val loc = UniversalMapParser.parse(testInputUrl)
-                                                            val intent = NavigationIntentBuilder.buildIntent(loc, userPreferences.targetApp, context).apply {
-                                                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                                            }
-                                                            context.startActivity(intent)
-                                                        } catch (_: android.content.ActivityNotFoundException) {
-                                                            val appName = when (userPreferences.targetApp) {
-                                                                de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> s.sectionTargetApp
-                                                                else -> userPreferences.targetApp.displayName
-                                                            }
-                                                            Toast.makeText(context, "$appName is not installed", Toast.LENGTH_SHORT).show()
-                                                        } catch (_: Exception) {
-                                                            try {
-                                                                val fallback = Intent(Intent.ACTION_VIEW, Uri.parse(convertedTargetUri)).apply {
-                                                                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                                                }
-                                                                context.startActivity(fallback)
-                                                            } catch (_: Exception) {
-                                                                Toast.makeText(context, "Target app could not be opened", Toast.LENGTH_SHORT).show()
-                                                            }
+                                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                                        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                                                            type = "text/plain"
+                                                            putExtra(Intent.EXTRA_TEXT, convertedTargetUri)
                                                         }
+                                                        context.startActivity(Intent.createChooser(shareIntent, s.btnShareLink))
                                                     },
                                                     modifier = Modifier.weight(1f),
                                                     shape = RoundedCornerShape(10.dp)
                                                 ) {
                                                     Icon(
-                                                        Icons.AutoMirrored.Outlined.OpenInNew,
+                                                        Icons.Outlined.Share,
                                                         contentDescription = null,
                                                         modifier = Modifier.size(16.dp)
                                                     )
                                                     Spacer(Modifier.width(6.dp))
                                                     Text(
-                                                        text = s.testButtonLabel(userPreferences.targetApp),
+                                                        text = s.btnShareLink,
                                                         style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
                                                         maxLines = 1
                                                     )
                                                 }
+                                            }
+
+                                            Spacer(Modifier.height(8.dp))
+
+                                            FilledTonalButton(
+                                                onClick = {
+                                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                    try {
+                                                        val loc = UniversalMapParser.parse(testInputUrl)
+                                                        val intent = NavigationIntentBuilder.buildIntent(loc, userPreferences.targetApp, context).apply {
+                                                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                                        }
+                                                        context.startActivity(intent)
+                                                    } catch (_: android.content.ActivityNotFoundException) {
+                                                        val appName = when (userPreferences.targetApp) {
+                                                            de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> s.sectionTargetApp
+                                                            else -> userPreferences.targetApp.displayName
+                                                        }
+                                                        Toast.makeText(context, "$appName is not installed", Toast.LENGTH_SHORT).show()
+                                                    } catch (_: Exception) {
+                                                        try {
+                                                            val fallback = Intent(Intent.ACTION_VIEW, Uri.parse(convertedTargetUri)).apply {
+                                                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                                            }
+                                                            context.startActivity(fallback)
+                                                        } catch (_: Exception) {
+                                                            Toast.makeText(context, "Target app could not be opened", Toast.LENGTH_SHORT).show()
+                                                        }
+                                                    }
+                                                },
+                                                modifier = Modifier.fillMaxWidth(),
+                                                shape = RoundedCornerShape(10.dp)
+                                            ) {
+                                                Icon(
+                                                    Icons.AutoMirrored.Outlined.OpenInNew,
+                                                    contentDescription = null,
+                                                    modifier = Modifier.size(16.dp)
+                                                )
+                                                Spacer(Modifier.width(6.dp))
+                                                Text(
+                                                    text = s.testButtonLabel(userPreferences.targetApp),
+                                                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
+                                                    maxLines = 1
+                                                )
                                             }
                                         }
                                     }

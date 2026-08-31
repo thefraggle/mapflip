@@ -24,10 +24,19 @@ class RedirectActivity : Activity() {
 
         val repository = PreferencesRepository.getInstance(this)
         val isPaused = repository.isCurrentlyPaused()
-        val dataUri = intent?.data
+        val incomingUri = intent?.data
+        val sharedText = if (intent?.action == Intent.ACTION_SEND) {
+            intent?.getStringExtra(Intent.EXTRA_TEXT) ?: intent?.getStringExtra(Intent.EXTRA_SUBJECT)
+        } else null
 
-        if (dataUri != null) {
-            val mapUrl = dataUri.toString()
+        val mapUrl = when {
+            incomingUri != null -> incomingUri.toString()
+            !sharedText.isNullOrBlank() -> UniversalMapParser.extractMapUrl(sharedText) ?: sharedText.trim()
+            else -> null
+        }
+
+        if (mapUrl != null) {
+            val dataUri = incomingUri ?: Uri.parse(mapUrl)
             if (isPaused) {
                 // When paused: forward original URL to non-MapFlip browser
                 forwardOriginalUrl(dataUri)
