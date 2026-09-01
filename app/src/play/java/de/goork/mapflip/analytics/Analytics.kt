@@ -83,19 +83,34 @@ object Analytics {
             val isTestHarness = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && ActivityManager.isRunningInUserTestHarness()
             val isEmulator = Build.FINGERPRINT.startsWith("generic") ||
                     Build.FINGERPRINT.startsWith("unknown") ||
+                    Build.BRAND.startsWith("generic") ||
+                    Build.DEVICE.startsWith("generic") ||
                     Build.MODEL.contains("google_sdk") ||
                     Build.MODEL.contains("Emulator") ||
                     Build.MODEL.contains("Android SDK built for x86") ||
                     Build.MANUFACTURER.contains("Genymotion") ||
+                    Build.MANUFACTURER.contains("BlueStacks") ||
+                    Build.MANUFACTURER.contains("nox") ||
                     Build.HARDWARE.contains("goldfish") ||
                     Build.HARDWARE.contains("ranchu") ||
+                    Build.HARDWARE.contains("cutf") ||
+                    Build.HARDWARE.contains("vbox86") ||
+                    Build.HARDWARE.contains("nox") ||
                     Build.PRODUCT.contains("sdk_google") ||
                     Build.PRODUCT.contains("google_sdk") ||
                     Build.PRODUCT.contains("sdk") ||
                     Build.PRODUCT.contains("sdk_x86") ||
                     Build.PRODUCT.contains("vbox86p") ||
                     Build.PRODUCT.contains("emulator") ||
-                    Build.PRODUCT.contains("simulator")
+                    Build.PRODUCT.contains("simulator") ||
+                    Build.PRODUCT.contains("nox") ||
+                    Build.PRODUCT.startsWith("aosp_cf_") ||
+                    Build.PRODUCT.startsWith("vsoc_") ||
+                    Build.DEVICE.startsWith("vsoc") ||
+                    Build.BOARD.contains("cutf") ||
+                    Build.BOARD.contains("nox") ||
+                    Build.HOST == "android-test" ||
+                    System.getProperty("ro.kernel.qemu") == "1"
 
             isDebuggable || isTestLab || isTestHarness || isEmulator
         } catch (_: Exception) {
