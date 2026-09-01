@@ -695,46 +695,29 @@ private fun StatusAndControlCard(
             // Status Header Row
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    val statusDotColor = when {
-                        isPaused -> MaterialTheme.colorScheme.onSurfaceVariant
-                        linksActive == true -> Green500
-                        else -> Red500
-                    }
-                    Box(
-                        modifier = Modifier
-                            .size(10.dp)
-                            .clip(CircleShape)
-                            .background(statusDotColor)
-                    )
-                    Spacer(Modifier.width(10.dp))
-                    Text(
-                        text = when {
-                            isPaused -> s.statusPaused
-                            linksActive == true -> s.statusActive
-                            else -> s.statusInactive
-                        },
-                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
+                val statusDotColor = when {
+                    isPaused -> MaterialTheme.colorScheme.onSurfaceVariant
+                    linksActive == true -> Green500
+                    else -> Red500
                 }
-
-                if (isPaused) {
-                    Surface(
-                        color = MaterialTheme.colorScheme.surfaceVariant,
-                        shape = RoundedCornerShape(8.dp)
-                    ) {
-                        Text(
-                            text = s.statusPaused.uppercase(),
-                            style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-                        )
-                    }
-                }
+                Box(
+                    modifier = Modifier
+                        .size(10.dp)
+                        .clip(CircleShape)
+                        .background(statusDotColor)
+                )
+                Spacer(Modifier.width(10.dp))
+                Text(
+                    text = when {
+                        isPaused -> s.statusPaused
+                        linksActive == true -> s.statusActive
+                        else -> s.statusInactive
+                    },
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
             }
 
             Spacer(Modifier.height(14.dp))
