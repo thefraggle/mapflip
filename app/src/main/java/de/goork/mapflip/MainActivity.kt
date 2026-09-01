@@ -21,7 +21,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         handleIntent(intent)
-        Analytics.trackEvent("app_open")
+        if (savedInstanceState == null) {
+            Analytics.trackEvent("app_open")
+        }
 
         val repository = PreferencesRepository.getInstance(applicationContext)
 
