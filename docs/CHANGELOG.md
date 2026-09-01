@@ -1,3 +1,8 @@
+## 1.2.13
+- Automatische Zwischenablage-Erkennung: Erkennt kopierte Karten-Links beim App-Start sofort und bietet ein 1-Tap-Aktions-Banner zum direkten Öffnen in deiner Lieblings-Navigations-App
+- Optimierte Benutzeroberfläche: Aufgeräumte Statusanzeige und verbesserte Übersicht im Pausen-Modus
+- Feinschliff & Zuverlässigkeit: Präzisere Link-Verifizierung für aktuelle Android-Versionen und optimierte App-Reaktionszeiten
+
 ## 1.2.12
 - Stabilität & Performance: Zuverlässigere Hintergrund-Verarbeitung und optimierte App-Reaktionszeiten
 - Verbesserte Kompatibilität: Verfeinerte Weiterleitung für aktuelle Android-Versionen und Drittanbieter-Karten-Apps

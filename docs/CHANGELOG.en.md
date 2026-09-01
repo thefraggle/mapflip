@@ -1,3 +1,8 @@
+## 1.2.13
+- Automatic Clipboard Detection: Instantly detects copied map links upon opening the app and provides a 1-tap banner to launch them in your preferred navigation app
+- Refined User Interface: Cleaned up status layout and improved readability in pause mode
+- Polish & Reliability: Enhanced link handling verification for modern Android versions and overall performance tuning
+
 ## 1.2.12
 - Stability & Performance: More reliable background processing and improved app responsiveness
 - Enhanced Compatibility: Refined link redirection for modern Android versions and third-party map apps
