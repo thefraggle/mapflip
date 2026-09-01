@@ -1,3 +1,8 @@
+## 1.2.12
+- Stability & Performance: More reliable background processing and improved app responsiveness
+- Enhanced Compatibility: Refined link redirection for modern Android versions and third-party map apps
+- Polish: General quality improvements and optimizations under the hood
+
 ## 1.2.11
 - Stability & Performance: More reliable background processing and improved app responsiveness
 - Enhanced Compatibility: Refined link redirection for modern Android versions and third-party map apps

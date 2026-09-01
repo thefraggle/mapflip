@@ -1,3 +1,8 @@
+## 1.2.12
+- Stabilität & Performance: Zuverlässigere Hintergrund-Verarbeitung und optimierte App-Reaktionszeiten
+- Verbesserte Kompatibilität: Verfeinerte Weiterleitung für aktuelle Android-Versionen und Drittanbieter-Karten-Apps
+- Feinschliff: Allgemeine Qualitätsverbesserungen und Bereinigungen unter der Haube
+
 ## 1.2.11
 - Stabilität & Performance: Zuverlässigere Hintergrund-Verarbeitung und optimierte App-Reaktionszeiten
 - Verbesserte Kompatibilität: Verfeinerte Weiterleitung für aktuelle Android-Versionen und Drittanbieter-Karten-Apps
