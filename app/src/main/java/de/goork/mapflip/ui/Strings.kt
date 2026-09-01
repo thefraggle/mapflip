@@ -90,7 +90,9 @@ object Strings {
         val btnCopyLink: String = "Copy link",
         val linkCopiedToast: String = "Link copied to clipboard",
         val btnShareLink: String = "Share link",
-        val btnClearInput: String = "Clear"
+        val btnClearInput: String = "Clear",
+        val clipboardDetectedTitle: String = "Map link in clipboard",
+        val btnOpenInApp: String = "Open in %s"
     ) {
         val effectivePrivacyNote: String
             get() = if (de.goork.mapflip.BuildConfig.FLAVOR == "play" && privacyNotePlay.isNotBlank()) privacyNotePlay else privacyNote
@@ -109,6 +111,23 @@ object Strings {
                 btnTestLink.format(appName)
             } catch (_: Exception) {
                 "Test ($appName)"
+            }
+        }
+
+        fun openInButtonLabel(targetApp: de.goork.mapflip.navigation.TargetNavigationApp): String {
+            val appName = when (targetApp) {
+                de.goork.mapflip.navigation.TargetNavigationApp.GOOGLE_MAPS -> "Google Maps"
+                de.goork.mapflip.navigation.TargetNavigationApp.WAZE -> "Waze"
+                de.goork.mapflip.navigation.TargetNavigationApp.ORGANIC_MAPS -> "Organic Maps"
+                de.goork.mapflip.navigation.TargetNavigationApp.OSMAND -> "OsmAnd"
+                de.goork.mapflip.navigation.TargetNavigationApp.HERE_WEGO -> "HERE WeGo"
+                de.goork.mapflip.navigation.TargetNavigationApp.YANDEX_MAPS -> "Yandex Maps"
+                de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> if (sectionTargetApp.isNotBlank()) sectionTargetApp else "Navigation App"
+            }
+            return try {
+                btnOpenInApp.format(appName)
+            } catch (_: Exception) {
+                "Open in $appName"
             }
         }
     }
@@ -211,7 +230,9 @@ object Strings {
         btnCopyLink = "Link kopieren",
         linkCopiedToast = "Link in die Zwischenablage kopiert",
         btnShareLink = "Link teilen",
-        btnClearInput = "Löschen"
+        btnClearInput = "Löschen",
+        clipboardDetectedTitle = "Karten-Link in Zwischenablage",
+        btnOpenInApp = "In %s öffnen"
     )
 
     val EN = AppStrings(

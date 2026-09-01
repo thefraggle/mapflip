@@ -26,6 +26,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.ContentCopy
+import androidx.compose.material.icons.outlined.ContentPaste
 import androidx.compose.material.icons.outlined.ExpandLess
 import androidx.compose.material.icons.outlined.ExpandMore
 import androidx.compose.material.icons.outlined.Lock
@@ -50,6 +51,7 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDirection
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -100,6 +102,9 @@ fun MainScreen(
     }
 
     var linksActive by remember { mutableStateOf<Boolean?>(null) }
+    var detectedClipboardUrl by remember { mutableStateOf<String?>(null) }
+    var dismissedClipboardUrl by remember { mutableStateOf<String?>(null) }
+
     val lifecycleOwner = LocalLifecycleOwner.current
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
@@ -109,10 +114,28 @@ fun MainScreen(
                     Analytics.trackEvent("links_activated")
                 }
                 linksActive = currentStatus
+
+                // Detect map links in clipboard on app open / resume
+                try {
+                    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+                    val clipText = clipboard?.primaryClip?.getItemAt(0)?.text?.toString()
+                    val mapUrl = de.goork.mapflip.parser.UniversalMapParser.extractMapUrl(clipText)
+                    detectedClipboardUrl = mapUrl
+                } catch (_: Exception) {
+                    detectedClipboardUrl = null
+                }
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
         onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+    }
+
+    LaunchedEffect(detectedClipboardUrl) {
+        if (detectedClipboardUrl != null && detectedClipboardUrl != dismissedClipboardUrl) {
+            Analytics.trackEvent("clipboard_banner_shown", mapOf(
+                "source_service" to de.goork.mapflip.parser.UniversalMapParser.detectSourceService(detectedClipboardUrl)
+            ))
+        }
     }
 
     val isRtl = activeLangCode == "ar"
@@ -185,6 +208,47 @@ fun MainScreen(
                     )
 
                     Spacer(Modifier.height(20.dp))
+
+                    // Clipboard Action Banner (1-Tap Map Redirect when link found in clipboard)
+                    val showClipboardBanner = detectedClipboardUrl != null && detectedClipboardUrl != dismissedClipboardUrl
+                    AnimatedVisibility(
+                        visible = showClipboardBanner,
+                        enter = fadeIn() + expandVertically(),
+                        exit = fadeOut() + shrinkVertically()
+                    ) {
+                        Column {
+                            ClipboardBanner(
+                                s = s,
+                                url = detectedClipboardUrl ?: "",
+                                targetApp = userPreferences.targetApp,
+                                onOpen = {
+                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                    val url = detectedClipboardUrl
+                                    if (url != null) {
+                                        val parsed = de.goork.mapflip.parser.UniversalMapParser.parse(url)
+                                        val targetIntent = de.goork.mapflip.navigation.NavigationIntentBuilder.buildIntent(
+                                            parsed, userPreferences.targetApp, context
+                                        ).apply {
+                                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                        }
+                                        Analytics.trackEvent("clipboard_banner_clicked", mapOf(
+                                            "source_service" to de.goork.mapflip.parser.UniversalMapParser.detectSourceService(url),
+                                            "target_app" to userPreferences.targetApp.name.lowercase()
+                                        ))
+                                        try {
+                                            context.startActivity(targetIntent)
+                                        } catch (_: Exception) {}
+                                    }
+                                },
+                                onDismiss = {
+                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                    dismissedClipboardUrl = detectedClipboardUrl
+                                    Analytics.trackEvent("clipboard_banner_dismissed")
+                                }
+                            )
+                            Spacer(Modifier.height(16.dp))
+                        }
+                    }
 
                     // Status & Control Card (Active / Paused Status + Pause Switch)
                     StatusAndControlCard(
@@ -835,6 +899,120 @@ private fun AppFooter(s: Strings.AppStrings) {
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(12.dp)
             )
+        }
+    }
+}
+
+@Composable
+private fun ClipboardBanner(
+    s: Strings.AppStrings,
+    url: String,
+    targetApp: de.goork.mapflip.navigation.TargetNavigationApp,
+    onOpen: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    val serviceName = when (de.goork.mapflip.parser.UniversalMapParser.detectSourceService(url)) {
+        "apple" -> "Apple Maps"
+        "bing" -> "Bing Maps"
+        "osm" -> "OpenStreetMap"
+        "yandex" -> "Yandex Maps"
+        "here" -> "HERE WeGo"
+        "waze" -> "Waze"
+        else -> "Karten-Link"
+    }
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(
+                width = 1.5.dp,
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
+                shape = RoundedCornerShape(16.dp)
+            ),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f)
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(
+                    modifier = Modifier.weight(1f),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(28.dp)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colorScheme.primary),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.ContentPaste,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onPrimary,
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
+                    Spacer(Modifier.width(10.dp))
+                    Column {
+                        Text(
+                            text = s.clipboardDetectedTitle,
+                            style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                        Text(
+                            text = serviceName,
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
+                IconButton(
+                    onClick = onDismiss,
+                    modifier = Modifier.size(28.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Close,
+                        contentDescription = s.btnClose,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(16.dp)
+                    )
+                }
+            }
+
+            Spacer(Modifier.height(12.dp))
+
+            Button(
+                onClick = onOpen,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(44.dp),
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                )
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Outlined.OpenInNew,
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp)
+                )
+                Spacer(Modifier.width(8.dp))
+                Text(
+                    text = s.openInButtonLabel(targetApp),
+                    style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold)
+                )
+            }
         }
     }
 }
