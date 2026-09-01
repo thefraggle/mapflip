@@ -70,11 +70,26 @@ class RedirectActivity : Activity() {
                 try {
                     startActivity(targetIntent)
                 } catch (_: ActivityNotFoundException) {
+                    Analytics.trackEvent("redirect_fallback", mapOf(
+                        "target_app" to targetApp.name.lowercase(),
+                        "source_service" to sourceService,
+                        "reason" to "app_not_installed"
+                    ))
                     handleTargetNotFoundFallback(targetApp, dataUri, parsedLocation)
-                } catch (_: Exception) {
+                } catch (e: Exception) {
+                    Analytics.trackEvent("redirect_fallback", mapOf(
+                        "target_app" to targetApp.name.lowercase(),
+                        "source_service" to sourceService,
+                        "reason" to e.javaClass.simpleName
+                    ))
                     forwardOriginalUrl(dataUri)
                 }
             }
+        } else {
+            Analytics.trackEvent("redirect_failed", mapOf(
+                "reason" to "no_url_found",
+                "is_share_sheet" to isShareSheet
+            ))
         }
 
         finish()

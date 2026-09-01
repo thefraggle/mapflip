@@ -22,7 +22,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         handleIntent(intent)
         if (savedInstanceState == null) {
-            Analytics.trackEvent("app_open")
+            val linksActive = de.goork.mapflip.util.DomainVerificationHelper.checkLinksEnabled(applicationContext)
+            val props = mutableMapOf<String, Any>()
+            if (linksActive != null) {
+                props["links_active"] = linksActive
+            }
+            Analytics.trackEvent("app_open", props)
         }
 
         val repository = PreferencesRepository.getInstance(applicationContext)

@@ -104,7 +104,11 @@ fun MainScreen(
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
-                linksActive = checkLinksEnabled(context)
+                val currentStatus = de.goork.mapflip.util.DomainVerificationHelper.checkLinksEnabled(context)
+                if (linksActive == false && currentStatus == true) {
+                    Analytics.trackEvent("links_activated")
+                }
+                linksActive = currentStatus
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
@@ -268,7 +272,9 @@ fun MainScreen(
                                     .defaultMinSize(minHeight = 48.dp)
                                     .clickable {
                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                        isSetupGuideExpanded = !isSetupGuideExpanded
+                                        val willExpand = !isSetupGuideExpanded
+                                        isSetupGuideExpanded = willExpand
+                                        Analytics.trackEvent("setup_guide_toggled", mapOf("expanded" to willExpand))
                                     }
                                     .semantics {
                                         role = Role.Button
@@ -335,6 +341,7 @@ fun MainScreen(
                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                         val willExpand = !isLinkTesterExpanded
                                         isLinkTesterExpanded = willExpand
+                                        Analytics.trackEvent("tester_toggled", mapOf("expanded" to willExpand))
                                         if (willExpand && testInputUrl.isBlank()) {
                                             val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
                                             val clipText = clipboard?.primaryClip?.getItemAt(0)?.text?.toString()
@@ -803,20 +810,6 @@ private fun StepItem(number: String, title: String) {
     }
 }
 
-private fun checkLinksEnabled(context: Context): Boolean? {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-        return try {
-            val domainVerificationManager = context.getSystemService(
-                android.content.pm.verify.domain.DomainVerificationManager::class.java
-            )
-            val userState = domainVerificationManager?.getDomainVerificationUserState(context.packageName)
-            userState?.isLinkHandlingAllowed
-        } catch (_: Exception) {
-            null
-        }
-    }
-    return null
-}
 
 @Composable
 private fun AppFooter(s: Strings.AppStrings) {
