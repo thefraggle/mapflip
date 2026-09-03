@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import de.goork.mapflip.BuildConfig
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
@@ -28,8 +29,8 @@ import java.util.UUID
  */
 object Analytics {
     private const val TAG = "MapFlipAnalytics"
-    private const val APP_KEY = "A-SH-1812872922"
-    private const val CUSTOM_HOST = "https://telemetry-apps.goork.de"
+    private val APP_KEY = BuildConfig.APTABASE_KEY
+    private val CUSTOM_HOST = BuildConfig.APTABASE_HOST
     private const val SDK_VERSION = "aptabase-android@1.0.0"
     private const val SESSION_TIMEOUT_MS = 60 * 60 * 1000L // 1 hour
 
@@ -139,7 +140,7 @@ object Analytics {
     }
 
     fun trackEvent(eventName: String, properties: Map<String, Any> = emptyMap()) {
-        if (!isInitialized) return
+        if (!isInitialized || APP_KEY.isBlank() || CUSTOM_HOST.isBlank()) return
         scope.launch {
             try {
                 val systemPropsObj = JSONObject().apply {

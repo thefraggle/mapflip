@@ -1,3 +1,7 @@
+## 1.2.16
+- Sicherheit & Open-Source-Hygiene: Telemetrie-Zugangsdaten (Aptabase Ingest-Key & Host) vollständig aus dem öffentlichen Quellcode entfernt und in sichere Build-Konfigurationen ausgelagert
+- Robustheit & Stabilität: Automatischer No-Op-Fallback für Telemetrie bei fehlenden Konfigurationsdaten in Test- und Fork-Builds
+
 ## 1.2.15
 - Stabilität & Crash-Schutz: Absicherung sämtlicher Zwischenablage-Zugriffe im Link-Tester gegen leere Daten und Sicherheitsbeschränkungen
 - GPS-Präzision: Koordinatenübergabe auf 6 Nachkommastellen (~11 cm Genauigkeit) für exakte Zielnavigation optimiert

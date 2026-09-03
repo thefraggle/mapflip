@@ -1,3 +1,7 @@
+## 1.2.16
+- Security & Open Source Hygiene: Completely decoupled telemetry credentials (Aptabase Ingest Key & Host) from public source code into secure build configurations
+- Resilience & Reliability: Graceful no-op fallback for telemetry when credentials are omitted in test or fork builds
+
 ## 1.2.15
 - Stability & Crash Prevention: Shielded all clipboard interactions in the Link Tester against empty data or permission boundaries
 - GPS Precision: Enhanced coordinate formatting to 6 decimal places (~11 cm accuracy) for pinpoint navigation

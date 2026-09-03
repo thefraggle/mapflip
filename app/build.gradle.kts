@@ -7,16 +7,21 @@ plugins {
     alias(libs.plugins.compose.compiler)
 }
 
-// Load signing properties
+// Load signing properties & optional telemetry keys
 val keystorePropertiesFile = rootProject.file("keystore.properties")
 val keystoreProperties = Properties()
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
-val appVersion = "1.2.15"
+val aptabaseKey: String = System.getenv("APTABASE_KEY")
+    ?: keystoreProperties.getProperty("aptabaseKey", "")
+val aptabaseHost: String = System.getenv("APTABASE_HOST")
+    ?: keystoreProperties.getProperty("aptabaseHost", "https://telemetry-apps.goork.de")
 
-val appVersionCode = 315018
+val appVersion = "1.2.16"
+
+val appVersionCode = 315019
 
 android {
     namespace = "de.goork.mapflip"
@@ -76,9 +81,13 @@ android {
     productFlavors {
         create("play") {
             dimension = "distribution"
+            buildConfigField("String", "APTABASE_KEY", "\"$aptabaseKey\"")
+            buildConfigField("String", "APTABASE_HOST", "\"$aptabaseHost\"")
         }
         create("foss") {
             dimension = "distribution"
+            buildConfigField("String", "APTABASE_KEY", "\"\"")
+            buildConfigField("String", "APTABASE_HOST", "\"\"")
         }
     }
 }

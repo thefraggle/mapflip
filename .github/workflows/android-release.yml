@@ -65,6 +65,8 @@ jobs:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          APTABASE_KEY: ${{ secrets.APTABASE_KEY }}
+          APTABASE_HOST: ${{ secrets.APTABASE_HOST }}
         run: |
           # Decode keystore JKS file into RUNNER_TEMP
           python3 -c "import os, base64; open(os.environ['RUNNER_TEMP'] + '/keystore.jks', 'wb').write(base64.b64decode(os.environ['KEYSTORE_BASE64']))"
@@ -74,8 +76,17 @@ jobs:
           echo "storePassword=$KEYSTORE_PASSWORD" >> keystore.properties
           echo "keyAlias=$KEY_ALIAS" >> keystore.properties
           echo "keyPassword=$KEY_PASSWORD" >> keystore.properties
+          if [ -n "$APTABASE_KEY" ]; then
+            echo "aptabaseKey=$APTABASE_KEY" >> keystore.properties
+          fi
+          if [ -n "$APTABASE_HOST" ]; then
+            echo "aptabaseHost=$APTABASE_HOST" >> keystore.properties
+          fi
 
       - name: Build Signed Release APK & AAB
+        env:
+          APTABASE_KEY: ${{ secrets.APTABASE_KEY }}
+          APTABASE_HOST: ${{ secrets.APTABASE_HOST }}
         run: |
           ./gradlew :app:assemblePlayRelease :app:bundlePlayRelease :app:assembleFossRelease \
             --build-cache --parallel --configuration-cache \
