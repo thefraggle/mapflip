@@ -1,3 +1,7 @@
+## 1.2.14
+- Stabilitäts-Fix: Behebt einen kritischen Start-Absturz bei abgelaufenen Pausenzeiten in den Einstellungen
+- Fehlerbehandlung & Robustheit: System- und Zwischenablage-Zugriffe beim Start noch widerstandsfähiger gestaltet
+
 ## 1.2.13
 - Automatische Zwischenablage-Erkennung: Erkennt kopierte Karten-Links beim App-Start sofort und bietet ein 1-Tap-Aktions-Banner zum direkten Öffnen in deiner Lieblings-Navigations-App
 - Optimierte Benutzeroberfläche: Aufgeräumte Statusanzeige und verbesserte Übersicht im Pausen-Modus

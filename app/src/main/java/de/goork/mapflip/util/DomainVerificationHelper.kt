@@ -22,7 +22,7 @@ object DomainVerificationHelper {
                     state == DomainVerificationUserState.DOMAIN_STATE_SELECTED ||
                     state == DomainVerificationUserState.DOMAIN_STATE_VERIFIED
                 }
-            } catch (_: Exception) {
+            } catch (_: Throwable) {
                 null
             }
         }

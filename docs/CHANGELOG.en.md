@@ -1,3 +1,7 @@
+## 1.2.14
+- Stability Fix: Fixes a critical crash on application launch when a temporary pause period had expired
+- Resilience: Hardened system service and clipboard access during startup
+
 ## 1.2.13
 - Automatic Clipboard Detection: Instantly detects copied map links upon opening the app and provides a 1-tap banner to launch them in your preferred navigation app
 - Refined User Interface: Cleaned up status layout and improved readability in pause mode

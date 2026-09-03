@@ -118,10 +118,11 @@ fun MainScreen(
                 // Detect map links in clipboard on app open / resume
                 try {
                     val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
-                    val clipText = clipboard?.primaryClip?.getItemAt(0)?.text?.toString()
+                    val clip = clipboard?.takeIf { it.hasPrimaryClip() }?.primaryClip
+                    val clipText = if (clip != null && clip.itemCount > 0) clip.getItemAt(0)?.text?.toString() else null
                     val mapUrl = de.goork.mapflip.parser.UniversalMapParser.extractMapUrl(clipText)
                     detectedClipboardUrl = mapUrl
-                } catch (_: Exception) {
+                } catch (_: Throwable) {
                     detectedClipboardUrl = null
                 }
             }

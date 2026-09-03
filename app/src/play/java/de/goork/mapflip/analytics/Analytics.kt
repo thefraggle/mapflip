@@ -71,7 +71,7 @@ object Analytics {
 
             refreshSessionId()
             isInitialized = true
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             Log.w(TAG, "Failed to initialize Analytics", e)
         }
     }
@@ -113,7 +113,7 @@ object Analytics {
                     System.getProperty("ro.kernel.qemu") == "1"
 
             isDebuggable || isTestLab || isTestHarness || isEmulator
-        } catch (_: Exception) {
+        } catch (_: Throwable) {
             false
         }
     }

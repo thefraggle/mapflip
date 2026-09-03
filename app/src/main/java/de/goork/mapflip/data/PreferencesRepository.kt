@@ -21,16 +21,17 @@ data class UserPreferences(
  * Single source of truth for persistent user preferences and application state.
  * Manages reactive state flow and provides thread-safe access.
  */
-class PreferencesRepository private constructor(context: Context) {
+class PreferencesRepository internal constructor(private val prefs: SharedPreferences) {
 
-    private val appContext = context.applicationContext
-    private val prefs: SharedPreferences = appContext.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE)
+    private constructor(context: Context) : this(
+        context.applicationContext.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE)
+    )
 
     private val _preferences = MutableStateFlow(readCurrentPreferences())
     val preferences: StateFlow<UserPreferences> = _preferences.asStateFlow()
 
     private val prefChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { _, _ ->
-        _preferences.value = readCurrentPreferences()
+        _preferences?.value = readCurrentPreferences()
     }
 
     init {
@@ -41,14 +42,14 @@ class PreferencesRepository private constructor(context: Context) {
 
     fun setLanguage(language: String) {
         prefs.edit().putString(AppConstants.PREFS_KEY_LANG, language).apply()
-        _preferences.value = readCurrentPreferences()
+        _preferences?.value = readCurrentPreferences()
     }
 
     fun getTheme(): String = prefs.getString(AppConstants.PREFS_KEY_THEME, "system") ?: "system"
 
     fun setTheme(theme: String) {
         prefs.edit().putString(AppConstants.PREFS_KEY_THEME, theme).apply()
-        _preferences.value = readCurrentPreferences()
+        _preferences?.value = readCurrentPreferences()
     }
 
     fun getTargetApp(): TargetNavigationApp {
@@ -58,7 +59,7 @@ class PreferencesRepository private constructor(context: Context) {
 
     fun setTargetApp(targetApp: TargetNavigationApp) {
         prefs.edit().putString(AppConstants.PREFS_KEY_TARGET_APP, targetApp.id).apply()
-        _preferences.value = readCurrentPreferences()
+        _preferences?.value = readCurrentPreferences()
     }
 
     fun isCurrentlyPaused(): Boolean {
@@ -69,8 +70,11 @@ class PreferencesRepository private constructor(context: Context) {
         if (pausedUntil > 0L) {
             val now = System.currentTimeMillis()
             if (now >= pausedUntil) {
-                // Pause expired, auto-resume
-                unpause()
+                // Pause expired, auto-resume in storage without triggering recursive state mutation
+                prefs.edit()
+                    .putBoolean(AppConstants.PREFS_KEY_PAUSED, false)
+                    .putLong(PREFS_KEY_PAUSED_UNTIL, 0L)
+                    .apply()
                 return false
             }
         }
@@ -106,7 +110,7 @@ class PreferencesRepository private constructor(context: Context) {
             .putBoolean(AppConstants.PREFS_KEY_PAUSED, paused)
             .putLong(PREFS_KEY_PAUSED_UNTIL, untilTimestamp)
             .apply()
-        _preferences.value = readCurrentPreferences()
+        _preferences?.value = readCurrentPreferences()
     }
 
     private fun readCurrentPreferences(): UserPreferences {
@@ -131,6 +135,10 @@ class PreferencesRepository private constructor(context: Context) {
             return INSTANCE ?: synchronized(this) {
                 INSTANCE ?: PreferencesRepository(context).also { INSTANCE = it }
             }
+        }
+
+        internal fun createForTesting(prefs: SharedPreferences): PreferencesRepository {
+            return PreferencesRepository(prefs)
         }
     }
 }
