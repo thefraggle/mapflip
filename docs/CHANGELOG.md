@@ -1,9 +1,9 @@
 ## 1.2.17
-- UX: Status-Badges („Installiert“ / „Nicht installiert“) im Ziel-App-Auswahldialog zur schnellen Orientierung in allen 19 Sprachen
-- Barrierefreiheit: Touch-Target für den „Einfügen“-Button im Link-Tester auf mindestens 48 dp vergrößert
-- GPS-Präzision: Koordinatenübergabe auf 6 Nachkommastellen (~11 cm Genauigkeit) für exakte Zielnavigation optimiert
-- Kartendienste: HERE WeGo und Yandex Maps als Ziel-Apps sowie universelles Multi-Karten-Parsing (Bing, OSM, HERE, Waze, Yandex) vereinheitlicht
-- Open Source: Standardisierte GitHub Issue-Templates für Bug-Reports und Feature-Requests hinzugefügt
+- UX: Status-Badges („Installiert“ / „Nicht installiert“) im Ziel-App-Auswahldialog
+- Barrierefreiheit: Touch-Target für „Einfügen“-Button im Link-Tester auf 48 dp vergrößert
+- GPS-Präzision: Koordinatenübergabe auf 6 Nachkommastellen (~11 cm) optimiert
+- Kartendienste: HERE WeGo und Yandex Maps als Ziel-Apps sowie Multi-Karten-Parsing vereinheitlicht
+- Open Source: GitHub Issue-Templates für Bug-Reports und Feature-Requests ergänzt
 
 ## 1.2.16
 - Sicherheit & Open-Source-Hygiene: Telemetrie-Zugangsdaten (Aptabase Ingest-Key & Host) vollständig aus dem öffentlichen Quellcode entfernt und in sichere Build-Konfigurationen ausgelagert

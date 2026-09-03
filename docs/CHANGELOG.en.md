@@ -1,9 +1,9 @@
 ## 1.2.17
-- UX: Added status badges ("Installed" / "Not installed") in target navigation app picker across all 19 languages
-- Accessibility: Increased touch target for "Paste" button in Link Tester to at least 48 dp
-- GPS Precision: Optimized coordinates formatting to 6 decimal places (~11 cm accuracy) for exact routing
-- Map Services: Added HERE WeGo and Yandex Maps as target apps and unified multi-map parsing (Bing, OSM, HERE, Waze, Yandex)
-- Open Source: Added standardized GitHub issue templates for bug reports and feature requests
+- UX: Added status badges ("Installed" / "Not installed") in target app picker
+- Accessibility: Increased touch target for "Paste" button in Link Tester to 48 dp
+- GPS Precision: Optimized coordinates formatting to 6 decimal places (~11 cm)
+- Map Services: Added HERE WeGo and Yandex Maps as target apps and unified multi-map parsing
+- Open Source: Added GitHub issue templates for bug reports and feature requests
 
 ## 1.2.16
 - Security & Open Source Hygiene: Completely decoupled telemetry credentials (Aptabase Ingest Key & Host) from public source code into secure build configurations
