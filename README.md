@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Google Play](https://img.shields.io/badge/Google_Play-Available-green.svg)](https://play.google.com/store/apps/details?id=de.goork.mapflip)
 [![F-Droid](https://img.shields.io/badge/F--Droid-In_Review-orange.svg)](https://gitlab.com/fdroid/fdroiddata/-/merge_requests/45011)
-[![Build Status](https://github.com/thefraggle/mapflip/actions/workflows/ci.yml/badge.svg)](https://github.com/thefraggle/mapflip/actions/workflows/ci.yml)
+[![Build Status](https://github.com/thefraggle/mapflip/actions/workflows/android-release.yml/badge.svg)](https://github.com/thefraggle/mapflip/actions/workflows/android-release.yml)
 
 > **No more clunky web previews or broken map links on Android.**  
 > MapFlip is a lightweight Android utility that intercepts map links and seamlessly redirects them directly into your favorite navigation app.
