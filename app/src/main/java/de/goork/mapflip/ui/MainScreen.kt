@@ -116,15 +116,8 @@ fun MainScreen(
                 linksActive = currentStatus
 
                 // Detect map links in clipboard on app open / resume
-                try {
-                    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
-                    val clip = clipboard?.takeIf { it.hasPrimaryClip() }?.primaryClip
-                    val clipText = if (clip != null && clip.itemCount > 0) clip.getItemAt(0)?.text?.toString() else null
-                    val mapUrl = de.goork.mapflip.parser.UniversalMapParser.extractMapUrl(clipText)
-                    detectedClipboardUrl = mapUrl
-                } catch (_: Throwable) {
-                    detectedClipboardUrl = null
-                }
+                val clipText = getClipboardTextSafely(context)
+                detectedClipboardUrl = de.goork.mapflip.parser.UniversalMapParser.extractMapUrl(clipText)
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
@@ -312,7 +305,7 @@ fun MainScreen(
                     Spacer(Modifier.height(20.dp))
 
                     // Collapsible Setup Instructions Card (Accordion)
-                    val guideExpandDesc = if (isSetupGuideExpanded) "Einklappen" else "Ausklappen"
+                    val guideExpandDesc = if (isSetupGuideExpanded) s.actionCollapse else s.actionExpand
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -379,7 +372,7 @@ fun MainScreen(
                     Spacer(Modifier.height(16.dp))
 
                     // Collapsible Link Tester Card (Accordion)
-                    val testerExpandDesc = if (isLinkTesterExpanded) "Einklappen" else "Ausklappen"
+                    val testerExpandDesc = if (isLinkTesterExpanded) s.actionCollapse else s.actionExpand
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -408,13 +401,10 @@ fun MainScreen(
                                         isLinkTesterExpanded = willExpand
                                         Analytics.trackEvent("tester_toggled", mapOf("expanded" to willExpand))
                                         if (willExpand && testInputUrl.isBlank()) {
-                                            val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
-                                            val clipText = clipboard?.primaryClip?.getItemAt(0)?.text?.toString()
-                                            if (!clipText.isNullOrBlank()) {
-                                                val mapUrl = UniversalMapParser.extractMapUrl(clipText)
-                                                if (mapUrl != null) {
-                                                    testInputUrl = mapUrl
-                                                }
+                                            val clipText = getClipboardTextSafely(context)
+                                            val mapUrl = UniversalMapParser.extractMapUrl(clipText)
+                                            if (mapUrl != null) {
+                                                testInputUrl = mapUrl
                                             }
                                         }
                                     }
@@ -481,8 +471,7 @@ fun MainScreen(
                                                 TextButton(
                                                     onClick = {
                                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                                        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
-                                                        val clipText = clipboard?.primaryClip?.getItemAt(0)?.text?.toString()
+                                                        val clipText = getClipboardTextSafely(context)
                                                         if (!clipText.isNullOrBlank()) {
                                                             testInputUrl = clipText.trim()
                                                         }
@@ -619,7 +608,7 @@ fun MainScreen(
                                                             de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> s.sectionTargetApp
                                                             else -> userPreferences.targetApp.displayName
                                                         }
-                                                        Toast.makeText(context, "$appName is not installed", Toast.LENGTH_SHORT).show()
+                                                        Toast.makeText(context, s.appNotInstalledToast(appName), Toast.LENGTH_SHORT).show()
                                                     } catch (_: Exception) {
                                                         try {
                                                             val fallback = Intent(Intent.ACTION_VIEW, Uri.parse(convertedTargetUri)).apply {
@@ -627,7 +616,7 @@ fun MainScreen(
                                                             }
                                                             context.startActivity(fallback)
                                                         } catch (_: Exception) {
-                                                            Toast.makeText(context, "Target app could not be opened", Toast.LENGTH_SHORT).show()
+                                                            Toast.makeText(context, s.targetAppOpenError, Toast.LENGTH_SHORT).show()
                                                         }
                                                     }
                                                 },
@@ -1017,3 +1006,14 @@ private fun ClipboardBanner(
         }
     }
 }
+
+private fun getClipboardTextSafely(context: Context): String? {
+    return try {
+        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+        val clip = clipboard?.takeIf { it.hasPrimaryClip() }?.primaryClip
+        if (clip != null && clip.itemCount > 0) clip.getItemAt(0)?.text?.toString() else null
+    } catch (_: Throwable) {
+        null
+    }
+}
+

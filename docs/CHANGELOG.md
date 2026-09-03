@@ -1,3 +1,10 @@
+## 1.2.15
+- Stabilität & Crash-Schutz: Absicherung sämtlicher Zwischenablage-Zugriffe im Link-Tester gegen leere Daten und Sicherheitsbeschränkungen
+- GPS-Präzision: Koordinatenübergabe auf 6 Nachkommastellen (~11 cm Genauigkeit) für exakte Zielnavigation optimiert
+- Vollständige Lokalisierung: Aktions-Banner, Screenreader-Texte und Hinweismeldungen über alle 19 Sprachen vervollständigt
+- Unsichtbare Weiterleitung: Schließanimationen auf Android 14+ für nahtlose Weiterleitung unterdrückt
+- Parser-Härtung & Web-Fallback: Robusteres Parsing bei Sonderzeichen in Karten-URLs
+
 ## 1.2.14
 - Stabilitäts-Fix: Behebt einen kritischen Start-Absturz bei abgelaufenen Pausenzeiten in den Einstellungen
 - Fehlerbehandlung & Robustheit: System- und Zwischenablage-Zugriffe beim Start noch widerstandsfähiger gestaltet

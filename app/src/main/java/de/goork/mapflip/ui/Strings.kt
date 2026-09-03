@@ -92,7 +92,11 @@ object Strings {
         val btnShareLink: String = "Share link",
         val btnClearInput: String = "Clear",
         val clipboardDetectedTitle: String = "Map link in clipboard",
-        val btnOpenInApp: String = "Open in %s"
+        val btnOpenInApp: String = "Open in %s",
+        val actionExpand: String = "Expand",
+        val actionCollapse: String = "Collapse",
+        val appNotInstalled: String = "%s is not installed",
+        val targetAppOpenError: String = "Target app could not be opened"
     ) {
         val effectivePrivacyNote: String
             get() = if (de.goork.mapflip.BuildConfig.FLAVOR == "play" && privacyNotePlay.isNotBlank()) privacyNotePlay else privacyNote
@@ -128,6 +132,14 @@ object Strings {
                 btnOpenInApp.format(appName)
             } catch (_: Exception) {
                 "Open in $appName"
+            }
+        }
+
+        fun appNotInstalledToast(appName: String): String {
+            return try {
+                appNotInstalled.format(appName)
+            } catch (_: Exception) {
+                "$appName is not installed"
             }
         }
     }
@@ -232,7 +244,11 @@ object Strings {
         btnShareLink = "Link teilen",
         btnClearInput = "Löschen",
         clipboardDetectedTitle = "Karten-Link in Zwischenablage",
-        btnOpenInApp = "In %s öffnen"
+        btnOpenInApp = "In %s öffnen",
+        actionExpand = "Ausklappen",
+        actionCollapse = "Einklappen",
+        appNotInstalled = "%s ist nicht installiert",
+        targetAppOpenError = "Ziel-App konnte nicht geöffnet werden"
     )
 
     val EN = AppStrings(
@@ -286,7 +302,13 @@ object Strings {
         privacyPolicyTitle = "Privacy Policy",
         sectionGeneral = "General",
         sectionAbout = "About",
-        quickGuideTitle = "Setup Guide"
+        quickGuideTitle = "Setup Guide",
+        clipboardDetectedTitle = "Map link in clipboard",
+        btnOpenInApp = "Open in %s",
+        actionExpand = "Expand",
+        actionCollapse = "Collapse",
+        appNotInstalled = "%s is not installed",
+        targetAppOpenError = "Target app could not be opened"
     )
 
     val DA = EN.copy(
@@ -341,7 +363,13 @@ object Strings {
         btnCopyLink = "Kopier link",
         linkCopiedToast = "Link kopieret til udklipsholder",
         btnShareLink = "Del link",
-        btnClearInput = "Ryd"
+        btnClearInput = "Ryd",
+        clipboardDetectedTitle = "Kortlink i udklipsholder",
+        btnOpenInApp = "Åbn i %s",
+        actionExpand = "Fold ud",
+        actionCollapse = "Fold sammen",
+        appNotInstalled = "%s er ikke installeret",
+        targetAppOpenError = "Destinationsapp kunne ikke åbnes"
     )
 
     val FR = EN.copy(
@@ -396,7 +424,13 @@ object Strings {
         btnCopyLink = "Copier le lien",
         linkCopiedToast = "Lien copié dans le presse-papiers",
         btnShareLink = "Partager le lien",
-        btnClearInput = "Effacer"
+        btnClearInput = "Effacer",
+        clipboardDetectedTitle = "Lien de carte dans le presse-papiers",
+        btnOpenInApp = "Ouvrir dans %s",
+        actionExpand = "Développer",
+        actionCollapse = "Réduire",
+        appNotInstalled = "%s n'est pas installée",
+        targetAppOpenError = "Impossible d'ouvrir l'application cible"
     )
 
     val IT = EN.copy(
@@ -451,7 +485,13 @@ object Strings {
         btnCopyLink = "Copia link",
         linkCopiedToast = "Link copiato negli appunti",
         btnShareLink = "Condividi link",
-        btnClearInput = "Cancella"
+        btnClearInput = "Cancella",
+        clipboardDetectedTitle = "Link mappa negli appunti",
+        btnOpenInApp = "Apri in %s",
+        actionExpand = "Espandi",
+        actionCollapse = "Comprimi",
+        appNotInstalled = "%s non è installata",
+        targetAppOpenError = "Impossibile aprire l'app di destinazione"
     )
 
     val JA = EN.copy(
@@ -506,7 +546,13 @@ object Strings {
         btnCopyLink = "リンクをコピー",
         linkCopiedToast = "リンクをクリップボードにコピーしました",
         btnShareLink = "リンクを共有",
-        btnClearInput = "クリア"
+        btnClearInput = "クリア",
+        clipboardDetectedTitle = "クリップボードのマップリンク",
+        btnOpenInApp = "%sで開く",
+        actionExpand = "展開",
+        actionCollapse = "折りたたむ",
+        appNotInstalled = "%sがインストールされていません",
+        targetAppOpenError = "対象アプリを開けませんでした"
     )
 
     val NL = EN.copy(
@@ -561,7 +607,13 @@ object Strings {
         btnCopyLink = "Link kopiëren",
         linkCopiedToast = "Link gekopieerd naar klembord",
         btnShareLink = "Link delen",
-        btnClearInput = "Wissen"
+        btnClearInput = "Wissen",
+        clipboardDetectedTitle = "Kaartlink op klembord",
+        btnOpenInApp = "Openen in %s",
+        actionExpand = "Uitklappen",
+        actionCollapse = "Inklappen",
+        appNotInstalled = "%s is niet geïnstalleerd",
+        targetAppOpenError = "Doel-app kon niet worden geopend"
     )
 
     val NO = EN.copy(
@@ -616,7 +668,13 @@ object Strings {
         btnCopyLink = "Kopier lenke",
         linkCopiedToast = "Lenke kopiert til utklippstavlen",
         btnShareLink = "Del lenke",
-        btnClearInput = "Tøm"
+        btnClearInput = "Tøm",
+        clipboardDetectedTitle = "Kartlenke i utklippstavlen",
+        btnOpenInApp = "Åpne i %s",
+        actionExpand = "Vis mer",
+        actionCollapse = "Vis mindre",
+        appNotInstalled = "%s er ikke installert",
+        targetAppOpenError = "Målappen kunne ikke åpnes"
     )
 
     val PL = EN.copy(
@@ -671,7 +729,13 @@ object Strings {
         btnCopyLink = "Kopiuj link",
         linkCopiedToast = "Link skopiowany do schowka",
         btnShareLink = "Udostępnij link",
-        btnClearInput = "Wyczyść"
+        btnClearInput = "Wyczyść",
+        clipboardDetectedTitle = "Link do mapy w schowku",
+        btnOpenInApp = "Otwórz w %s",
+        actionExpand = "Rozwiń",
+        actionCollapse = "Zwiń",
+        appNotInstalled = "Aplikacja %s nie jest zainstalowana",
+        targetAppOpenError = "Nie udało się otworzyć aplikacji docelowej"
     )
 
     val PT = EN.copy(
@@ -726,7 +790,13 @@ object Strings {
         btnCopyLink = "Copiar link",
         linkCopiedToast = "Link copiado para a área de transferência",
         btnShareLink = "Compartilhar link",
-        btnClearInput = "Limpar"
+        btnClearInput = "Limpar",
+        clipboardDetectedTitle = "Link de mapa na área de transferência",
+        btnOpenInApp = "Abrir no %s",
+        actionExpand = "Expandir",
+        actionCollapse = "Recolher",
+        appNotInstalled = "%s não está instalado",
+        targetAppOpenError = "Não foi possível abrir o app de destino"
     )
 
     val SV = EN.copy(
@@ -781,7 +851,13 @@ object Strings {
         btnCopyLink = "Kopiera länk",
         linkCopiedToast = "Länk kopierad till urklipp",
         btnShareLink = "Dela länk",
-        btnClearInput = "Rensa"
+        btnClearInput = "Rensa",
+        clipboardDetectedTitle = "Kartlänk i urklipp",
+        btnOpenInApp = "Öppna i %s",
+        actionExpand = "Fäll ut",
+        actionCollapse = "Fäll ihop",
+        appNotInstalled = "%s är inte installerad",
+        targetAppOpenError = "Målappen kunde inte öppnas"
     )
 
     val ES = EN.copy(
@@ -836,7 +912,13 @@ object Strings {
         btnCopyLink = "Copiar enlace",
         linkCopiedToast = "Enlace copiado al portapapeles",
         btnShareLink = "Compartir enlace",
-        btnClearInput = "Borrar"
+        btnClearInput = "Borrar",
+        clipboardDetectedTitle = "Enlace de mapa en el portapapeles",
+        btnOpenInApp = "Abrir en %s",
+        actionExpand = "Desplegar",
+        actionCollapse = "Plegar",
+        appNotInstalled = "%s no está instalada",
+        targetAppOpenError = "No se pudo abrir la app de destino"
     )
 
     val TR = EN.copy(
@@ -891,7 +973,13 @@ object Strings {
         btnCopyLink = "Bağlantıyı kopyala",
         linkCopiedToast = "Bağlantı panoya kopyalandı",
         btnShareLink = "Bağlantıyı paylaş",
-        btnClearInput = "Temizle"
+        btnClearInput = "Temizle",
+        clipboardDetectedTitle = "Panodaki harita bağlantısı",
+        btnOpenInApp = "%s ile Aç",
+        actionExpand = "Genişlet",
+        actionCollapse = "Daralt",
+        appNotInstalled = "%s yüklü değil",
+        targetAppOpenError = "Hedef uygulama açılamadı"
     )
 
     val KO = EN.copy(
@@ -946,7 +1034,13 @@ object Strings {
         btnCopyLink = "링크 복사",
         linkCopiedToast = "링크가 클립보드에 복사되었습니다",
         btnShareLink = "링크 공유",
-        btnClearInput = "지우기"
+        btnClearInput = "지우기",
+        clipboardDetectedTitle = "클립보드의 지도 링크",
+        btnOpenInApp = "%s에서 열기",
+        actionExpand = "펼치기",
+        actionCollapse = "접기",
+        appNotInstalled = "%s 앱이 설치되어 있지 않습니다",
+        targetAppOpenError = "대상 앱을 열 수 없습니다"
     )
 
     val ZH_CN = EN.copy(
@@ -1001,7 +1095,13 @@ object Strings {
         btnCopyLink = "复制链接",
         linkCopiedToast = "链接已复制到剪贴板",
         btnShareLink = "分享链接",
-        btnClearInput = "清除"
+        btnClearInput = "清除",
+        clipboardDetectedTitle = "剪贴板中的地图链接",
+        btnOpenInApp = "在 %s 中打开",
+        actionExpand = "展开",
+        actionCollapse = "折叠",
+        appNotInstalled = "未安装 %s",
+        targetAppOpenError = "无法打开目标应用"
     )
 
     val ZH_TW = EN.copy(
@@ -1056,7 +1156,13 @@ object Strings {
         btnCopyLink = "複製連結",
         linkCopiedToast = "連結已複製到剪貼簿",
         btnShareLink = "分享連結",
-        btnClearInput = "清除"
+        btnClearInput = "清除",
+        clipboardDetectedTitle = "剪貼簿中的地圖連結",
+        btnOpenInApp = "在 %s 中開啟",
+        actionExpand = "展開",
+        actionCollapse = "收合",
+        appNotInstalled = "尚未安裝 %s",
+        targetAppOpenError = "無法開啟目標應用程式"
     )
 
     val AR = EN.copy(
@@ -1111,7 +1217,13 @@ object Strings {
         btnCopyLink = "نسخ الرابط",
         linkCopiedToast = "تم نسخ الرابط إلى الحافظة",
         btnShareLink = "مشاركة الرابط",
-        btnClearInput = "مسح"
+        btnClearInput = "مسح",
+        clipboardDetectedTitle = "رابط خريطة في الحافظة",
+        btnOpenInApp = "فتح في %s",
+        actionExpand = "توسيع",
+        actionCollapse = "طي",
+        appNotInstalled = "%s غير مثبت",
+        targetAppOpenError = "تعذر فتح التطبيق المطلوب"
     )
 
     val RU = EN.copy(
@@ -1166,7 +1278,13 @@ object Strings {
         btnCopyLink = "Скопировать ссылку",
         linkCopiedToast = "Ссылка скопирована в буфер обмена",
         btnShareLink = "Поделиться ссылкой",
-        btnClearInput = "Очистить"
+        btnClearInput = "Очистить",
+        clipboardDetectedTitle = "Ссылка на карту в буфере",
+        btnOpenInApp = "Открыть в %s",
+        actionExpand = "Развернуть",
+        actionCollapse = "Свернуть",
+        appNotInstalled = "Приложение %s не установлено",
+        targetAppOpenError = "Не удалось открыть целевое приложение"
     )
 
     val ID = EN.copy(
@@ -1221,6 +1339,12 @@ object Strings {
         btnCopyLink = "Salin tautan",
         linkCopiedToast = "Tautan disalin ke papan klip",
         btnShareLink = "Bagikan tautan",
-        btnClearInput = "Hapus"
+        btnClearInput = "Hapus",
+        clipboardDetectedTitle = "Tautan peta di papan klip",
+        btnOpenInApp = "Buka di %s",
+        actionExpand = "Bentangkan",
+        actionCollapse = "Ciutkan",
+        appNotInstalled = "%s tidak terinstal",
+        targetAppOpenError = "Aplikasi tujuan tidak dapat dibuka"
     )
 }

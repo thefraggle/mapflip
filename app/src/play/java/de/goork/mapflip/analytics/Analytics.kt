@@ -166,22 +166,28 @@ object Analytics {
                 }
 
                 val url = URL("$CUSTOM_HOST/api/v0/event")
-                val connection = (url.openConnection() as HttpURLConnection).apply {
-                    requestMethod = "POST"
-                    connectTimeout = 10000
-                    readTimeout = 10000
-                    doOutput = true
-                    setRequestProperty("App-Key", APP_KEY)
-                    setRequestProperty("Content-Type", "application/json; charset=utf-8")
-                }
+                var connection: HttpURLConnection? = null
+                try {
+                    connection = (url.openConnection() as HttpURLConnection).apply {
+                        requestMethod = "POST"
+                        connectTimeout = 10000
+                        readTimeout = 10000
+                        doOutput = true
+                        setRequestProperty("App-Key", APP_KEY)
+                        setRequestProperty("Content-Type", "application/json; charset=utf-8")
+                    }
 
-                OutputStreamWriter(connection.outputStream, Charsets.UTF_8).use { writer ->
-                    writer.write(payload.toString())
-                    writer.flush()
-                }
+                    OutputStreamWriter(connection.outputStream, Charsets.UTF_8).use { writer ->
+                        writer.write(payload.toString())
+                        writer.flush()
+                    }
 
-                connection.responseCode // Triggers request execution
-                connection.disconnect()
+                    connection.responseCode // Triggers request execution
+                } finally {
+                    try {
+                        connection?.disconnect()
+                    } catch (_: Throwable) {}
+                }
             } catch (_: Throwable) {
                 // Silently swallow analytics errors to never impact UX
             }

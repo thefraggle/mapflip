@@ -1,3 +1,10 @@
+## 1.2.15
+- Stability & Crash Prevention: Shielded all clipboard interactions in the Link Tester against empty data or permission boundaries
+- GPS Precision: Enhanced coordinate formatting to 6 decimal places (~11 cm accuracy) for pinpoint navigation
+- Complete Localization: Localized action banners, screen reader labels, and toasts across all 19 supported languages
+- Seamless Redirects: Suppressed exit transitions on Android 14+ for invisible link forwarding
+- Parser Hardening: Improved web fallback handling for special characters in map URLs
+
 ## 1.2.14
 - Stability Fix: Fixes a critical crash on application launch when a temporary pause period had expired
 - Resilience: Hardened system service and clipboard access during startup

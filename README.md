@@ -3,10 +3,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Google Play](https://img.shields.io/badge/Google_Play-Available-green.svg)](https://play.google.com/store/apps/details?id=de.goork.mapflip)
 [![F-Droid](https://img.shields.io/badge/F--Droid-In_Review-orange.svg)](https://gitlab.com/fdroid/fdroiddata/-/merge_requests/45011)
-[![Permissions](https://img.shields.io/badge/Permissions-0%20Internet-blue.svg)](app/src/main/AndroidManifest.xml)
+[![Build Status](https://github.com/thefraggle/mapflip/actions/workflows/ci.yml/badge.svg)](https://github.com/thefraggle/mapflip/actions/workflows/ci.yml)
 
-> **No more clunky browser previews or broken workflows on Android.**  
-> MapFlip is a lightweight, 100% offline Android utility that intercepts Apple Maps web links (`maps.apple.com`) and seamlessly redirects them directly to Google Maps.
+> **No more clunky web previews or broken map links on Android.**  
+> MapFlip is a lightweight Android utility that intercepts map links and seamlessly redirects them directly into your favorite navigation app.
 
 Set it up once, and it works invisibly in the background.
 
@@ -18,30 +18,47 @@ Set it up once, and it works invisibly in the background.
 
 | ❌ Without MapFlip | ✅ With MapFlip |
 |---|---|
-| Clunky web view in mobile browser | Direct launch in native Google Maps |
-| No turn-by-turn navigation or Android Auto | Full turn-by-turn routing & Android Auto support |
-| Manual copying & pasting of coordinates | Seamless 1-tap redirect from any app |
+| Clunky web previews in mobile browser | Direct launch in native navigation apps |
+| No turn-by-turn routing or Android Auto | Full turn-by-turn routing & Android Auto support |
+| Manual copying & pasting of coordinates | Seamless 1-tap redirect or clipboard detection |
+| Locked into single proprietary providers | Full flexibility: Google Maps, OsmAnd, Organic Maps, Waze & more |
 
 ---
 
 ## ✨ Features
 
-- 🔄 **Automatic & Instant** – Intercepts `maps.apple.com` links on-device; no manual copying or browser detours.
-- 🚗 **Navigation & Android Auto Ready** – Opens destinations directly with native routing, live traffic, and Android Auto support.
-- 💬 **Universal App Compatibility** – Intercepts links shared in WhatsApp, Telegram, Signal, Slack, SMS, Gmail, and notes.
-- 🗺️ **Full Query & Coordinate Support** – Handles search queries, GPS coordinates, place IDs, and addresses.
-- 🔒 **100% Offline & Private** – Zero internet permission in manifest (`android.permission.INTERNET` is not declared), zero analytics, zero ads, zero battery drain.
-- ⏸️ **Smart Pause Mode** – Pause redirection for 1h, 8h, until tomorrow, or indefinitely via the in-app toggle or **Quick Settings Tile**.
-- 🌍 **14 Languages** – Localized in English, German, Spanish, French, Italian, Japanese, Dutch, Danish, Norwegian, Polish, Portuguese (BR & PT), Swedish, and Turkish.
+- 🔄 **Multi-Service Interception** – Intercepts map links from:
+  - **Apple Maps** (`maps.apple.com`, `applemaps://`)
+  - **Bing Maps** (`bing.com/maps`, `maps.bing.com`)
+  - **OpenStreetMap** (`openstreetmap.org`, `osm.org`)
+  - **Yandex Maps** (`yandex.com/maps`, `maps.yandex.ru`, etc.)
+  - **HERE WeGo** (`wego.here.com`, `share.here.com`, `here.com`)
+  - **Waze** (`waze.com/ul`, `waze.com/live-map`)
+- 🎯 **Configurable Target Apps** – Route destinations directly to:
+  - **Google Maps**
+  - **Waze**
+  - **Organic Maps** (100% FOSS)
+  - **OsmAnd / OsmAnd+** (100% FOSS)
+  - **HERE WeGo**
+  - **Yandex Maps**
+  - **System App Picker** (Always ask)
+- 📋 **Smart Clipboard Banner** – Detects map links copied to your clipboard on app open for quick 1-tap launching.
+- 🧪 **Interactive Link Tester** – Test map URLs, convert target URIs, copy, or share without leaving the app.
+- ⏸️ **Smart Pause Mode** – Temporarily pause redirection (1h, 8h, until tomorrow morning, or indefinitely) in-app or via the **Quick Settings Tile**.
+- 🔒 **Privacy-First Architecture**:
+  - **FOSS Flavor**: 100% offline, zero internet permission in manifest (`android.permission.INTERNET` not declared), zero tracking, zero ads.
+  - **Play Flavor**: Minimal anonymous telemetry via self-hosted Aptabase (app version, OS, event names; zero personal data or location coordinates).
+- 🌍 **19 Languages + Auto (RTL supported)** – English, German, Spanish, French, Italian, Japanese, Dutch, Danish, Norwegian, Polish, Portuguese, Swedish, Turkish, Korean, Simplified Chinese, Traditional Chinese, Arabic (RTL), Russian, and Indonesian.
 
 ---
 
-## 🔧 How it works
+## 🔧 How It Works
 
-1. Install MapFlip from Google Play or GitHub Releases.
+1. Install MapFlip from Google Play, F-Droid, or GitHub Releases.
 2. Open the app and tap **"Open Settings"**.
-3. Under *Open by default* (Standardmäßig öffnen), enable link handling for `maps.apple.com`.
-4. Done! Every Apple Maps link will now open directly in Google Maps.
+3. Under *Open by default* (Standardmäßig öffnen), enable link handling for the supported map domains.
+4. Select your preferred navigation app in MapFlip settings (or keep Google Maps as default).
+5. Done! Map links will now open directly in your chosen navigation app.
 
 ---
 
@@ -53,11 +70,11 @@ Set it up once, and it works invisibly in the background.
 
 ---
 
-## 🛠️ Build
+## 🛠️ Build & Development
 
-The project is split into two build flavors:
-- `play` (for Google Play Store, includes rate button and promo banner).
-- `foss` (for F-Droid and GitHub Releases, fully independent of Google services).
+The project is split into two flavors:
+- `foss` – 100% open source, zero permissions, independent of Google services.
+- `play` – Google Play release flavor with rating prompts and self-hosted privacy-focused telemetry.
 
 Build the FOSS release APK locally:
 ```bash
@@ -66,7 +83,7 @@ Build the FOSS release APK locally:
 
 Run unit tests:
 ```bash
-./gradlew :app:testDebugUnitTest
+./gradlew test
 ```
 
 ---
@@ -75,8 +92,8 @@ Run unit tests:
 
 - Kotlin & Jetpack Compose (Material 3)
 - Min SDK 26 (Android 8.0), Target SDK 36 (Android 16)
-- Pure local link parser (zero network requests)
-- Zero external dependencies beyond AndroidX
+- High-precision local coordinate & query parsing
+- Zero external SDK dependencies in FOSS flavor
 
 ---
 
