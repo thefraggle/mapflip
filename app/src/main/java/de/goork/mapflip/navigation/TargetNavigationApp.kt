@@ -48,4 +48,25 @@ enum class TargetNavigationApp(
             return entries.firstOrNull { it.id.equals(id, ignoreCase = true) } ?: GOOGLE_MAPS
         }
     }
+
+    fun isInstalled(context: android.content.Context): Boolean {
+        if (isSystemPicker) return true
+        val pkg = packageName ?: return false
+        val pm = context.packageManager
+        return try {
+            pm.getPackageInfo(pkg, 0)
+            true
+        } catch (_: Exception) {
+            if (this == OSMAND) {
+                try {
+                    pm.getPackageInfo("net.osmand.plus", 0)
+                    true
+                } catch (_: Exception) {
+                    false
+                }
+            } else {
+                false
+            }
+        }
+    }
 }

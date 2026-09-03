@@ -215,7 +215,7 @@ object NavigationIntentBuilder {
     }
 
     private fun formatCoord(value: Double): String {
-        return "%.4f".format(java.util.Locale.US, value)
+        return "%.6f".format(java.util.Locale.US, value)
     }
 
     private fun encode(value: String): String = URLEncoder.encode(value, "UTF-8")

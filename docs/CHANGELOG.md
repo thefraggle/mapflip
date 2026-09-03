@@ -1,3 +1,10 @@
+## 1.2.17
+- UX: Status-Badges („Installiert“ / „Nicht installiert“) im Ziel-App-Auswahldialog zur schnellen Orientierung in allen 19 Sprachen
+- Barrierefreiheit: Touch-Target für den „Einfügen“-Button im Link-Tester auf mindestens 48 dp vergrößert
+- GPS-Präzision: Koordinatenübergabe auf 6 Nachkommastellen (~11 cm Genauigkeit) für exakte Zielnavigation optimiert
+- Kartendienste: HERE WeGo und Yandex Maps als Ziel-Apps sowie universelles Multi-Karten-Parsing (Bing, OSM, HERE, Waze, Yandex) vereinheitlicht
+- Open Source: Standardisierte GitHub Issue-Templates für Bug-Reports und Feature-Requests hinzugefügt
+
 ## 1.2.16
 - Sicherheit & Open-Source-Hygiene: Telemetrie-Zugangsdaten (Aptabase Ingest-Key & Host) vollständig aus dem öffentlichen Quellcode entfernt und in sichere Build-Konfigurationen ausgelagert
 - Robustheit & Stabilität: Automatischer No-Op-Fallback für Telemetrie bei fehlenden Konfigurationsdaten in Test- und Fork-Builds
@@ -6,7 +13,7 @@
 - Stabilität & Crash-Schutz: Absicherung sämtlicher Zwischenablage-Zugriffe im Link-Tester gegen leere Daten und Sicherheitsbeschränkungen
 - GPS-Präzision: Koordinatenübergabe auf 6 Nachkommastellen (~11 cm Genauigkeit) für exakte Zielnavigation optimiert
 - Vollständige Lokalisierung: Aktions-Banner, Screenreader-Texte und Hinweismeldungen über alle 19 Sprachen vervollständigt
-- Unsichtbare Weiterleitung: Schließanimationen auf Android 14+ für nahtlose Weiterleitung unterdrückt
+- Unsichtbare Weiterleitung: Schließanimationen für nahtlose Weiterleitung unterdrückt
 - Parser-Härtung & Web-Fallback: Robusteres Parsing bei Sonderzeichen in Karten-URLs
 
 ## 1.2.14

@@ -4,11 +4,11 @@ import Foundation
 public enum AppleMapsParser {
 
     private static let urlRegex: NSRegularExpression = {
-        let pattern = #"(?:https?://|applemaps://|maps\.apple\.com)[^\s<>"'()]+"#
+        let pattern = #"(?:https?://|applemaps://)(?:maps\.apple\.com|bing\.com/maps|maps\.bing\.com|openstreetmap\.org|osm\.org|wego\.here\.com|share\.here\.com|here\.com|waze\.com|yandex\.[a-z.]+/maps)[^\s<>"'()]+"#
         return try! NSRegularExpression(pattern: pattern, options: [.caseInsensitive])
     }()
 
-    /// Extracts an Apple Maps URL from arbitrary text (e.g. shared messenger messages or clipboard snippets).
+    /// Extracts a supported map URL from arbitrary text (e.g. shared messenger messages or clipboard snippets).
     public static func extractMapUrl(from text: String?) -> String? {
         guard let text = text, !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             return nil
@@ -23,7 +23,7 @@ public enum AppleMapsParser {
         return nil
     }
 
-    /// Converts an Apple Maps URL into a normalized ParsedMapLocation.
+    /// Converts a map URL into a normalized ParsedMapLocation.
     public static func parse(appleUrl: String?) -> ParsedMapLocation {
         guard let rawUrl = appleUrl?.trimmingCharacters(in: .whitespacesAndNewlines), !rawUrl.isEmpty else {
             return ParsedMapLocation(type: .home)
@@ -41,6 +41,19 @@ public enum AppleMapsParser {
             let key = item.name.lowercased().trimmingCharacters(in: .whitespaces)
             let value = item.value?.replacingOccurrences(of: "+", with: " ").trimmingCharacters(in: .whitespaces)
             params[key] = value
+        }
+
+        let host = components.host?.lowercased() ?? ""
+        if host.contains("bing.com") {
+            return parseBing(components: components, params: params, rawUrl: normalized)
+        } else if host.contains("openstreetmap.org") || host.contains("osm.org") {
+            return parseOsm(components: components, params: params, rawUrl: normalized)
+        } else if host.contains("here.com") {
+            return parseHere(components: components, params: params, rawUrl: normalized)
+        } else if host.contains("waze.com") {
+            return parseWaze(components: components, params: params, rawUrl: normalized)
+        } else if host.contains("yandex.") {
+            return parseYandex(components: components, params: params, rawUrl: normalized)
         }
 
         let saddr = params["saddr"]
@@ -103,6 +116,105 @@ public enum AppleMapsParser {
         } else {
             return ParsedMapLocation(type: .home)
         }
+    }
+
+    private static func parseBing(components: URLComponents, params: [String: String], rawUrl: String) -> ParsedMapLocation {
+        if let cp = params["cp"], cp.contains("~") {
+            let coords = cp.replacingOccurrences(of: "~", with: ",")
+            let query = params["where1"] ?? params["q"]
+            return ParsedMapLocation(type: .coordinates(coords: coords, query: query))
+        }
+        if let rtp = params["rtp"] {
+            let legs = rtp.components(separatedBy: "~")
+            if legs.count >= 2 {
+                let origin = legs.first?.replacingOccurrences(of: "pos.", with: "").replacingOccurrences(of: "adr.", with: "").replacingOccurrences(of: "_", with: ", ") ?? ""
+                let dest = legs.last?.replacingOccurrences(of: "pos.", with: "").replacingOccurrences(of: "adr.", with: "").replacingOccurrences(of: "_", with: ", ") ?? ""
+                return ParsedMapLocation(type: .directions(origin: origin, destination: dest, mode: nil))
+            }
+        }
+        if let query = params["where1"] ?? params["q"] ?? params["q1"], !query.isEmpty {
+            return ParsedMapLocation(type: .query(query))
+        }
+        return ParsedMapLocation(type: .searchFallback(rawUrl))
+    }
+
+    private static func parseOsm(components: URLComponents, params: [String: String], rawUrl: String) -> ParsedMapLocation {
+        if let mlat = params["mlat"], let mlon = params["mlon"] {
+            return ParsedMapLocation(type: .coordinates(coords: "\(mlat),\(mlon)", query: nil))
+        }
+        if let query = params["query"], !query.isEmpty {
+            return ParsedMapLocation(type: .query(query))
+        }
+        if let frag = components.fragment, frag.contains("map=") {
+            let parts = frag.replacingOccurrences(of: "map=", with: "").components(separatedBy: "/")
+            if parts.count >= 3 {
+                return ParsedMapLocation(type: .coordinates(coords: "\(parts[1]),\(parts[2])", query: nil))
+            }
+        }
+        return ParsedMapLocation(type: .searchFallback(rawUrl))
+    }
+
+    private static func parseHere(components: URLComponents, params: [String: String], rawUrl: String) -> ParsedMapLocation {
+        if let map = params["map"] {
+            let parts = map.components(separatedBy: ",")
+            if parts.count >= 2 {
+                return ParsedMapLocation(type: .coordinates(coords: "\(parts[0]),\(parts[1])", query: nil))
+            }
+        }
+        let path = components.path
+        if path.contains("/l/") {
+            let sub = path.components(separatedBy: "/l/").last ?? ""
+            let parts = sub.components(separatedBy: ",")
+            if parts.count >= 2 {
+                let lat = parts[0]
+                let lon = parts[1].components(separatedBy: "/").first ?? parts[1]
+                let msg = params["msg"]
+                return ParsedMapLocation(type: .coordinates(coords: "\(lat),\(lon)", query: msg))
+            }
+        }
+        if path.contains("/search/") {
+            let q = path.components(separatedBy: "/search/").last?.removingPercentEncoding ?? ""
+            if !q.isEmpty {
+                return ParsedMapLocation(type: .query(q))
+            }
+        }
+        if let query = params["q"] ?? params["msg"], !query.isEmpty {
+            return ParsedMapLocation(type: .query(query))
+        }
+        return ParsedMapLocation(type: .searchFallback(rawUrl))
+    }
+
+    private static func parseWaze(components: URLComponents, params: [String: String], rawUrl: String) -> ParsedMapLocation {
+        if let ll = params["ll"] {
+            let query = params["q"]
+            return ParsedMapLocation(type: .coordinates(coords: ll, query: query))
+        }
+        if let q = params["q"], !q.isEmpty {
+            return ParsedMapLocation(type: .query(q))
+        }
+        return ParsedMapLocation(type: .searchFallback(rawUrl))
+    }
+
+    private static func parseYandex(components: URLComponents, params: [String: String], rawUrl: String) -> ParsedMapLocation {
+        if let rtext = params["rtext"] {
+            let legs = rtext.components(separatedBy: "~")
+            if legs.count >= 2 {
+                return ParsedMapLocation(type: .directions(origin: legs.first ?? "", destination: legs.last ?? "", mode: nil))
+            }
+        }
+        if let ll = params["ll"] {
+            let parts = ll.components(separatedBy: ",")
+            if parts.count == 2 {
+                let lon = parts[0]
+                let lat = parts[1]
+                let text = params["text"]
+                return ParsedMapLocation(type: .coordinates(coords: "\(lat),\(lon)", query: text))
+            }
+        }
+        if let text = params["text"], !text.isEmpty {
+            return ParsedMapLocation(type: .query(text))
+        }
+        return ParsedMapLocation(type: .searchFallback(rawUrl))
     }
 
     private static func normalizeUrl(_ url: String) -> String {

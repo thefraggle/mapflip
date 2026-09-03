@@ -231,6 +231,7 @@ fun SettingsSheet(
                     Spacer(Modifier.height(12.dp))
                     TargetNavigationApp.entries.forEach { app ->
                         val isSelected = currentTargetApp == app
+                        val isInstalled = remember(app) { app.isInstalled(context) }
                         Surface(
                             onClick = {
                                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -256,13 +257,38 @@ fun SettingsSheet(
                                     modifier = Modifier.size(22.dp)
                                 )
                                 Spacer(Modifier.width(16.dp))
-                                Text(
-                                    text = if (app == TargetNavigationApp.SYSTEM_PICKER) s.targetAppAlwaysAsk else app.displayName,
-                                    style = MaterialTheme.typography.bodyLarge.copy(
-                                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
-                                    ),
-                                    color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
-                                )
+                                Column(
+                                    modifier = Modifier.weight(1f)
+                                ) {
+                                    Text(
+                                        text = if (app == TargetNavigationApp.SYSTEM_PICKER) s.targetAppAlwaysAsk else app.displayName,
+                                        style = MaterialTheme.typography.bodyLarge.copy(
+                                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                                        ),
+                                        color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+                                    )
+                                }
+                                if (!app.isSystemPicker) {
+                                    Surface(
+                                        shape = RoundedCornerShape(6.dp),
+                                        color = if (isInstalled) {
+                                            MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
+                                        } else {
+                                            MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.25f)
+                                        }
+                                    ) {
+                                        Text(
+                                            text = if (isInstalled) s.statusInstalled else s.statusNotInstalled,
+                                            style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
+                                            color = if (isInstalled) {
+                                                MaterialTheme.colorScheme.primary
+                                            } else {
+                                                MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                                            },
+                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                                        )
+                                    }
+                                }
                             }
                         }
                         Spacer(Modifier.height(4.dp))

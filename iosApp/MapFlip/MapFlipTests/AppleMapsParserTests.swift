@@ -144,4 +144,53 @@ final class AppleMapsParserTests: XCTestCase {
         let wazeUrl = UrlSchemeBuilder.buildUrl(for: coords, target: .waze)
         XCTAssertEqual(wazeUrl.absoluteString, "waze://?ll=48.8584,2.2945&navigate=yes")
     }
+
+    func testBingMapsParsing() {
+        let coords = AppleMapsParser.parse(appleUrl: "https://www.bing.com/maps?cp=52.5200~13.4050&where1=Berlin")
+        XCTAssertEqual(coords.type, .coordinates(coords: "52.5200,13.4050", query: "Berlin"))
+
+        let search = AppleMapsParser.parse(appleUrl: "https://www.bing.com/maps?q=Eiffelturm")
+        XCTAssertEqual(search.type, .query("Eiffelturm"))
+    }
+
+    func testOpenStreetMapParsing() {
+        let coords = AppleMapsParser.parse(appleUrl: "https://www.openstreetmap.org/?mlat=52.5200&mlon=13.4050")
+        XCTAssertEqual(coords.type, .coordinates(coords: "52.5200,13.4050", query: nil))
+
+        let search = AppleMapsParser.parse(appleUrl: "https://www.openstreetmap.org/search?query=Berlin")
+        XCTAssertEqual(search.type, .query("Berlin"))
+    }
+
+    func testHereWeGoParsing() {
+        let coords = AppleMapsParser.parse(appleUrl: "https://share.here.com/l/52.5200,13.4050?msg=Berlin")
+        XCTAssertEqual(coords.type, .coordinates(coords: "52.5200,13.4050", query: "Berlin"))
+
+        let search = AppleMapsParser.parse(appleUrl: "https://wego.here.com/search/Alexanderplatz")
+        XCTAssertEqual(search.type, .query("Alexanderplatz"))
+    }
+
+    func testWazeParsing() {
+        let coords = AppleMapsParser.parse(appleUrl: "https://www.waze.com/ul?ll=48.8584,2.2945&navigate=yes")
+        XCTAssertEqual(coords.type, .coordinates(coords: "48.8584,2.2945", query: nil))
+
+        let search = AppleMapsParser.parse(appleUrl: "https://www.waze.com/ul?q=Berlin")
+        XCTAssertEqual(search.type, .query("Berlin"))
+    }
+
+    func testYandexMapsParsing() {
+        let coords = AppleMapsParser.parse(appleUrl: "https://yandex.com/maps/?ll=13.4050,52.5200&text=Berlin")
+        XCTAssertEqual(coords.type, .coordinates(coords: "52.5200,13.4050", query: "Berlin"))
+
+        let search = AppleMapsParser.parse(appleUrl: "https://yandex.com/maps/?text=Kremlin")
+        XCTAssertEqual(search.type, .query("Kremlin"))
+    }
+
+    func testHereAndYandexUrlBuilders() {
+        let coords = ParsedMapLocation(type: .coordinates(coords: "52.5200,13.4050", query: "Berlin"))
+        let hereUrl = UrlSchemeBuilder.buildUrl(for: coords, target: .hereWeGo)
+        XCTAssertEqual(hereUrl.absoluteString, "https://share.here.com/l/52.5200,13.4050")
+
+        let yandexUrl = UrlSchemeBuilder.buildUrl(for: coords, target: .yandexMaps)
+        XCTAssertEqual(yandexUrl.absoluteString, "yandexmaps://maps.yandex.ru/?ll=13.4050,52.5200&z=16&text=Berlin")
+    }
 }

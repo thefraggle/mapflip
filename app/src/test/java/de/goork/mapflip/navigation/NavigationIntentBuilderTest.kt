@@ -13,7 +13,7 @@ class NavigationIntentBuilderTest {
     fun `builds correct Google Maps URIs`() {
         val coords = ParsedLocation.Coordinates(52.5200, 13.4050, label = "Berlin")
         val uri = NavigationIntentBuilder.buildGoogleMapsUriString(coords)
-        assertEquals("geo:52.5200,13.4050?q=Berlin", uri)
+        assertEquals("geo:52.520000,13.405000?q=Berlin", uri)
 
         val nav = ParsedLocation.Navigation("Munich", TravelMode.DRIVING)
         assertEquals("google.navigation:q=Munich&mode=d", NavigationIntentBuilder.buildGoogleMapsUriString(nav))
@@ -55,7 +55,7 @@ class NavigationIntentBuilderTest {
     @Test
     fun `builds correct Generic Geo URIs`() {
         val coords = ParsedLocation.Coordinates(52.5200, 13.4050, label = "Berlin")
-        assertEquals("geo:52.5200,13.4050?q=Berlin", NavigationIntentBuilder.buildGenericGeoUriString(coords))
+        assertEquals("geo:52.520000,13.405000?q=Berlin", NavigationIntentBuilder.buildGenericGeoUriString(coords))
 
         val search = ParsedLocation.SearchQuery("Potsdam")
         assertEquals("geo:0,0?q=Potsdam", NavigationIntentBuilder.buildGenericGeoUriString(search))
@@ -64,7 +64,7 @@ class NavigationIntentBuilderTest {
     @Test
     fun `builds correct Here WeGo URIs`() {
         val coords = ParsedLocation.Coordinates(52.5200, 13.4050, label = "Berlin")
-        assertEquals("https://share.here.com/l/52.5200,13.4050?msg=Berlin", NavigationIntentBuilder.buildHereWeGoUriString(coords))
+        assertEquals("https://share.here.com/l/52.520000,13.405000?msg=Berlin", NavigationIntentBuilder.buildHereWeGoUriString(coords))
 
         val search = ParsedLocation.SearchQuery("Alexanderplatz")
         assertEquals("https://wego.here.com/search/Alexanderplatz", NavigationIntentBuilder.buildHereWeGoUriString(search))
@@ -84,7 +84,7 @@ class NavigationIntentBuilderTest {
         val loc = ParsedLocation.Coordinates(48.8584, 2.2945)
 
         val googleUri = NavigationIntentBuilder.buildUriString(loc, TargetNavigationApp.GOOGLE_MAPS)
-        assertTrue(googleUri.startsWith("geo:48.8584,2.2945"))
+        assertTrue(googleUri.startsWith("geo:48.858400,2.294500"))
 
         val wazeUri = NavigationIntentBuilder.buildUriString(loc, TargetNavigationApp.WAZE)
         assertEquals("waze://?ll=48.8584,2.2945&navigate=yes", wazeUri)
@@ -96,13 +96,13 @@ class NavigationIntentBuilderTest {
         assertEquals("osmandmaps://?lat=48.8584&lon=2.2945&z=16", osmandUri)
 
         val hereUri = NavigationIntentBuilder.buildUriString(loc, TargetNavigationApp.HERE_WEGO)
-        assertEquals("https://share.here.com/l/48.8584,2.2945", hereUri)
+        assertEquals("https://share.here.com/l/48.858400,2.294500", hereUri)
 
         val yandexUri = NavigationIntentBuilder.buildUriString(loc, TargetNavigationApp.YANDEX_MAPS)
         assertEquals("yandexmaps://maps.yandex.ru/?ll=2.2945,48.8584&z=16", yandexUri)
 
         val sysUri = NavigationIntentBuilder.buildUriString(loc, TargetNavigationApp.SYSTEM_PICKER)
-        assertTrue(sysUri.startsWith("geo:48.8584,2.2945"))
+        assertTrue(sysUri.startsWith("geo:48.858400,2.294500"))
     }
 
     @Test

@@ -12,13 +12,13 @@ class AppleMapsParserTest {
 
     @Test
     fun `converts coordinates`() {
-        assertEquals("geo:48.8584,2.2945?q=48.8584,2.2945",
+        assertEquals("geo:48.858400,2.294500?q=48.858400,2.294500",
             AppleMapsParser.convert("https://maps.apple.com/?ll=48.8584,2.2945"))
     }
 
     @Test
     fun `converts coordinates with query`() {
-        assertEquals("geo:48.8584,2.2945?q=Eiffelturm",
+        assertEquals("geo:48.858400,2.294500?q=Eiffelturm",
             AppleMapsParser.convert("https://maps.apple.com/?ll=48.8584,2.2945&q=Eiffelturm"))
     }
 
@@ -79,13 +79,13 @@ class AppleMapsParserTest {
 
     @Test
     fun `converts pt coordinate parameter`() {
-        assertEquals("geo:52.5200,13.4050?q=52.5200,13.4050",
+        assertEquals("geo:52.520000,13.405000?q=52.520000,13.405000",
             AppleMapsParser.convert("https://maps.apple.com/?pt=52.5200,13.4050"))
     }
 
     @Test
     fun `converts pt coordinate parameter with query`() {
-        assertEquals("geo:52.5200,13.4050?q=TV+Tower",
+        assertEquals("geo:52.520000,13.405000?q=TV+Tower",
             AppleMapsParser.convert("https://maps.apple.com/?pt=52.5200,13.4050&q=TV+Tower"))
     }
 
@@ -112,7 +112,7 @@ class AppleMapsParserTest {
 
     @Test
     fun `cleans spaces inside coordinates`() {
-        assertEquals("geo:52.5200,13.4050?q=52.5200,13.4050",
+        assertEquals("geo:52.520000,13.405000?q=52.520000,13.405000",
             AppleMapsParser.convert("https://maps.apple.com/?ll=%2052.5200,%2013.4050%20"))
     }
 
@@ -155,9 +155,9 @@ class AppleMapsParserTest {
 
     @Test
     fun `converts center and coordinate parameters`() {
-        assertEquals("geo:40.7128,-74.0060?q=40.7128,-74.0060",
+        assertEquals("geo:40.712800,-74.006000?q=40.712800,-74.006000",
             AppleMapsParser.convert("https://maps.apple.com/?coordinate=40.7128,-74.0060"))
-        assertEquals("geo:48.8566,2.3522?q=Paris",
+        assertEquals("geo:48.856600,2.352200?q=Paris",
             AppleMapsParser.convert("https://maps.apple.com/?center=48.8566,2.3522&q=Paris"))
     }
 

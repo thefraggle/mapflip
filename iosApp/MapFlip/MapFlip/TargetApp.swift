@@ -6,6 +6,8 @@ public enum TargetApp: String, CaseIterable, Identifiable, Codable {
     case waze = "waze"
     case organicMaps = "organic_maps"
     case osmAnd = "osmand"
+    case hereWeGo = "here_wego"
+    case yandexMaps = "yandex_maps"
     case appleMaps = "apple_maps"
 
     public var id: String { rawValue }
@@ -16,6 +18,8 @@ public enum TargetApp: String, CaseIterable, Identifiable, Codable {
         case .waze: return "Waze"
         case .organicMaps: return "Organic Maps"
         case .osmAnd: return "OsmAnd Maps"
+        case .hereWeGo: return "HERE WeGo"
+        case .yandexMaps: return "Yandex Maps"
         case .appleMaps: return "Apple Maps"
         }
     }
@@ -26,6 +30,8 @@ public enum TargetApp: String, CaseIterable, Identifiable, Codable {
         case .waze: return "car.fill"
         case .organicMaps: return "leaf.fill"
         case .osmAnd: return "map"
+        case .hereWeGo: return "location.fill"
+        case .yandexMaps: return "arrow.triangle.turn.up.right.diamond.fill"
         case .appleMaps: return "applelogo"
         }
     }
@@ -40,6 +46,10 @@ public enum TargetApp: String, CaseIterable, Identifiable, Codable {
             return URL(string: "https://apps.apple.com/app/id1567437057")
         case .osmAnd:
             return URL(string: "https://apps.apple.com/app/id934850377")
+        case .hereWeGo:
+            return URL(string: "https://apps.apple.com/app/id955837609")
+        case .yandexMaps:
+            return URL(string: "https://apps.apple.com/app/id313877526")
         case .appleMaps:
             return nil
         }
@@ -59,6 +69,10 @@ public enum UrlSchemeBuilder {
             return buildOrganicMapsUrl(for: location)
         case .osmAnd:
             return buildOsmAndUrl(for: location)
+        case .hereWeGo:
+            return buildHereWeGoUrl(for: location)
+        case .yandexMaps:
+            return buildYandexMapsUrl(for: location)
         case .appleMaps:
             return buildAppleMapsUrl(for: location)
         }
@@ -157,6 +171,40 @@ public enum UrlSchemeBuilder {
             return URL(string: "osmandmaps://?q=\(encoded)") ?? URL(string: "osmandmaps://")!
         default:
             return URL(string: "osmandmaps://")!
+        }
+    }
+
+    private static func buildHereWeGoUrl(for location: ParsedMapLocation) -> URL {
+        switch location.type {
+        case .coordinates(let coords, _):
+            return URL(string: "https://share.here.com/l/\(coords)") ?? URL(string: "https://wego.here.com")!
+        case .query(let query), .navigation(let query, _), .directions(_, let query, _):
+            let encoded = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query
+            return URL(string: "https://wego.here.com/search/\(encoded)") ?? URL(string: "https://wego.here.com")!
+        default:
+            return URL(string: "https://wego.here.com")!
+        }
+    }
+
+    private static func buildYandexMapsUrl(for location: ParsedMapLocation) -> URL {
+        switch location.type {
+        case .coordinates(let coords, let query):
+            let parts = coords.split(separator: ",")
+            if parts.count == 2 {
+                let lat = parts[0]
+                let lon = parts[1]
+                var urlStr = "yandexmaps://maps.yandex.ru/?ll=\(lon),\(lat)&z=16"
+                if let q = query, !q.isEmpty, let encoded = q.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                    urlStr += "&text=\(encoded)"
+                }
+                return URL(string: urlStr) ?? URL(string: "https://yandex.com/maps")!
+            }
+            return URL(string: "https://yandex.com/maps")!
+        case .query(let query), .navigation(let query, _), .directions(_, let query, _):
+            let encoded = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? query
+            return URL(string: "yandexmaps://maps.yandex.ru/?text=\(encoded)") ?? URL(string: "https://yandex.com/maps")!
+        default:
+            return URL(string: "https://yandex.com/maps")!
         }
     }
 

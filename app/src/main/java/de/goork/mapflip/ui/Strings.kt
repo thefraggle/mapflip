@@ -96,7 +96,9 @@ object Strings {
         val actionExpand: String = "Expand",
         val actionCollapse: String = "Collapse",
         val appNotInstalled: String = "%s is not installed",
-        val targetAppOpenError: String = "Target app could not be opened"
+        val targetAppOpenError: String = "Target app could not be opened",
+        val statusInstalled: String = "Installed",
+        val statusNotInstalled: String = "Not installed"
     ) {
         val effectivePrivacyNote: String
             get() = if (de.goork.mapflip.BuildConfig.FLAVOR == "play" && privacyNotePlay.isNotBlank()) privacyNotePlay else privacyNote
@@ -248,7 +250,9 @@ object Strings {
         actionExpand = "Ausklappen",
         actionCollapse = "Einklappen",
         appNotInstalled = "%s ist nicht installiert",
-        targetAppOpenError = "Ziel-App konnte nicht geöffnet werden"
+        targetAppOpenError = "Ziel-App konnte nicht geöffnet werden",
+        statusInstalled = "Installiert",
+        statusNotInstalled = "Nicht installiert"
     )
 
     val EN = AppStrings(
@@ -369,7 +373,9 @@ object Strings {
         actionExpand = "Fold ud",
         actionCollapse = "Fold sammen",
         appNotInstalled = "%s er ikke installeret",
-        targetAppOpenError = "Destinationsapp kunne ikke åbnes"
+        targetAppOpenError = "Destinationsapp kunne ikke åbnes",
+        statusInstalled = "Installeret",
+        statusNotInstalled = "Ikke installeret"
     )
 
     val FR = EN.copy(
@@ -430,7 +436,9 @@ object Strings {
         actionExpand = "Développer",
         actionCollapse = "Réduire",
         appNotInstalled = "%s n'est pas installée",
-        targetAppOpenError = "Impossible d'ouvrir l'application cible"
+        targetAppOpenError = "Impossible d'ouvrir l'application cible",
+        statusInstalled = "Installée",
+        statusNotInstalled = "Non installée"
     )
 
     val IT = EN.copy(
@@ -491,7 +499,9 @@ object Strings {
         actionExpand = "Espandi",
         actionCollapse = "Comprimi",
         appNotInstalled = "%s non è installata",
-        targetAppOpenError = "Impossibile aprire l'app di destinazione"
+        targetAppOpenError = "Impossibile aprire l'app di destinazione",
+        statusInstalled = "Installata",
+        statusNotInstalled = "Non installata"
     )
 
     val JA = EN.copy(
@@ -552,7 +562,9 @@ object Strings {
         actionExpand = "展開",
         actionCollapse = "折りたたむ",
         appNotInstalled = "%sがインストールされていません",
-        targetAppOpenError = "対象アプリを開けませんでした"
+        targetAppOpenError = "対象アプリを開けませんでした",
+        statusInstalled = "インストール済み",
+        statusNotInstalled = "未インストール"
     )
 
     val NL = EN.copy(
@@ -613,7 +625,9 @@ object Strings {
         actionExpand = "Uitklappen",
         actionCollapse = "Inklappen",
         appNotInstalled = "%s is niet geïnstalleerd",
-        targetAppOpenError = "Doel-app kon niet worden geopend"
+        targetAppOpenError = "Doel-app kon niet worden geopend",
+        statusInstalled = "Geïnstalleerd",
+        statusNotInstalled = "Niet geïnstalleerd"
     )
 
     val NO = EN.copy(
@@ -674,7 +688,9 @@ object Strings {
         actionExpand = "Vis mer",
         actionCollapse = "Vis mindre",
         appNotInstalled = "%s er ikke installert",
-        targetAppOpenError = "Målappen kunne ikke åpnes"
+        targetAppOpenError = "Målappen kunne ikke åpnes",
+        statusInstalled = "Installert",
+        statusNotInstalled = "Ikke installert"
     )
 
     val PL = EN.copy(
@@ -735,7 +751,9 @@ object Strings {
         actionExpand = "Rozwiń",
         actionCollapse = "Zwiń",
         appNotInstalled = "Aplikacja %s nie jest zainstalowana",
-        targetAppOpenError = "Nie udało się otworzyć aplikacji docelowej"
+        targetAppOpenError = "Nie udało się otworzyć aplikacji docelowej",
+        statusInstalled = "Zainstalowano",
+        statusNotInstalled = "Nie zainstalowano"
     )
 
     val PT = EN.copy(
@@ -796,7 +814,9 @@ object Strings {
         actionExpand = "Expandir",
         actionCollapse = "Recolher",
         appNotInstalled = "%s não está instalado",
-        targetAppOpenError = "Não foi possível abrir o app de destino"
+        targetAppOpenError = "Não foi possível abrir o app de destino",
+        statusInstalled = "Instalado",
+        statusNotInstalled = "Não instalado"
     )
 
     val SV = EN.copy(
@@ -857,7 +877,9 @@ object Strings {
         actionExpand = "Fäll ut",
         actionCollapse = "Fäll ihop",
         appNotInstalled = "%s är inte installerad",
-        targetAppOpenError = "Målappen kunde inte öppnas"
+        targetAppOpenError = "Målappen kunde inte öppnas",
+        statusInstalled = "Installerad",
+        statusNotInstalled = "Inte installerad"
     )
 
     val ES = EN.copy(
@@ -918,7 +940,9 @@ object Strings {
         actionExpand = "Desplegar",
         actionCollapse = "Plegar",
         appNotInstalled = "%s no está instalada",
-        targetAppOpenError = "No se pudo abrir la app de destino"
+        targetAppOpenError = "No se pudo abrir la app de destino",
+        statusInstalled = "Instalada",
+        statusNotInstalled = "No instalada"
     )
 
     val TR = EN.copy(
@@ -979,7 +1003,9 @@ object Strings {
         actionExpand = "Genişlet",
         actionCollapse = "Daralt",
         appNotInstalled = "%s yüklü değil",
-        targetAppOpenError = "Hedef uygulama açılamadı"
+        targetAppOpenError = "Hedef uygulama açılamadı",
+        statusInstalled = "Yüklü",
+        statusNotInstalled = "Yüklü değil"
     )
 
     val KO = EN.copy(
@@ -1040,7 +1066,9 @@ object Strings {
         actionExpand = "펼치기",
         actionCollapse = "접기",
         appNotInstalled = "%s 앱이 설치되어 있지 않습니다",
-        targetAppOpenError = "대상 앱을 열 수 없습니다"
+        targetAppOpenError = "대상 앱을 열 수 없습니다",
+        statusInstalled = "설치됨",
+        statusNotInstalled = "설치되지 않음"
     )
 
     val ZH_CN = EN.copy(
@@ -1101,7 +1129,9 @@ object Strings {
         actionExpand = "展开",
         actionCollapse = "折叠",
         appNotInstalled = "未安装 %s",
-        targetAppOpenError = "无法打开目标应用"
+        targetAppOpenError = "无法打开目标应用",
+        statusInstalled = "已安装",
+        statusNotInstalled = "未安装"
     )
 
     val ZH_TW = EN.copy(
@@ -1162,7 +1192,9 @@ object Strings {
         actionExpand = "展開",
         actionCollapse = "收合",
         appNotInstalled = "尚未安裝 %s",
-        targetAppOpenError = "無法開啟目標應用程式"
+        targetAppOpenError = "無法開啟目標應用程式",
+        statusInstalled = "已安裝",
+        statusNotInstalled = "未安裝"
     )
 
     val AR = EN.copy(
@@ -1223,7 +1255,9 @@ object Strings {
         actionExpand = "توسيع",
         actionCollapse = "طي",
         appNotInstalled = "%s غير مثبت",
-        targetAppOpenError = "تعذر فتح التطبيق المطلوب"
+        targetAppOpenError = "تعذر فتح التطبيق المطلوب",
+        statusInstalled = "مثبت",
+        statusNotInstalled = "غير مثبت"
     )
 
     val RU = EN.copy(
@@ -1284,7 +1318,9 @@ object Strings {
         actionExpand = "Развернуть",
         actionCollapse = "Свернуть",
         appNotInstalled = "Приложение %s не установлено",
-        targetAppOpenError = "Не удалось открыть целевое приложение"
+        targetAppOpenError = "Не удалось открыть целевое приложение",
+        statusInstalled = "Установлено",
+        statusNotInstalled = "Не установлено"
     )
 
     val ID = EN.copy(
@@ -1345,6 +1381,8 @@ object Strings {
         actionExpand = "Bentangkan",
         actionCollapse = "Ciutkan",
         appNotInstalled = "%s tidak terinstal",
-        targetAppOpenError = "Aplikasi tujuan tidak dapat dibuka"
+        targetAppOpenError = "Aplikasi tujuan tidak dapat dibuka",
+        statusInstalled = "Terinstal",
+        statusNotInstalled = "Tidak terinstal"
     )
 }

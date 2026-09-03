@@ -1,3 +1,10 @@
+## 1.2.17
+- UX: Added status badges ("Installed" / "Not installed") in target navigation app picker across all 19 languages
+- Accessibility: Increased touch target for "Paste" button in Link Tester to at least 48 dp
+- GPS Precision: Optimized coordinates formatting to 6 decimal places (~11 cm accuracy) for exact routing
+- Map Services: Added HERE WeGo and Yandex Maps as target apps and unified multi-map parsing (Bing, OSM, HERE, Waze, Yandex)
+- Open Source: Added standardized GitHub issue templates for bug reports and feature requests
+
 ## 1.2.16
 - Security & Open Source Hygiene: Completely decoupled telemetry credentials (Aptabase Ingest Key & Host) from public source code into secure build configurations
 - Resilience & Reliability: Graceful no-op fallback for telemetry when credentials are omitted in test or fork builds
@@ -6,7 +13,7 @@
 - Stability & Crash Prevention: Shielded all clipboard interactions in the Link Tester against empty data or permission boundaries
 - GPS Precision: Enhanced coordinate formatting to 6 decimal places (~11 cm accuracy) for pinpoint navigation
 - Complete Localization: Localized action banners, screen reader labels, and toasts across all 19 supported languages
-- Seamless Redirects: Suppressed exit transitions on Android 14+ for invisible link forwarding
+- Seamless Redirects: Suppressed exit transitions for invisible link forwarding
 - Parser Hardening: Improved web fallback handling for special characters in map URLs
 
 ## 1.2.14

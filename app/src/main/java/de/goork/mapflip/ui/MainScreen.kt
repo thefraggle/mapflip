@@ -475,7 +475,8 @@ fun MainScreen(
                                                         if (!clipText.isNullOrBlank()) {
                                                             testInputUrl = clipText.trim()
                                                         }
-                                                    }
+                                                    },
+                                                    modifier = Modifier.defaultMinSize(minHeight = 48.dp)
                                                 ) {
                                                     Text(
                                                         text = s.btnPasteClipboard,
