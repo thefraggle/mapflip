@@ -1,3 +1,9 @@
+## 1.2.18
+- Quick Settings: Status-Feedback im Schnelleinstellungs-Tile zeigt nun fehlende Link-Verknüpfung („Einrichtung erforderlich“) an und öffnet direkt die Systemeinstellungen
+- Zwischenablage & Parser-Härtung: Falscherkennung regulärer Web-URLs zuverlässig behoben, Prüfung auf gültige Kartendienste und Toast-Feedback bei fehlschlagendem Start der Ziel-App
+- Pause-Logik: Mitternachtsgrenzen bei Nachtpausen vor 6 Uhr korrigiert (pausiert exakt bis 6 Uhr desselben Morgens)
+- Stabilität & QA: Test-Suite massiv auf 81 Unit-Tests ausgebaut (100% grün) inklusive Zeitzonen-, Datums- und Sonderzeichen-Abdeckung
+
 ## 1.2.17
 - UX: Status-Badges („Installiert“ / „Nicht installiert“) im Ziel-App-Auswahldialog
 - Barrierefreiheit: Touch-Target für „Einfügen“-Button im Link-Tester auf 48 dp vergrößert
