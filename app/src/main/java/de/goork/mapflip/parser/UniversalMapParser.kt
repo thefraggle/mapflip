@@ -15,7 +15,7 @@ object UniversalMapParser {
         if (text.isNullOrBlank()) return null
         for (parser in parsers) {
             val url = parser.extractUrl(text)
-            if (url != null) return url
+            if (url != null && parser.canParse(url)) return url
         }
         return null
     }

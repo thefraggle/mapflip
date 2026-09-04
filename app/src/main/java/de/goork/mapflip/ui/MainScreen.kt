@@ -231,7 +231,13 @@ fun MainScreen(
                                         ))
                                         try {
                                             context.startActivity(targetIntent)
-                                        } catch (_: Exception) {}
+                                        } catch (_: Exception) {
+                                            Toast.makeText(
+                                                context,
+                                                s.targetAppOpenError,
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
                                     }
                                 },
                                 onDismiss = {
@@ -909,7 +915,7 @@ private fun ClipboardBanner(
         "yandex" -> "Yandex Maps"
         "here" -> "HERE WeGo"
         "waze" -> "Waze"
-        else -> "Karten-Link"
+        else -> s.testLinkTitle
     }
 
     Card(
