@@ -98,7 +98,8 @@ object Strings {
         val appNotInstalled: String = "%s is not installed",
         val targetAppOpenError: String = "Target app could not be opened",
         val statusInstalled: String = "Installed",
-        val statusNotInstalled: String = "Not installed"
+        val statusNotInstalled: String = "Not installed",
+        val tileSetupRequired: String = "Setup required"
     ) {
         val effectivePrivacyNote: String
             get() = if (de.goork.mapflip.BuildConfig.FLAVOR == "play" && privacyNotePlay.isNotBlank()) privacyNotePlay else privacyNote
@@ -252,7 +253,8 @@ object Strings {
         appNotInstalled = "%s ist nicht installiert",
         targetAppOpenError = "Ziel-App konnte nicht geöffnet werden",
         statusInstalled = "Installiert",
-        statusNotInstalled = "Nicht installiert"
+        statusNotInstalled = "Nicht installiert",
+        tileSetupRequired = "Einrichtung erforderlich"
     )
 
     val EN = AppStrings(
@@ -375,7 +377,8 @@ object Strings {
         appNotInstalled = "%s er ikke installeret",
         targetAppOpenError = "Destinationsapp kunne ikke åbnes",
         statusInstalled = "Installeret",
-        statusNotInstalled = "Ikke installeret"
+        statusNotInstalled = "Ikke installeret",
+        tileSetupRequired = "Opsætning påkrævet"
     )
 
     val FR = EN.copy(
@@ -438,7 +441,8 @@ object Strings {
         appNotInstalled = "%s n'est pas installée",
         targetAppOpenError = "Impossible d'ouvrir l'application cible",
         statusInstalled = "Installée",
-        statusNotInstalled = "Non installée"
+        statusNotInstalled = "Non installée",
+        tileSetupRequired = "Configuration requise"
     )
 
     val IT = EN.copy(
@@ -501,7 +505,8 @@ object Strings {
         appNotInstalled = "%s non è installata",
         targetAppOpenError = "Impossibile aprire l'app di destinazione",
         statusInstalled = "Installata",
-        statusNotInstalled = "Non installata"
+        statusNotInstalled = "Non installata",
+        tileSetupRequired = "Configurazione richiesta"
     )
 
     val JA = EN.copy(
@@ -564,7 +569,8 @@ object Strings {
         appNotInstalled = "%sがインストールされていません",
         targetAppOpenError = "対象アプリを開けませんでした",
         statusInstalled = "インストール済み",
-        statusNotInstalled = "未インストール"
+        statusNotInstalled = "未インストール",
+        tileSetupRequired = "設定が必要です"
     )
 
     val NL = EN.copy(
@@ -627,7 +633,8 @@ object Strings {
         appNotInstalled = "%s is niet geïnstalleerd",
         targetAppOpenError = "Doel-app kon niet worden geopend",
         statusInstalled = "Geïnstalleerd",
-        statusNotInstalled = "Niet geïnstalleerd"
+        statusNotInstalled = "Niet geïnstalleerd",
+        tileSetupRequired = "Installatie vereist"
     )
 
     val NO = EN.copy(
@@ -690,7 +697,8 @@ object Strings {
         appNotInstalled = "%s er ikke installert",
         targetAppOpenError = "Målappen kunne ikke åpnes",
         statusInstalled = "Installert",
-        statusNotInstalled = "Ikke installert"
+        statusNotInstalled = "Ikke installert",
+        tileSetupRequired = "Oppsett kreves"
     )
 
     val PL = EN.copy(
@@ -753,7 +761,8 @@ object Strings {
         appNotInstalled = "Aplikacja %s nie jest zainstalowana",
         targetAppOpenError = "Nie udało się otworzyć aplikacji docelowej",
         statusInstalled = "Zainstalowano",
-        statusNotInstalled = "Nie zainstalowano"
+        statusNotInstalled = "Nie zainstalowano",
+        tileSetupRequired = "Wymaga konfiguracji"
     )
 
     val PT = EN.copy(
@@ -816,7 +825,8 @@ object Strings {
         appNotInstalled = "%s não está instalado",
         targetAppOpenError = "Não foi possível abrir o app de destino",
         statusInstalled = "Instalado",
-        statusNotInstalled = "Não instalado"
+        statusNotInstalled = "Não instalado",
+        tileSetupRequired = "Configuração necessária"
     )
 
     val SV = EN.copy(
@@ -879,7 +889,8 @@ object Strings {
         appNotInstalled = "%s är inte installerad",
         targetAppOpenError = "Målappen kunde inte öppnas",
         statusInstalled = "Installerad",
-        statusNotInstalled = "Inte installerad"
+        statusNotInstalled = "Inte installerad",
+        tileSetupRequired = "Inställning krävs"
     )
 
     val ES = EN.copy(
@@ -942,7 +953,8 @@ object Strings {
         appNotInstalled = "%s no está instalada",
         targetAppOpenError = "No se pudo abrir la app de destino",
         statusInstalled = "Instalada",
-        statusNotInstalled = "No instalada"
+        statusNotInstalled = "No instalada",
+        tileSetupRequired = "Configuración requerida"
     )
 
     val TR = EN.copy(
@@ -1005,7 +1017,8 @@ object Strings {
         appNotInstalled = "%s yüklü değil",
         targetAppOpenError = "Hedef uygulama açılamadı",
         statusInstalled = "Yüklü",
-        statusNotInstalled = "Yüklü değil"
+        statusNotInstalled = "Yüklü değil",
+        tileSetupRequired = "Kurulum gerekli"
     )
 
     val KO = EN.copy(
@@ -1068,7 +1081,8 @@ object Strings {
         appNotInstalled = "%s 앱이 설치되어 있지 않습니다",
         targetAppOpenError = "대상 앱을 열 수 없습니다",
         statusInstalled = "설치됨",
-        statusNotInstalled = "설치되지 않음"
+        statusNotInstalled = "설치되지 않음",
+        tileSetupRequired = "설정이 필요합니다"
     )
 
     val ZH_CN = EN.copy(
@@ -1131,7 +1145,8 @@ object Strings {
         appNotInstalled = "未安装 %s",
         targetAppOpenError = "无法打开目标应用",
         statusInstalled = "已安装",
-        statusNotInstalled = "未安装"
+        statusNotInstalled = "未安装",
+        tileSetupRequired = "需要设置"
     )
 
     val ZH_TW = EN.copy(
@@ -1194,7 +1209,8 @@ object Strings {
         appNotInstalled = "尚未安裝 %s",
         targetAppOpenError = "無法開啟目標應用程式",
         statusInstalled = "已安裝",
-        statusNotInstalled = "未安裝"
+        statusNotInstalled = "未安裝",
+        tileSetupRequired = "需要設定"
     )
 
     val AR = EN.copy(
@@ -1257,7 +1273,8 @@ object Strings {
         appNotInstalled = "%s غير مثبت",
         targetAppOpenError = "تعذر فتح التطبيق المطلوب",
         statusInstalled = "مثبت",
-        statusNotInstalled = "غير مثبت"
+        statusNotInstalled = "غير مثبت",
+        tileSetupRequired = "الإعداد مطلوب"
     )
 
     val RU = EN.copy(
@@ -1320,7 +1337,8 @@ object Strings {
         appNotInstalled = "Приложение %s не установлено",
         targetAppOpenError = "Не удалось открыть целевое приложение",
         statusInstalled = "Установлено",
-        statusNotInstalled = "Не установлено"
+        statusNotInstalled = "Не установлено",
+        tileSetupRequired = "Требуется настройка"
     )
 
     val ID = EN.copy(
@@ -1383,6 +1401,7 @@ object Strings {
         appNotInstalled = "%s tidak terinstal",
         targetAppOpenError = "Aplikasi tujuan tidak dapat dibuka",
         statusInstalled = "Terinstal",
-        statusNotInstalled = "Tidak terinstal"
+        statusNotInstalled = "Tidak terinstal",
+        tileSetupRequired = "Perlu penyiapan"
     )
 }
