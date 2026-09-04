@@ -1,8 +1,8 @@
 ## 1.2.18
-- Quick Settings: Status feedback in Quick Settings tile reflects domain verification state ("Setup required") and navigates directly to system settings
-- Clipboard & Parser Hardening: Fixed false-positive detections for non-map URLs, added strict service validation, and introduced toast feedback when target app launch fails
-- Pause Logic: Fixed midnight edge cases when pausing before 6 AM (correctly pauses until 6 AM of the same morning)
-- Stability & QA: Expanded test suite to 81 unit tests (100% passing) covering timezones, date boundaries, and character encoding
+- Quick Settings: Tile now reflects setup status ("Setup required") and navigates to system settings
+- Clipboard: Fixed non-map URL false positives, added strict validation & launch error toast
+- Pause Mode: Night pause before 6 AM now correctly stops at 6 AM of the same morning
+- Quality: Expanded test suite to 81 unit tests (timezones, date boundaries, character encoding)
 
 ## 1.2.17
 - UX: Added status badges ("Installed" / "Not installed") in target app picker
