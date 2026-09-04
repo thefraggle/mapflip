@@ -16,10 +16,19 @@ object PauseHelper {
 
     /**
      * Helper to compute next morning at 6:00 AM timestamp.
+     * If called between midnight and 6:00 AM, pauses until 6:00 AM of the current day.
+     * If called at or after 6:00 AM, pauses until 6:00 AM of the following day.
      */
-    fun getTomorrowMorningTimestamp(): Long {
-        val calendar = Calendar.getInstance().apply {
-            add(Calendar.DAY_OF_YEAR, 1)
+    fun getTomorrowMorningTimestamp(
+        fromMillis: Long = System.currentTimeMillis(),
+        timeZone: java.util.TimeZone = java.util.TimeZone.getDefault()
+    ): Long {
+        val calendar = Calendar.getInstance(timeZone).apply {
+            timeInMillis = fromMillis
+            val currentHour = get(Calendar.HOUR_OF_DAY)
+            if (currentHour >= 6) {
+                add(Calendar.DAY_OF_YEAR, 1)
+            }
             set(Calendar.HOUR_OF_DAY, 6)
             set(Calendar.MINUTE, 0)
             set(Calendar.SECOND, 0)

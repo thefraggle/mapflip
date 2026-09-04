@@ -91,14 +91,7 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
     }
 
     fun pauseUntilTomorrowMorning() {
-        val calendar = Calendar.getInstance().apply {
-            add(Calendar.DAY_OF_YEAR, 1)
-            set(Calendar.HOUR_OF_DAY, 6)
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-            set(Calendar.MILLISECOND, 0)
-        }
-        setPauseState(paused = true, untilTimestamp = calendar.timeInMillis)
+        setPauseState(paused = true, untilTimestamp = de.goork.mapflip.PauseHelper.getTomorrowMorningTimestamp())
     }
 
     fun unpause() {

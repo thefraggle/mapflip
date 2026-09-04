@@ -136,4 +136,76 @@ class NavigationIntentBuilderTest {
             }
         }
     }
+
+    @Test
+    fun `builds encoded URIs for queries with umlauts and diacritics across apps`() {
+        val loc = ParsedLocation.SearchQuery("München Marienplatz")
+
+        // Google Maps
+        assertEquals("geo:0,0?q=M%C3%BCnchen+Marienplatz", NavigationIntentBuilder.buildGoogleMapsUriString(loc))
+        // Waze
+        assertEquals("waze://?q=M%C3%BCnchen+Marienplatz&navigate=yes", NavigationIntentBuilder.buildWazeUriString(loc))
+        // Organic Maps
+        assertEquals("om://search?query=M%C3%BCnchen+Marienplatz", NavigationIntentBuilder.buildOrganicMapsUriString(loc))
+        // OsmAnd
+        assertEquals("osmandmaps://?q=M%C3%BCnchen+Marienplatz", NavigationIntentBuilder.buildOsmAndUriString(loc))
+        // HERE WeGo
+        assertEquals("https://wego.here.com/search/M%C3%BCnchen+Marienplatz", NavigationIntentBuilder.buildHereWeGoUriString(loc))
+        // Yandex Maps
+        assertEquals("yandexmaps://maps.yandex.ru/?text=M%C3%BCnchen+Marienplatz", NavigationIntentBuilder.buildYandexMapsUriString(loc))
+    }
+
+    @Test
+    fun `builds encoded URIs for queries with special characters ampersand plus and percent across apps`() {
+        val queryWithAmpersand = ParsedLocation.SearchQuery("Café & Bar")
+        assertEquals("geo:0,0?q=Caf%C3%A9+%26+Bar", NavigationIntentBuilder.buildGoogleMapsUriString(queryWithAmpersand))
+        assertEquals("waze://?q=Caf%C3%A9+%26+Bar&navigate=yes", NavigationIntentBuilder.buildWazeUriString(queryWithAmpersand))
+
+        val queryWithPlus = ParsedLocation.SearchQuery("C++ Innovation")
+        assertEquals("geo:0,0?q=C%2B%2B+Innovation", NavigationIntentBuilder.buildGoogleMapsUriString(queryWithPlus))
+
+        val queryWithPercent = ParsedLocation.SearchQuery("Top 10% Club")
+        assertEquals("geo:0,0?q=Top+10%25+Club", NavigationIntentBuilder.buildGoogleMapsUriString(queryWithPercent))
+    }
+
+    @Test
+    fun `builds properly encoded URIs for non-latin alphabets (Cyrillic, Arabic, Chinese)`() {
+        // Cyrillic (Red Square)
+        val cyrillicLoc = ParsedLocation.SearchQuery("Красная площадь")
+        assertEquals("geo:0,0?q=%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%B0%D1%8F+%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C",
+            NavigationIntentBuilder.buildGoogleMapsUriString(cyrillicLoc))
+        assertEquals("yandexmaps://maps.yandex.ru/?text=%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%B0%D1%8F+%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C",
+            NavigationIntentBuilder.buildYandexMapsUriString(cyrillicLoc))
+
+        // Arabic (Burj Khalifa)
+        val arabicLoc = ParsedLocation.SearchQuery("برج خليفة")
+        assertEquals("geo:0,0?q=%D8%A8%D8%B1%D8%AC+%D8%AE%D9%84%D9%8A%D9%81%D8%A9",
+            NavigationIntentBuilder.buildGoogleMapsUriString(arabicLoc))
+
+        // Chinese (Forbidden City)
+        val chineseLoc = ParsedLocation.SearchQuery("故宫博物院")
+        assertEquals("geo:0,0?q=%E6%95%85%E5%AE%AB%E5%8D%9A%E7%89%A9%E9%99%A2",
+            NavigationIntentBuilder.buildGoogleMapsUriString(chineseLoc))
+    }
+
+    @Test
+    fun `builds encoded coordinates labels and navigation with umlauts and non-latin scripts`() {
+        val coordsWithLabel = ParsedLocation.Coordinates(48.1371, 11.5754, label = "München Zentrum")
+        assertEquals("geo:48.137100,11.575400?q=M%C3%BCnchen+Zentrum",
+            NavigationIntentBuilder.buildGoogleMapsUriString(coordsWithLabel))
+        assertEquals("om://map?v=1&ll=48.1371,11.5754&n=M%C3%BCnchen+Zentrum",
+            NavigationIntentBuilder.buildOrganicMapsUriString(coordsWithLabel))
+        assertEquals("https://share.here.com/l/48.137100,11.575400?msg=M%C3%BCnchen+Zentrum",
+            NavigationIntentBuilder.buildHereWeGoUriString(coordsWithLabel))
+
+        val navCyrillic = ParsedLocation.Navigation("Москва", TravelMode.DRIVING)
+        assertEquals("google.navigation:q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&mode=d",
+            NavigationIntentBuilder.buildGoogleMapsUriString(navCyrillic))
+        assertEquals("yandexmaps://maps.yandex.ru/?rtext=~%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&rtt=auto",
+            NavigationIntentBuilder.buildYandexMapsUriString(navCyrillic))
+
+        val directionsUmlaut = ParsedLocation.Directions("Köln", "München", TravelMode.TRANSIT)
+        assertEquals("https://www.google.com/maps/dir/?api=1&origin=K%C3%B6ln&destination=M%C3%BCnchen&travelmode=transit",
+            NavigationIntentBuilder.buildGoogleMapsUriString(directionsUmlaut))
+    }
 }

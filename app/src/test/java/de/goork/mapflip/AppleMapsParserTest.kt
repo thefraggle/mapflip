@@ -162,6 +162,55 @@ class AppleMapsParserTest {
     }
 
     @Test
+    fun `converts search query with umlauts and diacritics`() {
+        assertEquals("geo:0,0?q=M%C3%BCnchen+Marienplatz",
+            AppleMapsParser.convert("https://maps.apple.com/?q=M%C3%BCnchen%20Marienplatz"))
+        assertEquals("geo:0,0?q=Z%C3%BCrich+HB",
+            AppleMapsParser.convert("https://maps.apple.com/?q=Z%C3%BCrich+HB"))
+        assertEquals("geo:0,0?q=Champs-%C3%89lys%C3%A9es",
+            AppleMapsParser.convert("https://maps.apple.com/?q=Champs-%C3%89lys%C3%A9es"))
+        assertEquals("geo:0,0?q=S%C3%A3o+Paulo",
+            AppleMapsParser.convert("https://maps.apple.com/?q=S%C3%A3o+Paulo"))
+    }
+
+    @Test
+    fun `converts search query with special characters`() {
+        // Ampersand (&) encoded as %26
+        assertEquals("geo:0,0?q=Caf%C3%A9+%26+Bar",
+            AppleMapsParser.convert("https://maps.apple.com/?q=Caf%C3%A9%20%26%20Bar"))
+        // Plus (+) encoded as %2B
+        assertEquals("geo:0,0?q=C%2B%2B+Campus",
+            AppleMapsParser.convert("https://maps.apple.com/?q=C%2B%2B%20Campus"))
+        // Percent (%) encoded as %25
+        assertEquals("geo:0,0?q=Top+10%25+Club",
+            AppleMapsParser.convert("https://maps.apple.com/?q=Top%2010%25%20Club"))
+    }
+
+    @Test
+    fun `converts search query with non-latin scripts`() {
+        // Cyrillic (Moscow, Red Square)
+        assertEquals("geo:0,0?q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C+%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%B0%D1%8F+%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C",
+            AppleMapsParser.convert("https://maps.apple.com/?q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%B0%D1%8F%20%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C"))
+        // Arabic (Burj Khalifa)
+        assertEquals("geo:0,0?q=%D8%A8%D8%B1%D8%AC+%D8%AE%D9%84%D9%8A%D9%81%D8%A9",
+            AppleMapsParser.convert("https://maps.apple.com/?q=%D8%A8%D8%B1%D8%AC%20%D8%AE%D9%84%D9%8A%D9%81%D8%A9"))
+        // Chinese (Forbidden City)
+        assertEquals("geo:0,0?q=%E6%95%85%E5%AE%AB%E5%8D%9A%E7%89%A9%E9%99%A2",
+            AppleMapsParser.convert("https://maps.apple.com/?q=%E6%95%85%E5%AE%AB%E5%8D%9A%E7%89%A9%E9%99%A2"))
+        // Japanese (Tokyo Tower)
+        assertEquals("geo:0,0?q=%E6%9D%B1%E4%BA%AC%E3%82%BF%E3%83%AF%E3%83%BC",
+            AppleMapsParser.convert("https://maps.apple.com/?q=%E6%9D%B1%E4%BA%AC%E3%82%BF%E3%83%AF%E3%83%BC"))
+    }
+
+    @Test
+    fun `converts directions with special characters and umlauts`() {
+        assertEquals("https://www.google.com/maps/dir/?api=1&origin=M%C3%BCnchen&destination=K%C3%B6ln",
+            AppleMapsParser.convert("https://maps.apple.com/?saddr=M%C3%BCnchen&daddr=K%C3%B6ln"))
+        assertEquals("https://www.google.com/maps/dir/?api=1&origin=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&destination=%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3",
+            AppleMapsParser.convert("https://maps.apple.com/?saddr=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&daddr=%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3"))
+    }
+
+    @Test
     fun `supports all 20 languages in Strings registry`() {
         val supportedCodes = de.goork.mapflip.ui.Strings.SUPPORTED_LANGUAGES.map { it.code }
         org.junit.Assert.assertEquals(20, supportedCodes.size)
