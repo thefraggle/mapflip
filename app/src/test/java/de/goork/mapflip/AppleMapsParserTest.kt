@@ -224,6 +224,8 @@ class AppleMapsParserTest {
             org.junit.Assert.assertFalse(strings.setupTitle.isBlank())
             org.junit.Assert.assertFalse(strings.tagline.isBlank())
             org.junit.Assert.assertFalse(strings.testLinkTitle.isBlank())
+            org.junit.Assert.assertFalse(strings.privacyPolicyTitle.isBlank())
+            org.junit.Assert.assertFalse(strings.impressumTitle.isBlank())
         }
     }
 }

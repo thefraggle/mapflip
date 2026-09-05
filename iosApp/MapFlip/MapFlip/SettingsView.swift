@@ -44,6 +44,8 @@ struct SettingsView: View {
                         Text("100% Offline & Privat")
                             .foregroundColor(.secondary)
                     }
+                    Link("Datenschutzerklärung", destination: URL(string: "https://goork.de/mapflip/#privacy")!)
+                    Link("Impressum", destination: URL(string: "https://goork.de/mapflip/#impressum")!)
                     Link("Website & Quellcode", destination: URL(string: "https://goork.de/mapflip/")!)
                 }
             }

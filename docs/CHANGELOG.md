@@ -1,3 +1,8 @@
+## 1.2.19
+- Rechtliches & Transparenz: Impressum neben Datenschutzerklärung im Footer verlinkt
+- Lokalisierung: Vollständige Übersetzung für Impressum in allen 19 Sprachen
+- Benutzeroberfläche: Aufgeräumtes Footer-Layout mit klaren Direktlinks
+
 ## 1.2.18
 - Quick Settings: Tile zeigt fehlende Link-Einrichtung an und öffnet direkt die Einstellungen
 - Zwischenablage: Falscherkennung von Web-Links behoben, Prüfung auf Kartendienste & Fehler-Feedback

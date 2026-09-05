@@ -1,3 +1,8 @@
+## 1.2.19
+- Legal & Transparency: Added Legal Notice (Impressum) link next to Privacy Policy in footer
+- Localization: Localized legal notice title across all 19 supported languages
+- User Interface: Refined footer layout with clean direct links
+
 ## 1.2.18
 - Quick Settings: Tile now reflects setup status ("Setup required") and navigates to system settings
 - Clipboard: Fixed non-map URL false positives, added strict validation & launch error toast

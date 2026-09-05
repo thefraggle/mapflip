@@ -11,5 +11,6 @@ object AppConstants {
     const val URL_FAMWAKE = "https://play.google.com/store/apps/details?id=de.familienwecker.famwake"
     const val URL_NOTTHOFF = "https://notthoff.org"
     const val URL_PRIVACY_POLICY = "https://goork.de/mapflip/#privacy"
+    const val URL_IMPRESSUM = "https://goork.de/mapflip/#impressum"
     const val URL_KOFI = "https://ko-fi.com/thefraggle78"
 }
