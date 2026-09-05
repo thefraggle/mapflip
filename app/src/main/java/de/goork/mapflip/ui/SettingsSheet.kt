@@ -2,6 +2,7 @@ package de.goork.mapflip.ui
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
@@ -359,9 +360,22 @@ fun SettingsSheet(
                         onClick = {
                             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             Analytics.trackEvent("feedback_clicked")
-                            val intent = Intent(Intent.ACTION_SENDTO).apply {
-                                data = Uri.parse("mailto:${AppConstants.FEEDBACK_EMAIL}")
-                                putExtra(Intent.EXTRA_SUBJECT, "[MapFlip Feedback]")
+                            val subject = "[MapFlip Feedback]"
+                            val body = """
+                                
+                                
+                                ---
+                                App: MapFlip v${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE}) [${BuildConfig.FLAVOR}]
+                                OS: Android ${Build.VERSION.RELEASE} (API ${Build.VERSION.SDK_INT})
+                                Device: ${Build.MANUFACTURER} ${Build.MODEL}
+                                Target App: ${currentTargetApp.displayName}
+                            """.trimIndent()
+                            val mailtoUri = Uri.parse(
+                                "mailto:${AppConstants.FEEDBACK_EMAIL}?subject=${Uri.encode(subject)}&body=${Uri.encode(body)}"
+                            )
+                            val intent = Intent(Intent.ACTION_SENDTO, mailtoUri).apply {
+                                putExtra(Intent.EXTRA_SUBJECT, subject)
+                                putExtra(Intent.EXTRA_TEXT, body)
                             }
                             try {
                                 context.startActivity(intent)

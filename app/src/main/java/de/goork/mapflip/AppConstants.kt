@@ -7,7 +7,7 @@ object AppConstants {
     const val PREFS_KEY_THEME = "theme" // "system", "light", "dark"
     const val PREFS_KEY_TARGET_APP = "target_app" // "google_maps", "waze", "organic_maps", "osmand", "system_picker"
     const val GOOGLE_MAPS_PACKAGE = "com.google.android.apps.maps"
-    const val FEEDBACK_EMAIL = "daniel.notthoff@gmail.com"
+    const val FEEDBACK_EMAIL = "mapflip@goork.de"
     const val URL_FAMWAKE = "https://play.google.com/store/apps/details?id=de.familienwecker.famwake"
     const val URL_NOTTHOFF = "https://notthoff.org"
     const val URL_PRIVACY_POLICY = "https://goork.de/mapflip/#privacy"
