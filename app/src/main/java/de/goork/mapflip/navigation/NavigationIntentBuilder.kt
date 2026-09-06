@@ -41,7 +41,15 @@ object NavigationIntentBuilder {
                 val label = location.label
                 val latStr = formatCoord(location.latitude)
                 val lonStr = formatCoord(location.longitude)
-                if (!label.isNullOrBlank()) {
+                if (location.mode != null) {
+                    val modeParam = when (location.mode) {
+                        TravelMode.WALKING -> "&mode=w"
+                        TravelMode.BICYCLING -> "&mode=b"
+                        TravelMode.TRANSIT -> "&mode=transit"
+                        TravelMode.DRIVING -> "&mode=d"
+                    }
+                    "google.navigation:q=$latStr,$lonStr$modeParam"
+                } else if (!label.isNullOrBlank()) {
                     "geo:$latStr,$lonStr?q=${encode(label)}"
                 } else {
                     "geo:$latStr,$lonStr?q=$latStr,$lonStr"
@@ -149,12 +157,38 @@ object NavigationIntentBuilder {
             is ParsedLocation.Coordinates -> {
                 val latStr = formatCoord(location.latitude)
                 val lonStr = formatCoord(location.longitude)
-                val labelParam = if (!location.label.isNullOrBlank()) "?msg=${encode(location.label)}" else ""
-                "https://share.here.com/l/$latStr,$lonStr$labelParam"
+                if (location.mode != null) {
+                    val modePart = when (location.mode) {
+                        TravelMode.WALKING -> "walk"
+                        TravelMode.BICYCLING -> "bicycle"
+                        TravelMode.TRANSIT -> "public-transport"
+                        TravelMode.DRIVING -> "drive"
+                    }
+                    "https://wego.here.com/directions/$modePart//$latStr,$lonStr"
+                } else {
+                    val labelParam = if (!location.label.isNullOrBlank()) "?msg=${encode(location.label)}" else ""
+                    "https://share.here.com/l/$latStr,$lonStr$labelParam"
+                }
             }
             is ParsedLocation.SearchQuery -> "https://wego.here.com/search/${encode(location.query)}"
-            is ParsedLocation.Navigation -> "https://wego.here.com/directions/drive//${encode(location.destination)}"
-            is ParsedLocation.Directions -> "https://wego.here.com/directions/drive/${encode(location.origin)}/${encode(location.destination)}"
+            is ParsedLocation.Navigation -> {
+                val modePart = when (location.mode) {
+                    TravelMode.WALKING -> "walk"
+                    TravelMode.BICYCLING -> "bicycle"
+                    TravelMode.TRANSIT -> "public-transport"
+                    TravelMode.DRIVING, null -> "drive"
+                }
+                "https://wego.here.com/directions/$modePart//${encode(location.destination)}"
+            }
+            is ParsedLocation.Directions -> {
+                val modePart = when (location.mode) {
+                    TravelMode.WALKING -> "walk"
+                    TravelMode.BICYCLING -> "bicycle"
+                    TravelMode.TRANSIT -> "public-transport"
+                    TravelMode.DRIVING, null -> "drive"
+                }
+                "https://wego.here.com/directions/$modePart/${encode(location.origin)}/${encode(location.destination)}"
+            }
             is ParsedLocation.WebFallback -> "https://wego.here.com/search/${encode(location.fallbackUrl)}"
         }
     }
@@ -170,11 +204,34 @@ object NavigationIntentBuilder {
             is ParsedLocation.Home -> "yandexmaps://maps.yandex.ru"
             is ParsedLocation.Coordinates -> {
                 val labelParam = if (!location.label.isNullOrBlank()) "&text=${encode(location.label)}" else ""
-                "yandexmaps://maps.yandex.ru/?ll=${location.longitude},${location.latitude}&z=16$labelParam"
+                val rttParam = when (location.mode) {
+                    TravelMode.WALKING -> "&rtt=pd"
+                    TravelMode.BICYCLING -> "&rtt=bc"
+                    TravelMode.TRANSIT -> "&rtt=mt"
+                    TravelMode.DRIVING -> "&rtt=auto"
+                    null -> ""
+                }
+                "yandexmaps://maps.yandex.ru/?ll=${location.longitude},${location.latitude}&z=16$labelParam$rttParam"
             }
             is ParsedLocation.SearchQuery -> "yandexmaps://maps.yandex.ru/?text=${encode(location.query)}"
-            is ParsedLocation.Navigation -> "yandexmaps://maps.yandex.ru/?rtext=~${encode(location.destination)}&rtt=auto"
-            is ParsedLocation.Directions -> "yandexmaps://maps.yandex.ru/?rtext=${encode(location.origin)}~${encode(location.destination)}&rtt=auto"
+            is ParsedLocation.Navigation -> {
+                val rtt = when (location.mode) {
+                    TravelMode.WALKING -> "pd"
+                    TravelMode.BICYCLING -> "bc"
+                    TravelMode.TRANSIT -> "mt"
+                    TravelMode.DRIVING, null -> "auto"
+                }
+                "yandexmaps://maps.yandex.ru/?rtext=~${encode(location.destination)}&rtt=$rtt"
+            }
+            is ParsedLocation.Directions -> {
+                val rtt = when (location.mode) {
+                    TravelMode.WALKING -> "pd"
+                    TravelMode.BICYCLING -> "bc"
+                    TravelMode.TRANSIT -> "mt"
+                    TravelMode.DRIVING, null -> "auto"
+                }
+                "yandexmaps://maps.yandex.ru/?rtext=${encode(location.origin)}~${encode(location.destination)}&rtt=$rtt"
+            }
             is ParsedLocation.WebFallback -> "https://yandex.com/maps/?text=${encode(location.fallbackUrl)}"
         }
     }

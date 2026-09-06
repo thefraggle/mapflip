@@ -42,6 +42,15 @@ object YandexMapsParser : MapUrlParser {
             val uri = URI(normalizedUrl.replace(" ", "%20"))
             val params = parseQueryParams(uri.rawQuery ?: "")
 
+            val rtt = params["rtt"]?.lowercase()
+            val travelMode = when (rtt) {
+                "pd" -> TravelMode.WALKING
+                "bc" -> TravelMode.BICYCLING
+                "mt" -> TravelMode.TRANSIT
+                "auto" -> TravelMode.DRIVING
+                else -> null
+            }
+
             // 1. Coordinates: ll=longitude,latitude (NOTE: Yandex puts LONGITUDE first!)
             val ll = params["ll"]
             if (!ll.isNullOrBlank()) {
@@ -51,7 +60,7 @@ object YandexMapsParser : MapUrlParser {
                     val lat = parts[1].toDoubleOrNull()
                     if (lat != null && lon != null) {
                         val text = params["text"]
-                        return ParsedLocation.Coordinates(lat, lon, label = text)
+                        return ParsedLocation.Coordinates(lat, lon, label = text, mode = travelMode)
                     }
                 }
             }
@@ -67,7 +76,7 @@ object YandexMapsParser : MapUrlParser {
             if (!rtext.isNullOrBlank()) {
                 val legs = rtext.split("~")
                 if (legs.size >= 2) {
-                    return ParsedLocation.Directions(origin = legs.first(), destination = legs.last(), mode = null)
+                    return ParsedLocation.Directions(origin = legs.first(), destination = legs.last(), mode = travelMode)
                 }
             }
 

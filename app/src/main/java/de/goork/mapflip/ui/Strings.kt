@@ -100,7 +100,8 @@ object Strings {
         val targetAppOpenError: String = "Target app could not be opened",
         val statusInstalled: String = "Installed",
         val statusNotInstalled: String = "Not installed",
-        val tileSetupRequired: String = "Setup required"
+        val tileSetupRequired: String = "Setup required",
+        val targetAppFallbackOpened: String = "%s is not installed – opened with %s"
     ) {
         val effectivePrivacyNote: String
             get() = if (de.goork.mapflip.BuildConfig.FLAVOR == "play" && privacyNotePlay.isNotBlank()) privacyNotePlay else privacyNote
@@ -256,7 +257,8 @@ object Strings {
         targetAppOpenError = "Ziel-App konnte nicht geöffnet werden",
         statusInstalled = "Installiert",
         statusNotInstalled = "Nicht installiert",
-        tileSetupRequired = "Einrichtung erforderlich"
+        tileSetupRequired = "Einrichtung erforderlich",
+        targetAppFallbackOpened = "%s ist nicht installiert – mit %s geöffnet"
     )
 
     val EN = AppStrings(

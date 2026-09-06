@@ -8,7 +8,9 @@ object UniversalMapParser {
         OpenStreetMapParser,
         YandexMapsParser,
         HereMapsParser,
-        WazeMapsParser
+        WazeMapsParser,
+        PlusCodeParser,
+        GeoCoordinateParser
     )
 
     fun extractMapUrl(text: String?): String? {
@@ -34,14 +36,16 @@ object UniversalMapParser {
 
     fun detectSourceService(url: String?): String {
         if (url.isNullOrBlank()) return "unknown"
-        val lower = url.lowercase()
+        val lower = url.lowercase().trim()
         return when {
-            lower.contains("apple.com") -> "apple"
+            lower.contains("apple.com") || lower.startsWith("applemaps://") -> "apple"
             lower.contains("bing.com") -> "bing"
             lower.contains("openstreetmap.org") || lower.contains("osm.org") -> "osm"
             lower.contains("yandex.") -> "yandex"
             lower.contains("here.com") -> "here"
             lower.contains("waze.com") -> "waze"
+            lower.contains("plus.codes") || PlusCodeParser.canParse(url) -> "plus_code"
+            lower.startsWith("geo:") || GeoCoordinateParser.canParse(url) -> "geo_coordinates"
             else -> "other"
         }
     }

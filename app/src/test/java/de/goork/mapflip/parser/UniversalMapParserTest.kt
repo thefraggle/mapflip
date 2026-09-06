@@ -75,9 +75,29 @@ class UniversalMapParserTest {
         assertEquals("yandex", UniversalMapParser.detectSourceService("https://yandex.ru/maps/213/moscow/"))
         assertEquals("here", UniversalMapParser.detectSourceService("https://wego.here.com/location?map=52.52,13.40"))
         assertEquals("waze", UniversalMapParser.detectSourceService("https://waze.com/ul?q=Munich"))
+        assertEquals("plus_code", UniversalMapParser.detectSourceService("https://plus.codes/8FW4V75V+8G"))
+        assertEquals("plus_code", UniversalMapParser.detectSourceService("8FW4V75V+8G"))
+        assertEquals("geo_coordinates", UniversalMapParser.detectSourceService("geo:52.5200,13.4050"))
+        assertEquals("geo_coordinates", UniversalMapParser.detectSourceService("52.520008, 13.404954"))
         assertEquals("other", UniversalMapParser.detectSourceService("https://example.com"))
         assertEquals("unknown", UniversalMapParser.detectSourceService(null))
         assertEquals("unknown", UniversalMapParser.detectSourceService(""))
+    }
+
+    @Test
+    fun `extractMapUrl extracts raw coordinates from text`() {
+        val text = "Komm zu 52.520008, 13.404954 heute"
+        val extracted = UniversalMapParser.extractMapUrl(text)
+        assertNotNull(extracted)
+        assertEquals("geo:52.520008,13.404954", extracted)
+    }
+
+    @Test
+    fun `extractMapUrl extracts Plus Code from text`() {
+        val text = "Standort: 8FW4V75V+8G in Paris"
+        val extracted = UniversalMapParser.extractMapUrl(text)
+        assertNotNull(extracted)
+        assertEquals("https://plus.codes/8FW4V75V+8G", extracted)
     }
 
     @Test

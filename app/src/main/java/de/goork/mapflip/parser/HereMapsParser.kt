@@ -48,6 +48,15 @@ object HereMapsParser : MapUrlParser {
             val path = uri.path ?: ""
             val params = parseQueryParams(uri.rawQuery ?: "")
 
+            val queryMode = params["m"]?.lowercase()
+            val queryTravelMode = when (queryMode) {
+                "walk", "pedestrian" -> TravelMode.WALKING
+                "bicycle", "bike" -> TravelMode.BICYCLING
+                "publictransport", "transit" -> TravelMode.TRANSIT
+                "drive", "car" -> TravelMode.DRIVING
+                else -> null
+            }
+
             // 1. Path-based coordinates e.g. /l/52.5200,13.4050,16,Berlin or /r/52.52,13.40
             val pathCoordMatcher = SHARE_COORD_PATTERN.matcher(path)
             if (pathCoordMatcher.find()) {
@@ -55,7 +64,7 @@ object HereMapsParser : MapUrlParser {
                 val lon = pathCoordMatcher.group(2)?.toDoubleOrNull()
                 if (lat != null && lon != null) {
                     val label = params["msg"] ?: params["q"]
-                    return ParsedLocation.Coordinates(lat, lon, label = label)
+                    return ParsedLocation.Coordinates(lat, lon, label = label, mode = queryTravelMode)
                 }
             }
 
@@ -68,7 +77,7 @@ object HereMapsParser : MapUrlParser {
                     val lon = parts[1].toDoubleOrNull()
                     if (lat != null && lon != null) {
                         val label = params["msg"] ?: params["q"]
-                        return ParsedLocation.Coordinates(lat, lon, label = label)
+                        return ParsedLocation.Coordinates(lat, lon, label = label, mode = queryTravelMode)
                     }
                 }
             }

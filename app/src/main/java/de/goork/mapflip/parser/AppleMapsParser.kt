@@ -79,7 +79,7 @@ object AppleMapsParser : MapUrlParser {
                     val lon = parts[1].toDoubleOrNull()
                     if (lat != null && lon != null) {
                         val searchQuery = params["q"] ?: params["address"] ?: params["near"] ?: params["name"]
-                        return ParsedLocation.Coordinates(lat, lon, label = searchQuery)
+                        return ParsedLocation.Coordinates(lat, lon, label = searchQuery, mode = travelMode)
                     }
                 }
             }

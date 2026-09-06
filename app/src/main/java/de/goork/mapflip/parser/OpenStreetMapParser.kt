@@ -42,6 +42,22 @@ object OpenStreetMapParser : MapUrlParser {
             val uri = URI(normalizedUrl.replace(" ", "%20"))
             val params = parseQueryParams(uri.rawQuery ?: "")
 
+            // 0. Directions (route=lat1,lon1;lat2,lon2)
+            val route = params["route"]
+            val engine = params["engine"]?.lowercase() ?: ""
+            val travelMode = when {
+                engine.contains("foot") || engine.contains("walk") -> TravelMode.WALKING
+                engine.contains("bike") || engine.contains("bicycle") -> TravelMode.BICYCLING
+                engine.contains("car") || engine.contains("driving") -> TravelMode.DRIVING
+                else -> null
+            }
+            if (!route.isNullOrBlank()) {
+                val legs = route.split(";")
+                if (legs.size >= 2) {
+                    return ParsedLocation.Directions(origin = legs.first(), destination = legs.last(), mode = travelMode)
+                }
+            }
+
             // 1. Direct Marker coordinates (mlat=lat&mlon=lon)
             val mlat = params["mlat"]?.toDoubleOrNull()
             val mlon = params["mlon"]?.toDoubleOrNull()

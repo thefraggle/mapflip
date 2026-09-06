@@ -208,4 +208,32 @@ class NavigationIntentBuilderTest {
         assertEquals("https://www.google.com/maps/dir/?api=1&origin=K%C3%B6ln&destination=M%C3%BCnchen&travelmode=transit",
             NavigationIntentBuilder.buildGoogleMapsUriString(directionsUmlaut))
     }
+
+    @Test
+    fun `builds correct URIs with travel modes for coordinates, here wego, and yandex`() {
+        // Coordinates with walking mode
+        val walkCoords = ParsedLocation.Coordinates(52.5200, 13.4050, mode = TravelMode.WALKING)
+        assertEquals("google.navigation:q=52.520000,13.405000&mode=w",
+            NavigationIntentBuilder.buildGoogleMapsUriString(walkCoords))
+        assertEquals("https://wego.here.com/directions/walk//52.520000,13.405000",
+            NavigationIntentBuilder.buildHereWeGoUriString(walkCoords))
+        assertEquals("yandexmaps://maps.yandex.ru/?ll=13.405,52.52&z=16&rtt=pd",
+            NavigationIntentBuilder.buildYandexMapsUriString(walkCoords))
+
+        // Coordinates with bicycle mode
+        val bikeCoords = ParsedLocation.Coordinates(52.5200, 13.4050, mode = TravelMode.BICYCLING)
+        assertEquals("google.navigation:q=52.520000,13.405000&mode=b",
+            NavigationIntentBuilder.buildGoogleMapsUriString(bikeCoords))
+        assertEquals("https://wego.here.com/directions/bicycle//52.520000,13.405000",
+            NavigationIntentBuilder.buildHereWeGoUriString(bikeCoords))
+        assertEquals("yandexmaps://maps.yandex.ru/?ll=13.405,52.52&z=16&rtt=bc",
+            NavigationIntentBuilder.buildYandexMapsUriString(bikeCoords))
+
+        // Directions with transit mode
+        val transitDirs = ParsedLocation.Directions("Alexanderplatz", "Potsdamer Platz", TravelMode.TRANSIT)
+        assertEquals("https://wego.here.com/directions/public-transport/Alexanderplatz/Potsdamer+Platz",
+            NavigationIntentBuilder.buildHereWeGoUriString(transitDirs))
+        assertEquals("yandexmaps://maps.yandex.ru/?rtext=Alexanderplatz~Potsdamer+Platz&rtt=mt",
+            NavigationIntentBuilder.buildYandexMapsUriString(transitDirs))
+    }
 }

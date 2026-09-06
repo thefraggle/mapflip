@@ -47,7 +47,26 @@ class RedirectActivity : Activity() {
             } else {
                 val parsedLocation = UniversalMapParser.parse(mapUrl)
                 val targetApp = repository.getTargetApp()
-                val targetIntent = NavigationIntentBuilder.buildIntent(parsedLocation, targetApp, this).apply {
+                val isTargetInstalled = targetApp.isInstalled(this)
+                val effectiveTargetApp = if (isTargetInstalled) {
+                    targetApp
+                } else {
+                    val fallback = if (de.goork.mapflip.navigation.TargetNavigationApp.GOOGLE_MAPS.isInstalled(this)) {
+                        de.goork.mapflip.navigation.TargetNavigationApp.GOOGLE_MAPS
+                    } else {
+                        de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER
+                    }
+                    showFallbackToast(targetApp, fallback)
+                    Analytics.trackEvent("redirect_fallback", mapOf(
+                        "configured_app" to targetApp.name.lowercase(),
+                        "fallback_app" to fallback.name.lowercase(),
+                        "source_service" to sourceService,
+                        "reason" to "configured_app_not_installed"
+                    ))
+                    fallback
+                }
+
+                val targetIntent = NavigationIntentBuilder.buildIntent(parsedLocation, effectiveTargetApp, this).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
 
@@ -61,7 +80,7 @@ class RedirectActivity : Activity() {
                 }
 
                 Analytics.trackEvent("redirect_performed", mapOf(
-                    "target_app" to targetApp.name.lowercase(),
+                    "target_app" to effectiveTargetApp.name.lowercase(),
                     "source_service" to sourceService,
                     "location_type" to locationType,
                     "is_share_sheet" to isShareSheet
@@ -71,14 +90,14 @@ class RedirectActivity : Activity() {
                     startActivity(targetIntent)
                 } catch (_: ActivityNotFoundException) {
                     Analytics.trackEvent("redirect_fallback", mapOf(
-                        "target_app" to targetApp.name.lowercase(),
+                        "target_app" to effectiveTargetApp.name.lowercase(),
                         "source_service" to sourceService,
                         "reason" to "app_not_installed"
                     ))
-                    handleTargetNotFoundFallback(targetApp, dataUri, parsedLocation)
+                    handleTargetNotFoundFallback(effectiveTargetApp, dataUri, parsedLocation)
                 } catch (e: Exception) {
                     Analytics.trackEvent("redirect_fallback", mapOf(
-                        "target_app" to targetApp.name.lowercase(),
+                        "target_app" to effectiveTargetApp.name.lowercase(),
                         "source_service" to sourceService,
                         "reason" to e.javaClass.simpleName
                     ))
@@ -96,41 +115,49 @@ class RedirectActivity : Activity() {
         suppressTransitionAnimation()
     }
 
+    private fun showFallbackToast(
+        configuredApp: de.goork.mapflip.navigation.TargetNavigationApp,
+        fallbackApp: de.goork.mapflip.navigation.TargetNavigationApp
+    ) {
+        try {
+            val repo = PreferencesRepository.getInstance(this)
+            val langCode = de.goork.mapflip.ui.Strings.resolveLanguage(repo.preferences.value.language)
+            val s = de.goork.mapflip.ui.Strings.getStrings(langCode)
+            val fallbackName = if (fallbackApp.isSystemPicker) s.targetAppAlwaysAsk else fallbackApp.displayName
+            val msg = s.targetAppFallbackOpened.format(configuredApp.displayName, fallbackName)
+            android.widget.Toast.makeText(applicationContext, msg, android.widget.Toast.LENGTH_LONG).show()
+        } catch (_: Exception) {}
+    }
+
     private fun handleTargetNotFoundFallback(
         targetApp: de.goork.mapflip.navigation.TargetNavigationApp,
         dataUri: Uri,
         parsedLocation: de.goork.mapflip.parser.ParsedLocation
     ) {
-        when (targetApp) {
-            de.goork.mapflip.navigation.TargetNavigationApp.WAZE -> {
-                // Try Waze web fallback or browser
-                try {
-                    val wazeWebUri = Uri.parse("https://waze.com/ul?${dataUri.query ?: ""}")
-                    val fallbackIntent = Intent(Intent.ACTION_VIEW, wazeWebUri).apply {
-                        addCategory(Intent.CATEGORY_BROWSABLE)
-                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    }
-                    startActivity(fallbackIntent)
-                } catch (_: Exception) {
-                    forwardOriginalUrl(dataUri)
+        // 1. Try generic System Picker chooser
+        try {
+            val chooserIntent = NavigationIntentBuilder.buildGenericGeoIntent(parsedLocation, createChooser = true).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            startActivity(chooserIntent)
+            return
+        } catch (_: Exception) {}
+
+        // 2. Specific Waze web fallback if applicable
+        if (targetApp == de.goork.mapflip.navigation.TargetNavigationApp.WAZE) {
+            try {
+                val wazeWebUri = Uri.parse("https://waze.com/ul?${dataUri.query ?: ""}")
+                val fallbackIntent = Intent(Intent.ACTION_VIEW, wazeWebUri).apply {
+                    addCategory(Intent.CATEGORY_BROWSABLE)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
-            }
-            de.goork.mapflip.navigation.TargetNavigationApp.OSMAND -> {
-                // Try OsmAnd Plus if standard OsmAnd wasn't found
-                try {
-                    val plusIntent = Intent(Intent.ACTION_VIEW, Uri.parse(NavigationIntentBuilder.buildOsmAndUriString(parsedLocation))).apply {
-                        setPackage("net.osmand.plus")
-                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    }
-                    startActivity(plusIntent)
-                } catch (_: Exception) {
-                    forwardOriginalUrl(dataUri)
-                }
-            }
-            else -> {
-                forwardOriginalUrl(dataUri)
-            }
+                startActivity(fallbackIntent)
+                return
+            } catch (_: Exception) {}
         }
+
+        // 3. Fallback: browser
+        forwardOriginalUrl(dataUri)
     }
 
     /**

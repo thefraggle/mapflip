@@ -17,7 +17,8 @@ sealed class ParsedLocation {
     data class Coordinates(
         val latitude: Double,
         val longitude: Double,
-        val label: String? = null
+        val label: String? = null,
+        val mode: TravelMode? = null
     ) : ParsedLocation() {
         val latLonString: String get() = "$latitude,$longitude"
     }

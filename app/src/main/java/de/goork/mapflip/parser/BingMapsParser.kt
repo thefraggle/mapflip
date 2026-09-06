@@ -42,20 +42,21 @@ object BingMapsParser : MapUrlParser {
             val uri = URI(normalizedUrl.replace(" ", "%20"))
             val params = parseQueryParams(uri.rawQuery ?: "")
 
-            // 1. Directions (rtp=pos.lat_lon_Name~pos.lat_lon_Name or rtp=adr.Berlin~adr.Munich)
+            val modeParam = params["mode"]?.lowercase()
+            val travelMode = when (modeParam) {
+                "w", "walking" -> TravelMode.WALKING
+                "t", "transit" -> TravelMode.TRANSIT
+                "d", "driving" -> TravelMode.DRIVING
+                else -> null
+            }
+
+            // 1. Directions (rtp=pos.lat_lon~pos.lat_lon or rtp=adr.A~adr.B)
             val rtp = params["rtp"]
             if (!rtp.isNullOrBlank()) {
-                val legs = rtp.split("~")
+                val legs = rtp.split("~").filter { it.isNotBlank() }
                 if (legs.size >= 2) {
                     val origin = cleanRtpPoint(legs.first())
                     val destination = cleanRtpPoint(legs.last())
-                    val modeParam = params["mode"]?.lowercase()
-                    val travelMode = when (modeParam) {
-                        "w", "walking" -> TravelMode.WALKING
-                        "t", "transit" -> TravelMode.TRANSIT
-                        "d", "driving" -> TravelMode.DRIVING
-                        else -> null
-                    }
                     return ParsedLocation.Directions(origin = origin, destination = destination, mode = travelMode)
                 }
             }
@@ -70,7 +71,7 @@ object BingMapsParser : MapUrlParser {
                     val lon = parts[1].toDoubleOrNull()
                     if (lat != null && lon != null) {
                         val searchQuery = params["q"] ?: params["where1"]
-                        return ParsedLocation.Coordinates(lat, lon, label = searchQuery)
+                        return ParsedLocation.Coordinates(lat, lon, label = searchQuery, mode = travelMode)
                     }
                 }
             }
