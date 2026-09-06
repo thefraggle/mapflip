@@ -1,3 +1,10 @@
+## 1.2.20
+- New Navigation Apps: Now supports Magic Earth, Citymapper, Komoot, and TomTom AmiGO
+- Smarter Detection: Intercepts Google Maps links, raw coordinates, and Plus Codes
+- Travel Modes: Preserves walking, cycling, and public transit navigation
+- Android 13+ Integration: Themed monochrome app icon and per-app language settings
+- Reliability: Subtle redirection notification and smart fallback if a target app was removed
+
 ## 1.2.19
 - Legal & Transparency: Added Legal Notice (Impressum) link next to Privacy Policy in footer
 - Localization: Localized legal notice title across all 19 supported languages

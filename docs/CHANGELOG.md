@@ -1,3 +1,10 @@
+## 1.2.20
+- Neue Ziel-Apps: Unterstützt jetzt auch Magic Earth, Citymapper, Komoot und TomTom AmiGO
+- Mehr Erkennung: Liest Google Maps Weblinks, direkte Geokoordinaten und Google Plus Codes
+- Mobilität: Erkennt Fußwege, Fahrradrouten und ÖPNV automatisch
+- Android 13+ Design: Modernes App-Icon (Themed Icon) und native Sprachauswahl pro App
+- Zuverlässig: Schneller Hinweis bei Weiterleitung und automatische Hilfe, falls eine Karten-App deinstalliert wurde
+
 ## 1.2.19
 - Rechtliches & Transparenz: Impressum neben Datenschutzerklärung im Footer verlinkt
 - Lokalisierung: Vollständige Übersetzung für Impressum in allen 19 Sprachen
