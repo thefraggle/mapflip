@@ -236,4 +236,25 @@ class NavigationIntentBuilderTest {
         assertEquals("yandexmaps://maps.yandex.ru/?rtext=Alexanderplatz~Potsdamer+Platz&rtt=mt",
             NavigationIntentBuilder.buildYandexMapsUriString(transitDirs))
     }
+
+    @Test
+    fun `builds correct URIs for Magic Earth, Citymapper, Komoot, and TomTom AmiGO`() {
+        val coords = ParsedLocation.Coordinates(52.5200, 13.4050, label = "Berlin")
+
+        // Magic Earth
+        assertEquals("magicearth://map?lat=52.52&lon=13.405&name=Berlin",
+            NavigationIntentBuilder.buildMagicEarthUriString(coords))
+
+        // Citymapper
+        assertEquals("citymapper://directions?endcoord=52.52,13.405&endname=Berlin",
+            NavigationIntentBuilder.buildCitymapperUriString(coords))
+
+        // Komoot
+        assertEquals("komoot://tour?coordinate=52.52,13.405",
+            NavigationIntentBuilder.buildKomootUriString(coords))
+
+        // TomTom AmiGO
+        assertEquals("amigo://navigate?to=52.52,13.405",
+            NavigationIntentBuilder.buildTomTomAmiGOUriString(coords))
+    }
 }

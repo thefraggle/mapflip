@@ -17,6 +17,10 @@ object NavigationIntentBuilder {
             TargetNavigationApp.OSMAND -> buildOsmAndIntent(location, context)
             TargetNavigationApp.HERE_WEGO -> buildHereWeGoIntent(location)
             TargetNavigationApp.YANDEX_MAPS -> buildYandexMapsIntent(location)
+            TargetNavigationApp.MAGIC_EARTH -> buildMagicEarthIntent(location)
+            TargetNavigationApp.CITYMAPPER -> buildCitymapperIntent(location)
+            TargetNavigationApp.KOMOOT -> buildKomootIntent(location)
+            TargetNavigationApp.TOMTOM_AMIGO -> buildTomTomAmiGOIntent(location)
             TargetNavigationApp.SYSTEM_PICKER -> buildGenericGeoIntent(location, createChooser = true)
         }
     }
@@ -29,6 +33,10 @@ object NavigationIntentBuilder {
             TargetNavigationApp.OSMAND -> buildOsmAndUriString(location)
             TargetNavigationApp.HERE_WEGO -> buildHereWeGoUriString(location)
             TargetNavigationApp.YANDEX_MAPS -> buildYandexMapsUriString(location)
+            TargetNavigationApp.MAGIC_EARTH -> buildMagicEarthUriString(location)
+            TargetNavigationApp.CITYMAPPER -> buildCitymapperUriString(location)
+            TargetNavigationApp.KOMOOT -> buildKomootUriString(location)
+            TargetNavigationApp.TOMTOM_AMIGO -> buildTomTomAmiGOUriString(location)
             TargetNavigationApp.SYSTEM_PICKER -> buildGenericGeoUriString(location)
         }
     }
@@ -239,6 +247,80 @@ object NavigationIntentBuilder {
     fun buildYandexMapsIntent(location: ParsedLocation): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildYandexMapsUriString(location))).apply {
             setPackage(TargetNavigationApp.YANDEX_MAPS.packageName)
+        }
+    }
+
+    fun buildMagicEarthUriString(location: ParsedLocation): String {
+        return when (location) {
+            is ParsedLocation.Home -> "magicearth://"
+            is ParsedLocation.Coordinates -> {
+                val labelParam = if (!location.label.isNullOrBlank()) "&name=${encode(location.label)}" else ""
+                "magicearth://map?lat=${location.latitude}&lon=${location.longitude}$labelParam"
+            }
+            is ParsedLocation.SearchQuery -> "magicearth://q=${encode(location.query)}"
+            is ParsedLocation.Navigation -> "magicearth://navigate?destination=${encode(location.destination)}"
+            is ParsedLocation.Directions -> "magicearth://navigate?destination=${encode(location.destination)}"
+            is ParsedLocation.WebFallback -> "magicearth://q=${encode(location.fallbackUrl)}"
+        }
+    }
+
+    fun buildMagicEarthIntent(location: ParsedLocation): Intent {
+        return Intent(Intent.ACTION_VIEW, Uri.parse(buildMagicEarthUriString(location))).apply {
+            setPackage(TargetNavigationApp.MAGIC_EARTH.packageName)
+        }
+    }
+
+    fun buildCitymapperUriString(location: ParsedLocation): String {
+        return when (location) {
+            is ParsedLocation.Home -> "citymapper://"
+            is ParsedLocation.Coordinates -> {
+                val nameParam = if (!location.label.isNullOrBlank()) "&endname=${encode(location.label)}" else ""
+                "citymapper://directions?endcoord=${location.latitude},${location.longitude}$nameParam"
+            }
+            is ParsedLocation.SearchQuery -> "citymapper://directions?endaddress=${encode(location.query)}"
+            is ParsedLocation.Navigation -> "citymapper://directions?endaddress=${encode(location.destination)}"
+            is ParsedLocation.Directions -> "citymapper://directions?startaddress=${encode(location.origin)}&endaddress=${encode(location.destination)}"
+            is ParsedLocation.WebFallback -> "citymapper://directions?endaddress=${encode(location.fallbackUrl)}"
+        }
+    }
+
+    fun buildCitymapperIntent(location: ParsedLocation): Intent {
+        return Intent(Intent.ACTION_VIEW, Uri.parse(buildCitymapperUriString(location))).apply {
+            setPackage(TargetNavigationApp.CITYMAPPER.packageName)
+        }
+    }
+
+    fun buildKomootUriString(location: ParsedLocation): String {
+        return when (location) {
+            is ParsedLocation.Home -> "komoot://"
+            is ParsedLocation.Coordinates -> "komoot://tour?coordinate=${location.latitude},${location.longitude}"
+            is ParsedLocation.SearchQuery -> "https://www.komoot.com/search/${encode(location.query)}"
+            is ParsedLocation.Navigation -> "komoot://tour?coordinate=${encode(location.destination)}"
+            is ParsedLocation.Directions -> "komoot://tour?coordinate=${encode(location.destination)}"
+            is ParsedLocation.WebFallback -> "https://www.komoot.com/search/${encode(location.fallbackUrl)}"
+        }
+    }
+
+    fun buildKomootIntent(location: ParsedLocation): Intent {
+        return Intent(Intent.ACTION_VIEW, Uri.parse(buildKomootUriString(location))).apply {
+            setPackage(TargetNavigationApp.KOMOOT.packageName)
+        }
+    }
+
+    fun buildTomTomAmiGOUriString(location: ParsedLocation): String {
+        return when (location) {
+            is ParsedLocation.Home -> "amigo://"
+            is ParsedLocation.Coordinates -> "amigo://navigate?to=${location.latitude},${location.longitude}"
+            is ParsedLocation.SearchQuery -> "amigo://search?q=${encode(location.query)}"
+            is ParsedLocation.Navigation -> "amigo://navigate?to=${encode(location.destination)}"
+            is ParsedLocation.Directions -> "amigo://navigate?to=${encode(location.destination)}"
+            is ParsedLocation.WebFallback -> "amigo://search?q=${encode(location.fallbackUrl)}"
+        }
+    }
+
+    fun buildTomTomAmiGOIntent(location: ParsedLocation): Intent {
+        return Intent(Intent.ACTION_VIEW, Uri.parse(buildTomTomAmiGOUriString(location))).apply {
+            setPackage(TargetNavigationApp.TOMTOM_AMIGO.packageName)
         }
     }
 

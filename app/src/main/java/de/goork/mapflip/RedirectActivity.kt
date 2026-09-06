@@ -88,6 +88,8 @@ class RedirectActivity : Activity() {
 
                 try {
                     startActivity(targetIntent)
+                    // Issue #10: Feedback toast when redirect is performed
+                    showRedirectToast(effectiveTargetApp)
                 } catch (_: ActivityNotFoundException) {
                     Analytics.trackEvent("redirect_fallback", mapOf(
                         "target_app" to effectiveTargetApp.name.lowercase(),
@@ -126,6 +128,17 @@ class RedirectActivity : Activity() {
             val fallbackName = if (fallbackApp.isSystemPicker) s.targetAppAlwaysAsk else fallbackApp.displayName
             val msg = s.targetAppFallbackOpened.format(configuredApp.displayName, fallbackName)
             android.widget.Toast.makeText(applicationContext, msg, android.widget.Toast.LENGTH_LONG).show()
+        } catch (_: Exception) {}
+    }
+
+    private fun showRedirectToast(targetApp: de.goork.mapflip.navigation.TargetNavigationApp) {
+        try {
+            val repo = PreferencesRepository.getInstance(this)
+            val langCode = de.goork.mapflip.ui.Strings.resolveLanguage(repo.preferences.value.language)
+            val s = de.goork.mapflip.ui.Strings.getStrings(langCode)
+            val appName = if (targetApp.isSystemPicker) s.targetAppAlwaysAsk else targetApp.displayName
+            val msg = s.redirectingToApp.format(appName)
+            android.widget.Toast.makeText(applicationContext, msg, android.widget.Toast.LENGTH_SHORT).show()
         } catch (_: Exception) {}
     }
 

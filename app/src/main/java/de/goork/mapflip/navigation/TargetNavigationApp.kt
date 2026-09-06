@@ -36,6 +36,26 @@ enum class TargetNavigationApp(
         displayName = "Yandex Maps",
         packageName = "ru.yandex.yandexmaps"
     ),
+    MAGIC_EARTH(
+        id = "magic_earth",
+        displayName = "Magic Earth",
+        packageName = "com.generalmagic.magicearth"
+    ),
+    CITYMAPPER(
+        id = "citymapper",
+        displayName = "Citymapper",
+        packageName = "com.citymapper.app.release"
+    ),
+    KOMOOT(
+        id = "komoot",
+        displayName = "Komoot",
+        packageName = "de.komoot.android"
+    ),
+    TOMTOM_AMIGO(
+        id = "tomtom_amigo",
+        displayName = "TomTom AmiGO",
+        packageName = "com.tomtom.speedcams.android.map"
+    ),
     SYSTEM_PICKER(
         id = "system_picker",
         displayName = "Always ask (System Picker)",

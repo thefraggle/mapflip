@@ -101,7 +101,8 @@ object Strings {
         val statusInstalled: String = "Installed",
         val statusNotInstalled: String = "Not installed",
         val tileSetupRequired: String = "Setup required",
-        val targetAppFallbackOpened: String = "%s is not installed – opened with %s"
+        val targetAppFallbackOpened: String = "%s is not installed – opened with %s",
+        val redirectingToApp: String = "Redirecting to %s..."
     ) {
         val effectivePrivacyNote: String
             get() = if (de.goork.mapflip.BuildConfig.FLAVOR == "play" && privacyNotePlay.isNotBlank()) privacyNotePlay else privacyNote
@@ -114,6 +115,10 @@ object Strings {
                 de.goork.mapflip.navigation.TargetNavigationApp.OSMAND -> "OsmAnd"
                 de.goork.mapflip.navigation.TargetNavigationApp.HERE_WEGO -> "HERE WeGo"
                 de.goork.mapflip.navigation.TargetNavigationApp.YANDEX_MAPS -> "Yandex Maps"
+                de.goork.mapflip.navigation.TargetNavigationApp.MAGIC_EARTH -> "Magic Earth"
+                de.goork.mapflip.navigation.TargetNavigationApp.CITYMAPPER -> "Citymapper"
+                de.goork.mapflip.navigation.TargetNavigationApp.KOMOOT -> "Komoot"
+                de.goork.mapflip.navigation.TargetNavigationApp.TOMTOM_AMIGO -> "TomTom AmiGO"
                 de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> if (sectionTargetApp.isNotBlank()) sectionTargetApp else "Navigation App"
             }
             return try {
@@ -131,6 +136,10 @@ object Strings {
                 de.goork.mapflip.navigation.TargetNavigationApp.OSMAND -> "OsmAnd"
                 de.goork.mapflip.navigation.TargetNavigationApp.HERE_WEGO -> "HERE WeGo"
                 de.goork.mapflip.navigation.TargetNavigationApp.YANDEX_MAPS -> "Yandex Maps"
+                de.goork.mapflip.navigation.TargetNavigationApp.MAGIC_EARTH -> "Magic Earth"
+                de.goork.mapflip.navigation.TargetNavigationApp.CITYMAPPER -> "Citymapper"
+                de.goork.mapflip.navigation.TargetNavigationApp.KOMOOT -> "Komoot"
+                de.goork.mapflip.navigation.TargetNavigationApp.TOMTOM_AMIGO -> "TomTom AmiGO"
                 de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> if (sectionTargetApp.isNotBlank()) sectionTargetApp else "Navigation App"
             }
             return try {
@@ -258,7 +267,8 @@ object Strings {
         statusInstalled = "Installiert",
         statusNotInstalled = "Nicht installiert",
         tileSetupRequired = "Einrichtung erforderlich",
-        targetAppFallbackOpened = "%s ist nicht installiert – mit %s geöffnet"
+        targetAppFallbackOpened = "%s ist nicht installiert – mit %s geöffnet",
+        redirectingToApp = "Weiterleiten an %s..."
     )
 
     val EN = AppStrings(

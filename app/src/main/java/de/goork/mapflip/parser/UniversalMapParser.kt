@@ -9,6 +9,7 @@ object UniversalMapParser {
         YandexMapsParser,
         HereMapsParser,
         WazeMapsParser,
+        GoogleMapsParser,
         PlusCodeParser,
         GeoCoordinateParser
     )
@@ -44,6 +45,7 @@ object UniversalMapParser {
             lower.contains("yandex.") -> "yandex"
             lower.contains("here.com") -> "here"
             lower.contains("waze.com") -> "waze"
+            lower.contains("google.") || lower.contains("goo.gl") || GoogleMapsParser.canParse(url) -> "google"
             lower.contains("plus.codes") || PlusCodeParser.canParse(url) -> "plus_code"
             lower.startsWith("geo:") || GeoCoordinateParser.canParse(url) -> "geo_coordinates"
             else -> "other"
