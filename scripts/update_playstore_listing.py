@@ -10,7 +10,7 @@ LISTINGS = {
 
 MapFlip is the ultimate Apple Maps converter, fast map converter, and link redirect tool for Android. Set it up once, and everything works automatically as a seamless Google Maps redirect: Every Apple Maps link, URL, or location opens directly in Google Maps. No copying, no pasting, no browser detours.
 
-Whether you need an Apple Maps for Android solution or an automatic Apple to Google Maps converter, MapFlip handles all Apple Maps URLs in the background. Open Apple Maps links directly in your favorite navigation app.
+Whether you need an Apple Maps for Android solution, an Apple to Google converter, or an automatic Apple to Google Maps converter, MapFlip handles all Apple Maps URLs in the background. Open Apple Maps links directly in your favorite navigation app.
 
 🔧 How it works:
 1. Open MapFlip
@@ -42,7 +42,7 @@ MapFlip was built for Android users who regularly receive Apple Maps links from 
 
 MapFlip ist der zuverlässige Apple Maps Konverter, smarte Apple Karten Konverter und die automatische Kartenweiterleitung für Android. Einmal einrichten, danach läuft alles automatisch als Google Maps Weiterleitung: Jeder Apple Karten Link, jeder Apple Maps Link und jede URL öffnet sich direkt in Google Maps. Kein Kopieren, kein Einfügen, kein Umweg über den Browser.
 
-Egal ob Apple Maps zu Google Maps, Apple Karten öffnen oder Apple Maps für Android: MapFlip leitet alle Karten-Links blitzschnell um.
+Egal ob Apple zu Google Maps, Apple Karten weiterleiten, Apple Karten öffnen oder Apple Maps für Android: MapFlip leitet alle Karten-Links blitzschnell um.
 
 🔧 So funktioniert's:
 1. Öffne MapFlip
@@ -53,7 +53,7 @@ Egal ob Apple Maps zu Google Maps, Apple Karten öffnen oder Apple Maps für And
 ✨ Features & Datenschutz:
 • 🚗 Turn-by-Turn Navigation & Android Auto – Startet sofort die native Routenführung in Google Maps
 • 🧭 Wähle deine Navigations-App – Öffne Ziele in Google Maps, Waze, Organic Maps, OsmAnd oder Systemauswahl
-• 🔄 Automatische Kartenweiterleitung – Apple Maps Link-Konverter ohne manuelles Kopieren
+• 🔄 Automatische Kartenweiterleitung – Schneller Apple Karten Konverter & Link-Weiterleitung ohne manuelles Kopieren
 • 🔒 100% Offline & Datenschutz – Keine Internet-Berechtigung (0 Permissions), kein Tracking, keine Werbung
 • ⏸️ Pausen-Modus & Schnelleinstellungs-Kachel – Umleitung jederzeit im Kontrollzentrum pausieren
 • 💬 Universelle App-Kompatibilität – Funktioniert mit WhatsApp, Telegram, Signal, SMS, Slack und E-Mails
