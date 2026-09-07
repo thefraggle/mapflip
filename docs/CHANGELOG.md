@@ -1,3 +1,9 @@
+## 1.2.21
+- Neue Ziel-Apps: Unterstützt jetzt auch Sygic und Locus Map (inkl. Locus Map Pro)
+- DuckDuckGo Maps: Erkennt Karten- und Routen-Links aus der DuckDuckGo-Suche
+- Nahtlos im Alltag: Normale Internetsuchen bleiben unberührt und öffnen direkt im Browser
+- Verbesserte Erkennung: Präzise Übergabe von Geokoordinaten und Zielen an Offline-Karten
+
 ## 1.2.20
 - Neue Ziel-Apps: Unterstützt jetzt auch Magic Earth, Citymapper, Komoot und TomTom AmiGO
 - Mehr Erkennung: Liest Google Maps Weblinks, direkte Geokoordinaten und Google Plus Codes

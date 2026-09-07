@@ -1,3 +1,9 @@
+## 1.2.21
+- New Navigation Apps: Now supports Sygic and Locus Map (including Locus Map Pro)
+- DuckDuckGo Maps: Intercepts map and directions links shared from DuckDuckGo
+- Seamless Web Search: Regular web search queries continue to open directly in your browser
+- Accurate Handoff: Reliable transfer of coordinates and destinations to offline navigation apps
+
 ## 1.2.20
 - New Navigation Apps: Now supports Magic Earth, Citymapper, Komoot, and TomTom AmiGO
 - Smarter Detection: Intercepts Google Maps links, raw coordinates, and Plus Codes
