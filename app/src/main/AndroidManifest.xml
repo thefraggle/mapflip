@@ -19,6 +19,9 @@
         <package android:name="com.citymapper.app.release" />
         <package android:name="de.komoot.android" />
         <package android:name="com.tomtom.speedcams.android.map" />
+        <package android:name="com.sygic.aura" />
+        <package android:name="menion.android.locus" />
+        <package android:name="menion.android.locus.pro" />
     </queries>
 
     <application
@@ -137,6 +140,17 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="geo" />
+            </intent-filter>
+
+            <!-- 9. DuckDuckGo Maps Links -->
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="duckduckgo.com" />
+                <data android:scheme="http" android:host="duckduckgo.com" />
+                <data android:scheme="https" android:host="www.duckduckgo.com" />
+                <data android:scheme="http" android:host="www.duckduckgo.com" />
             </intent-filter>
         </activity>
 

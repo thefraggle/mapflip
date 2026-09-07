@@ -40,7 +40,10 @@ class RedirectActivity : Activity() {
         if (mapUrl != null) {
             val sourceService = UniversalMapParser.detectSourceService(mapUrl)
             val dataUri = incomingUri ?: Uri.parse(mapUrl)
-            if (isPaused) {
+            if (incomingUri != null && !UniversalMapParser.canParse(mapUrl)) {
+                // Not a supported map URL (e.g. regular web search from intercepted search engine host)
+                forwardOriginalUrl(dataUri)
+            } else if (isPaused) {
                 // When paused: forward original URL to non-MapFlip browser
                 Analytics.trackEvent("redirect_paused", mapOf("source_service" to sourceService))
                 forwardOriginalUrl(dataUri)

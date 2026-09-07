@@ -10,9 +10,16 @@ object UniversalMapParser {
         HereMapsParser,
         WazeMapsParser,
         GoogleMapsParser,
+        DuckDuckGoParser,
         PlusCodeParser,
         GeoCoordinateParser
     )
+
+    fun canParse(url: String?): Boolean {
+        if (url.isNullOrBlank()) return false
+        val extracted = extractMapUrl(url) ?: url
+        return parsers.any { it.canParse(extracted) }
+    }
 
     fun extractMapUrl(text: String?): String? {
         if (text.isNullOrBlank()) return null
@@ -46,6 +53,7 @@ object UniversalMapParser {
             lower.contains("here.com") -> "here"
             lower.contains("waze.com") -> "waze"
             lower.contains("google.") || lower.contains("goo.gl") || GoogleMapsParser.canParse(url) -> "google"
+            lower.contains("duckduckgo.com") || DuckDuckGoParser.canParse(url) -> "duckduckgo"
             lower.contains("plus.codes") || PlusCodeParser.canParse(url) -> "plus_code"
             lower.startsWith("geo:") || GeoCoordinateParser.canParse(url) -> "geo_coordinates"
             else -> "other"

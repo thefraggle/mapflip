@@ -257,4 +257,37 @@ class NavigationIntentBuilderTest {
         assertEquals("amigo://navigate?to=52.52,13.405",
             NavigationIntentBuilder.buildTomTomAmiGOUriString(coords))
     }
+
+    @Test
+    fun `builds correct URIs for Sygic and Locus Map`() {
+        val coords = ParsedLocation.Coordinates(52.5200, 13.4050, label = "Berlin")
+        val walkCoords = ParsedLocation.Coordinates(52.5200, 13.4050, mode = TravelMode.WALKING)
+        val search = ParsedLocation.SearchQuery("Berlin TV Tower")
+        val home = ParsedLocation.Home
+
+        // Sygic
+        assertEquals("com.sygic.aura://coordinate|13.405000|52.520000|drive",
+            NavigationIntentBuilder.buildSygicUriString(coords))
+        assertEquals("com.sygic.aura://coordinate|13.405000|52.520000|walk",
+            NavigationIntentBuilder.buildSygicUriString(walkCoords))
+        assertEquals("com.sygic.aura://search|Berlin+TV+Tower|drive",
+            NavigationIntentBuilder.buildSygicUriString(search))
+        assertEquals("com.sygic.aura://",
+            NavigationIntentBuilder.buildSygicUriString(home))
+
+        // Locus Map
+        assertEquals("geo:52.520000,13.405000?q=52.520000,13.405000(Berlin)",
+            NavigationIntentBuilder.buildLocusMapUriString(coords))
+        assertEquals("geo:0,0?q=Berlin+TV+Tower",
+            NavigationIntentBuilder.buildLocusMapUriString(search))
+        assertEquals("geo:0,0",
+            NavigationIntentBuilder.buildLocusMapUriString(home))
+
+        // TargetNavigationApp button strings
+        val s = Strings.getStrings("en")
+        assertTrue(s.testButtonLabel(TargetNavigationApp.SYGIC).contains("Sygic"))
+        assertTrue(s.testButtonLabel(TargetNavigationApp.LOCUS_MAP).contains("Locus Map"))
+        assertTrue(s.openInButtonLabel(TargetNavigationApp.SYGIC).contains("Sygic"))
+        assertTrue(s.openInButtonLabel(TargetNavigationApp.LOCUS_MAP).contains("Locus Map"))
+    }
 }

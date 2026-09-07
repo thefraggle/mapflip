@@ -119,6 +119,8 @@ object Strings {
                 de.goork.mapflip.navigation.TargetNavigationApp.CITYMAPPER -> "Citymapper"
                 de.goork.mapflip.navigation.TargetNavigationApp.KOMOOT -> "Komoot"
                 de.goork.mapflip.navigation.TargetNavigationApp.TOMTOM_AMIGO -> "TomTom AmiGO"
+                de.goork.mapflip.navigation.TargetNavigationApp.SYGIC -> "Sygic"
+                de.goork.mapflip.navigation.TargetNavigationApp.LOCUS_MAP -> "Locus Map"
                 de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> if (sectionTargetApp.isNotBlank()) sectionTargetApp else "Navigation App"
             }
             return try {
@@ -140,6 +142,8 @@ object Strings {
                 de.goork.mapflip.navigation.TargetNavigationApp.CITYMAPPER -> "Citymapper"
                 de.goork.mapflip.navigation.TargetNavigationApp.KOMOOT -> "Komoot"
                 de.goork.mapflip.navigation.TargetNavigationApp.TOMTOM_AMIGO -> "TomTom AmiGO"
+                de.goork.mapflip.navigation.TargetNavigationApp.SYGIC -> "Sygic"
+                de.goork.mapflip.navigation.TargetNavigationApp.LOCUS_MAP -> "Locus Map"
                 de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> if (sectionTargetApp.isNotBlank()) sectionTargetApp else "Navigation App"
             }
             return try {

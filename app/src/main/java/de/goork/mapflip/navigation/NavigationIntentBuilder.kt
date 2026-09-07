@@ -21,6 +21,8 @@ object NavigationIntentBuilder {
             TargetNavigationApp.CITYMAPPER -> buildCitymapperIntent(location)
             TargetNavigationApp.KOMOOT -> buildKomootIntent(location)
             TargetNavigationApp.TOMTOM_AMIGO -> buildTomTomAmiGOIntent(location)
+            TargetNavigationApp.SYGIC -> buildSygicIntent(location)
+            TargetNavigationApp.LOCUS_MAP -> buildLocusMapIntent(location, context)
             TargetNavigationApp.SYSTEM_PICKER -> buildGenericGeoIntent(location, createChooser = true)
         }
     }
@@ -37,6 +39,8 @@ object NavigationIntentBuilder {
             TargetNavigationApp.CITYMAPPER -> buildCitymapperUriString(location)
             TargetNavigationApp.KOMOOT -> buildKomootUriString(location)
             TargetNavigationApp.TOMTOM_AMIGO -> buildTomTomAmiGOUriString(location)
+            TargetNavigationApp.SYGIC -> buildSygicUriString(location)
+            TargetNavigationApp.LOCUS_MAP -> buildLocusMapUriString(location)
             TargetNavigationApp.SYSTEM_PICKER -> buildGenericGeoUriString(location)
         }
     }
@@ -321,6 +325,74 @@ object NavigationIntentBuilder {
     fun buildTomTomAmiGOIntent(location: ParsedLocation): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildTomTomAmiGOUriString(location))).apply {
             setPackage(TargetNavigationApp.TOMTOM_AMIGO.packageName)
+        }
+    }
+
+    fun buildSygicUriString(location: ParsedLocation): String {
+        return when (location) {
+            is ParsedLocation.Home -> "com.sygic.aura://"
+            is ParsedLocation.Coordinates -> {
+                val lonStr = formatCoord(location.longitude)
+                val latStr = formatCoord(location.latitude)
+                val mode = if (location.mode == TravelMode.WALKING) "walk" else "drive"
+                "com.sygic.aura://coordinate|$lonStr|$latStr|$mode"
+            }
+            is ParsedLocation.SearchQuery -> "com.sygic.aura://search|${encode(location.query)}|drive"
+            is ParsedLocation.Navigation -> {
+                val dest = location.destination
+                val mode = if (location.mode == TravelMode.WALKING) "walk" else "drive"
+                "com.sygic.aura://search|${encode(dest)}|$mode"
+            }
+            is ParsedLocation.Directions -> {
+                val dest = location.destination
+                val mode = if (location.mode == TravelMode.WALKING) "walk" else "drive"
+                "com.sygic.aura://search|${encode(dest)}|$mode"
+            }
+            is ParsedLocation.WebFallback -> "com.sygic.aura://search|${encode(location.fallbackUrl)}|drive"
+        }
+    }
+
+    fun buildSygicIntent(location: ParsedLocation): Intent {
+        return Intent(Intent.ACTION_VIEW, Uri.parse(buildSygicUriString(location))).apply {
+            setPackage(TargetNavigationApp.SYGIC.packageName)
+        }
+    }
+
+    fun buildLocusMapUriString(location: ParsedLocation): String {
+        return when (location) {
+            is ParsedLocation.Home -> "geo:0,0"
+            is ParsedLocation.SearchQuery -> "geo:0,0?q=${encode(location.query)}"
+            is ParsedLocation.Coordinates -> {
+                val latStr = formatCoord(location.latitude)
+                val lonStr = formatCoord(location.longitude)
+                val label = location.label
+                if (!label.isNullOrBlank()) {
+                    "geo:$latStr,$lonStr?q=$latStr,$lonStr(${encode(label)})"
+                } else {
+                    "geo:$latStr,$lonStr?q=$latStr,$lonStr"
+                }
+            }
+            is ParsedLocation.Navigation -> "geo:0,0?q=${encode(location.destination)}"
+            is ParsedLocation.Directions -> "geo:0,0?q=${encode(location.destination)}"
+            is ParsedLocation.WebFallback -> "geo:0,0?q=${encode(location.fallbackUrl)}"
+        }
+    }
+
+    fun buildLocusMapIntent(location: ParsedLocation, context: Context? = null): Intent {
+        val pkg = if (context != null) {
+            val pm = context.packageManager
+            val isProInstalled = try {
+                pm.getPackageInfo("menion.android.locus.pro", 0)
+                true
+            } catch (_: Exception) {
+                false
+            }
+            if (isProInstalled) "menion.android.locus.pro" else TargetNavigationApp.LOCUS_MAP.packageName
+        } else {
+            TargetNavigationApp.LOCUS_MAP.packageName
+        }
+        return Intent(Intent.ACTION_VIEW, Uri.parse(buildLocusMapUriString(location))).apply {
+            if (pkg != null) setPackage(pkg)
         }
     }
 

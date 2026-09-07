@@ -56,6 +56,16 @@ enum class TargetNavigationApp(
         displayName = "TomTom AmiGO",
         packageName = "com.tomtom.speedcams.android.map"
     ),
+    SYGIC(
+        id = "sygic",
+        displayName = "Sygic",
+        packageName = "com.sygic.aura"
+    ),
+    LOCUS_MAP(
+        id = "locus_map",
+        displayName = "Locus Map",
+        packageName = "menion.android.locus"
+    ),
     SYSTEM_PICKER(
         id = "system_picker",
         displayName = "Always ask (System Picker)",
@@ -80,6 +90,13 @@ enum class TargetNavigationApp(
             if (this == OSMAND) {
                 try {
                     pm.getPackageInfo("net.osmand.plus", 0)
+                    true
+                } catch (_: Exception) {
+                    false
+                }
+            } else if (this == LOCUS_MAP) {
+                try {
+                    pm.getPackageInfo("menion.android.locus.pro", 0)
                     true
                 } catch (_: Exception) {
                     false
