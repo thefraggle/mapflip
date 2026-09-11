@@ -1,3 +1,8 @@
+## 1.2.22
+- Visual Setup Guide: An easy step-by-step guide showing how to unlock web links directly for your preferred maps app
+- Clear Status Overview: See at a glance how many map links are active and whether any need to be added
+- Quick Alternatives: Helpful tips for opening map links instantly via the share menu or clipboard without extra setup
+
 ## 1.2.21
 - New Navigation Apps: Now supports Sygic and Locus Map (including Locus Map Pro)
 - DuckDuckGo Maps: Intercepts map and directions links shared from DuckDuckGo

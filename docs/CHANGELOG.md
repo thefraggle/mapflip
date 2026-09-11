@@ -1,3 +1,8 @@
+## 1.2.22
+- Interaktive Setup-Hilfe: Eine Schritt-für-Schritt-Anleitung zeigt direkt, wie Weblinks nahtlos für deine Karten-App freigeschaltet werden
+- Übersichtlicher Status: Die Startseite zeigt auf einen Blick, wie viele Weblinks bereits aktiv sind und ob noch Verknüpfungen fehlen
+- Schnelle Alternativen: Praktische Tipps, um Karten-Links jederzeit auch ohne Einstellungen über das Teilen-Menü oder die Zwischenablage zu öffnen
+
 ## 1.2.21
 - Neue Ziel-Apps: Unterstützt jetzt auch Sygic und Locus Map (inkl. Locus Map Pro)
 - DuckDuckGo Maps: Erkennt Karten- und Routen-Links aus der DuckDuckGo-Suche
