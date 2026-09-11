@@ -23,6 +23,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.HelpOutline
+import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.ContentCopy
@@ -39,6 +41,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
@@ -102,6 +105,8 @@ fun MainScreen(
     }
 
     var linksActive by remember { mutableStateOf<Boolean?>(null) }
+    var domainStatus by remember { mutableStateOf<de.goork.mapflip.util.DomainStatusInfo?>(null) }
+    var showSetupGuideSheet by remember { mutableStateOf(false) }
     var detectedClipboardUrl by remember { mutableStateOf<String?>(null) }
     var dismissedClipboardUrl by remember { mutableStateOf<String?>(null) }
 
@@ -109,7 +114,9 @@ fun MainScreen(
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
-                val currentStatus = de.goork.mapflip.util.DomainVerificationHelper.checkLinksEnabled(context)
+                val currentDomainStatus = de.goork.mapflip.util.DomainVerificationHelper.getDomainStatus(context)
+                domainStatus = currentDomainStatus
+                val currentStatus = currentDomainStatus?.let { it.enabledHosts > 0 } ?: de.goork.mapflip.util.DomainVerificationHelper.checkLinksEnabled(context)
                 if (linksActive == false && currentStatus == true) {
                     Analytics.trackEvent("links_activated")
                 }
@@ -123,6 +130,7 @@ fun MainScreen(
         lifecycleOwner.lifecycle.addObserver(observer)
         onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
     }
+
 
     LaunchedEffect(detectedClipboardUrl) {
         if (detectedClipboardUrl != null && detectedClipboardUrl != dismissedClipboardUrl) {
@@ -255,6 +263,12 @@ fun MainScreen(
                         s = s,
                         isPaused = userPreferences.isPaused,
                         linksActive = linksActive,
+                        domainStatus = domainStatus,
+                        onStatusClick = {
+                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                            Analytics.trackEvent("setup_guide_opened", mapOf("source" to "status_card"))
+                            showSetupGuideSheet = true
+                        },
                         onPauseToggle = { checked ->
                             haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                             if (checked) {
@@ -268,22 +282,12 @@ fun MainScreen(
 
                     Spacer(Modifier.height(16.dp))
 
-                    // Primary Settings CTA Button
+                    // Primary Settings / Setup Guide CTA Button
                     Button(
                         onClick = {
                             haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                            Analytics.trackEvent("open_system_settings_clicked")
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                                context.startActivity(Intent(
-                                    Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS,
-                                    Uri.parse("package:${context.packageName}")
-                                ))
-                            } else {
-                                context.startActivity(Intent(
-                                    Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                    Uri.parse("package:${context.packageName}")
-                                ))
-                            }
+                            Analytics.trackEvent("setup_guide_opened", mapOf("source" to "main_cta"))
+                            showSetupGuideSheet = true
                         },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -294,13 +298,13 @@ fun MainScreen(
                         )
                     ) {
                         Icon(
-                            Icons.Rounded.Settings,
+                            Icons.AutoMirrored.Outlined.HelpOutline,
                             contentDescription = null,
                             modifier = Modifier.size(20.dp)
                         )
                         Spacer(Modifier.width(10.dp))
                         Text(
-                            s.btnSettings,
+                            text = if (linksActive == true && domainStatus?.isFullyEnabled == true) s.menuSetupGuide else s.btnSettings,
                             style = MaterialTheme.typography.labelLarge.copy(
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 16.sp
@@ -370,6 +374,24 @@ fun MainScreen(
                                     StepItem(number = "2", title = s.step2)
                                     Spacer(Modifier.height(12.dp))
                                     StepItem(number = "3", title = s.step3)
+                                    Spacer(Modifier.height(14.dp))
+                                    OutlinedButton(
+                                        onClick = {
+                                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                            Analytics.trackEvent("setup_guide_opened", mapOf("source" to "accordion"))
+                                            showSetupGuideSheet = true
+                                        },
+                                        modifier = Modifier.fillMaxWidth(),
+                                        shape = RoundedCornerShape(12.dp)
+                                    ) {
+                                        Icon(
+                                            Icons.AutoMirrored.Outlined.HelpOutline,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                        Spacer(Modifier.width(8.dp))
+                                        Text(s.menuSetupGuide)
+                                    }
                                 }
                             }
                         }
@@ -722,17 +744,58 @@ fun MainScreen(
                 onTargetAppSelected = { newApp ->
                     repository.setTargetApp(newApp)
                 },
+                onOpenSetupGuide = {
+                    showSettingsSheet = false
+                    showSetupGuideSheet = true
+                },
                 onDismiss = { showSettingsSheet = false }
+            )
+        }
+
+        // Setup Guide BottomSheet (Android 12+)
+        if (showSetupGuideSheet) {
+            SetupGuideBottomSheet(
+                onDismissRequest = {
+                    Analytics.trackEvent("setup_guide_dismissed")
+                    showSetupGuideSheet = false
+                },
+                onOpenSystemSettings = {
+                    Analytics.trackEvent("setup_guide_settings_clicked")
+                    showSetupGuideSheet = false
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        try {
+                            context.startActivity(Intent(
+                                Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS,
+                                Uri.parse("package:${context.packageName}")
+                            ))
+                        } catch (_: Exception) {
+                            context.startActivity(Intent(
+                                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                Uri.parse("package:${context.packageName}")
+                            ))
+                        }
+                    } else {
+                        context.startActivity(Intent(
+                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                            Uri.parse("package:${context.packageName}")
+                        ))
+                    }
+                },
+                domainStatus = domainStatus,
+                s = s
             )
         }
     }
 }
+
 
 @Composable
 private fun StatusAndControlCard(
     s: Strings.AppStrings,
     isPaused: Boolean,
     linksActive: Boolean?,
+    domainStatus: de.goork.mapflip.util.DomainStatusInfo?,
+    onStatusClick: () -> Unit,
     onPauseToggle: (Boolean) -> Unit
 ) {
     Card(
@@ -753,13 +816,22 @@ private fun StatusAndControlCard(
                 .fillMaxWidth()
                 .padding(20.dp)
         ) {
-            // Status Header Row
+            // Status Header Row (tap to open setup guide)
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(8.dp))
+                    .clickable { onStatusClick() }
+                    .padding(vertical = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 val statusDotColor = when {
                     isPaused -> MaterialTheme.colorScheme.onSurfaceVariant
+                    domainStatus != null -> when {
+                        domainStatus.isFullyEnabled -> Green500
+                        domainStatus.isPartiallyEnabled -> Color(0xFFFF9800)
+                        else -> Red500
+                    }
                     linksActive == true -> Green500
                     else -> Red500
                 }
@@ -773,13 +845,26 @@ private fun StatusAndControlCard(
                 Text(
                     text = when {
                         isPaused -> s.statusPaused
+                        domainStatus != null -> when {
+                            domainStatus.isFullyEnabled -> s.formatStatusAllActive(domainStatus.totalHosts)
+                            domainStatus.isPartiallyEnabled -> s.formatStatusPartial(domainStatus.enabledHosts, domainStatus.totalHosts)
+                            else -> s.setupStatusNone
+                        }
                         linksActive == true -> s.statusActive
                         else -> s.statusInactive
                     },
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.weight(1f)
+                )
+                Icon(
+                    imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
+                    contentDescription = s.menuSetupGuide,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                    modifier = Modifier.size(20.dp)
                 )
             }
+
 
             Spacer(Modifier.height(14.dp))
 

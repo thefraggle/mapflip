@@ -102,8 +102,40 @@ object Strings {
         val statusNotInstalled: String = "Not installed",
         val tileSetupRequired: String = "Setup required",
         val targetAppFallbackOpened: String = "%s is not installed – opened with %s",
-        val redirectingToApp: String = "Redirecting to %s..."
+        val redirectingToApp: String = "Redirecting to %s...",
+        val setupSheetTitle: String = "Set up map links",
+        val setupSheetSubtitle: String = "Android 12+ requires confirming supported map links manually.",
+        val setupStep1Title: String = "Open system settings",
+        val setupStep1Desc: String = "Tap the button below to open MapFlip's app settings.",
+        val setupStep2Title: String = "Select \"Open by default\"",
+        val setupStep2Desc: String = "Tap \"Open supported links\" or \"Add links\".",
+        val setupStep3Title: String = "Enable map links",
+        val setupStep3Desc: String = "Check all supported map domains (Apple Maps, Bing, OSM, HERE etc.).",
+        val setupAltTitle: String = "Works immediately without setup:",
+        val setupAltShare: String = "Share Menu: Share any map link via Android's Share menu directly with MapFlip.",
+        val setupAltClipboard: String = "Clipboard: Copy a map link and open MapFlip for instant redirection.",
+        val setupBtnOpenSettings: String = "Open system settings",
+        val setupBtnDismiss: String = "Continue without setup",
+        val setupStatusAllActive: String = "%d of %d links active",
+        val setupStatusPartial: String = "%d of %d links active – tap to add more",
+        val setupStatusNone: String = "No links active – setup required",
+        val menuSetupGuide: String = "Setup Guide (Android 12+)"
     ) {
+        fun formatStatusAllActive(count: Int): String {
+            return try {
+                setupStatusAllActive.format(count, count)
+            } catch (_: Exception) {
+                "$count of $count links active"
+            }
+        }
+
+        fun formatStatusPartial(enabled: Int, total: Int): String {
+            return try {
+                setupStatusPartial.format(enabled, total)
+            } catch (_: Exception) {
+                "$enabled of $total links active"
+            }
+        }
         val effectivePrivacyNote: String
             get() = if (de.goork.mapflip.BuildConfig.FLAVOR == "play" && privacyNotePlay.isNotBlank()) privacyNotePlay else privacyNote
 
@@ -272,7 +304,24 @@ object Strings {
         statusNotInstalled = "Nicht installiert",
         tileSetupRequired = "Einrichtung erforderlich",
         targetAppFallbackOpened = "%s ist nicht installiert – mit %s geöffnet",
-        redirectingToApp = "Weiterleiten an %s..."
+        redirectingToApp = "Weiterleiten an %s...",
+        setupSheetTitle = "Karten-Links einrichten",
+        setupSheetSubtitle = "Android 12+ erfordert die manuelle Bestätigung unterstützter Karten-Links.",
+        setupStep1Title = "Einstellungen öffnen",
+        setupStep1Desc = "Tippe unten auf den Button, um die Android-Einstellungen für MapFlip zu öffnen.",
+        setupStep2Title = "\"Standardmäßig öffnen\" wählen",
+        setupStep2Desc = "Tippe auf \"Unterstützte Links öffnen\" oder \"Links hinzufügen\".",
+        setupStep3Title = "Karten-Links aktivieren",
+        setupStep3Desc = "Hake alle gewünschten Kartendienste an (Apple, Bing, OSM, HERE etc.).",
+        setupAltTitle = "Funktioniert sofort ohne Einrichtung:",
+        setupAltShare = "Teilen-Menü: Teile einen Karten-Link über Androids Teilen-Menü direkt mit MapFlip.",
+        setupAltClipboard = "Zwischenablage: Kopiere einen Karten-Link und öffne MapFlip für eine sofortige Weiterleitung.",
+        setupBtnOpenSettings = "Systemeinstellungen öffnen",
+        setupBtnDismiss = "Ohne Einrichtung fortfahren",
+        setupStatusAllActive = "%d von %d Links aktiv",
+        setupStatusPartial = "%d von %d Links aktiv – weitere hinzufügen",
+        setupStatusNone = "Keine Links aktiv – Einrichtung erforderlich",
+        menuSetupGuide = "Einrichtungs-Hilfe (Android 12+)",
     )
 
     val EN = AppStrings(
@@ -398,7 +447,24 @@ object Strings {
         targetAppOpenError = "Destinationsapp kunne ikke åbnes",
         statusInstalled = "Installeret",
         statusNotInstalled = "Ikke installeret",
-        tileSetupRequired = "Opsætning påkrævet"
+        tileSetupRequired = "Opsætning påkrævet",
+        setupSheetTitle = "Konfigurer kortlinks",
+        setupSheetSubtitle = "Android 12+ kræver manuel bekræftelse af understøttede kortlinks.",
+        setupStep1Title = "Åbn systemindstillinger",
+        setupStep1Desc = "Tryk på knappen nedenfor for at åbne MapFlips indstillinger.",
+        setupStep2Title = "Vælg \"Åbn som standard\"",
+        setupStep2Desc = "Tryk på \"Åbn understøttede links\" eller \"Tilføj links\".",
+        setupStep3Title = "Aktivér kortlinks",
+        setupStep3Desc = "Marker alle understøttede korttjenester (Apple, Bing, OSM, HERE osv.).",
+        setupAltTitle = "Virker med det samme uden opsætning:",
+        setupAltShare = "Delemenu: Del et kortlink via Androids delemenu direkte med MapFlip.",
+        setupAltClipboard = "Udklipsholder: Kopiér et kortlink og åbn MapFlip for øjeblikkelig omdirigering.",
+        setupBtnOpenSettings = "Åbn systemindstillinger",
+        setupBtnDismiss = "Fortsæt uden opsætning",
+        setupStatusAllActive = "%d af %d links aktive",
+        setupStatusPartial = "%d af %d links aktive – tryk for at tilføje flere",
+        setupStatusNone = "Ingen links aktive – opsætning påkrævet",
+        menuSetupGuide = "Opsætningsvejledning (Android 12+)",
     )
 
     val FR = EN.copy(
@@ -463,7 +529,24 @@ object Strings {
         targetAppOpenError = "Impossible d'ouvrir l'application cible",
         statusInstalled = "Installée",
         statusNotInstalled = "Non installée",
-        tileSetupRequired = "Configuration requise"
+        tileSetupRequired = "Configuration requise",
+        setupSheetTitle = "Configurer les liens de carte",
+        setupSheetSubtitle = "Android 12+ requiert la confirmation manuelle des liens de carte pris en charge.",
+        setupStep1Title = "Ouvrir les paramètres système",
+        setupStep1Desc = "Appuyez sur le bouton ci-dessous pour ouvrir les paramètres de MapFlip.",
+        setupStep2Title = "Sélectionner \"Ouvrir par défaut\"",
+        setupStep2Desc = "Appuyez sur \"Ouvrir les liens pris en charge\" ou \"Ajouter un lien\".",
+        setupStep3Title = "Activer les liens de carte",
+        setupStep3Desc = "Cochez tous les services de carte souhaités (Apple, Bing, OSM, HERE, etc.).",
+        setupAltTitle = "Fonctionne immédiatement sans configuration :",
+        setupAltShare = "Menu Partager : Partagez n'importe quel lien de carte via le menu Partager d'Android directement avec MapFlip.",
+        setupAltClipboard = "Presse-papiers : Copiez un lien de carte et ouvrez MapFlip pour une redirection immédiate.",
+        setupBtnOpenSettings = "Ouvrir les paramètres système",
+        setupBtnDismiss = "Continuer sans configurer",
+        setupStatusAllActive = "%d sur %d liens actifs",
+        setupStatusPartial = "%d sur %d liens actifs – appuyez pour en ajouter",
+        setupStatusNone = "Aucun lien actif – configuration requise",
+        menuSetupGuide = "Guide de configuration (Android 12+)",
     )
 
     val IT = EN.copy(
@@ -528,7 +611,24 @@ object Strings {
         targetAppOpenError = "Impossibile aprire l'app di destinazione",
         statusInstalled = "Installata",
         statusNotInstalled = "Non installata",
-        tileSetupRequired = "Configurazione richiesta"
+        tileSetupRequired = "Configurazione richiesta",
+        setupSheetTitle = "Configura i link delle mappe",
+        setupSheetSubtitle = "Android 12+ richiede la conferma manuale dei link supportati.",
+        setupStep1Title = "Apri impostazioni di sistema",
+        setupStep1Desc = "Tocca il pulsante qui sotto per aprire le impostazioni di MapFlip.",
+        setupStep2Title = "Seleziona \"Apri per impostazione predefinita\"",
+        setupStep2Desc = "Tocca \"Apri link supportati\" o \"Aggiungi link\".",
+        setupStep3Title = "Attiva i domini delle mappe",
+        setupStep3Desc = "Spunta tutti i servizi supportati (Apple, Bing, OSM, HERE ecc.).",
+        setupAltTitle = "Funziona subito senza configurazione:",
+        setupAltShare = "Menu Condividi: Condividi qualsiasi link di mappa tramite il menu Condividi di Android direttamente con MapFlip.",
+        setupAltClipboard = "Appunti: Copia un link di mappa e apri MapFlip per il reindirizzamento immediato.",
+        setupBtnOpenSettings = "Apri impostazioni di sistema",
+        setupBtnDismiss = "Continua senza configurazione",
+        setupStatusAllActive = "%d su %d link attivi",
+        setupStatusPartial = "%d su %d link attivi – tocca per aggiungerne altri",
+        setupStatusNone = "Nessun link attivo – configurazione richiesta",
+        menuSetupGuide = "Guida configurazione (Android 12+)",
     )
 
     val JA = EN.copy(
@@ -593,7 +693,24 @@ object Strings {
         targetAppOpenError = "対象アプリを開けませんでした",
         statusInstalled = "インストール済み",
         statusNotInstalled = "未インストール",
-        tileSetupRequired = "設定が必要です"
+        tileSetupRequired = "設定が必要です",
+        setupSheetTitle = "マップリンクの設定",
+        setupSheetSubtitle = "Android 12以降では、対応する地図リンクを手動で許可する必要があります。",
+        setupStep1Title = "システム設定を開く",
+        setupStep1Desc = "下のボタンをタップしてMapFlipの設定画面を開きます。",
+        setupStep2Title = "「デフォルトで開く」を選択",
+        setupStep2Desc = "「対応リンクを開く」または「リンクを追加」をタップします。",
+        setupStep3Title = "地図リンクを有効化",
+        setupStep3Desc = "対応するすべての地図サービス（Apple、Bing、OSM、HEREなど）にチェックを入れます。",
+        setupAltTitle = "設定不要ですぐに利用する方法:",
+        setupAltShare = "共有メニュー: 地図リンクをAndroidの共有メニューから直接MapFlipと共有します。",
+        setupAltClipboard = "クリップボード: 地図リンクをコピーしてMapFlipを開くと、自動で転送されます。",
+        setupBtnOpenSettings = "システム設定を開く",
+        setupBtnDismiss = "設定せずに続ける",
+        setupStatusAllActive = "%d / %d 個のリンクが有効",
+        setupStatusPartial = "%d / %d 個のリンクが有効 – タップして追加",
+        setupStatusNone = "リンクが無効です – 設定が必要です",
+        menuSetupGuide = "設定ガイド (Android 12+)",
     )
 
     val NL = EN.copy(
@@ -658,7 +775,24 @@ object Strings {
         targetAppOpenError = "Doel-app kon niet worden geopend",
         statusInstalled = "Geïnstalleerd",
         statusNotInstalled = "Niet geïnstalleerd",
-        tileSetupRequired = "Installatie vereist"
+        tileSetupRequired = "Installatie vereist",
+        setupSheetTitle = "Kaartlinks instellen",
+        setupSheetSubtitle = "Android 12+ vereist handmatige bevestiging van ondersteunde kaartlinks.",
+        setupStep1Title = "Systeeminstellingen openen",
+        setupStep1Desc = "Tik op de onderstaande knop om de MapFlip-instellingen te openen.",
+        setupStep2Title = "Kies \"Standaard openen\"",
+        setupStep2Desc = "Tik op \"Ondersteunde links openen\" of \"Links toevoegen\".",
+        setupStep3Title = "Kaartlinks inschakelen",
+        setupStep3Desc = "Vink alle gewenste kaartdiensten aan (Apple, Bing, OSM, HERE enz.).",
+        setupAltTitle = "Werkt direct zonder configuratie:",
+        setupAltShare = "Deelmenu: Deel een kaartlink via het Android-deelmenu rechtstreeks met MapFlip.",
+        setupAltClipboard = "Klembord: Kopieer een kaartlink en open MapFlip voor directe doorverwijzing.",
+        setupBtnOpenSettings = "Systeeminstellingen openen",
+        setupBtnDismiss = "Doorgaan zonder instellen",
+        setupStatusAllActive = "%d van %d links actief",
+        setupStatusPartial = "%d van %d links actief – tik om meer toe te voegen",
+        setupStatusNone = "Geen links actief – installatie vereist",
+        menuSetupGuide = "Installatiehandleiding (Android 12+)",
     )
 
     val NO = EN.copy(
@@ -723,7 +857,24 @@ object Strings {
         targetAppOpenError = "Målappen kunne ikke åpnes",
         statusInstalled = "Installert",
         statusNotInstalled = "Ikke installert",
-        tileSetupRequired = "Oppsett kreves"
+        tileSetupRequired = "Oppsett kreves",
+        setupSheetTitle = "Konfigurer kartlenker",
+        setupSheetSubtitle = "Android 12+ krever manuell bekreftelse av støttede kartlenker.",
+        setupStep1Title = "Åpne systeminnstillinger",
+        setupStep1Desc = "Trykk på knappen nedenfor for å åpne MapFlips innstillinger.",
+        setupStep2Title = "Velg \"Åpne som standard\"",
+        setupStep2Desc = "Trykk på \"Åpne støttede lenker\" eller \"Legg til lenker\".",
+        setupStep3Title = "Aktiver kartlenker",
+        setupStep3Desc = "Kryss av for alle støttede karttjenester (Apple, Bing, OSM, HERE osv.).",
+        setupAltTitle = "Fungerer umiddelbart uten oppsett:",
+        setupAltShare = "Delemeny: Del en kartlenke via Androids delemeny direkte med MapFlip.",
+        setupAltClipboard = "Utklippstavle: Kopier en kartlenke og åpne MapFlip for umiddelbar omdirigering.",
+        setupBtnOpenSettings = "Åpne systeminnstillinger",
+        setupBtnDismiss = "Fortsett uten oppsett",
+        setupStatusAllActive = "%d av %d lenker aktive",
+        setupStatusPartial = "%d av %d lenker aktive – trykk for å legge til flere",
+        setupStatusNone = "Ingen lenker aktive – oppsett kreves",
+        menuSetupGuide = "Oppsettveiledning (Android 12+)",
     )
 
     val PL = EN.copy(
@@ -788,7 +939,24 @@ object Strings {
         targetAppOpenError = "Nie udało się otworzyć aplikacji docelowej",
         statusInstalled = "Zainstalowano",
         statusNotInstalled = "Nie zainstalowano",
-        tileSetupRequired = "Wymaga konfiguracji"
+        tileSetupRequired = "Wymaga konfiguracji",
+        setupSheetTitle = "Skonfiguruj linki map",
+        setupSheetSubtitle = "Android 12+ wymaga ręcznego zatwierdzenia obsługiwanych linków map.",
+        setupStep1Title = "Otwórz ustawienia systemowe",
+        setupStep1Desc = "Dotknij poniższego przycisku, aby otworzyć ustawienia MapFlip.",
+        setupStep2Title = "Wybierz \"Otwieraj domyślnie\"",
+        setupStep2Desc = "Dotknij \"Otwieraj obsługiwane linki\" lub \"Dodaj linki\".",
+        setupStep3Title = "Włącz linki map",
+        setupStep3Desc = "Zaznacz wszystkie obsługiwane domeny map (Apple, Bing, OSM, HERE itp.).",
+        setupAltTitle = "Działa natychmiast bez konfiguracji:",
+        setupAltShare = "Menu Udostępnij: Udostępnij dowolny link mapy przez menu Udostępnij Androida bezpośrednio do MapFlip.",
+        setupAltClipboard = "Schowek: Skopiuj link mapy i otwórz MapFlip w celu natychmiastowego przekierowania.",
+        setupBtnOpenSettings = "Otwórz ustawienia systemowe",
+        setupBtnDismiss = "Kontynuuj bez konfiguracji",
+        setupStatusAllActive = "%d z %d linków aktywnych",
+        setupStatusPartial = "%d z %d linków aktywnych – dotknij, aby dodać więcej",
+        setupStatusNone = "Brak aktywnych linków – wymagana konfiguracja",
+        menuSetupGuide = "Przewodnik konfiguracji (Android 12+)",
     )
 
     val PT = EN.copy(
@@ -853,7 +1021,24 @@ object Strings {
         targetAppOpenError = "Não foi possível abrir o app de destino",
         statusInstalled = "Instalado",
         statusNotInstalled = "Não instalado",
-        tileSetupRequired = "Configuração necessária"
+        tileSetupRequired = "Configuração necessária",
+        setupSheetTitle = "Configurar links de mapas",
+        setupSheetSubtitle = "O Android 12+ exige confirmação manual dos links de mapas compatíveis.",
+        setupStep1Title = "Abrir configurações do sistema",
+        setupStep1Desc = "Toque no botão abaixo para abrir as configurações do MapFlip.",
+        setupStep2Title = "Selecione \"Abrir por padrão\"",
+        setupStep2Desc = "Toque em \"Abrir links compatíveis\" ou \"Adicionar links\".",
+        setupStep3Title = "Ativar links de mapas",
+        setupStep3Desc = "Marque todos os domínios de mapas suportados (Apple, Bing, OSM, HERE etc.).",
+        setupAltTitle = "Funciona instantaneamente sem configuração:",
+        setupAltShare = "Menu Compartilhar: Compartilhe qualquer link de mapa pelo menu Compartilhar do Android diretamente com o MapFlip.",
+        setupAltClipboard = "Área de transferência: Copie um link de mapa e abra o MapFlip para redirecionamento imediato.",
+        setupBtnOpenSettings = "Abrir configurações do sistema",
+        setupBtnDismiss = "Continuar sem configurar",
+        setupStatusAllActive = "%d de %d links ativos",
+        setupStatusPartial = "%d de %d links ativos – toque para adicionar mais",
+        setupStatusNone = "Nenhum link ativo – configuração necessária",
+        menuSetupGuide = "Guia de configuração (Android 12+)",
     )
 
     val SV = EN.copy(
@@ -918,7 +1103,24 @@ object Strings {
         targetAppOpenError = "Målappen kunde inte öppnas",
         statusInstalled = "Installerad",
         statusNotInstalled = "Inte installerad",
-        tileSetupRequired = "Inställning krävs"
+        tileSetupRequired = "Inställning krävs",
+        setupSheetTitle = "Konfigurera kartlänkar",
+        setupSheetSubtitle = "Android 12+ kräver manuell bekräftelse av stödda kartlänkar.",
+        setupStep1Title = "Öppna systeminställningar",
+        setupStep1Desc = "Tryck på knappen nedan för att öppna MapFlips appinställningar.",
+        setupStep2Title = "Välj \"Öppna som standard\"",
+        setupStep2Desc = "Tryck på \"Öppna länkar som stöds\" eller \"Lägg till länk\".",
+        setupStep3Title = "Aktivera kartlänkar",
+        setupStep3Desc = "Markera alla stödda karttjänster (Apple, Bing, OSM, HERE osv.).",
+        setupAltTitle = "Fungerar direkt utan inställningar:",
+        setupAltShare = "Delningsmeny: Dela valfri kartlänk via Androids delningsmeny direkt med MapFlip.",
+        setupAltClipboard = "Urklipp: Kopiera en kartlänk och öppna MapFlip för omedelbar omdirigering.",
+        setupBtnOpenSettings = "Öppna systeminställningar",
+        setupBtnDismiss = "Fortsätt utan inställningar",
+        setupStatusAllActive = "%d av %d länkar aktiva",
+        setupStatusPartial = "%d av %d länkar aktiva – tryck för att lägga till fler",
+        setupStatusNone = "Inga länkar aktiva – konfigurering krävs",
+        menuSetupGuide = "Konfigurationsguide (Android 12+)",
     )
 
     val ES = EN.copy(
@@ -983,7 +1185,24 @@ object Strings {
         targetAppOpenError = "No se pudo abrir la app de destino",
         statusInstalled = "Instalada",
         statusNotInstalled = "No instalada",
-        tileSetupRequired = "Configuración requerida"
+        tileSetupRequired = "Configuración requerida",
+        setupSheetTitle = "Configurar enlaces de mapas",
+        setupSheetSubtitle = "Android 12+ requiere confirmar manualmente los enlaces de mapas compatibles.",
+        setupStep1Title = "Abrir ajustes del sistema",
+        setupStep1Desc = "Toca el botón inferior para abrir los ajustes de la aplicación MapFlip.",
+        setupStep2Title = "Seleccionar \"Abrir de forma predeterminada\"",
+        setupStep2Desc = "Toca \"Abrir enlaces compatibles\" o \"Añadir enlace\".",
+        setupStep3Title = "Activar enlaces de mapas",
+        setupStep3Desc = "Marca todos los dominios de mapas deseados (Apple, Bing, OSM, HERE, etc.).",
+        setupAltTitle = "Funciona al instante sin configuración:",
+        setupAltShare = "Menú Compartir: Comparte cualquier enlace de mapa mediante el menú Compartir de Android directamente con MapFlip.",
+        setupAltClipboard = "Portapapeles: Copia un enlace de mapa y abre MapFlip para una redirección instantánea.",
+        setupBtnOpenSettings = "Abrir ajustes del sistema",
+        setupBtnDismiss = "Continuar sin configurar",
+        setupStatusAllActive = "%d de %d enlaces activos",
+        setupStatusPartial = "%d de %d enlaces activos – toca para añadir más",
+        setupStatusNone = "Ningún enlace activo – configuración requerida",
+        menuSetupGuide = "Guía de configuración (Android 12+)",
     )
 
     val TR = EN.copy(
@@ -1048,7 +1267,24 @@ object Strings {
         targetAppOpenError = "Hedef uygulama açılamadı",
         statusInstalled = "Yüklü",
         statusNotInstalled = "Yüklü değil",
-        tileSetupRequired = "Kurulum gerekli"
+        tileSetupRequired = "Kurulum gerekli",
+        setupSheetTitle = "Harita bağlantılarını ayarla",
+        setupSheetSubtitle = "Android 12+, desteklenen harita bağlantılarının manuel olarak onaylanmasını gerektirir.",
+        setupStep1Title = "Sistem ayarlarını aç",
+        setupStep1Desc = "MapFlip uygulama ayarlarını açmak için aşağıdaki düğmeye dokunun.",
+        setupStep2Title = "\"Varsayılan olarak aç\"ı seçin",
+        setupStep2Desc = "\"Desteklenen bağlantıları aç\" veya \"Bağlantı ekle\"ye dokunun.",
+        setupStep3Title = "Harita bağlantılarını etkinleştirin",
+        setupStep3Desc = "Tüm desteklenen harita alan adlarını işaretleyin (Apple, Bing, OSM, HERE vb.).",
+        setupAltTitle = "Kurulum olmadan hemen çalışır:",
+        setupAltShare = "Paylaş Menüsü: Herhangi bir harita bağlantısını Android Paylaş menüsüyle doğrudan MapFlip ile paylaşın.",
+        setupAltClipboard = "Pano: Bir harita bağlantısını kopyalayın ve anında yönlendirme için MapFlip'i açın.",
+        setupBtnOpenSettings = "Sistem ayarlarını aç",
+        setupBtnDismiss = "Ayar yapmadan devam et",
+        setupStatusAllActive = "%d / %d bağlantı etkin",
+        setupStatusPartial = "%d / %d bağlantı etkin – daha fazlasını eklemek için dokunun",
+        setupStatusNone = "Etkin bağlantı yok – kurulum gerekli",
+        menuSetupGuide = "Kurulum Kılavuzu (Android 12+)",
     )
 
     val KO = EN.copy(
@@ -1113,7 +1349,24 @@ object Strings {
         targetAppOpenError = "대상 앱을 열 수 없습니다",
         statusInstalled = "설치됨",
         statusNotInstalled = "설치되지 않음",
-        tileSetupRequired = "설정이 필요합니다"
+        tileSetupRequired = "설정이 필요합니다",
+        setupSheetTitle = "지도 링크 설정",
+        setupSheetSubtitle = "Android 12 이상에서는 지원되는 지도 링크를 수동으로 승인해야 합니다.",
+        setupStep1Title = "시스템 설정 열기",
+        setupStep1Desc = "아래 버튼을 눌러 MapFlip의 앱 설정 화면을 엽니다.",
+        setupStep2Title = "\"기본으로 열기\" 선택",
+        setupStep2Desc = "\"지원되는 링크 열기\" 또는 \"링크 추가\"를 누릅니다.",
+        setupStep3Title = "지도 링크 활성화",
+        setupStep3Desc = "지원되는 모든 지도 도메인(Apple, Bing, OSM, HERE 등)을 선택합니다.",
+        setupAltTitle = "설정 없이 바로 사용하는 방법:",
+        setupAltShare = "공유 메뉴: 지도 링크를 Android 공유 메뉴를 통해 MapFlip으로 직접 공유하세요.",
+        setupAltClipboard = "클립보드: 지도 링크를 복사하고 MapFlip을 열면 즉시 리디렉션됩니다.",
+        setupBtnOpenSettings = "시스템 설정 열기",
+        setupBtnDismiss = "설정 없이 계속",
+        setupStatusAllActive = "%d / %d 링크 활성화됨",
+        setupStatusPartial = "%d / %d 링크 활성화됨 – 탭하여 추가",
+        setupStatusNone = "활성화된 링크 없음 – 설정 필요",
+        menuSetupGuide = "설정 가이드 (Android 12+)",
     )
 
     val ZH_CN = EN.copy(
@@ -1178,7 +1431,24 @@ object Strings {
         targetAppOpenError = "无法打开目标应用",
         statusInstalled = "已安装",
         statusNotInstalled = "未安装",
-        tileSetupRequired = "需要设置"
+        tileSetupRequired = "需要设置",
+        setupSheetTitle = "设置地图链接",
+        setupSheetSubtitle = "Android 12+ 需要手动确认支持的地图链接。",
+        setupStep1Title = "打开系统设置",
+        setupStep1Desc = "点击下方按钮打开 MapFlip 的应用设置。",
+        setupStep2Title = "选择“默认打开”",
+        setupStep2Desc = "点击“打开支持的链接”或“添加链接”。",
+        setupStep3Title = "启用地图链接",
+        setupStep3Desc = "勾选所有支持的地图服务（Apple、Bing、OSM、HERE 等）。",
+        setupAltTitle = "无需设置即可即时使用：",
+        setupAltShare = "分享菜单：通过 Android 分享菜单将任何地图链接直接分享到 MapFlip。",
+        setupAltClipboard = "剪贴板：复制地图链接并打开 MapFlip 即可瞬间重定向。",
+        setupBtnOpenSettings = "打开系统设置",
+        setupBtnDismiss = "暂不设置继续",
+        setupStatusAllActive = "已激活 %d / %d 个链接",
+        setupStatusPartial = "已激活 %d / %d 个链接 – 点击添加更多",
+        setupStatusNone = "未激活任何链接 – 需要设置",
+        menuSetupGuide = "设置指南 (Android 12+)",
     )
 
     val ZH_TW = EN.copy(
@@ -1243,7 +1513,24 @@ object Strings {
         targetAppOpenError = "無法開啟目標應用程式",
         statusInstalled = "已安裝",
         statusNotInstalled = "未安裝",
-        tileSetupRequired = "需要設定"
+        tileSetupRequired = "需要設定",
+        setupSheetTitle = "設定地圖連結",
+        setupSheetSubtitle = "Android 12+ 需要手動確認支援的地圖連結。",
+        setupStep1Title = "開啟系統設定",
+        setupStep1Desc = "點擊下方按鈕開啟 MapFlip 的應用程式設定。",
+        setupStep2Title = "選擇「預設開啟」",
+        setupStep2Desc = "點擊「開啟支援的連結」或「新增連結」。",
+        setupStep3Title = "啟用地圖連結",
+        setupStep3Desc = "勾選所有支援的地圖服務（Apple、Bing、OSM、HERE 等）。",
+        setupAltTitle = "無需設定即可即時使用：",
+        setupAltShare = "分享選單：透過 Android 分享選單將任何地圖連結直接分享到 MapFlip。",
+        setupAltClipboard = "剪貼簿：複製地圖連結並開啟 MapFlip 即可立即重新導向。",
+        setupBtnOpenSettings = "開啟系統設定",
+        setupBtnDismiss = "暫不設定繼續",
+        setupStatusAllActive = "已啟用 %d / %d 個連結",
+        setupStatusPartial = "已啟用 %d / %d 個連結 – 點擊新增更多",
+        setupStatusNone = "未啟用任何連結 – 需要設定",
+        menuSetupGuide = "設定指南 (Android 12+)",
     )
 
     val AR = EN.copy(
@@ -1308,7 +1595,24 @@ object Strings {
         targetAppOpenError = "تعذر فتح التطبيق المطلوب",
         statusInstalled = "مثبت",
         statusNotInstalled = "غير مثبت",
-        tileSetupRequired = "الإعداد مطلوب"
+        tileSetupRequired = "الإعداد مطلوب",
+        setupSheetTitle = "إعداد روابط الخرائط",
+        setupSheetSubtitle = "يتطلب Android 12+ تأكيد روابط الخرائط المدعومة يدوياً.",
+        setupStep1Title = "فتح إعدادات النظام",
+        setupStep1Desc = "اضغط على الزر أدناه لفتح إعدادات تطبيق MapFlip.",
+        setupStep2Title = "اختر \"الفتح افتراضياً\"",
+        setupStep2Desc = "اضغط على \"فتح الروابط المدعومة\" أو \"إضافة روابط\".",
+        setupStep3Title = "تفعيل روابط الخرائط",
+        setupStep3Desc = "حدد جميع نطاقات الخرائط المدعومة (Apple و Bing و OSM و HERE وغيرها).",
+        setupAltTitle = "يعمل فوراً بدون إعداد:",
+        setupAltShare = "قائمة المشاركة: شارك أي رابط خريطة عبر قائمة مشاركة Android مباشرة مع MapFlip.",
+        setupAltClipboard = "الحافظة: انسخ رابط الخريطة وافتح MapFlip لإعادة التوجيه الفوري.",
+        setupBtnOpenSettings = "فتح إعدادات النظام",
+        setupBtnDismiss = "المتابعة بدون إعداد",
+        setupStatusAllActive = "%d من %d روابط نشطة",
+        setupStatusPartial = "%d من %d روابط نشطة – اضغط لإضافة المزيد",
+        setupStatusNone = "لا توجد روابط نشطة – يلزم الإعداد",
+        menuSetupGuide = "دليل الإعداد (Android 12+)",
     )
 
     val RU = EN.copy(
@@ -1373,7 +1677,24 @@ object Strings {
         targetAppOpenError = "Не удалось открыть целевое приложение",
         statusInstalled = "Установлено",
         statusNotInstalled = "Не установлено",
-        tileSetupRequired = "Требуется настройка"
+        tileSetupRequired = "Требуется настройка",
+        setupSheetTitle = "Настройка ссылок карт",
+        setupSheetSubtitle = "В Android 12+ требуется вручную подтвердить поддерживаемые ссылки карт.",
+        setupStep1Title = "Открыть настройки системы",
+        setupStep1Desc = "Нажмите кнопку ниже, чтобы открыть настройки MapFlip.",
+        setupStep2Title = "Выберите \"Открывать по умолчанию\"",
+        setupStep2Desc = "Нажмите \"Открывать поддерживаемые ссылки\" или \"Добавить ссылки\".",
+        setupStep3Title = "Включить ссылки карт",
+        setupStep3Desc = "Отметьте все поддерживаемые службы карт (Apple, Bing, OSM, HERE и др.).",
+        setupAltTitle = "Работает мгновенно без настройки:",
+        setupAltShare = "Меню \"Поделиться\": Отправьте любую ссылку на карту через меню Android прямо в MapFlip.",
+        setupAltClipboard = "Буфер обмена: Скопируйте ссылку на карту и откройте MapFlip для мгновенного перенаправления.",
+        setupBtnOpenSettings = "Открыть настройки системы",
+        setupBtnDismiss = "Продолжить без настройки",
+        setupStatusAllActive = "%d из %d ссылок активно",
+        setupStatusPartial = "%d из %d ссылок активно – нажмите для добавления",
+        setupStatusNone = "Нет активных ссылок – требуется настройка",
+        menuSetupGuide = "Инструкция по настройке (Android 12+)",
     )
 
     val ID = EN.copy(
@@ -1438,6 +1759,23 @@ object Strings {
         targetAppOpenError = "Aplikasi tujuan tidak dapat dibuka",
         statusInstalled = "Terinstal",
         statusNotInstalled = "Tidak terinstal",
-        tileSetupRequired = "Perlu penyiapan"
+        tileSetupRequired = "Perlu penyiapan",
+        setupSheetTitle = "Atur tautan peta",
+        setupSheetSubtitle = "Android 12+ memerlukan konfirmasi tautan peta yang didukung secara manual.",
+        setupStep1Title = "Buka pengaturan sistem",
+        setupStep1Desc = "Ketuk tombol di bawah untuk membuka pengaturan aplikasi MapFlip.",
+        setupStep2Title = "Pilih \"Buka secara default\"",
+        setupStep2Desc = "Ketuk \"Buka tautan yang didukung\" atau \"Tambah tautan\".",
+        setupStep3Title = "Aktifkan tautan peta",
+        setupStep3Desc = "Centang semua layanan peta yang didukung (Apple, Bing, OSM, HERE, dll.).",
+        setupAltTitle = "Berfungsi langsung tanpa konfigurasi:",
+        setupAltShare = "Menu Berbagi: Bagikan tautan peta apa pun melalui menu Berbagi Android langsung ke MapFlip.",
+        setupAltClipboard = "Papan klip: Salin tautan peta dan buka MapFlip untuk pengalihan instan.",
+        setupBtnOpenSettings = "Buka pengaturan sistem",
+        setupBtnDismiss = "Lanjutkan tanpa pengaturan",
+        setupStatusAllActive = "%d dari %d tautan aktif",
+        setupStatusPartial = "%d dari %d tautan aktif – ketuk untuk menambah lagi",
+        setupStatusNone = "Tidak ada tautan aktif – konfigurasi diperlukan",
+        menuSetupGuide = "Panduan Pengaturan (Android 12+)",
     )
 }

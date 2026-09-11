@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.outlined.DarkMode
 import androidx.compose.material.icons.outlined.Email
@@ -57,8 +58,10 @@ fun SettingsSheet(
     onLanguageSelected: (String) -> Unit,
     onThemeSelected: (String) -> Unit,
     onTargetAppSelected: (TargetNavigationApp) -> Unit,
+    onOpenSetupGuide: () -> Unit = {},
     onDismiss: () -> Unit
 ) {
+
     val context = LocalContext.current
     val haptic = LocalHapticFeedback.current
     val focusRequester = remember { FocusRequester() }
@@ -352,7 +355,21 @@ fun SettingsSheet(
 
                     Spacer(Modifier.height(10.dp))
 
-                    // 4. Support & Feedback
+                    // 4. Setup Guide (Android 12+)
+                    SettingsItem(
+                        icon = Icons.AutoMirrored.Outlined.HelpOutline,
+                        title = s.menuSetupGuide,
+                        subtitle = s.setupSheetSubtitle,
+                        onClick = {
+                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                            Analytics.trackEvent("setup_guide_opened", mapOf("source" to "settings"))
+                            onOpenSetupGuide()
+                        }
+                    )
+
+                    Spacer(Modifier.height(10.dp))
+
+                    // 5. Support & Feedback
                     SettingsItem(
                         icon = Icons.Outlined.Email,
                         title = s.btnFeedback,
