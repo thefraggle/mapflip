@@ -1,24 +1,28 @@
 朋友傳送了 Apple Maps 地圖連結，但你在 Android 上習慣使用 Google Maps？
 
-MapFlip 是專為 Android 設計的 Apple Maps 連結轉換與自動重新導向工具。只需設定一次，所有 Apple Maps 連結、網址和分享位置都將直接在 Google Maps 中開啟。無需手動複製貼上，無需瀏覽器跳轉。
+MapFlip 是專為 Android 打造的 Apple Maps 終極轉換器、極速地圖重新導向與連結轉換神器。只需簡單設定一次，所有 Apple Maps 連結、網址和共享位置都將無縫直接在 Google Maps 中開啟。無需手動複製貼上，無需經過瀏覽器跳轉。
 
-🔧 使用步驟：
+無論你需要 Android 上的 Apple Maps 解決方案、Apple to Google 轉換器，還是全自動地圖重新導向，MapFlip 都能在背景疾速處理。在你喜愛的導航應用程式中直接開啟 Apple Maps 連結。
+
+🔧 使用方法：
 1. 開啟 MapFlip
 2. 點擊「開啟設定」
-3. 為 maps.apple.com 啟用支援的連結轉發
-4. 完成！Apple Maps 連結將自動在 Google Maps 中開啟。
+3. 為 maps.apple.com 開啟支援的連結轉發
+4. 完成！從此 Apple Maps 連結將自動在 Google Maps 中開啟。
 
-✨ 核心功能與隱私保護：
-• 🚗 路線導航與 Android Auto – 立即啟動 Google Maps 原生導航與路線指引
+✨ 核心特色與隱私保證：
+• 🚗 即時導航與 Android Auto – 一鍵立即啟動 Google Maps 原生路線指引與導航
 • 🧭 自由選擇目標導航應用 – 支援在 Google Maps、Waze、Organic Maps、OsmAnd 或系統選擇器中開啟
-• 🔄 全自動無縫轉向 – 本機即時轉換，流暢順暢
-• 🔒 100% 離線與隱私安全 – 無網路權限（0 權限），無追蹤，無廣告
-• ⏸️ 快速設定控制磚 – 從下拉通知欄隨時暫停與恢復重定向
-• 💬 完美支援各類通訊軟體 – LINE、WhatsApp、Telegram、Signal、簡訊與電子郵件
-• 👻 隱形背景運作 – 零干擾，不耗電
+• 🔄 全自動即時重新導向 – 零延遲裝置端連結與地圖轉換
+• 🔒 100% 離線與隱私保護 – 無網路存取權限（0 權限），無資料追蹤，無廣告
+• ⏸️ 快捷暫停模式 – 在通知列下拉快捷開關中隨時暫停與恢復
+• 💬 廣泛相容各類通訊軟體 – 完美支援 LINE、WhatsApp、Telegram、Signal、簡訊與電子郵件
+• 👻 極簡無感背景運作 – 零多餘介面，不耗電
 
 🗺️ 支援的連結格式與地圖服務：
 • Apple Maps 網址與搜尋關鍵字 (maps.apple.com)
 • OpenStreetMap (osm.org)、Bing Maps 與 Yandex Maps
-• GPS 經緯度座標與共享定位
-• 地址、地點標籤與導航路線
+• GPS 經緯度座標與分享定位
+• 具體地址、地點標註與導航路線
+
+MapFlip 專為經常收到 iPhone 使用者傳送 Apple Maps 連結的 Android 使用者量身打造。

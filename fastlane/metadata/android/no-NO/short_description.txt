@@ -1,1 +1,1 @@
-Åpne Apple Maps-lenker & URL-er i Google Maps. Rask kartkonverterer.
+Omdiriger Apple Maps-lenker til Google Maps. Rask kartkonverterer.

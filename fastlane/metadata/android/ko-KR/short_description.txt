@@ -1,1 +1,1 @@
-Apple Maps 링크를 Google Maps에서 열기. 빠른 지도 링크 변환기.
+Apple Maps 링크를 Google Maps로 리디렉션. 빠른 지도 링크 변환기.

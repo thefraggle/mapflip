@@ -1,26 +1,28 @@
-친구들이 Apple Maps 링크를 보내는데, 당신은 Android에서 Google Maps를 사용하시나요?
+친구들이 Apple Maps 링크를 보내지만, Android에서는 Google Maps를 사용하시나요?
 
-MapFlip은 Android를 위한 가장 완벽한 Apple Maps 변환기 및 링크 리디렉션 도구입니다. 한 번만 설정하면 모든 Apple Maps 링크, URL 및 위치가 Google Maps에서 자동으로 열립니다. 복사, 붙여넣기, 브라우저 우회가 필요 없습니다.
+MapFlip은 Android를 위한 최고의 Apple Maps 변환기이자 빠른 링크 리디렉션 도구입니다. 한 번만 설정하면 모든 과정이 자동으로 작동합니다. 모든 Apple Maps 링크, URL, 공유 위치가 Google Maps에서 바로 열립니다. 복사하고 붙여넣거나 브라우저를 거칠 필요가 없습니다.
 
-Android용 Apple Maps 솔루션이나 자동 변환기가 필요할 때, MapFlip이 백그라운드에서 모든 것을 처리합니다.
+Android용 Apple Maps 솔루션, Apple to Google 변환기 또는 자동 지도 리디렉션이 필요할 때 MapFlip이 백그라운드에서 모든 URL을 즉시 처리합니다. 선호하는 내비게이션 앱에서 Apple Maps 링크를 바로 여세요.
 
-🔧 작동 방법:
+🔧 사용 방법:
 1. MapFlip 열기
-2. "설정 열기" 탭하기
-3. maps.apple.com에 대한 링크 전달 활성화
-4. 완료! 이제 Apple Maps 링크가 Google Maps에서 바로 열립니다.
+2. "설정 열기" 탭
+3. maps.apple.com 지원 링크 전달 활성화
+4. 완료! 이제 Apple Maps 링크가 Google Maps에서 자동으로 열립니다.
 
 ✨ 주요 기능 및 개인정보 보호:
-• 🚗 턴바이턴 내비게이션 & Android Auto – Google Maps 기본 내비게이션 즉시 실행
-• 🧭 원하는 내비게이션 앱 선택 – Google Maps, Waze, Organic Maps, OsmAnd 또는 시스템 선택기로 열기
-• 🔄 자동 지도 리디렉션 – 실시간 기기 내 링크 변환
-• 🔒 100% 오프라인 & 프라이버시 – 인터넷 권한 없음(0 Permissions), 추적 없음, 광고 없음
-• ⏸️ 일시중지 모드 & 빠른 설정 타일 – 알림창에서 언제든 간편하게 일시중지
-• 💬 모든 메신저 호환 – WhatsApp, Telegram, Signal, SMS, Slack, 카카오톡, 이메일 완벽 지원
-• 👻 보이지 않는 백그라운드 작동 – 불필요한 화면이나 배터리 소모 없음
+• 🚗 턴바이턴 내비게이션 & Android Auto – Google Maps에서 네이티브 경로 안내 즉시 시작
+• 🧭 원하는 내비게이션 앱 선택 – Google Maps, Waze, Organic Maps, OsmAnd 또는 시스템 선택기 지원
+• 🔄 자동 리디렉션 – 기기 내 즉각적인 링크 및 지도 변환
+• 🔒 100% 오프라인 & 프라이버시 보장 – 인터넷 권한 없음 (0 Permissions), 추적 없음, 광고 없음
+• ⏸️ 일시 중지 모드 & 빠른 설정 타일 – 알림창에서 언제든지 리디렉션을 일시 중지
+• 💬 폭넓은 앱 호환성 – WhatsApp, Telegram, Signal, SMS, Slack, 이메일과 완벽 호환
+• 👻 보이지 않는 백그라운드 작동 – 불필요한 화면 없음, 배터리 소모 없음
 
-🗺️ 지원되는 링크 형식 및 서비스:
-• Apple Maps URL 및 검색어 (maps.apple.com)
+🗺️ 지원되는 링크 형식 및 지도 서비스:
+• Apple Maps URL 및 검색 쿼리 (maps.apple.com)
 • OpenStreetMap (osm.org), Bing Maps 및 Yandex Maps
 • GPS 좌표 및 공유된 위치
 • 주소, 장소 마커 및 내비게이션 경로
+
+MapFlip은 iPhone 사용자로부터 Apple Maps 링크를 자주 받는 Android 사용자를 위해 만들어졌습니다.

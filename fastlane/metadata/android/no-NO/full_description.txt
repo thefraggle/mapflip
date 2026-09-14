@@ -1,28 +1,28 @@
-Vennene dine sender deg Apple Maps-lenker – men du bruker Google Maps?
+Sender vennene dine Apple Maps-lenker – men du bruker Google Maps på Android?
 
-MapFlip er den ultimate Apple Maps-konverteren og viderekoblingsløsningen for Android. Sett det opp én gang, og alt fungerer automatisk som en viderekobling til Google Maps: Hver Apple Maps-lenke, URL eller posisjon åpnes direkte i Google Maps. Ingen kopiering, ingen liming, ingen omveier via nettleseren.
+MapFlip er den ultimate Apple Maps-konverteren, raske Apple Maps-omdirigeringen og lenkekonverteren for Android. Konfigurer det én gang, og alt skjer automatisk: Hver Apple Maps-lenke, URL eller plassering åpnes direkte i Google Maps. Ingen kopiering, ingen liming, ingen omveier via nettleseren.
 
-Enten du trenger Apple Maps for Android eller en automatisk Apple til Google Maps-konverter, håndterer MapFlip alle lenker sømløst i bakgrunnen.
+Enten du trenger Apple Maps for Android, en Apple til Google-konverter eller en automatisk Apple til Google Maps-konverter, håndterer MapFlip alle lenker i bakgrunnen. Åpne Apple Maps-lenker direkte i din favoritt-navigasjonsapp.
 
 🔧 Slik fungerer det:
 1. Åpne MapFlip
 2. Trykk på "Åpne innstillinger"
-3. Aktiver lenke-viderekobling for maps.apple.com
+3. Aktiver koblingsviderekobling for maps.apple.com
 4. Ferdig! Apple Maps-lenker åpnes nå direkte i Google Maps.
 
 ✨ Funksjoner & Personvern:
-• 🚗 Turn-by-turn navigasjon & Android Auto – Starter umiddelbart ruteveiledning i Google Maps
-• 🧭 Velg din navigasjonsapp – Åpne destinasjoner i Google Maps, Waze, Organic Maps, OsmAnd eller systemvalg
-• 🔄 Automatisk viderekobling – Apple Maps til Google Maps lenkekonverter
-• 🔒 100% frakoblet & privat – Null internetttillatelser (ingen android.permission.INTERNET), ingen sporing, ingen reklame
-• ⏸️ Pausemodus & Hurtiginnstillinger-knapp – Sett viderekobling på pause i varslingspanelet
+• 🚗 Turn-by-turn navigasjon & Android Auto – Starter umiddelbart veibeskrivelser i Google Maps
+• 🧭 Velg din navigasjonsapp – Åpne destinasjoner i Google Maps, Waze, Organic Maps, OsmAnd eller systemvelger
+• 🔄 Automatisk omdirigering – Rask lenke- og kartkonvertering direkte på enheten
+• 🔒 100% offline & privat – Null internetttillatelser (no android.permission.INTERNET), ingen sporing, ingen reklame
+• ⏸️ Pausemodus & Hurtiginnstillinger-flis – Sett omdirigering på pause fra varselpanelet
 • 💬 Universell app-kompatibilitet – Fungerer sømløst med WhatsApp, Telegram, Signal, SMS, Slack og e-post
-• 👻 Usynlig bakgrunnsdrift – Ingen ekstra skjermer, null batteribruk
+• 👻 Usynlig bakgrunnsdrift – Ingen unødvendige skjermer, null batteriforbruk
 
 🗺️ Støttede lenkeformater & tjenester:
 • Apple Maps URL-er & søk (maps.apple.com)
 • OpenStreetMap (osm.org), Bing Maps & Yandex Maps
-• GPS-koordinater & delte posisjoner
-• Adresser, stedmarkører & navigasjonsruter
+• GPS-koordinater & delte plasseringer
+• Adresser, stedsmarkører & navigasjonsruter
 
 MapFlip er bygget for Android-brukere som regelmessig mottar Apple Maps-lenker fra iPhone-brukere.

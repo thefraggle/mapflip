@@ -1,22 +1,22 @@
-Dina vänner skickar Apple Maps-länkar – men du använder Google Maps?
+Skickar dina vänner Apple Maps-länkar – men du använder Google Maps på Android?
 
-MapFlip är den ultimata Apple Maps-konverteraren och länkomdirigeringen för Android. Ställ in det en gång så fungerar allt automatiskt som en omdirigering till Google Maps: Varje Apple Maps-länk, URL eller plats öppnas direkt i Google Maps. Ingen kopiering, ingen klistra in, inga omvägar via webbläsaren.
+MapFlip är den ultimata Apple Maps-konverteraren, snabba Apple Maps-omdirigeringen och länkkonverteraren för Android. Konfigurera det en gång så sker allt automatiskt som en Google Maps-omdirigering: Varje Apple Maps-länk, URL eller plats öppnas direkt i Google Maps. Ingen kopiering, ingen klistring, inga omvägar via webbläsaren.
 
-Oavsett om du behöver Apple Maps för Android eller en automatisk Apple till Google Maps-konverterare, hanterar MapFlip alla länkar sömlöst i bakgrunden.
+Oavsett om du behöver Apple Maps för Android, en Apple till Google-konverterare eller en automatisk kartkonverterare hanterar MapFlip alla länkar i bakgrunden. Öppna Apple Maps-länkar direkt i din favoritnavigeringsapp.
 
 🔧 Så fungerar det:
 1. Öppna MapFlip
 2. Tryck på "Öppna inställningar"
-3. Aktivera länk-omdirigering för maps.apple.com
+3. Aktivera länkvidarebefordran för maps.apple.com
 4. Klart! Apple Maps-länkar öppnas nu direkt i Google Maps.
 
 ✨ Funktioner & Integritet:
-• 🚗 Sväng-för-sväng-navigering & Android Auto – Startar omedelbart rutt i Google Maps
-• 🧭 Välj din navigeringsapp – Öppna destinationer i Google Maps, Waze, Organic Maps, OsmAnd eller systemväljare
-• 🔄 Automatisk omdirigering – Apple Maps till Google Maps länkkonverterare
-• 🔒 100% offline & integritetsvänlig – Noll internetbehörigheter (ingen android.permission.INTERNET), ingen spårning, inga annonser
-• ⏸️ Pausläge & Snabbinställnings-knapp – Pausa omdirigeringen från aviseringspanelen
-• 💬 Universell app-kompatibilitet – Fungerar sömlöst med WhatsApp, Telegram, Signal, SMS, Slack och e-post
+• 🚗 Sväng-för-sväng-navigering & Android Auto – Startar omedelbart ruttvägledning i Google Maps
+• 🧭 Välj din navigationsapp – Öppna destinationer i Google Maps, Waze, Organic Maps, OsmAnd eller systemväljaren
+• 🔄 Automatisk omdirigering – Blixtsnabb länk- och kartkonverterare direkt på enheten
+• 🔒 100% offline & privat – Noll internetbehörigheter (inget android.permission.INTERNET), ingen spårning, ingen reklam
+• ⏸️ Pausläge & Snabbinställningspanel – Pausa omdirigeringen när som helst från aviseringsfältet
+• 💬 Universell appkompatibilitet – Fungerar sömlöst med WhatsApp, Telegram, Signal, SMS, Slack och e-post
 • 👻 Osynlig bakgrundsdrift – Inga extra skärmar, noll batteriförbrukning
 
 🗺️ Länkformat & tjänster som stöds:
@@ -25,4 +25,4 @@ Oavsett om du behöver Apple Maps för Android eller en automatisk Apple till Go
 • GPS-koordinater & delade platser
 • Adresser, platsmarkörer & navigeringsrutter
 
-MapFlip är skapat för Android-användare som regelbundet tar emot Apple Maps-länkar från iPhone-användare.
+MapFlip skapades för Android-användare som regelbundet får Apple Maps-länkar från iPhone-användare.

@@ -1,6 +1,8 @@
 朋友发送了 Apple Maps 地图链接，但你在安卓上习惯使用 Google Maps？
 
-MapFlip 是专为 Android 打造的 Apple Maps 链接转换与自动重定向神器。只需简单配置一次，所有 Apple Maps 链接、网址和共享位置都将无缝直接在 Google Maps 中打开。无需手动复制粘贴，无需经过浏览器跳转。
+MapFlip 是专为 Android 打造的 Apple Maps 终极转换器、极速地图重定向与链接转换神器。只需简单配置一次，所有 Apple Maps 链接、网址和共享位置都将无缝直接在 Google Maps 中打开。无需手动复制粘贴，无需经过浏览器跳转。
+
+无论你需要 Android 上的 Apple Maps 解决方案、Apple to Google 转换器，还是全自动地图重定向，MapFlip 都能在后台疾速处理。在你喜爱的导航应用中直接开启 Apple Maps 链接。
 
 🔧 使用方法：
 1. 打开 MapFlip
@@ -11,7 +13,7 @@ MapFlip 是专为 Android 打造的 Apple Maps 链接转换与自动重定向神
 ✨ 核心特色与隐私保证：
 • 🚗 实时导航与 Android Auto – 一键立即启动 Google Maps 原生路线指引与导航
 • 🧭 自由选择目标导航应用 – 支持在 Google Maps、Waze、Organic Maps、OsmAnd 或系统选择器中打开
-• 🔄 全自动即时重定向 – 零延迟本地链路转换
+• 🔄 全自动即时重定向 – 零延迟本地链接与地图转换
 • 🔒 100% 离线与隐私保护 – 无网络访问权限（0 权限），无数据追踪，无广告
 • ⏸️ 快捷暂停模式 – 在通知栏下拉快捷开关中随时暂停与恢复
 • 💬 广泛兼容各类通讯软件 – 完美支持微信、WhatsApp、Telegram、Signal、短信与邮件
@@ -22,3 +24,5 @@ MapFlip 是专为 Android 打造的 Apple Maps 链接转换与自动重定向神
 • OpenStreetMap (osm.org)、Bing Maps 与 Yandex Maps
 • GPS 经纬度坐标与分享定位
 • 具体地址、地点标注与导航路线
+
+MapFlip 专为经常收到 iPhone 用户发送 Apple Maps 链接的 Android 用户量身打造。

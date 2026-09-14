@@ -1,6 +1,8 @@
-Teman Anda mengirim tautan Apple Maps, tetapi Anda menggunakan Google Maps di Android?
+Teman Anda mengirim tautan Apple Maps – tetapi Anda menggunakan Google Maps di Android?
 
-MapFlip adalah alat pengonversi dan pengalih tautan Apple Maps terbaik untuk Android. Cukup atur sekali, dan semua tautan, URL, atau lokasi Apple Maps akan terbuka secara otomatis di Google Maps. Tanpa salin-tempel dan tanpa membuka browser.
+MapFlip adalah konverter Apple Maps terbaik, pengalihan cepat dan konverter tautan untuk Android. Cukup atur sekali, dan semua tautan, URL, atau lokasi Apple Maps akan terbuka secara otomatis di Google Maps. Tanpa salin-tempel dan tanpa membuka browser.
+
+Apakah Anda memerlukan solusi Apple Maps untuk Android, konverter Apple ke Google, atau pengalihan peta otomatis, MapFlip menangani semua URL di latar belakang. Buka tautan Apple Maps langsung di aplikasi navigasi favorit Anda.
 
 🔧 Cara Penggunaan:
 1. Buka MapFlip
@@ -11,14 +13,16 @@ MapFlip adalah alat pengonversi dan pengalih tautan Apple Maps terbaik untuk And
 ✨ Fitur & Privasi:
 • 🚗 Navigasi Belokan demi Belokan & Android Auto – Langsung meluncurkan rute asli di Google Maps
 • 🧭 Pilih Aplikasi Navigasi Anda – Buka tujuan di Google Maps, Waze, Organic Maps, OsmAnd, atau pemilih sistem
-• 🔄 Pengalihan Otomatis – Konversi tautan instan di dalam perangkat
+• 🔄 Pengalihan Otomatis – Konverter tautan dan peta instan di dalam perangkat
 • 🔒 100% Offline & Privasi Terjaga – Tanpa izin internet (0 Permissions), tanpa pelacakan, tanpa iklan
-• ⏸️ Mode Jeda & Ubin Pengaturan Cepat – Jeda kapan saja dari panel notifikasi
+• ⏸️ Mode Jeda & Ubin Pengaturan Cepat – Jeda kapan saja langsung dari panel notifikasi
 • 💬 Kompatibel dengan Semua Aplikasi – WhatsApp, Telegram, Signal, SMS, Slack, dan email
-• 👻 Berjalan Halus di Latar Belakang – Hemat baterai tanpa gangguan
+• 👻 Berjalan Halus di Latar Belakang – Tanpa layar tambahan, hemat baterai tanpa gangguan
 
 🗺️ Format tautan & layanan yang didukung:
 • URL & pencarian Apple Maps (maps.apple.com)
 • OpenStreetMap (osm.org), Bing Maps & Yandex Maps
 • Koordinat GPS & lokasi bersama
 • Alamat, penanda tempat & rute navigasi
+
+MapFlip dibuat untuk pengguna Android yang sering menerima tautan Apple Maps dari pengguna iPhone.

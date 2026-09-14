@@ -1,28 +1,28 @@
-I tuoi amici ti inviano link di Apple Maps – ma tu usi Google Maps?
+I tuoi amici ti inviano link di Apple Maps – ma tu usi Google Maps su Android?
 
-MapFlip è il convertitore definitivo per Apple Maps e lo strumento di reindirizzamento link per Android. Configuralo una volta e tutto funzionerà automaticamente come un reindirizzamento a Google Maps: ogni link Apple Maps, URL o posizione si aprirà direttamente in Google Maps. Nessun copia-incolla, nessun passaggio dal browser.
+MapFlip è il convertitore definitivo di Apple Maps, reindirizzamento veloce e convertitore di link per Android. Configuralo una volta e tutto funzionerà automaticamente: ogni link, URL o posizione di Apple Maps si apre direttamente in Google Maps. Senza copiare, senza incollare, senza passare dal browser.
 
-Che tu abbia bisogno di Apple Maps per Android o di un convertitore da Apple a Google Maps, MapFlip gestisce tutti i link in background.
+Che tu abbia bisogno di una soluzione Apple Maps per Android, di un convertitore da Apple a Google o di una conversione automatica di mappe, MapFlip gestisce tutti gli URL in background. Apri i link di Apple Maps direttamente nella tua app di navigazione preferita.
 
 🔧 Come funziona:
 1. Apri MapFlip
 2. Tocca "Apri impostazioni"
-3. Abilita il reindirizzamento dei link per maps.apple.com
+3. Attiva l'inoltro dei link per maps.apple.com
 4. Fatto! I link di Apple Maps ora si aprono direttamente in Google Maps.
 
-✨ Caratteristiche & Privacy:
-• 🚗 Navigazione passo-passo & Android Auto – Avvia istantaneamente l'itinerario in Google Maps
-• 🧭 Scegli la tua app di navigazione – Apri destinazioni in Google Maps, Waze, Organic Maps, OsmAnd o selettore di sistema
-• 🔄 Reindirizzamento automatico – Convertitore di link da Apple Maps a Google Maps
-• 🔒 100% offline e privato – Zero permessi Internet (no android.permission.INTERNET), nessun tracciamento, nessuna pubblicità
-• ⏸️ Modalità pausa e tessera Impostazioni rapide – Sospendi il reindirizzamento dal pannello notifiche
+✨ Funzionalità e Privacy:
+• 🚗 Navigazione passo-passo e Android Auto – Avvia subito l'itinerario nativo in Google Maps
+• 🧭 Scegli la tua app di navigazione – Apri le destinazioni in Google Maps, Waze, Organic Maps, OsmAnd o selettore di sistema
+• 🔄 Reindirizzamento automatico – Convertitore istantaneo di link e mappe sul dispositivo
+• 🔒 100% Offline e Privato – Zero permessi Internet (nessun android.permission.INTERNET), nessun tracciamento, nessuna pubblicità
+• ⏸️ Modalità Pausa e Tile Impostazioni Rapide – Sospendi il reindirizzamento in qualsiasi momento dalla tendina delle notifiche
 • 💬 Compatibilità universale – Funziona perfettamente con WhatsApp, Telegram, Signal, SMS, Slack ed e-mail
-• 👻 Funzionamento invisibile in background – Nessuna schermata aggiuntiva, zero consumo di batteria
+• 👻 Funzionamento invisibile in background – Nessuna schermata extra, nessun consumo di batteria
 
-🗺️ Formati di link & servizi supportati:
-• URL Apple Maps & ricerche (maps.apple.com)
-• OpenStreetMap (osm.org), Bing Maps & Yandex Maps
-• Coordinate GPS & posizioni condivise
-• Indirizzi, segnaposto & percorsi di navigazione
+🗺️ Formati di link e servizi supportati:
+• URL e ricerche di Apple Maps (maps.apple.com)
+• OpenStreetMap (osm.org), Bing Maps e Yandex Maps
+• Coordinate GPS e posizioni condivise
+• Indirizzi, segnaposto e percorsi di navigazione
 
 MapFlip è stato creato per gli utenti Android che ricevono regolarmente link di Apple Maps da utenti iPhone.

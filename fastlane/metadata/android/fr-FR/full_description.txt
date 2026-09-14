@@ -1,8 +1,8 @@
 Vos amis vous envoient des liens Apple Maps – mais vous utilisez Google Maps ?
 
-MapFlip est le convertisseur Apple Maps ultime et l'outil de redirection de liens pour Android. Configurez-le une fois, et tout fonctionne automatiquement comme une redirection Google Maps : chaque lien Apple Maps, URL ou lieu s'ouvre directement dans Google Maps. Pas de copier-coller, pas de détour par le navigateur.
+MapFlip est le convertisseur Apple Maps ultime, l'outil de redirection rapide et de conversion de liens pour Android. Configurez-le une fois, et tout fonctionne automatiquement comme une redirection Google Maps : chaque lien Apple Maps, URL ou lieu s'ouvre directement dans Google Maps. Pas de copier-coller, pas de détour par le navigateur.
 
-Que vous cherchiez une solution Apple Maps pour Android ou un convertisseur Apple vers Google Maps automatique, MapFlip traite tous les liens en arrière-plan.
+Que vous cherchiez une solution Apple Maps pour Android, un convertisseur Apple vers Google ou un convertisseur automatique Apple vers Google Maps, MapFlip traite tous les liens en arrière-plan. Ouvrez les liens Apple Maps directement dans votre application de navigation préférée.
 
 🔧 Comment ça marche :
 1. Ouvrez MapFlip
@@ -13,7 +13,7 @@ Que vous cherchiez une solution Apple Maps pour Android ou un convertisseur Appl
 ✨ Fonctionnalités & Confidentialité :
 • 🚗 Navigation étape par étape & Android Auto – Lance instantanément l'itinéraire dans Google Maps
 • 🧭 Choisissez votre app de navigation – Ouvrez vos trajets dans Google Maps, Waze, Organic Maps, OsmAnd ou le sélecteur système
-• 🔄 Redirection automatique – Convertisseur de liens Apple Maps vers Google Maps
+• 🔄 Redirection automatique – Convertisseur de liens et de cartes instantané
 • 🔒 100% hors ligne & privé – Aucune permission Internet (sans android.permission.INTERNET), aucun suivi, aucune publicité
 • ⏸️ Mode pause & Tuile Paramètres rapides – Interrompez la redirection depuis le panneau de notification
 • 💬 Compatibilité universelle – Fonctionne parfaitement avec WhatsApp, Telegram, Signal, SMS, Slack et e-mails
