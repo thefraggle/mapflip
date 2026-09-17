@@ -27,4 +27,4 @@ Thank you for your interest in contributing to MapFlip!
 
 ## Translations
 
-MapFlip supports 19 languages. Translations are managed in `app/src/main/java/de/goork/mapflip/ui/Strings.kt`. Corrections and new language additions are always welcome!
+MapFlip supports 20 languages. Translations are managed in `app/src/main/java/de/goork/mapflip/ui/Strings.kt`. Corrections and new language additions are always welcome!
