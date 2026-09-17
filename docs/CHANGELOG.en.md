@@ -1,3 +1,10 @@
+## 1.3.0
+- Choose Your Navigation App: Support for 12 map apps (incl. Organic Maps, OsmAnd, Waze) and system picker
+- Broader Support: Intercepts Apple Maps, Google Maps, OpenStreetMap, Bing, DuckDuckGo, HERE WeGo, Yandex Maps, GPS coordinates & Plus Codes
+- Travel Modes: Preserves driving, walking, cycling, and public transit routes
+- Setup Guide: Step-by-step assistance for link verification on Android 12+
+- System Integration: Themed monochrome icon & Quick Settings tile
+
 ## 1.2.22
 - Visual Setup Guide: An easy step-by-step guide showing how to unlock web links directly for your preferred maps app
 - Clear Status Overview: See at a glance how many map links are active and whether any need to be added

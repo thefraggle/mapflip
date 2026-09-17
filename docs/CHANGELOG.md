@@ -1,3 +1,10 @@
+## 1.3.0
+- Freie Kartenauswahl: Unterstützung für 12 Navigations-Apps (u. a. Organic Maps, OsmAnd, Waze) sowie System-Auswahldialog
+- Mehr Kartendienste: Liest Apple Maps, Google Maps, OpenStreetMap, Bing, DuckDuckGo, HERE WeGo, Yandex Maps, Geokoordinaten & Plus Codes
+- Reisemodi: Behält Routen für Auto, Fußgänger, Fahrrad und ÖPNV bei
+- Schritt-für-Schritt-Hilfe: Einfache Anleitung zur Link-Aktivierung auf Android 12+
+- Systemintegration: Material You App-Icon & Quick Settings Tile
+
 ## 1.2.22
 - Interaktive Setup-Hilfe: Eine Schritt-für-Schritt-Anleitung zeigt direkt, wie Weblinks nahtlos für deine Karten-App freigeschaltet werden
 - Übersichtlicher Status: Die Startseite zeigt auf einen Blick, wie viele Weblinks bereits aktiv sind und ob noch Verknüpfungen fehlen

@@ -19,9 +19,9 @@ val aptabaseKey: String = System.getenv("APTABASE_KEY")
 val aptabaseHost: String = System.getenv("APTABASE_HOST")
     ?: keystoreProperties.getProperty("aptabaseHost", "https://telemetry-apps.goork.de")
 
-val appVersion = "1.2.22"
+val appVersion = "1.3.0"
 
-val appVersionCode = 315025
+val appVersionCode = 315026
 
 android {
     namespace = "de.goork.mapflip"
