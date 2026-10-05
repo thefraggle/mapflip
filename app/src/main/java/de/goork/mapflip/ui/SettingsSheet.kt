@@ -218,6 +218,17 @@ fun SettingsSheet(
                 }
                 showTargetAppPicker -> {
                     // Target App picker subview
+                    val targetApps = remember(context) {
+                        TargetNavigationApp.entries
+                            .map { app -> app to app.isInstalled(context) }
+                            .sortedBy { (app, isInstalled) ->
+                                when {
+                                    app.isSystemPicker -> 2
+                                    isInstalled -> 0
+                                    else -> 1
+                                }
+                            }
+                    }
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
@@ -233,9 +244,8 @@ fun SettingsSheet(
                         }
                     }
                     Spacer(Modifier.height(12.dp))
-                    TargetNavigationApp.entries.forEach { app ->
+                    targetApps.forEach { (app, isInstalled) ->
                         val isSelected = currentTargetApp == app
-                        val isInstalled = remember(app) { app.isInstalled(context) }
                         Surface(
                             onClick = {
                                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
