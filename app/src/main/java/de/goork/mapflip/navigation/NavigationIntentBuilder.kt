@@ -15,6 +15,7 @@ object NavigationIntentBuilder {
             TargetNavigationApp.GOOGLE_MAPS -> buildGoogleMapsIntent(location)
             TargetNavigationApp.WAZE -> buildWazeIntent(location)
             TargetNavigationApp.ORGANIC_MAPS -> buildOrganicMapsIntent(location)
+            TargetNavigationApp.COMAPS -> buildCoMapsIntent(location, context)
             TargetNavigationApp.OSMAND -> buildOsmAndIntent(location, context)
             TargetNavigationApp.VELA -> buildVelaIntent(location)
             TargetNavigationApp.HERE_WEGO -> buildHereWeGoIntent(location)
@@ -34,6 +35,7 @@ object NavigationIntentBuilder {
             TargetNavigationApp.GOOGLE_MAPS -> buildGoogleMapsUriString(location)
             TargetNavigationApp.WAZE -> buildWazeUriString(location)
             TargetNavigationApp.ORGANIC_MAPS -> buildOrganicMapsUriString(location)
+            TargetNavigationApp.COMAPS -> buildCoMapsUriString(location)
             TargetNavigationApp.OSMAND -> buildOsmAndUriString(location)
             TargetNavigationApp.VELA -> buildVelaUriString(location)
             TargetNavigationApp.HERE_WEGO -> buildHereWeGoUriString(location)
@@ -118,22 +120,47 @@ object NavigationIntentBuilder {
     }
 
     fun buildOrganicMapsUriString(location: ParsedLocation): String {
+        return buildOrganicMapsCompatibleUriString(location, "om")
+    }
+
+    private fun buildOrganicMapsCompatibleUriString(location: ParsedLocation, scheme: String): String {
         return when (location) {
-            is ParsedLocation.Home -> "om://"
+            is ParsedLocation.Home -> "$scheme://"
             is ParsedLocation.Coordinates -> {
                 val name = if (!location.label.isNullOrBlank()) "&n=${encode(location.label)}" else ""
-                "om://map?v=1&ll=${formatCoordCompact(location.latitude)},${formatCoordCompact(location.longitude)}$name"
+                "$scheme://map?v=1&ll=${formatCoordCompact(location.latitude)},${formatCoordCompact(location.longitude)}$name"
             }
-            is ParsedLocation.SearchQuery -> "om://search?query=${encode(location.query)}"
-            is ParsedLocation.Navigation -> "om://search?query=${encode(location.destination)}"
-            is ParsedLocation.Directions -> "om://search?query=${encode(location.destination)}"
-            is ParsedLocation.WebFallback -> "om://search?query=${encode(location.fallbackUrl)}"
+            is ParsedLocation.SearchQuery -> "$scheme://search?query=${encode(location.query)}"
+            is ParsedLocation.Navigation -> "$scheme://search?query=${encode(location.destination)}"
+            is ParsedLocation.Directions -> "$scheme://search?query=${encode(location.destination)}"
+            is ParsedLocation.WebFallback -> "$scheme://search?query=${encode(location.fallbackUrl)}"
         }
     }
 
     fun buildOrganicMapsIntent(location: ParsedLocation): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildOrganicMapsUriString(location))).apply {
             setPackage(TargetNavigationApp.ORGANIC_MAPS.packageName)
+        }
+    }
+
+    fun buildCoMapsUriString(location: ParsedLocation): String {
+        return buildOrganicMapsCompatibleUriString(location, "cm")
+    }
+
+    fun buildCoMapsIntent(location: ParsedLocation, context: Context? = null): Intent {
+        val primaryPackage = TargetNavigationApp.COMAPS.packageName!!
+        val pkg = if (context != null) {
+            try {
+                context.packageManager.getPackageInfo(primaryPackage, 0)
+                primaryPackage
+            } catch (_: Exception) {
+                TargetNavigationApp.COMAPS_FDROID_PACKAGE
+            }
+        } else {
+            primaryPackage
+        }
+        return Intent(Intent.ACTION_VIEW, Uri.parse(buildCoMapsUriString(location))).apply {
+            setPackage(pkg)
         }
     }
 

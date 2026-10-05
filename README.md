@@ -41,7 +41,7 @@ Set it up once, and it works invisibly in the background.
 - 🎯 **Configurable Target Apps** – Route destinations directly to 13 navigation apps:
   - **Google Maps**
   - **Waze**
-  - **Organic Maps** (100% FOSS)
+  - **Organic Maps / CoMaps** (100% FOSS)
   - **OsmAnd / OsmAnd+** (100% FOSS)
   - **Vela** (100% FOSS)
   - **HERE WeGo**
