@@ -38,11 +38,12 @@ Set it up once, and it works invisibly in the background.
   - **DuckDuckGo Maps** (`duckduckgo.com/?q=...&iaxm=maps`)
   - **Google Plus Codes** (100% offline Base20 decoding)
   - **Direct GPS Coordinates** (RFC 5870 `geo:`, decimal & DMS)
-- 🎯 **Configurable Target Apps** – Route destinations directly to 12 navigation apps:
+- 🎯 **Configurable Target Apps** – Route destinations directly to 13 navigation apps:
   - **Google Maps**
   - **Waze**
   - **Organic Maps** (100% FOSS)
   - **OsmAnd / OsmAnd+** (100% FOSS)
+  - **Vela** (100% FOSS)
   - **HERE WeGo**
   - **Yandex Maps**
   - **Magic Earth**

@@ -13,6 +13,7 @@
         <package android:name="app.organicmaps" />
         <package android:name="net.osmand" />
         <package android:name="net.osmand.plus" />
+        <package android:name="app.vela" />
         <package android:name="com.here.app.maps" />
         <package android:name="ru.yandex.yandexmaps" />
         <package android:name="com.generalmagic.magicearth" />

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import de.goork.mapflip.parser.ParsedLocation
 import de.goork.mapflip.parser.TravelMode
+import java.net.URI
 import java.net.URLEncoder
 
 object NavigationIntentBuilder {
@@ -15,6 +16,7 @@ object NavigationIntentBuilder {
             TargetNavigationApp.WAZE -> buildWazeIntent(location)
             TargetNavigationApp.ORGANIC_MAPS -> buildOrganicMapsIntent(location)
             TargetNavigationApp.OSMAND -> buildOsmAndIntent(location, context)
+            TargetNavigationApp.VELA -> buildVelaIntent(location)
             TargetNavigationApp.HERE_WEGO -> buildHereWeGoIntent(location)
             TargetNavigationApp.YANDEX_MAPS -> buildYandexMapsIntent(location)
             TargetNavigationApp.MAGIC_EARTH -> buildMagicEarthIntent(location)
@@ -33,6 +35,7 @@ object NavigationIntentBuilder {
             TargetNavigationApp.WAZE -> buildWazeUriString(location)
             TargetNavigationApp.ORGANIC_MAPS -> buildOrganicMapsUriString(location)
             TargetNavigationApp.OSMAND -> buildOsmAndUriString(location)
+            TargetNavigationApp.VELA -> buildVelaUriString(location)
             TargetNavigationApp.HERE_WEGO -> buildHereWeGoUriString(location)
             TargetNavigationApp.YANDEX_MAPS -> buildYandexMapsUriString(location)
             TargetNavigationApp.MAGIC_EARTH -> buildMagicEarthUriString(location)
@@ -160,6 +163,45 @@ object NavigationIntentBuilder {
         }
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildOsmAndUriString(location))).apply {
             if (pkg != null) setPackage(pkg)
+        }
+    }
+
+    fun buildVelaUriString(location: ParsedLocation): String {
+        val baseUrl = "https://maps.google.com"
+        fun directions(destination: String, origin: String? = null, mode: TravelMode? = null): String {
+            val originParam = origin?.let { "&origin=${encode(it)}" } ?: ""
+            val modeParam = mode?.let { "&travelmode=${it.name.lowercase(java.util.Locale.ROOT)}" } ?: ""
+            return "$baseUrl/maps/dir/?api=1&destination=${encode(destination)}$originParam$modeParam"
+        }
+        return when (location) {
+            is ParsedLocation.Home -> baseUrl
+            is ParsedLocation.SearchQuery -> "$baseUrl/?q=${encode(location.query)}"
+            is ParsedLocation.Coordinates -> {
+                val coordinates = "${formatCoordCompact(location.latitude)},${formatCoordCompact(location.longitude)}"
+                if (location.mode != null) {
+                    directions(coordinates, mode = location.mode)
+                } else {
+                    "$baseUrl/?q=$coordinates"
+                }
+            }
+            is ParsedLocation.Navigation -> directions(location.destination, mode = location.mode)
+            is ParsedLocation.Directions -> directions(location.destination, location.origin, location.mode)
+            is ParsedLocation.WebFallback -> {
+                // Vela can resolve these URLs itself, including opaque Google short links.
+                val uri = runCatching { URI(location.fallbackUrl) }.getOrNull()
+                if ((uri?.scheme.equals("https", ignoreCase = true) || uri?.scheme.equals("http", ignoreCase = true)) &&
+                    (uri?.host.equals("maps.google.com", ignoreCase = true) || uri?.host.equals("maps.app.goo.gl", ignoreCase = true))) {
+                    location.fallbackUrl
+                } else {
+                    "$baseUrl/?q=${encode(location.fallbackUrl)}"
+                }
+            }
+        }
+    }
+
+    fun buildVelaIntent(location: ParsedLocation): Intent {
+        return Intent(Intent.ACTION_VIEW, Uri.parse(buildVelaUriString(location))).apply {
+            setPackage(TargetNavigationApp.VELA.packageName)
         }
     }
 

@@ -26,6 +26,11 @@ enum class TargetNavigationApp(
         displayName = "OsmAnd",
         packageName = "net.osmand"
     ),
+    VELA(
+        id = "vela",
+        displayName = "Vela",
+        packageName = "app.vela"
+    ),
     HERE_WEGO(
         id = "here_wego",
         displayName = "HERE WeGo",
