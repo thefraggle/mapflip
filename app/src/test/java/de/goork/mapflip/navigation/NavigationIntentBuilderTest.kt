@@ -44,6 +44,54 @@ class NavigationIntentBuilderTest {
     }
 
     @Test
+    fun `builds correct CoMaps URIs`() {
+        val coords = ParsedLocation.Coordinates(52.5200, 13.4050, label = "Checkpoint Charlie")
+        assertEquals("cm://map?v=1&ll=52.52,13.405&n=Checkpoint+Charlie", NavigationIntentBuilder.buildCoMapsUriString(coords))
+
+        val search = ParsedLocation.SearchQuery("Berlin TV Tower")
+        assertEquals("cm://search?query=Berlin+TV+Tower", NavigationIntentBuilder.buildCoMapsUriString(search))
+
+        val nav = ParsedLocation.Navigation("Alexanderplatz")
+        assertEquals("cm://search?query=Alexanderplatz", NavigationIntentBuilder.buildCoMapsUriString(nav))
+
+        val dir = ParsedLocation.Directions(origin = "Berlin", destination = "Potsdam")
+        assertEquals("cm://search?query=Potsdam", NavigationIntentBuilder.buildCoMapsUriString(dir))
+
+        val home = ParsedLocation.Home
+        assertEquals("cm://", NavigationIntentBuilder.buildCoMapsUriString(home))
+    }
+
+    @Test
+    fun `builds correct Vela URIs`() {
+        val coords = ParsedLocation.Coordinates(52.5200, 13.4050)
+        assertEquals("https://maps.google.com/?q=52.52,13.405", NavigationIntentBuilder.buildVelaUriString(coords))
+
+        val coordsWithMode = ParsedLocation.Coordinates(52.5200, 13.4050, mode = TravelMode.DRIVING)
+        assertEquals("https://maps.google.com/maps/dir/?api=1&destination=52.52%2C13.405&travelmode=driving", NavigationIntentBuilder.buildVelaUriString(coordsWithMode))
+
+        val search = ParsedLocation.SearchQuery("Berlin TV Tower")
+        assertEquals("https://maps.google.com/?q=Berlin+TV+Tower", NavigationIntentBuilder.buildVelaUriString(search))
+
+        val nav = ParsedLocation.Navigation("Alexanderplatz", TravelMode.WALKING)
+        assertEquals("https://maps.google.com/maps/dir/?api=1&destination=Alexanderplatz&travelmode=walking", NavigationIntentBuilder.buildVelaUriString(nav))
+
+        val dir = ParsedLocation.Directions(origin = "Berlin", destination = "Potsdam", mode = TravelMode.TRANSIT)
+        assertEquals("https://maps.google.com/maps/dir/?api=1&destination=Potsdam&origin=Berlin&travelmode=transit", NavigationIntentBuilder.buildVelaUriString(dir))
+
+        val home = ParsedLocation.Home
+        assertEquals("https://maps.google.com", NavigationIntentBuilder.buildVelaUriString(home))
+
+        val gmapsFallback = ParsedLocation.WebFallback("https://maps.google.com/maps?q=Berlin")
+        assertEquals("https://maps.google.com/maps?q=Berlin", NavigationIntentBuilder.buildVelaUriString(gmapsFallback))
+
+        val shortFallback = ParsedLocation.WebFallback("https://maps.app.goo.gl/xyz")
+        assertEquals("https://maps.app.goo.gl/xyz", NavigationIntentBuilder.buildVelaUriString(shortFallback))
+
+        val genericFallback = ParsedLocation.WebFallback("https://example.com/map")
+        assertEquals("https://maps.google.com/?q=https%3A%2F%2Fexample.com%2Fmap", NavigationIntentBuilder.buildVelaUriString(genericFallback))
+    }
+
+    @Test
     fun `builds correct OsmAnd URIs`() {
         val coords = ParsedLocation.Coordinates(52.5200, 13.4050)
         assertEquals("osmandmaps://?lat=52.52&lon=13.405&z=16", NavigationIntentBuilder.buildOsmAndUriString(coords))
@@ -101,6 +149,12 @@ class NavigationIntentBuilderTest {
         val yandexUri = NavigationIntentBuilder.buildUriString(loc, TargetNavigationApp.YANDEX_MAPS)
         assertEquals("yandexmaps://maps.yandex.ru/?ll=2.2945,48.8584&z=16", yandexUri)
 
+        val comapsUri = NavigationIntentBuilder.buildUriString(loc, TargetNavigationApp.COMAPS)
+        assertEquals("cm://map?v=1&ll=48.8584,2.2945", comapsUri)
+
+        val velaUri = NavigationIntentBuilder.buildUriString(loc, TargetNavigationApp.VELA)
+        assertEquals("https://maps.google.com/?q=48.8584,2.2945", velaUri)
+
         val sysUri = NavigationIntentBuilder.buildUriString(loc, TargetNavigationApp.SYSTEM_PICKER)
         assertTrue(sysUri.startsWith("geo:48.858400,2.294500"))
     }
@@ -111,7 +165,9 @@ class NavigationIntentBuilderTest {
         assertEquals("In Google Maps testen", sDe.testButtonLabel(TargetNavigationApp.GOOGLE_MAPS))
         assertEquals("In Waze testen", sDe.testButtonLabel(TargetNavigationApp.WAZE))
         assertEquals("In Organic Maps testen", sDe.testButtonLabel(TargetNavigationApp.ORGANIC_MAPS))
+        assertEquals("In CoMaps testen", sDe.testButtonLabel(TargetNavigationApp.COMAPS))
         assertEquals("In OsmAnd testen", sDe.testButtonLabel(TargetNavigationApp.OSMAND))
+        assertEquals("In Vela testen", sDe.testButtonLabel(TargetNavigationApp.VELA))
         assertEquals("In HERE WeGo testen", sDe.testButtonLabel(TargetNavigationApp.HERE_WEGO))
         assertEquals("In Yandex Maps testen", sDe.testButtonLabel(TargetNavigationApp.YANDEX_MAPS))
         assertEquals("In Ziel-Navigations-App testen", sDe.testButtonLabel(TargetNavigationApp.SYSTEM_PICKER))
@@ -120,7 +176,9 @@ class NavigationIntentBuilderTest {
         assertEquals("Test in Google Maps", sEn.testButtonLabel(TargetNavigationApp.GOOGLE_MAPS))
         assertEquals("Test in Waze", sEn.testButtonLabel(TargetNavigationApp.WAZE))
         assertEquals("Test in Organic Maps", sEn.testButtonLabel(TargetNavigationApp.ORGANIC_MAPS))
+        assertEquals("Test in CoMaps", sEn.testButtonLabel(TargetNavigationApp.COMAPS))
         assertEquals("Test in OsmAnd", sEn.testButtonLabel(TargetNavigationApp.OSMAND))
+        assertEquals("Test in Vela", sEn.testButtonLabel(TargetNavigationApp.VELA))
         assertEquals("Test in HERE WeGo", sEn.testButtonLabel(TargetNavigationApp.HERE_WEGO))
         assertEquals("Test in Yandex Maps", sEn.testButtonLabel(TargetNavigationApp.YANDEX_MAPS))
         assertEquals("Test in Navigation App", sEn.testButtonLabel(TargetNavigationApp.SYSTEM_PICKER))
@@ -147,8 +205,12 @@ class NavigationIntentBuilderTest {
         assertEquals("waze://?q=M%C3%BCnchen+Marienplatz&navigate=yes", NavigationIntentBuilder.buildWazeUriString(loc))
         // Organic Maps
         assertEquals("om://search?query=M%C3%BCnchen+Marienplatz", NavigationIntentBuilder.buildOrganicMapsUriString(loc))
+        // CoMaps
+        assertEquals("cm://search?query=M%C3%BCnchen+Marienplatz", NavigationIntentBuilder.buildCoMapsUriString(loc))
         // OsmAnd
         assertEquals("osmandmaps://?q=M%C3%BCnchen+Marienplatz", NavigationIntentBuilder.buildOsmAndUriString(loc))
+        // Vela
+        assertEquals("https://maps.google.com/?q=M%C3%BCnchen+Marienplatz", NavigationIntentBuilder.buildVelaUriString(loc))
         // HERE WeGo
         assertEquals("https://wego.here.com/search/M%C3%BCnchen+Marienplatz", NavigationIntentBuilder.buildHereWeGoUriString(loc))
         // Yandex Maps
@@ -289,6 +351,8 @@ class NavigationIntentBuilderTest {
         assertTrue(s.testButtonLabel(TargetNavigationApp.LOCUS_MAP).contains("Locus Map"))
         assertTrue(s.openInButtonLabel(TargetNavigationApp.SYGIC).contains("Sygic"))
         assertTrue(s.openInButtonLabel(TargetNavigationApp.LOCUS_MAP).contains("Locus Map"))
+        assertTrue(s.openInButtonLabel(TargetNavigationApp.COMAPS).contains("CoMaps"))
+        assertTrue(s.openInButtonLabel(TargetNavigationApp.VELA).contains("Vela"))
     }
 
     @Test
@@ -309,8 +373,14 @@ class NavigationIntentBuilderTest {
         val om = NavigationIntentBuilder.buildOrganicMapsUriString(smallCoords)
         assertEquals("om://map?v=1&ll=0.0001,0.00005", om)
 
+        val comaps = NavigationIntentBuilder.buildCoMapsUriString(smallCoords)
+        assertEquals("cm://map?v=1&ll=0.0001,0.00005", comaps)
+
         val osmand = NavigationIntentBuilder.buildOsmAndUriString(smallCoords)
         assertEquals("osmandmaps://?lat=0.0001&lon=0.00005&z=16", osmand)
+
+        val vela = NavigationIntentBuilder.buildVelaUriString(smallCoords)
+        assertEquals("https://maps.google.com/?q=0.0001,0.00005", vela)
 
         val yandex = NavigationIntentBuilder.buildYandexMapsUriString(smallCoords)
         assertEquals("yandexmaps://maps.yandex.ru/?ll=0.00005,0.0001&z=16", yandex)

@@ -1,3 +1,0 @@
-- Zuverlässigere Navigation: Verbesserte Übergabe von Standorten und Routen an externe Navigations-Apps
-- Standortdetails erhalten: Ortsnamen bleiben auch bei ausgewählter Wegbeschreibung zuverlässig sichtbar
-- Stabilitätsverbesserungen: Allgemein optimierte Verarbeitung von Karten-Links

@@ -45,20 +45,22 @@ flowchart TD
         G["Forward Original URL\nto Default Browser"]
     end
 
-    subgraph Targets ["Supported Navigation Apps (12 Destinations)"]
+    subgraph Targets ["Supported Navigation Apps (14 Destinations)"]
         H1["Google Maps"]
         H2["Waze"]
         H3["Organic Maps (FOSS)"]
-        H4["OsmAnd / OsmAnd+ (FOSS)"]
-        H5["HERE WeGo"]
-        H6["Yandex Maps"]
-        H7["Magic Earth"]
-        H8["Citymapper"]
-        H9["Komoot"]
-        H10["TomTom AmiGO"]
-        H11["Sygic"]
-        H12["Locus Map / Pro"]
-        H13["System App Picker"]
+        H4["CoMaps (FOSS)"]
+        H5["OsmAnd / OsmAnd+ (FOSS)"]
+        H6["Vela (FOSS)"]
+        H7["HERE WeGo"]
+        H8["Yandex Maps"]
+        H9["Magic Earth"]
+        H10["Citymapper"]
+        H11["Komoot"]
+        H12["TomTom AmiGO"]
+        H13["Sygic"]
+        H14["Locus Map / Pro"]
+        H15["System App Picker"]
     end
 
     A1 --> B
@@ -74,7 +76,7 @@ flowchart TD
     C1 & C2 & C3 & C4 & C5 & C6 & C7 & C8 & C9 & C10 --> D
 
     D --> E
-    E --> H1 & H2 & H3 & H4 & H5 & H6 & H7 & H8 & H9 & H10 & H11 & H12 & H13
+    E --> H1 & H2 & H3 & H4 & H5 & H6 & H7 & H8 & H9 & H10 & H11 & H12 & H13 & H14 & H15
 ```
 
 ---
@@ -132,5 +134,5 @@ In the `foss` flavor, `aapt2 dump permissions` confirms that `android.permission
 
 ## 4. Testing & Quality Assurance
 
-* **Unit Test Suite**: 131 deterministic unit tests covering parsers, timezones, encoding, locales, and domain verification.
+* **Unit Test Suite**: 133 deterministic unit tests covering parsers, timezones, encoding, locales, and domain verification.
 * **Clean Code & Zero External Dependencies**: The core FOSS build relies solely on AndroidX and standard Kotlin/Compose libraries.

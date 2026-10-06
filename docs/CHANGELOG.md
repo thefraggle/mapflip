@@ -1,3 +1,8 @@
+## 1.3.4
+- Neue Navigations-Apps: Unterstützung für CoMaps und Vela hinzugefügt
+- Verbesserte App-Auswahl: Installierte Navigations-Apps werden in den Einstellungen nun zuerst angezeigt
+- Optimierte Weiterleitung: Zuverlässigere Erkennung und Formatierung von Navigationszielen
+
 ## 1.3.3
 - Zuverlässigere Navigation: Verbesserte Übergabe von Standorten und Routen an externe Navigations-Apps
 - Standortdetails erhalten: Ortsnamen bleiben auch bei ausgewählter Wegbeschreibung zuverlässig sichtbar

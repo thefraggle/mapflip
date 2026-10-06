@@ -1,3 +1,0 @@
-- More Reliable Navigation: Improved handover of locations and routes to external navigation apps
-- Preserved Location Details: Place names remain visible even when turn-by-turn directions are selected
-- Stability Improvements: Smoother and more dependable map link handling

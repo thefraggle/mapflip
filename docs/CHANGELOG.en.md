@@ -1,3 +1,8 @@
+## 1.3.4
+- New Navigation Apps: Added support for CoMaps and Vela
+- Improved App Selection: Installed navigation apps are now displayed first in settings
+- Optimized Redirection: More reliable formatting and target routing for map links
+
 ## 1.3.3
 - More Reliable Navigation: Improved handover of locations and routes to external navigation apps
 - Preserved Location Details: Place names remain visible even when turn-by-turn directions are selected
