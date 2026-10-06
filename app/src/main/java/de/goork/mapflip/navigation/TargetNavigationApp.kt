@@ -21,10 +21,20 @@ enum class TargetNavigationApp(
         displayName = "Organic Maps",
         packageName = "app.organicmaps"
     ),
+    COMAPS(
+        id = "comaps",
+        displayName = "CoMaps",
+        packageName = "app.comaps"
+    ),
     OSMAND(
         id = "osmand",
         displayName = "OsmAnd",
         packageName = "net.osmand"
+    ),
+    VELA(
+        id = "vela",
+        displayName = "Vela",
+        packageName = "app.vela"
     ),
     HERE_WEGO(
         id = "here_wego",
@@ -74,6 +84,8 @@ enum class TargetNavigationApp(
     );
 
     companion object {
+        const val COMAPS_FDROID_PACKAGE = "app.comaps.fdroid"
+
         fun fromId(id: String?): TargetNavigationApp {
             return entries.firstOrNull { it.id.equals(id, ignoreCase = true) } ?: GOOGLE_MAPS
         }
@@ -87,7 +99,14 @@ enum class TargetNavigationApp(
             pm.getPackageInfo(pkg, 0)
             true
         } catch (_: Exception) {
-            if (this == OSMAND) {
+            if (this == COMAPS) {
+                try {
+                    pm.getPackageInfo(COMAPS_FDROID_PACKAGE, 0)
+                    true
+                } catch (_: Exception) {
+                    false
+                }
+            } else if (this == OSMAND) {
                 try {
                     pm.getPackageInfo("net.osmand.plus", 0)
                     true
