@@ -155,6 +155,19 @@
                 <data android:scheme="https" android:host="www.duckduckgo.com" />
                 <data android:scheme="http" android:host="www.duckduckgo.com" />
             </intent-filter>
+
+            <!-- 10. Mapy.com / Mapy.cz Links -->
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:scheme="http" />
+                <data android:host="mapy.com" />
+                <data android:host="www.mapy.com" />
+                <data android:host="mapy.cz" />
+                <data android:host="www.mapy.cz" />
+            </intent-filter>
         </activity>
 
         <!-- Quick Settings Tile Service -->

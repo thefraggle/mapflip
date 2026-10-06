@@ -33,6 +33,7 @@ flowchart TD
         C8["DuckDuckGoMapsParser"]
         C9["PlusCodeParser\n(OLC Base20 Offline Decoder)"]
         C10["GeoCoordinateParser\n(RFC 5870, DMS, Decimal)"]
+        C11["MapyMapsParser\n(Mapy.cz & Mapy.com)"]
     end
 
     subgraph Model ["Normalized Data Model"]
@@ -72,8 +73,8 @@ flowchart TD
     F -- "Yes" --> G
     F -- "No" --> C
 
-    C --> C1 & C2 & C3 & C4 & C5 & C6 & C7 & C8 & C9 & C10
-    C1 & C2 & C3 & C4 & C5 & C6 & C7 & C8 & C9 & C10 --> D
+    C --> C1 & C2 & C3 & C4 & C5 & C6 & C7 & C8 & C9 & C10 & C11
+    C1 & C2 & C3 & C4 & C5 & C6 & C7 & C8 & C9 & C10 & C11 --> D
 
     D --> E
     E --> H1 & H2 & H3 & H4 & H5 & H6 & H7 & H8 & H9 & H10 & H11 & H12 & H13 & H14 & H15
@@ -96,6 +97,7 @@ The parsing layer implements the **Strategy Pattern**. Each map source is an iso
 * **`DuckDuckGoMapsParser`**: Intercepts map search and directions links while passing generic web searches cleanly to the browser.
 * **`PlusCodeParser`**: 100% offline mathematical decoding of Open Location Codes (Google Plus Codes, Base20 algorithm) without network lookup.
 * **`GeoCoordinateParser`**: Extracts standard `geo:` URIs (RFC 5870), Degree-Minute-Second (DMS) coordinates, and decimal coordinate pairs with strict sanity filtering.
+* **`MapyMapsParser`**: Parses `mapy.cz` and `mapy.com` coordinates (longitude first), searches, and routes.
 
 ### 2.2 Navigation Intent Dispatcher (`NavigationIntentBuilder`)
 Translates the normalized `ParsedLocation` into platform-native intents:
@@ -128,11 +130,11 @@ MapFlip is built with a strict separation between open-source distribution and s
 | **Monetization / Ads** | Zero | Zero |
 
 ### Kernel-Level Verification
-In the `foss` flavor, `aapt2 dump permissions` confirms that `android.permission.INTERNET` is completely absent. Because the Linux kernel does not assign GID 3003 (`AID_INET`) to the app's process, it is mathematically and physically impossible for the app to open network sockets.
+In the `foss` flavor, `aapt2 dump permissions` confirms that `android.permission.INTERNET` is completely absent. Because the Linux kernel does not assign GID 3003 (`AID_INET`) to the app's process, it is mathematically und physically impossible for the app to open network sockets.
 
 ---
 
 ## 4. Testing & Quality Assurance
 
-* **Unit Test Suite**: 133 deterministic unit tests covering parsers, timezones, encoding, locales, and domain verification.
+* **Unit Test Suite**: 140 deterministic unit tests covering parsers, timezones, encoding, locales, and domain verification.
 * **Clean Code & Zero External Dependencies**: The core FOSS build relies solely on AndroidX and standard Kotlin/Compose libraries.

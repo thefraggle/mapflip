@@ -3,6 +3,7 @@ package de.goork.mapflip.parser
 object UniversalMapParser {
 
     private val parsers: List<MapUrlParser> = listOf(
+        MapyMapsParser,
         AppleMapsParser,
         BingMapsParser,
         OpenStreetMapParser,
@@ -55,6 +56,7 @@ object UniversalMapParser {
         if (url.isNullOrBlank()) return "unknown"
         val lower = url.lowercase().trim()
         return when {
+            MapyMapsParser.canParse(extractMapUrl(url) ?: url) -> "mapy"
             lower.contains("apple.com") || lower.startsWith("applemaps://") -> "apple"
             lower.contains("bing.com") -> "bing"
             lower.contains("openstreetmap.org") || lower.contains("osm.org") -> "osm"
