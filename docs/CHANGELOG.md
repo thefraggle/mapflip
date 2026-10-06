@@ -1,3 +1,8 @@
+## 1.3.5
+- Neuer Kartendienst: Unterstützung für Mapy.cz und Mapy.com Weblinks hinzugefügt
+- Präzise Koordinaten: Standorte, Suchen und Routen aus Mapy werden direkt und offline verarbeitet
+- Datenschutz garantiert: 100 % offline ohne Internetberechtigung
+
 ## 1.3.4
 - Neue Navigations-Apps: Unterstützung für CoMaps und Vela hinzugefügt
 - Verbesserte App-Auswahl: Installierte Navigations-Apps werden in den Einstellungen nun zuerst angezeigt

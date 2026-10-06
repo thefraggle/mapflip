@@ -1,3 +1,0 @@
-- New Navigation Apps: Added support for CoMaps and Vela
-- Improved App Selection: Installed navigation apps are now displayed first in settings
-- Optimized Redirection: More reliable formatting and target routing for map links

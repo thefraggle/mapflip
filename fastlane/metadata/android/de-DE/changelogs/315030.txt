@@ -1,3 +1,0 @@
-- Neue Navigations-Apps: Unterstützung für CoMaps und Vela hinzugefügt
-- Verbesserte App-Auswahl: Installierte Navigations-Apps werden in den Einstellungen nun zuerst angezeigt
-- Optimierte Weiterleitung: Zuverlässigere Erkennung und Formatierung von Navigationszielen
