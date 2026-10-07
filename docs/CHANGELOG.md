@@ -1,3 +1,8 @@
+## 1.3.6
+- Verbesserte Zuverlässigkeit: Optimierte Weiterleitung und Erkennung von Karten-Links im Hintergrund
+- Stabilitätsverbesserungen: Fehlerbehebungen beim Verarbeiten von Standorten und Routen
+- Detailoptimierungen: Flüssigere Benutzeroberfläche und allgemeine Performance-Verbesserungen
+
 ## 1.3.5
 - Neuer Kartendienst: Unterstützung für Mapy.cz und Mapy.com Weblinks hinzugefügt
 - Präzise Koordinaten: Standorte, Suchen und Routen aus Mapy werden direkt und offline verarbeitet

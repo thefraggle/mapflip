@@ -98,6 +98,39 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
         setPauseState(paused = false, untilTimestamp = 0L)
     }
 
+    var successfulFlipCount: Int
+        get() = prefs.getInt(PREFS_KEY_SUCCESSFUL_FLIP_COUNT, 0)
+        set(value) {
+            prefs.edit().putInt(PREFS_KEY_SUCCESSFUL_FLIP_COUNT, value).apply()
+        }
+
+    @Synchronized
+    fun incrementSuccessfulFlips(): Int {
+        val next = prefs.getInt(PREFS_KEY_SUCCESSFUL_FLIP_COUNT, 0) + 1
+        prefs.edit().putInt(PREFS_KEY_SUCCESSFUL_FLIP_COUNT, next).apply()
+        return next
+    }
+
+    var firstInstallTimestamp: Long
+        get() {
+            val ts = prefs.getLong(PREFS_KEY_FIRST_INSTALL_TS, 0L)
+            if (ts == 0L) {
+                val now = System.currentTimeMillis()
+                prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, now).apply()
+                return now
+            }
+            return ts
+        }
+        set(value) {
+            prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, value).apply()
+        }
+
+    var lastReviewPromptTimestamp: Long
+        get() = prefs.getLong(PREFS_KEY_LAST_REVIEW_PROMPT_TS, 0L)
+        set(value) {
+            prefs.edit().putLong(PREFS_KEY_LAST_REVIEW_PROMPT_TS, value).apply()
+        }
+
     private fun setPauseState(paused: Boolean, untilTimestamp: Long) {
         prefs.edit()
             .putBoolean(AppConstants.PREFS_KEY_PAUSED, paused)
@@ -120,6 +153,9 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
 
     companion object {
         const val PREFS_KEY_PAUSED_UNTIL = "paused_until"
+        const val PREFS_KEY_SUCCESSFUL_FLIP_COUNT = "successful_flip_count"
+        const val PREFS_KEY_FIRST_INSTALL_TS = "first_install_ts"
+        const val PREFS_KEY_LAST_REVIEW_PROMPT_TS = "last_review_prompt_ts"
 
         @Volatile
         private var INSTANCE: PreferencesRepository? = null

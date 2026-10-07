@@ -437,15 +437,13 @@ fun SettingsSheet(
                             onClick = {
                                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                 Analytics.trackEvent("rate_app_clicked")
-                                val rateIntent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${context.packageName}")).apply {
-                                    addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
-                                }
-                                try {
-                                    context.startActivity(rateIntent)
-                                } catch (_: Exception) {
-                                    try {
-                                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=${context.packageName}")))
-                                    } catch (_: Exception) {}
+                                val act = context as? android.app.Activity
+                                if (act != null) {
+                                    de.goork.mapflip.review.ReviewHelper.launchReviewFlow(act, trigger = "settings_manual") {
+                                        de.goork.mapflip.review.ReviewHelper.openPlayStoreListing(context)
+                                    }
+                                } else {
+                                    de.goork.mapflip.review.ReviewHelper.openPlayStoreListing(context)
                                 }
                             }
                         )

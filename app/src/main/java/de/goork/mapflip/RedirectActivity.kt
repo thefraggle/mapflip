@@ -91,6 +91,7 @@ class RedirectActivity : Activity() {
 
                 try {
                     startActivity(targetIntent)
+                    repository.incrementSuccessfulFlips()
                     // Issue #10: Feedback toast when redirect is performed
                     showRedirectToast(effectiveTargetApp)
                 } catch (_: ActivityNotFoundException) {

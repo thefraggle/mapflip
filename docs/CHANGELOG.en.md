@@ -1,3 +1,8 @@
+## 1.3.6
+- Improved Reliability: Optimized background detection and redirection for map links
+- Stability Improvements: Bug fixes and refinements when handling shared locations and routes
+- Performance Polish: Smoother user interface and general optimizations
+
 ## 1.3.5
 - New Map Service: Added support for Mapy.cz and Mapy.com web links
 - Accurate Coordinates: Locations, searches, and routes from Mapy are parsed directly and offline

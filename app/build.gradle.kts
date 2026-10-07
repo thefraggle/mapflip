@@ -31,8 +31,8 @@ android {
         applicationId = "de.goork.mapflip"
         minSdk = 26
         targetSdk = 36
-        versionCode = 315031
-        versionName = "1.3.5"
+        versionCode = 315032
+        versionName = "1.3.6"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -105,6 +105,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     debugImplementation(libs.androidx.ui.tooling)
     testImplementation(libs.junit)
+
+    // Google Play In-App Review API (Play Store Flavor only)
+    add("playImplementation", "com.google.android.play:review-ktx:2.0.2")
+
     androidTestImplementation("tools.fastlane:screengrab:2.1.1")
     androidTestImplementation("androidx.test:core:1.6.1")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")

@@ -57,4 +57,12 @@ class MainActivity : ComponentActivity() {
             showPauseDialogState.value = true
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        if (!showPauseDialogState.value) {
+            val repository = PreferencesRepository.getInstance(applicationContext)
+            de.goork.mapflip.review.ReviewHelper.maybeRequestReview(this, repository, trigger = "app_resume")
+        }
+    }
 }

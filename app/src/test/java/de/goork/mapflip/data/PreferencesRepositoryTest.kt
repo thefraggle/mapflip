@@ -18,7 +18,11 @@ class PreferencesRepositoryTest {
             return this
         }
         override fun putStringSet(key: String, values: Set<String>?): SharedPreferences.Editor = this
-        override fun putInt(key: String, value: Int): SharedPreferences.Editor = this
+        override fun putInt(key: String, value: Int): SharedPreferences.Editor {
+            temp[key] = value
+            removed.remove(key)
+            return this
+        }
         override fun putLong(key: String, value: Long): SharedPreferences.Editor {
             temp[key] = value
             removed.remove(key)
@@ -104,5 +108,44 @@ class PreferencesRepositoryTest {
         val repo = PreferencesRepository.createForTesting(prefs)
         assertNotNull(repo)
         org.junit.Assert.assertTrue(repo.isCurrentlyPaused())
+    }
+
+    @Test
+    fun testIncrementSuccessfulFlips() {
+        val prefs = FakeSharedPreferences()
+        val repo = PreferencesRepository.createForTesting(prefs)
+
+        org.junit.Assert.assertEquals(0, repo.successfulFlipCount)
+        val afterFirst = repo.incrementSuccessfulFlips()
+        org.junit.Assert.assertEquals(1, afterFirst)
+        org.junit.Assert.assertEquals(1, repo.successfulFlipCount)
+
+        val afterSecond = repo.incrementSuccessfulFlips()
+        org.junit.Assert.assertEquals(2, afterSecond)
+        org.junit.Assert.assertEquals(2, repo.successfulFlipCount)
+    }
+
+    @Test
+    fun testFirstInstallTimestampInitializesAndPersists() {
+        val prefs = FakeSharedPreferences()
+        val repo = PreferencesRepository.createForTesting(prefs)
+
+        val initialTs = repo.firstInstallTimestamp
+        org.junit.Assert.assertTrue(initialTs > 0L)
+
+        // Reading again should return the same timestamp
+        val secondRead = repo.firstInstallTimestamp
+        org.junit.Assert.assertEquals(initialTs, secondRead)
+    }
+
+    @Test
+    fun testLastReviewPromptTimestamp() {
+        val prefs = FakeSharedPreferences()
+        val repo = PreferencesRepository.createForTesting(prefs)
+
+        org.junit.Assert.assertEquals(0L, repo.lastReviewPromptTimestamp)
+        val testTs = 1700000000000L
+        repo.lastReviewPromptTimestamp = testTs
+        org.junit.Assert.assertEquals(testTs, repo.lastReviewPromptTimestamp)
     }
 }
