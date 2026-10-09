@@ -19,9 +19,9 @@ val aptabaseKey: String = System.getenv("APTABASE_KEY")
 val aptabaseHost: String = System.getenv("APTABASE_HOST")
     ?: keystoreProperties.getProperty("aptabaseHost", "https://telemetry-apps.goork.de")
 
-val appVersion = "1.3.7"
+val appVersion = "1.3.8"
 
-val appVersionCode = 315033
+val appVersionCode = 315034
 
 android {
     namespace = "de.goork.mapflip"
@@ -31,8 +31,8 @@ android {
         applicationId = "de.goork.mapflip"
         minSdk = 26
         targetSdk = 36
-        versionCode = 315033
-        versionName = "1.3.7"
+        versionCode = 315034
+        versionName = "1.3.8"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -74,6 +74,7 @@ android {
 
     testOptions {
         unitTests.isReturnDefaultValues = true
+        unitTests.isIncludeAndroidResources = true
     }
 
     buildFeatures {
@@ -108,8 +109,11 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
     debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.compose.ui.test.junit4)
 
     // Google Play In-App Review API (Play Store Flavor only)
     add("playImplementation", "com.google.android.play:review-ktx:2.0.2")

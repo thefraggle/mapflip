@@ -1,0 +1,3 @@
+- Redirecionamento mais fiável: Deteção melhorada e abertura mais fluida na sua aplicação de mapas preferida
+- Resposta mais rápida: Processamento mais suave e operações em segundo plano otimizadas
+- Melhorias gerais: Correções de erros para uma utilização ainda mais estável

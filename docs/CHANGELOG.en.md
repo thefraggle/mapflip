@@ -1,3 +1,8 @@
+## 1.3.8
+- More reliable redirection: Improved detection and smoother handoff to your preferred navigation app
+- Faster response: Smoother processing and optimized background operations
+- General improvements: Stability fixes for an even better experience
+
 ## 1.3.7
 - Improved Reliability: More accurate location detection and optimized map link redirection
 - Expanded Language Support: Enhanced translations and regional language options

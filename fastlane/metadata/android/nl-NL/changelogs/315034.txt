@@ -1,0 +1,3 @@
+- Betrouwbaardere doorverwijzing: Verbeterde herkenning en stabielere overdracht naar je favoriete kaart-app
+- Snellere reactietijd: Soepelere verwerking en geoptimaliseerde achtergrondprocessen
+- Algemene verbeteringen: Foutoplossingen voor een nog prettigere ervaring

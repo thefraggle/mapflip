@@ -1,0 +1,3 @@
+- Mer tillförlitlig omdirigering: Förbättrad identifiering och smidigare överföring till din favoritkartapp
+- Snabbare respons: Jämnare bearbetning och optimerad bakgrundsdrift
+- Allmänna förbättringar: Felkorrigeringar för en ännu bättre upplevelse

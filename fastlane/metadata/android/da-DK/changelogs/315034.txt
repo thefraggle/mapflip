@@ -1,0 +1,3 @@
+- Mere pålidelig omdirigering: Forbedret registrering og mere stabil overførsel til din foretrukne kort-app
+- Hurtigere respons: Mere jævn behandling og optimeret baggrundsdrift
+- Generelle forbedringer: Fejlrettelser for en endnu bedre oplevelse

@@ -1,0 +1,3 @@
+- Pengalihan lebih andal: Peningkatan deteksi dan peralihan yang lebih mulus ke aplikasi navigasi pilihan Anda
+- Respons lebih cepat: Pemrosesan lebih lancar dan pengoptimalan di latar belakang
+- Peningkatan umum: Perbaikan bug untuk pengalaman penggunaan yang lebih stabil

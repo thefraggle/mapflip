@@ -1,3 +1,8 @@
+## 1.3.8
+- Zuverlässigere Weiterleitung: Verbesserte Erkennung und noch stabilere Übergabe an deine bevorzugte Karten-App
+- Schnellere Reaktion: Reibungslosere Abläufe und optimierte Hintergrundverarbeitung
+- Allgemeine Verbesserungen: Fehlerbehebungen für eine noch flüssigere Nutzung
+
 ## 1.3.7
 - Verbesserte Zuverlässigkeit: Präzisere Standorterkennung und optimierte Weiterleitung von Karten-Links
 - Erweiterte Sprachunterstützung: Verbesserte Übersetzungen und regionale Sprachoptionen

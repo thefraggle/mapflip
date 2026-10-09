@@ -1,0 +1,3 @@
+- Redirection plus fiable : Détection améliorée et transfert plus fluide vers votre application de navigation préférée
+- Réactivité accrue : Traitement plus fluide et fonctionnement en arrière-plan optimisé
+- Améliorations générales : Corrections de bugs pour une expérience encore plus agréable

@@ -1,0 +1,3 @@
+- Reindirizzamento più affidabile: Rilevamento migliorato e passaggio ancora più fluido alla tua app di mappe preferita
+- Risposta più rapida: Elaborazione più fluida e ottimizzazione delle operazioni in background
+- Miglioramenti generali: Risoluzione di problemi per un'esperienza ancora più stabile

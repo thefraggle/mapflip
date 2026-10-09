@@ -1,0 +1,3 @@
+- Zuverlässigere Weiterleitung: Verbesserte Erkennung und noch stabilere Übergabe an deine bevorzugte Karten-App
+- Schnellere Reaktion: Reibungslosere Abläufe und optimierte Hintergrundverarbeitung
+- Allgemeine Verbesserungen: Fehlerbehebungen für eine noch flüssigere Nutzung

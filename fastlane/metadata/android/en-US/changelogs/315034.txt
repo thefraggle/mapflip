@@ -1,0 +1,3 @@
+- More reliable redirection: Improved detection and smoother handoff to your preferred navigation app
+- Faster response: Smoother processing and optimized background operations
+- General improvements: Stability fixes for an even better experience

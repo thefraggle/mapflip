@@ -1,0 +1,3 @@
+- Daha güvenilir yönlendirme: Tercih ettiğiniz harita uygulamasına gelişmiş algılama ve daha akıcı geçiş
+- Daha hızlı tepki: Arka plan işlemlerinde optimizasyon ve daha akıcı çalışma
+- Genel iyileştirmeler: Daha kusursuz bir deneyim için hata düzeltmeleri

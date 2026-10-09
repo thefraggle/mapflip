@@ -1,0 +1,3 @@
+- Mer pålitelig videresending: Forbedret gjenkjenning og smidigere overføring til din foretrukne kart-app
+- Raskere respons: Jevnere behandling og optimalisert bakgrunnsdrift
+- Generelle forbedringer: Feilrettinger for en enda bedre brukeropplevelse

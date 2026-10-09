@@ -1,0 +1,3 @@
+- Redirección más fiable: Detección mejorada y transferencia más fluida a tu aplicación de mapas preferida
+- Respuesta más rápida: Procesamiento más fluido y optimización de las tareas en segundo plano
+- Mejoras generales: Corrección de errores para una experiencia aún más fluida
