@@ -1,0 +1,3 @@
+- Förbättrad tillförlitlighet: Mer exakt platssökning och optimerad omdirigering av kartlänkar
+- Utökat språkstöd: Förbättrade översättningar och regionala språkalternativ
+- Stabilitetsförbättringar: Felkorrigeringar för en ännu smidigare upplevelse

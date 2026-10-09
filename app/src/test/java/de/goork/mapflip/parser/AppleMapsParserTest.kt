@@ -220,12 +220,12 @@ class AppleMapsParserTest {
     }
 
     @Test
-    fun `supports all 20 languages in Strings registry`() {
+    fun `supports all languages in Strings registry`() {
         val supportedCodes = de.goork.mapflip.ui.Strings.SUPPORTED_LANGUAGES.map { it.code }
-        assertEquals(20, supportedCodes.size)
+        assertEquals(21, supportedCodes.size)
         val expected = listOf(
             "auto", "de", "en", "da", "fr", "it", "ja", "nl", "no", "pl",
-            "pt", "sv", "es", "tr", "ko", "zh", "zh-tw", "ar", "ru", "id"
+            "pt", "pt-br", "sv", "es", "tr", "ko", "zh", "zh-tw", "ar", "ru", "id"
         )
         assertEquals(expected, supportedCodes)
         for (code in expected) {
@@ -250,5 +250,19 @@ class AppleMapsParserTest {
         assertEquals("no", de.goork.mapflip.ui.Strings.resolveLanguage("nb"))
         assertEquals("no", de.goork.mapflip.ui.Strings.resolveLanguage("nn"))
         assertEquals("no", de.goork.mapflip.ui.Strings.resolveLanguage("no"))
+    }
+
+    @Test
+    fun `resolveLanguage and getStrings handle pt-BR and pt-PT distinctly`() {
+        assertEquals("pt-br", de.goork.mapflip.ui.Strings.resolveLanguage("pt-br"))
+        assertEquals("pt", de.goork.mapflip.ui.Strings.resolveLanguage("pt"))
+
+        val ptBr = de.goork.mapflip.ui.Strings.getStrings("pt-br")
+        val ptPt = de.goork.mapflip.ui.Strings.getStrings("pt")
+
+        assertEquals("Redirecionando para %s...", ptBr.redirectingToApp)
+        assertEquals("A redirecionar para %s...", ptPt.redirectingToApp)
+        assertEquals("App de navegação", ptBr.sectionTargetApp)
+        assertEquals("Aplicação de navegação", ptPt.sectionTargetApp)
     }
 }

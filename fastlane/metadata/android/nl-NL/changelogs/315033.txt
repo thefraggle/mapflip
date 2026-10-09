@@ -1,0 +1,3 @@
+- Verbeterde betrouwbaarheid: Nauwkeurigere locatieherkenning en geoptimaliseerde doorsturing van kaartlinks
+- Uitgebreide taalondersteuning: Verbeterde vertalingen en regionale taalopties
+- Stabiliteitsverbeteringen: Foutoplossingen voor een nog soepelere werking

@@ -124,4 +124,61 @@ class UniversalMapParserTest {
         val parsed = UniversalMapParser.parse(malformed)
         assertTrue(parsed is ParsedLocation.Home)
     }
+
+    @Test
+    fun `universal parser dispatches across all providers correctly`() {
+        val apple = UniversalMapParser.parse("https://maps.apple.com/?q=Berlin")
+        assertEquals(ParsedLocation.SearchQuery("Berlin"), apple)
+
+        val bing = UniversalMapParser.parse("https://www.bing.com/maps?q=Munich")
+        assertEquals(ParsedLocation.SearchQuery("Munich"), bing)
+
+        val osm = UniversalMapParser.parse("https://www.openstreetmap.org/?mlat=52.5&mlon=13.4")
+        assertTrue(osm is ParsedLocation.Coordinates)
+
+        val here = UniversalMapParser.parse("https://share.here.com/l/52.52,13.40")
+        assertTrue(here is ParsedLocation.Coordinates)
+
+        val waze = UniversalMapParser.parse("https://waze.com/ul?q=Hamburg")
+        assertEquals(ParsedLocation.SearchQuery("Hamburg"), waze)
+
+        val yandex = UniversalMapParser.parse("https://yandex.com/maps/?ll=13.4,52.5&text=Berlin")
+        assertTrue(yandex is ParsedLocation.Coordinates)
+    }
+
+    @Test
+    fun `universal parser handles non-latin scripts and umlauts across all providers`() {
+        val arabicApple = UniversalMapParser.parse("https://maps.apple.com/?q=%D8%A8%D8%B1%D8%AC+%D8%AE%D9%84%D9%8A%D9%81%D8%A9")
+        assertEquals(ParsedLocation.SearchQuery("برج خليفة"), arabicApple)
+
+        val cyrillicYandex = UniversalMapParser.parse("https://yandex.ru/maps/?text=%D0%AD%D1%80%D0%BC%D0%B8%D1%82%D0%B0%D0%B6")
+        assertEquals(ParsedLocation.SearchQuery("Эрмитаж"), cyrillicYandex)
+
+        val chineseOsm = UniversalMapParser.parse("https://www.openstreetmap.org/search?query=%E5%8C%97%E4%BA%AC")
+        assertEquals(ParsedLocation.SearchQuery("北京"), chineseOsm)
+
+        val umlautHere = UniversalMapParser.parse("https://wego.here.com/search/N%C3%BCrnberg")
+        assertEquals(ParsedLocation.SearchQuery("Nürnberg"), umlautHere)
+    }
+
+    @Test
+    fun `parsers reject out of bounds coordinates and fallback to web or search`() {
+        val appleOutOfBounds = AppleMapsParser.parse("https://maps.apple.com/?ll=95.0,13.4")
+        assertTrue(appleOutOfBounds is ParsedLocation.WebFallback)
+
+        val osmOutOfBounds = OpenStreetMapParser.parse("https://www.openstreetmap.org/?mlat=95.0&mlon=13.4")
+        assertTrue(osmOutOfBounds is ParsedLocation.WebFallback)
+
+        val yandexOutOfBounds = YandexMapsParser.parse("https://yandex.com/maps/?ll=13.4,95.0")
+        assertTrue(yandexOutOfBounds is ParsedLocation.WebFallback)
+
+        val wazeOutOfBounds = WazeMapsParser.parse("https://waze.com/ul?ll=95.0,13.4")
+        assertTrue(wazeOutOfBounds is ParsedLocation.WebFallback)
+
+        val hereOutOfBounds = HereMapsParser.parse("https://share.here.com/l/95.0,13.4")
+        assertTrue(hereOutOfBounds is ParsedLocation.WebFallback)
+
+        val bingOutOfBounds = BingMapsParser.parse("https://www.bing.com/maps?cp=95.0~13.4")
+        assertTrue(bingOutOfBounds is ParsedLocation.WebFallback)
+    }
 }

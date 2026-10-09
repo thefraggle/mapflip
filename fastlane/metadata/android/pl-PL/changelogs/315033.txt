@@ -1,0 +1,3 @@
+- Zwiększona niezawodność: Bardziej precyzyjne wykrywanie lokalizacji i zoptymalizowane przekierowywanie linków do map
+- Rozszerzona obsługa języków: Ulepszone tłumaczenia i regionalne opcje językowe
+- Poprawki stabilności: Usunięcie błędów dla jeszcze płynniejszego działania

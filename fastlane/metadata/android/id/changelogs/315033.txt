@@ -1,0 +1,3 @@
+- Peningkatan Keandalan: Deteksi lokasi yang lebih akurat dan pengalihan tautan peta yang dioptimalkan
+- Dukungan Bahasa Diperluas: Terjemahan yang disempurnakan dan opsi bahasa regional
+- Peningkatan Stabilitas: Perbaikan bug untuk pengalaman yang lebih lancar

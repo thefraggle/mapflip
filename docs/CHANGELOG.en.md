@@ -1,3 +1,8 @@
+## 1.3.7
+- Improved Reliability: More accurate location detection and optimized map link redirection
+- Expanded Language Support: Enhanced translations and regional language options
+- Stability Improvements: Bug fixes for an even smoother experience
+
 ## 1.3.6
 - Improved Reliability: Optimized background detection and redirection for map links
 - Stability Improvements: Bug fixes and refinements when handling shared locations and routes

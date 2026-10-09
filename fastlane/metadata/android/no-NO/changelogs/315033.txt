@@ -1,0 +1,3 @@
+- Forbedret pålitelighet: Mer nøyaktig posisjonsgjenkjenning og optimalisert viderekobling av kartlenker
+- Utvidet språkstøtte: Forbedrede oversettelser og regionale språkalternativer
+- Stabilitetsforbedringer: Feilrettinger for en enda smidigere opplevelse

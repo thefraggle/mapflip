@@ -21,7 +21,8 @@ object Strings {
         LanguageItem("nl", "Nederlands", "🇳🇱"),
         LanguageItem("no", "Norsk", "🇳🇴"),
         LanguageItem("pl", "Polski", "🇵🇱"),
-        LanguageItem("pt", "Português", "🇵🇹"),
+        LanguageItem("pt", "Português (Portugal)", "🇵🇹"),
+        LanguageItem("pt-br", "Português (Brasil)", "🇧🇷"),
         LanguageItem("sv", "Svenska", "🇸🇪"),
         LanguageItem("es", "Español", "🇪🇸"),
         LanguageItem("tr", "Türkçe", "🇹🇷"),
@@ -211,6 +212,9 @@ object Strings {
         if (lang == "zh") {
             return if (country == "TW" || country == "HK" || country == "MO") "zh-tw" else "zh"
         }
+        if (lang == "pt") {
+            return if (country == "BR") "pt-br" else "pt"
+        }
         return when (lang) {
             "nb", "nn", "no" -> "no"
             "de", "en", "da", "fr", "it", "ja", "nl", "pl", "pt", "sv", "es", "tr", "ko", "ar", "ru", "id" -> lang
@@ -229,7 +233,8 @@ object Strings {
             "nl" -> NL
             "no" -> NO
             "pl" -> PL
-            "pt" -> PT
+            "pt-br" -> PT_BR
+            "pt", "pt-pt" -> PT
             "sv" -> SV
             "es" -> ES
             "tr" -> TR
@@ -1079,6 +1084,26 @@ object Strings {
         setupStatusPartial = "%d de %d links ativos – toque para adicionar mais",
         setupStatusNone = "Nenhum link ativo – configuração necessária",
         menuSetupGuide = "Guia de configuração (Android 12+)",
+    )
+
+    val PT_BR = PT.copy(
+        step2 = "Ative \"Abrir links suportados\" para os serviços de mapas desejados (ex. Apple, Bing, OSM, Yandex)",
+        step3 = "Pronto! Os links de mapas abrirão perfeitamente no seu app de navegação preferido.",
+        famwakeDesc = "O FamWake coordena as manhãs de toda a família – horários de banheiro, café da manhã e despertar.",
+        langToggle = "PT-BR",
+        btnFeedback = "Suporte",
+        sectionAbout = "Sobre o app",
+        sectionTargetApp = "App de navegação",
+        redirectingToApp = "Redirecionando para %s...",
+        targetAppFallbackOpened = "%s não está instalado – aberto com %s",
+        setupSheetSubtitle = "O Android 12+ exige confirmação manual dos links de mapas compatíveis.",
+        setupStep1Desc = "Toque no botão abaixo para abrir as configurações do MapFlip.",
+        setupStep2Title = "Selecione \"Abrir por padrão\"",
+        setupStep2Desc = "Toque em \"Abrir links compatíveis\" ou \"Adicionar links\".",
+        setupStep3Title = "Ativar links de mapas",
+        setupStep3Desc = "Marque todos os domínios de mapas suportados (Apple, Bing, OSM, HERE etc.).",
+        setupAltShare = "Menu Compartilhar: Compartilhe qualquer link de mapa pelo menu Compartilhar do Android diretamente com o MapFlip.",
+        setupAltClipboard = "Área de transferência: Copie um link de mapa e abra o MapFlip para redirecionamento imediato.",
     )
 
     val SV = EN.copy(

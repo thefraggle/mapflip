@@ -1,0 +1,3 @@
+- Mayor fiabilidad: Detección de ubicación más precisa y redirección optimizada de enlaces de mapas
+- Compatibilidad de idiomas ampliada: Traducciones mejoradas y opciones de idioma regionales
+- Mejoras de estabilidad: Correcciones de errores para una experiencia más fluida

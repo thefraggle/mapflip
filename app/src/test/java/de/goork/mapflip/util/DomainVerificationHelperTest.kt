@@ -70,7 +70,7 @@ class DomainVerificationHelperTest {
     }
 
     @Test
-    fun `all 20 languages have non-blank setup guide strings`() {
+    fun `all languages have non-blank setup guide strings`() {
         for (item in Strings.SUPPORTED_LANGUAGES) {
             val s = Strings.getStrings(item.code)
             assertTrue("setupSheetTitle missing in ${item.code}", s.setupSheetTitle.isNotBlank())

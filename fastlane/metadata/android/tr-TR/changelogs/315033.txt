@@ -1,0 +1,3 @@
+- Gelişmiş güvenilirlik: Daha hassas konum algılama ve optimize edilmiş harita bağlantısı yönlendirmesi
+- Genişletilmiş dil desteği: İyileştirilmiş çeviriler ve bölgesel dil seçenekleri
+- Kararlılık iyileştirmeleri: Daha akıcı bir deneyim için hata düzeltmeleri

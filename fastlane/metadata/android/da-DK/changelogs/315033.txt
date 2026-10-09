@@ -1,0 +1,3 @@
+- Forbedret pålidelighed: Mere præcis placeringsregistrering og optimeret viderestilling af kortlinks
+- Udvidet sprogunderstøttelse: Forbedrede oversættelser og regionale sprogindstillinger
+- Stabilitetsforbedringer: Fejlrettelser for en endnu mere smidig oplevelse

@@ -1,0 +1,3 @@
+- Improved Reliability: More accurate location detection and optimized map link redirection
+- Expanded Language Support: Enhanced translations and regional language options
+- Stability Improvements: Bug fixes for an even smoother experience

@@ -12,7 +12,7 @@ Whether you need an Apple Maps for Android solution, an Apple map for Android to
 
 ✨ Features & Privacy:
 • 🚗 Turn-by-Turn Navigation & Android Auto – Apple Maps navigation and turn by turn routing in Google Maps
-• 🧭 Choose Your Navigation App – Open destinations in Google Maps, Waze, Organic Maps, OsmAnd, or system picker
+• 🧭 Choose Your Navigation App – Open destinations in Google Maps, Waze, Organic Maps, CoMaps, OsmAnd, Vela, HERE WeGo, Magic Earth, Citymapper, Komoot, TomTom AmiGO, Sygic, Locus Map, or system picker
 • 🔄 Automatic Apple to Google redirect – Instant on-device Apple maps link converter & map redirect
 • 🔒 100% Offline & Private – Zero internet permissions (no android.permission.INTERNET), zero tracking, zero ads
 • ⏸️ Pause Mode & Quick Settings Tile – Suspend redirect anytime directly from your notification shade
@@ -21,7 +21,7 @@ Whether you need an Apple Maps for Android solution, an Apple map for Android to
 
 🗺️ Supported link formats & services:
 • Apple Maps URLs & search queries (maps.apple.com)
-• OpenStreetMap (osm.org), Bing Maps & Yandex Maps
+• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing Maps & Yandex Maps
 • GPS coordinates & shared locations
 • Addresses, place markers & navigation routes
 

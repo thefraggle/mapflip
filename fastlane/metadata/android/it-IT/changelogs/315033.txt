@@ -1,0 +1,3 @@
+- Affidabilità migliorata: Rilevamento della posizione più preciso e reindirizzamento ottimizzato dei link delle mappe
+- Supporto linguistico ampliato: Traduzioni migliorate e opzioni regionali
+- Miglioramenti della stabilità: Correzioni di errori per un'esperienza ancora più fluida

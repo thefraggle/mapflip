@@ -1,3 +1,8 @@
+## 1.3.7
+- Verbesserte Zuverlässigkeit: Präzisere Standorterkennung und optimierte Weiterleitung von Karten-Links
+- Erweiterte Sprachunterstützung: Verbesserte Übersetzungen und regionale Sprachoptionen
+- Stabilitätsoptimierungen: Fehlerbehebungen für eine noch flüssigere Nutzung
+
 ## 1.3.6
 - Verbesserte Zuverlässigkeit: Optimierte Weiterleitung und Erkennung von Karten-Links im Hintergrund
 - Stabilitätsverbesserungen: Fehlerbehebungen beim Verarbeiten von Standorten und Routen

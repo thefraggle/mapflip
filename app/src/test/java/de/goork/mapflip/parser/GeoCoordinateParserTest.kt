@@ -118,4 +118,21 @@ class GeoCoordinateParserTest {
         val evil = "52 " + "   ".repeat(100) + "31 " + "   ".repeat(100) + "12 " + "   ".repeat(100) + "X"
         assertNull(GeoCoordinateParser.extractUrl(evil))
     }
+
+    @Test
+    fun `isValidLatLon validates coordinate boundaries correctly`() {
+        assertTrue(isValidLatLon(0.0, 0.0))
+        assertTrue(isValidLatLon(90.0, 180.0))
+        assertTrue(isValidLatLon(-90.0, -180.0))
+        assertTrue(isValidLatLon(48.8584, 2.2945))
+
+        org.junit.Assert.assertFalse(isValidLatLon(90.0001, 0.0))
+        org.junit.Assert.assertFalse(isValidLatLon(-90.0001, 0.0))
+        org.junit.Assert.assertFalse(isValidLatLon(0.0, 180.0001))
+        org.junit.Assert.assertFalse(isValidLatLon(0.0, -180.0001))
+        org.junit.Assert.assertFalse(isValidLatLon(Double.NaN, 0.0))
+        org.junit.Assert.assertFalse(isValidLatLon(0.0, Double.NaN))
+        org.junit.Assert.assertFalse(isValidLatLon(Double.POSITIVE_INFINITY, 0.0))
+        org.junit.Assert.assertFalse(isValidLatLon(0.0, Double.NEGATIVE_INFINITY))
+    }
 }

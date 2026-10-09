@@ -1,0 +1,3 @@
+- Fiabilité améliorée : Détection d'emplacement plus précise et redirection optimisée des liens de carte
+- Prise en charge linguistique étendue : Traductions améliorées et options régionales
+- Améliorations de stabilité : Corrections d'erreurs pour une utilisation encore plus fluide
