@@ -114,7 +114,7 @@ fun MainScreen(
         }
     }
 
-    val isRtl = activeLangCode == "ar"
+    val isRtl = activeLangCode in listOf("ar", "he", "fa", "ur")
 
     CompositionLocalProvider(LocalLayoutDirection provides (if (isRtl) LayoutDirection.Rtl else LayoutDirection.Ltr)) {
         Scaffold(

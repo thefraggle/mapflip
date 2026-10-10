@@ -396,5 +396,24 @@ class NavigationIntentBuilderTest {
 
         val amigo = NavigationIntentBuilder.buildTomTomAmiGOUriString(smallCoords)
         assertEquals("amigo://navigate?to=0.0001,0.00005", amigo)
+
+        val mapyCz = NavigationIntentBuilder.buildMapyCzUriString(smallCoords)
+        assertEquals("geo:0.000100,0.000050?q=0.000100,0.000050", mapyCz)
+    }
+
+    @Test
+    fun `builds correct Mapy Cz URIs`() {
+        val coords = ParsedLocation.Coordinates(50.0878, 14.4205, label = "Prague Old Town")
+        val uri = NavigationIntentBuilder.buildMapyCzUriString(coords)
+        assertEquals("geo:50.087800,14.420500?q=Prague+Old+Town", uri)
+
+        val search = ParsedLocation.SearchQuery("Charles Bridge")
+        assertEquals("geo:0,0?q=Charles+Bridge", NavigationIntentBuilder.buildMapyCzUriString(search))
+
+        val dirs = ParsedLocation.Directions(origin = "Prague", destination = "Brno")
+        assertEquals("https://mapy.cz/route?start=Prague&end=Brno", NavigationIntentBuilder.buildMapyCzUriString(dirs))
+
+        val home = ParsedLocation.Home
+        assertEquals("https://mapy.cz", NavigationIntentBuilder.buildMapyCzUriString(home))
     }
 }

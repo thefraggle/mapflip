@@ -3,6 +3,7 @@ package de.goork.mapflip.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
@@ -406,7 +407,9 @@ fun SettingsSheet(
                             }
                             try {
                                 context.startActivity(intent)
-                            } catch (_: Exception) {}
+                            } catch (e: Exception) {
+                                Log.w("MapFlip", "Failed to launch feedback email intent", e)
+                            }
                         }
                     )
 
@@ -422,7 +425,9 @@ fun SettingsSheet(
                                 Analytics.trackEvent("donate_clicked")
                                 try {
                                     context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.URL_KOFI)))
-                                } catch (_: Exception) {}
+                                } catch (e: Exception) {
+                                    Log.w("MapFlip", "Failed to open Ko-fi donate URL", e)
+                                }
                             }
                         )
                     }
@@ -477,7 +482,9 @@ fun SettingsSheet(
                                     .clickable {
                                         try {
                                             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.URL_PRIVACY_POLICY)))
-                                        } catch (_: Exception) {}
+                                        } catch (e: Exception) {
+                                            Log.w("MapFlip", "Failed to open privacy policy", e)
+                                        }
                                     }
                                     .padding(vertical = 2.dp),
                                 verticalAlignment = Alignment.CenterVertically
@@ -506,7 +513,9 @@ fun SettingsSheet(
                                     .clickable {
                                         try {
                                             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.URL_IMPRESSUM)))
-                                        } catch (_: Exception) {}
+                                        } catch (e: Exception) {
+                                            Log.w("MapFlip", "Failed to open impressum", e)
+                                        }
                                     }
                                     .padding(vertical = 2.dp),
                                 verticalAlignment = Alignment.CenterVertically

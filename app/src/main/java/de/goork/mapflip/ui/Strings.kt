@@ -156,6 +156,7 @@ object Strings {
                 de.goork.mapflip.navigation.TargetNavigationApp.TOMTOM_AMIGO -> "TomTom AmiGO"
                 de.goork.mapflip.navigation.TargetNavigationApp.SYGIC -> "Sygic"
                 de.goork.mapflip.navigation.TargetNavigationApp.LOCUS_MAP -> "Locus Map"
+                de.goork.mapflip.navigation.TargetNavigationApp.MAPY_CZ -> "Mapy.cz"
                 de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> if (sectionTargetApp.isNotBlank()) sectionTargetApp else "Navigation App"
             }
             return try {
@@ -181,6 +182,7 @@ object Strings {
                 de.goork.mapflip.navigation.TargetNavigationApp.TOMTOM_AMIGO -> "TomTom AmiGO"
                 de.goork.mapflip.navigation.TargetNavigationApp.SYGIC -> "Sygic"
                 de.goork.mapflip.navigation.TargetNavigationApp.LOCUS_MAP -> "Locus Map"
+                de.goork.mapflip.navigation.TargetNavigationApp.MAPY_CZ -> "Mapy.cz"
                 de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> if (sectionTargetApp.isNotBlank()) sectionTargetApp else "Navigation App"
             }
             return try {
@@ -399,6 +401,7 @@ object Strings {
     )
 
     val DA = EN.copy(
+        subtitle = "Apple Maps → Google Maps",
         tagline = "Automatisk. Usynlig.",
         setupTitle = "Sådan virker det",
         step1 = "Tryk på knappen \"Åbn indstillinger\"",
@@ -485,6 +488,7 @@ object Strings {
     )
 
     val FR = EN.copy(
+        subtitle = "Apple Maps → Google Maps",
         tagline = "Automatique. Invisible.",
         setupTitle = "Comment ça marche",
         step1 = "Appuyez sur le bouton \"Ouvrir les paramètres\"",
@@ -571,6 +575,7 @@ object Strings {
     )
 
     val IT = EN.copy(
+        subtitle = "Apple Maps → Google Maps",
         tagline = "Automatico. Invisibile.",
         setupTitle = "Come funziona",
         step1 = "Tocca il pulsante \"Apri Impostazioni\"",
@@ -657,6 +662,7 @@ object Strings {
     )
 
     val JA = EN.copy(
+        subtitle = "Apple Maps → Google マップ",
         tagline = "自動。バックグラウンド。",
         setupTitle = "使い方",
         step1 = "「設定を開く」ボタンをタップ",
@@ -743,6 +749,7 @@ object Strings {
     )
 
     val NL = EN.copy(
+        subtitle = "Apple Maps → Google Maps",
         tagline = "Automatisch. Onzichtbaar.",
         setupTitle = "Hoe het werkt",
         step1 = "Tik op de knop \"Instellingen openen\"",
@@ -829,6 +836,7 @@ object Strings {
     )
 
     val NO = EN.copy(
+        subtitle = "Apple Maps → Google Maps",
         tagline = "Automatisk. Usynlig.",
         setupTitle = "Slik fungerer det",
         step1 = "Trykk på knappen \"Åpne innstillinger\"",
@@ -915,6 +923,7 @@ object Strings {
     )
 
     val PL = EN.copy(
+        subtitle = "Apple Maps → Google Maps",
         tagline = "Automatycznie. Niewidocznie.",
         setupTitle = "Jak to działa",
         step1 = "Dotknij przycisku \"Otwórz ustawienia\"",
@@ -1001,6 +1010,7 @@ object Strings {
     )
 
     val PT = EN.copy(
+        subtitle = "Apple Maps → Google Maps",
         tagline = "Automático. Invisível.",
         setupTitle = "Como funciona",
         step1 = "Toque no botão \"Abrir Configurações\"",
@@ -1107,6 +1117,7 @@ object Strings {
     )
 
     val SV = EN.copy(
+        subtitle = "Apple Maps → Google Maps",
         tagline = "Automatiskt. Osynligt.",
         setupTitle = "Hur det fungerar",
         step1 = "Tryck på knappen \"Öppna inställningar\"",
@@ -1193,6 +1204,7 @@ object Strings {
     )
 
     val ES = EN.copy(
+        subtitle = "Apple Maps → Google Maps",
         tagline = "Automático. Invisible.",
         setupTitle = "Cómo funciona",
         step1 = "Toca el botón \"Abrir Ajustes\"",
@@ -1279,6 +1291,7 @@ object Strings {
     )
 
     val TR = EN.copy(
+        subtitle = "Apple Maps → Google Maps",
         tagline = "Otomatik. Görünmez.",
         setupTitle = "Nasıl çalışır",
         step1 = "Aşağıdaki \"Ayarları Aç\" düğmesine dokunun",
@@ -1365,6 +1378,7 @@ object Strings {
     )
 
     val KO = EN.copy(
+        subtitle = "Apple Maps → Google 지도",
         tagline = "자동. 투명함.",
         setupTitle = "설정 방법",
         step1 = "\"설정 열기\" 버튼을 탭하세요",
@@ -1451,6 +1465,7 @@ object Strings {
     )
 
     val ZH_CN = EN.copy(
+        subtitle = "Apple Maps → Google 地图",
         tagline = "自动。无缝。",
         setupTitle = "使用方法",
         step1 = "点击“打开设置”按钮",
@@ -1537,6 +1552,7 @@ object Strings {
     )
 
     val ZH_TW = EN.copy(
+        subtitle = "Apple Maps → Google 地圖",
         tagline = "自動。無縫。",
         setupTitle = "使用步驟",
         step1 = "點擊「開啟設定」按鈕",
@@ -1623,6 +1639,7 @@ object Strings {
     )
 
     val AR = EN.copy(
+        subtitle = "خرائط Apple ← خرائط Google",
         tagline = "تلقائي. غير مرئي.",
         setupTitle = "كيفية البدء",
         step1 = "اضغط على زر \"فتح الإعدادات\"",
@@ -1709,6 +1726,7 @@ object Strings {
     )
 
     val RU = EN.copy(
+        subtitle = "Apple Карты → Google Карты",
         tagline = "Автоматически. Незаметно.",
         setupTitle = "Как это работает",
         step1 = "Нажмите кнопку «Открыть настройки»",
@@ -1795,6 +1813,7 @@ object Strings {
     )
 
     val ID = EN.copy(
+        subtitle = "Apple Maps → Google Maps",
         tagline = "Otomatis. Tak Terlihat.",
         setupTitle = "Cara Penggunaan",
         step1 = "Ketuk tombol \"Buka Pengaturan\"",

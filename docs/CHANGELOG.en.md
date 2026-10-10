@@ -1,3 +1,9 @@
+## 1.3.9
+- New Navigation App: Mapy.cz can now be selected as your preferred navigation app
+- Better Detection: Improved support for international Google Maps links
+- Enhanced Reliability: Safer and more stable link redirections
+- Detail Polish: Full multilingual subtitle coverage and bug fixes
+
 ## 1.3.8
 - More reliable redirection: Improved detection and smoother handoff to your preferred navigation app
 - Faster response: Smoother processing and optimized background operations

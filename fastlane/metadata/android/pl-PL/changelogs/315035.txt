@@ -1,0 +1,3 @@
+• Mapy.cz można teraz wybrać jako domyślną aplikację nawigacyjną.
+• Ulepszone rozpoznawanie międzynarodowych linków Google Maps.
+• Zwiększona stabilność i niezawodność przekierowań linków.

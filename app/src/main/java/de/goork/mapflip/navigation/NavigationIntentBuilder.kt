@@ -26,6 +26,7 @@ object NavigationIntentBuilder {
             TargetNavigationApp.TOMTOM_AMIGO -> buildTomTomAmiGOIntent(location)
             TargetNavigationApp.SYGIC -> buildSygicIntent(location)
             TargetNavigationApp.LOCUS_MAP -> buildLocusMapIntent(location, context)
+            TargetNavigationApp.MAPY_CZ -> buildMapyCzIntent(location)
             TargetNavigationApp.SYSTEM_PICKER -> buildGenericGeoIntent(location, createChooser = true)
         }
     }
@@ -46,6 +47,7 @@ object NavigationIntentBuilder {
             TargetNavigationApp.TOMTOM_AMIGO -> buildTomTomAmiGOUriString(location)
             TargetNavigationApp.SYGIC -> buildSygicUriString(location)
             TargetNavigationApp.LOCUS_MAP -> buildLocusMapUriString(location)
+            TargetNavigationApp.MAPY_CZ -> buildMapyCzUriString(location)
             TargetNavigationApp.SYSTEM_PICKER -> buildGenericGeoUriString(location)
         }
     }
@@ -462,6 +464,40 @@ object NavigationIntentBuilder {
         }
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildLocusMapUriString(location))).apply {
             if (pkg != null) setPackage(pkg)
+        }
+    }
+
+    fun buildMapyCzUriString(location: ParsedLocation): String {
+        return when (location) {
+            is ParsedLocation.Home -> "https://mapy.cz"
+            is ParsedLocation.Coordinates -> {
+                val latStr = formatCoord(location.latitude)
+                val lonStr = formatCoord(location.longitude)
+                val label = location.label
+                if (!label.isNullOrBlank()) {
+                    "geo:$latStr,$lonStr?q=${encode(label)}"
+                } else {
+                    "geo:$latStr,$lonStr?q=$latStr,$lonStr"
+                }
+            }
+            is ParsedLocation.SearchQuery -> "geo:0,0?q=${encode(location.query)}"
+            is ParsedLocation.Navigation -> "geo:0,0?q=${encode(location.destination)}"
+            is ParsedLocation.Directions -> {
+                val origin = location.origin
+                val dest = location.destination
+                if (origin.isNotBlank()) {
+                    "https://mapy.cz/route?start=${encode(origin)}&end=${encode(dest)}"
+                } else {
+                    "geo:0,0?q=${encode(dest)}"
+                }
+            }
+            is ParsedLocation.WebFallback -> location.fallbackUrl
+        }
+    }
+
+    fun buildMapyCzIntent(location: ParsedLocation): Intent {
+        return Intent(Intent.ACTION_VIEW, Uri.parse(buildMapyCzUriString(location))).apply {
+            setPackage(TargetNavigationApp.MAPY_CZ.packageName)
         }
     }
 

@@ -76,6 +76,11 @@ enum class TargetNavigationApp(
         displayName = "Locus Map",
         packageName = "menion.android.locus"
     ),
+    MAPY_CZ(
+        id = "mapy_cz",
+        displayName = "Mapy.cz",
+        packageName = "cz.seznam.mapy"
+    ),
     SYSTEM_PICKER(
         id = "system_picker",
         displayName = "Always ask (System Picker)",

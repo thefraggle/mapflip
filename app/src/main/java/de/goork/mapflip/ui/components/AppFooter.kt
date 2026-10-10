@@ -3,6 +3,7 @@ package de.goork.mapflip.ui.components
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -48,7 +49,9 @@ fun AppFooter(s: Strings.AppStrings) {
                     .clickable {
                         try {
                             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.URL_PRIVACY_POLICY)))
-                        } catch (_: Exception) {}
+                        } catch (e: Exception) {
+                            Log.w("MapFlip", "Failed to open privacy policy", e)
+                        }
                     }
                     .padding(vertical = 2.dp),
                 verticalAlignment = Alignment.CenterVertically
@@ -77,7 +80,9 @@ fun AppFooter(s: Strings.AppStrings) {
                     .clickable {
                         try {
                             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.URL_IMPRESSUM)))
-                        } catch (_: Exception) {}
+                        } catch (e: Exception) {
+                            Log.w("MapFlip", "Failed to open impressum", e)
+                        }
                     }
                     .padding(vertical = 2.dp),
                 verticalAlignment = Alignment.CenterVertically

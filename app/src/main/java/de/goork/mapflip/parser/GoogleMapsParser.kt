@@ -30,13 +30,14 @@ object GoogleMapsParser : MapUrlParser {
         """@([-+]?[0-9]+\.[0-9]+),([-+]?[0-9]+\.[0-9]+)"""
     )
 
+    private val CAN_PARSE_PATTERN = Pattern.compile(
+        """(?:maps\.google\.[a-z.]+|google\.[a-z.]+/maps|maps\.app\.goo\.gl|goo\.gl/maps)""",
+        Pattern.CASE_INSENSITIVE
+    )
+
     override fun canParse(url: String): Boolean {
         val lower = url.lowercase().trim()
-        return lower.contains("maps.google.") ||
-                lower.contains("google.com/maps") ||
-                lower.contains("google.de/maps") ||
-                lower.contains("maps.app.goo.gl") ||
-                lower.contains("goo.gl/maps")
+        return CAN_PARSE_PATTERN.matcher(lower).find()
     }
 
     override fun extractUrl(text: String?): String? {

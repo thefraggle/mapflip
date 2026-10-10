@@ -7,6 +7,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import de.goork.mapflip.analytics.Analytics
 import de.goork.mapflip.data.PreferencesRepository
 import de.goork.mapflip.navigation.NavigationIntentBuilder
@@ -132,7 +133,9 @@ class RedirectActivity : Activity() {
             val fallbackName = if (fallbackApp.isSystemPicker) s.targetAppAlwaysAsk else fallbackApp.displayName
             val msg = s.targetAppFallbackOpened.format(configuredApp.displayName, fallbackName)
             android.widget.Toast.makeText(applicationContext, msg, android.widget.Toast.LENGTH_LONG).show()
-        } catch (_: Exception) {}
+        } catch (e: Exception) {
+            Log.w("MapFlip", "Failed to show fallback toast", e)
+        }
     }
 
     private fun showRedirectToast(targetApp: de.goork.mapflip.navigation.TargetNavigationApp) {
@@ -143,7 +146,9 @@ class RedirectActivity : Activity() {
             val appName = if (targetApp.isSystemPicker) s.targetAppAlwaysAsk else targetApp.displayName
             val msg = s.redirectingToApp.format(appName)
             android.widget.Toast.makeText(applicationContext, msg, android.widget.Toast.LENGTH_SHORT).show()
-        } catch (_: Exception) {}
+        } catch (e: Exception) {
+            Log.w("MapFlip", "Failed to show redirect toast", e)
+        }
     }
 
     private fun handleTargetNotFoundFallback(
@@ -158,7 +163,9 @@ class RedirectActivity : Activity() {
             }
             startActivity(chooserIntent)
             return
-        } catch (_: Exception) {}
+        } catch (e: Exception) {
+            Log.w("MapFlip", "Failed to launch generic chooser intent", e)
+        }
 
         // 2. Specific Waze web fallback if applicable
         if (targetApp == de.goork.mapflip.navigation.TargetNavigationApp.WAZE) {
@@ -170,7 +177,9 @@ class RedirectActivity : Activity() {
                 }
                 startActivity(fallbackIntent)
                 return
-            } catch (_: Exception) {}
+            } catch (e: Exception) {
+                Log.w("MapFlip", "Failed to launch Waze web fallback", e)
+            }
         }
 
         // 3. Fallback: browser
@@ -181,6 +190,12 @@ class RedirectActivity : Activity() {
      * Forwards original map URL to standard web browser when redirect is paused or no native map app is found.
      */
     private fun forwardOriginalUrl(uri: Uri) {
+        val scheme = uri.scheme?.lowercase()
+        if (scheme != "http" && scheme != "https") {
+            Log.w("MapFlip", "Refusing to forward non-web URI to browser: $uri")
+            return
+        }
+
         val genericWebIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com")).apply {
             addCategory(Intent.CATEGORY_BROWSABLE)
         }
@@ -189,7 +204,8 @@ class RedirectActivity : Activity() {
             packageManager.queryIntentActivities(genericWebIntent, 0)
                 .map { it.activityInfo.packageName }
                 .firstOrNull { it != packageName }
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            Log.w("MapFlip", "Failed to query browser activities", e)
             null
         }
 
@@ -202,7 +218,9 @@ class RedirectActivity : Activity() {
             try {
                 startActivity(targetIntent)
                 return
-            } catch (_: Exception) {}
+            } catch (e: Exception) {
+                Log.w("MapFlip", "Failed to launch browser with package $browserPackage", e)
+            }
         }
 
         // Fallback: browser selector intent
@@ -215,7 +233,9 @@ class RedirectActivity : Activity() {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
             startActivity(browserIntent)
-        } catch (_: Exception) {}
+        } catch (e: Exception) {
+            Log.w("MapFlip", "Failed to launch browser selector intent", e)
+        }
     }
 
     /** Suppress enter/exit animation so the redirect is invisible. */

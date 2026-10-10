@@ -87,6 +87,29 @@ class GoogleMapsParserTest {
     }
 
     @Test
+    fun `parses international Google ccTLDs correctly`() {
+        val ukUrl = "https://www.google.co.uk/maps/@51.5074,-0.1278,14z"
+        val esUrl = "https://www.google.es/maps/place/Sagrada+Familia/@41.4036,2.1744,17z"
+        val frUrl = "https://google.fr/maps?q=Eiffel+Tower"
+
+        assertTrue(GoogleMapsParser.canParse(ukUrl))
+        assertTrue(GoogleMapsParser.canParse(esUrl))
+        assertTrue(GoogleMapsParser.canParse(frUrl))
+
+        val parsedUk = GoogleMapsParser.parse(ukUrl)
+        assertTrue(parsedUk is ParsedLocation.Coordinates)
+        assertEquals(51.5074, (parsedUk as ParsedLocation.Coordinates).latitude, 0.001)
+
+        val parsedEs = GoogleMapsParser.parse(esUrl)
+        assertTrue(parsedEs is ParsedLocation.Coordinates)
+        assertEquals("Sagrada Familia", (parsedEs as ParsedLocation.Coordinates).label)
+
+        val parsedFr = GoogleMapsParser.parse(frUrl)
+        assertTrue(parsedFr is ParsedLocation.SearchQuery)
+        assertEquals("Eiffel Tower", (parsedFr as ParsedLocation.SearchQuery).query)
+    }
+
+    @Test
     fun `rejects non Google URLs`() {
         assertNull(GoogleMapsParser.extractUrl("https://maps.apple.com/?q=Berlin"))
         assertNull(GoogleMapsParser.extractUrl("https://example.com"))
