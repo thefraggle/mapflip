@@ -1,1 +1,1 @@
-Apple MapsリンクをGoogle Mapsへ自動転送。高速マップ変換ツール。
+AppleマップのリンクをGoogleマップで自動転送。高速マップリンク変換。

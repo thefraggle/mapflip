@@ -1,1 +1,1 @@
-Stuur Apple Maps-links door naar Google Maps. Snelle kaartconverter.
+Open Apple Maps-links in Google Maps. Snelle kaartdoorverwijzing en converter.

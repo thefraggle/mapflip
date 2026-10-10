@@ -1,1 +1,1 @@
-Apple Maps linklerini Google Maps'e yönlendirin. Hızlı harita dönüştürücü.
+Apple Haritalar bağlantılarını Google Haritalar'da açın. Hızlı yönlendirici.

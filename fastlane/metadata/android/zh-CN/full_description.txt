@@ -1,28 +1,33 @@
-朋友发送了 Apple Maps 地图链接，但你在安卓上习惯使用 Google Maps？
+朋友经常给你发送Apple Maps苹果地图链接，而在安卓手机上无法直接用熟悉的导航应用打开？
 
-MapFlip 是专为 Android 打造的 Apple Maps 终极转换器、极速地图重定向与链接转换神器。只需简单配置一次，所有 Apple Maps 链接、网址和共享位置都将无缝直接在 Google Maps 中打开。无需手动复制粘贴，无需经过浏览器跳转。
+MapFlip 是一款专为安卓用户打造的苹果地图智能链接转换器与自动跳转工具。点击任何 Apple Maps 链接，即可直接调用 Google 地图、Waze 或其他你喜爱的导航应用打开，无需复制粘贴、无需手动输入、告别繁琐的浏览器中转。
 
-无论你需要 Android 上的 Apple Maps 解决方案、Apple to Google 转换器，还是全自动地图重定向，MapFlip 都能在后台疾速处理。在你喜爱的导航应用中直接开启 Apple Maps 链接。
+无论是打开苹果地图链接、将 Apple Maps 转为 Google 地图导航，还是快速提取共享位置，MapFlip 都在后台为你极速搞定。
 
-🔧 使用方法：
-1. 打开 MapFlip
-2. 点击“打开设置”
-3. 为 maps.apple.com 开启支持的链接转发
-4. 完成！从此 Apple Maps 链接将自动在 Google Maps 中打开。
+⚡ 3种便捷打开方式：
+1. 🚀 全自动跳转：点击微信、QQ、短信中的苹果地图链接，MapFlip 自动拦截并启动导航。
+2. 📲 系统分享菜单：在任何聊天界面或浏览器中点击“分享”，直接发送给 MapFlip 快速打开。
+3. 📋 剪贴板识别与测试工具：复制链接后打开 MapFlip 即可一键跳转，还能通过内置测试器预览与转换任意地图链接。
 
-✨ 核心特色与隐私保证：
-• 🚗 实时导航与 Android Auto – 一键立即启动 Google Maps 原生路线指引与导航
-• 🧭 自由选择目标导航应用 – 支持在 Google Maps、Waze、Organic Maps、OsmAnd 或系统选择器中打开
-• 🔄 全自动即时重定向 – 零延迟本地链接与地图转换
-• 🔒 100% 离线与隐私保护 – 无网络访问权限（0 权限），无数据追踪，无广告
-• ⏸️ 快捷暂停模式 – 在通知栏下拉快捷开关中随时暂停与恢复
-• 💬 广泛兼容各类通讯软件 – 完美支持微信、WhatsApp、Telegram、Signal、短信与邮件
-• 👻 极简无感后台运行 – 零冗余界面，不耗电
+🧭 支持 14 款主流导航地图：
+自由选择你常用的地图与导航工具：
+• 驾车与路况导航：Google Maps、Waze、HERE WeGo、TomTom AmiGO、Sygic
+• 隐私保护与离线地图：Organic Maps、OsmAnd（含 Plus）、CoMaps、Vela
+• 户外运动与公交出行：Komoot（徒步与骑行）、Citymapper（公共交通）、Magic Earth、Locus Map、Yandex Maps 或原生系统选择器
 
-🗺️ 支持的链接格式与地图服务：
-• Apple Maps 网址与搜索关键词 (maps.apple.com)
-• OpenStreetMap (osm.org)、Bing Maps 与 Yandex Maps
-• GPS 经纬度坐标与分享定位
-• 具体地址、地点标注与导航路线
+🗺️ 支持 11 种地图来源与格式：
+• Apple Maps 苹果地图 URL 及搜索关键词 (maps.apple.com)
+• Google Maps 谷歌地图链接 (maps.google.com, goo.gl) – 方便重定向至开源离线地图
+• OpenStreetMap (osm.org)、Mapy.cz / Mapy.com、HERE WeGo、Waze、Bing 必应地图及 Yandex Maps
+• DuckDuckGo 地图、原始 GPS 坐标 (geo:、DMS 度分秒、十进制经纬度) 以及 Google Plus Codes 离线地址码
+• 地点标记、街道地址、位置搜索及精准导航路径
 
-MapFlip 专为经常收到 iPhone 用户发送 Apple Maps 链接的 Android 用户量身打造。
+✨ 核心特色与隐私保障：
+• 🚗 路线导航与 Android Auto – 一键直达原生路线规划与车机投屏
+• 🔒 100% 离线与隐私保护 – 零联网权限 (无 android.permission.INTERNET)，无任何后台追踪，无任何广告
+• 🛡️ 智能防失效容错 – 若目标应用被卸载，自动安全回退至系统默认地图或选择窗口
+• ⏸️ 便捷暂停与快捷设置磁贴 – 下拉控制中心一键暂停重定向（可选 1小时、8小时或次日早晨）
+• 💬 广泛兼容主流应用 – 完美支持微信、QQ、Telegram、Signal、短信及各类邮件客户端
+• 👻 静默运行极度省电 – 无多余弹窗干扰，后台运行零耗电
+
+经常接收 iPhone 好友共享位置的安卓用户必备神器！

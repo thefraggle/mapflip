@@ -1,1 +1,1 @@
-将 Apple Maps 链接重定向至 Google Maps。极速地图转换器。
+在安卓上将Apple Maps苹果地图链接自动转换为Google地图或高德导航打开。

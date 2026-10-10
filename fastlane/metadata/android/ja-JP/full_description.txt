@@ -1,28 +1,33 @@
-友達からApple Mapsのリンクが送られてくるけれど、普段はGoogle Mapsを使っていませんか？
+iPhoneの友人からAppleマップのリンクが送られてきて、AndroidのGoogleマップで開けずに困ったことはありませんか？
 
-MapFlipは、Android向け究極のApple Maps変換＆リンク自動転送ツールです。一度設定すれば、あとはすべて自動でGoogle Mapsへリダイレクト。すべてのApple Mapsリンク、URL、共有された位置情報がGoogle Mapsで直接開きます。コピー＆ペーストも、ブラウザを経由する手間も一切不要です。
+MapFlipは、AppleマップのリンクをGoogleマップや好みのナビアプリで直接開くための高速・自動リンク変換アプリです。AppleマップのURLや共有位置情報をタップするだけで、手動検索やブラウザを経由することなく、お気に入りのナビゲーションアプリが瞬時に起動します。
 
-AndroidでApple Mapsを開く方法をお探しの方、AppleからGoogleへの変換や自動マップコンバーターが必要な方に最適。MapFlipがバックグラウンドで高速処理します。お気に入りのナビアプリで直接開くことができます。
+Appleマップリンクの自動転送、Googleマップへのリダイレクト、経路案内の即時開始など、すべてバックグラウンドで快適に動作します。
 
-🔧 使い方：
-1. MapFlipを開く
-2. 「設定を開く」をタップ
-3. maps.apple.com の対応リンク転送を有効化
-4. 完了！これ以降、Apple Mapsリンクは自動でGoogle Mapsで開きます。
+⚡ 3つの便利な使い方：
+1. 🚀 完全自動リダイレクト：Appleマップのリンクをタップするだけで、設定したナビアプリが直接開きます。
+2. 📲 Androidの共有メニューから：LINE、WhatsApp、Telegram、SMSなどのメッセージを「共有」からMapFlipに送るだけで即座に展開。
+3. 📋 クリップボード＆リンクテスター：リンクをコピーしてMapFlipを開くだけで1タップ起動。内蔵テスターでリンクの確認や手動変換も可能。
 
-✨ 特徴とプライバシー保護：
-• 🚗 ターンバイターン案内＆Android Auto – Google Mapsのネイティブルート案内を即座に開始
-• 🧭 ナビアプリを自由に選択 – Google Maps、Waze、Organic Maps、OsmAnd、またはシステム選択で開く
-• 🔄 自動リダイレクト – 端末内で瞬時にリンク＆マップを自動変換
-• 🔒 100%オフライン＆プライバシー保護 – インターネット権限ゼロ（android.permission.INTERNETなし）、トラッキングなし、広告なし
-• ⏸️ 一時停止モード＆クイック設定タイル – 通知パネルからワンタップでいつでも転送を一時停止可能
-• 💬 幅広いアプリに対応 – LINE、WhatsApp、Telegram、Signal、SMS、Slack、メール等で動作
-• 👻 目立たず動作するバックグラウンド設計 – 余計な画面表示なし、バッテリー消費ゼロ
+🧭 14種類のナビゲーションアプリに対応：
+目的に合わせてお好みの地図アプリを選択可能：
+• ドライブ・渋滞情報：Googleマップ、Waze、HERE WeGo、TomTom AmiGO、Sygic
+• プライバシー＆完全オフライン地図：Organic Maps、OsmAnd (Plus対応)、CoMaps、Vela
+• アウトドア・乗換案内：Komoot (登山・サイクリング)、Citymapper (公共交通機関)、Magic Earth、Locus Map、Yandex Maps、またはAndroid標準選択メニュー
 
-🗺️ 対応リンク形式＆サービス：
-• Apple Maps の URL および検索クエリ (maps.apple.com)
-• OpenStreetMap (osm.org)、Bing Maps、Yandex Maps
-• GPS座標および共有された位置情報
-• 住所、ピン、ナビゲーションルート
+🗺️ 幅広い地図サービス＆形式に対応（11のソース）：
+• AppleマップのURLおよび検索クエリ (maps.apple.com)
+• Googleマップのリンク (maps.google.com, goo.gl) – プライバシー重視の地図アプリへの転送にも最適
+• OpenStreetMap (osm.org)、Mapy.cz / Mapy.com、HERE WeGo、Waze、Bingマップ、Yandexマップ
+• DuckDuckGoマップ、GPS座標 (geo:、DMS、十進数)、Googleプラスコード (完全オフライン変換)
+• スポットピン、住所、検索ワード、ターンバイターンナビゲーションルート
 
-MapFlipは、iPhoneユーザーから日常的にApple Mapsリンクを受け取るAndroidユーザーのために開発されました。
+✨ 主な特徴と安心のプライバシー設計：
+• 🚗 音声ナビ＆Android Auto連携 – ネイティブナビゲーションを即座に開始
+• 🔒 100% オフライン＆安全 – インターネット通信権限なし (通信パーミッションゼロ)、追跡なし、広告なし
+• 🛡️ スマートフォールバック – 設定アプリが見つからない場合も自動でGoogleマップまたはシステム選択に安全に切り替え
+• ⏸️ 一時停止＆クイック設定タイル – 通知パネルのタイルからワンタップで一時停止（1時間、8時間、翌朝まで）
+• 💬 高い互換性 – LINE、SMS、メール、各種チャットアプリからの共有に対応
+• 👻 超軽量・バッテリー消費ゼロ – バックグラウンドで静かに常駐し端末の負荷になりません
+
+iPhoneユーザーから位置情報を受け取ることが多いすべてのAndroidユーザーにとって必携のツールです。

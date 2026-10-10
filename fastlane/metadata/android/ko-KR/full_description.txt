@@ -1,28 +1,33 @@
-친구들이 Apple Maps 링크를 보내지만, Android에서는 Google Maps를 사용하시나요?
+아이폰 사용자가 보낸 애플 지도(Apple Maps) 링크를 안드로이드의 구글 지도나 다른 내비게이션으로 바로 열고 싶으신가요?
 
-MapFlip은 Android를 위한 최고의 Apple Maps 변환기이자 빠른 링크 리디렉션 도구입니다. 한 번만 설정하면 모든 과정이 자동으로 작동합니다. 모든 Apple Maps 링크, URL, 공유 위치가 Google Maps에서 바로 열립니다. 복사하고 붙여넣거나 브라우저를 거칠 필요가 없습니다.
+MapFlip은 애플 지도 링크를 구글 지도나 선호하는 내비게이션 앱으로 즉시 자동 연결해 주는 스마트 지도 변환 앱입니다. 복사하고 붙여넣거나 브라우저를 거칠 필요 없이, 애플 지도 URL을 탭하는 순간 익숙한 지도 앱에서 위치와 경로가 바로 열립니다.
 
-Android용 Apple Maps 솔루션, Apple to Google 변환기 또는 자동 지도 리디렉션이 필요할 때 MapFlip이 백그라운드에서 모든 URL을 즉시 처리합니다. 선호하는 내비게이션 앱에서 Apple Maps 링크를 바로 여세요.
+안드로이드용 애플 지도 링크 변환, 길찾기 즉시 연동 등 모든 과정을 백그라운드에서 매끄럽게 처리합니다.
 
-🔧 사용 방법:
-1. MapFlip 열기
-2. "설정 열기" 탭
-3. maps.apple.com 지원 링크 전달 활성화
-4. 완료! 이제 Apple Maps 링크가 Google Maps에서 자동으로 열립니다.
+⚡ 3가지 간편한 실행 방법:
+1. 🚀 완전 자동 전환: 애플 지도 링크를 탭하면 MapFlip이 감지하여 원하는 내비게이션 앱을 즉시 실행합니다.
+2. 📲 안드로이드 공유 메뉴: 카카오톡, 라인, 텔레그램, 문자 메시지에서 링크를 MapFlip으로 바로 '공유'하여 실행하세요.
+3. 📋 클립보드 & 링크 테스터: 링크를 복사하고 MapFlip을 열면 1탭으로 즉시 열리며, 내장된 테스터로 링크를 확인하고 변환할 수도 있습니다.
 
-✨ 주요 기능 및 개인정보 보호:
-• 🚗 턴바이턴 내비게이션 & Android Auto – Google Maps에서 네이티브 경로 안내 즉시 시작
-• 🧭 원하는 내비게이션 앱 선택 – Google Maps, Waze, Organic Maps, OsmAnd 또는 시스템 선택기 지원
-• 🔄 자동 리디렉션 – 기기 내 즉각적인 링크 및 지도 변환
-• 🔒 100% 오프라인 & 프라이버시 보장 – 인터넷 권한 없음 (0 Permissions), 추적 없음, 광고 없음
-• ⏸️ 일시 중지 모드 & 빠른 설정 타일 – 알림창에서 언제든지 리디렉션을 일시 중지
-• 💬 폭넓은 앱 호환성 – WhatsApp, Telegram, Signal, SMS, Slack, 이메일과 완벽 호환
-• 👻 보이지 않는 백그라운드 작동 – 불필요한 화면 없음, 배터리 소모 없음
+🧭 14개 내비게이션 앱 지원:
+상황과 취향에 맞는 지도 앱을 자유롭게 선택하세요:
+• 운전 및 교통정보: Google 지도, Waze, HERE WeGo, TomTom AmiGO, Sygic
+• 프라이버시 및 오프라인 지도: Organic Maps, OsmAnd (Plus 지원), CoMaps, Vela
+• 아웃도어 및 대중교통: Komoot (등산 및 자전거), Citymapper (대중교통), Magic Earth, Locus Map, Yandex Maps 또는 안드로이드 시스템 선택 창
 
-🗺️ 지원되는 링크 형식 및 지도 서비스:
-• Apple Maps URL 및 검색 쿼리 (maps.apple.com)
-• OpenStreetMap (osm.org), Bing Maps 및 Yandex Maps
-• GPS 좌표 및 공유된 위치
-• 주소, 장소 마커 및 내비게이션 경로
+🗺️ 지원하는 지도 서비스 및 형식 (11개 소스):
+• Apple Maps URL 및 검색어 (maps.apple.com)
+• Google 지도 링크 (maps.google.com, goo.gl) – 독립 지도 앱으로 연결할 때도 유용
+• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing 지도, Yandex 지도
+• DuckDuckGo 지도, GPS 좌표 (geo:, DMS, 십진수 좌표) 및 Google Plus Codes (100% 오프라인 변환)
+• 위치 마커, 도로명 주소, 장소 검색 및 턴바이턴 내비게이션 경로
 
-MapFlip은 iPhone 사용자로부터 Apple Maps 링크를 자주 받는 Android 사용자를 위해 만들어졌습니다.
+✨ 핵심 기능 및 프라이버시 보호:
+• 🚗 턴바이턴 내비게이션 및 Android Auto 지원 – 즉각적인 경로 안내 시작
+• 🔒 100% 오프라인 & 프라이버시 – 인터넷 권한 완전 배제 (인터넷 권한 0개), 추적 없음, 광고 없음
+• 🛡️ 스마트 폴백(대체 실행) – 지정한 앱이 없더라도 구글 지도나 시스템 선택창으로 안전하게 연결
+• ⏸️ 일시 정지 및 퀵 세팅 타일 – 상단 빠른 설정 타일에서 언제든 손쉽게 일시 중지 (1시간, 8시간, 다음 날 아침까지)
+• 💬 완벽한 호환성 – 카카오톡, 라인, 텔레그램, 메시지, 이메일 등 모든 앱과 연동
+• 👻 완벽한 백그라운드 구동 – 불필요한 화면 전환 없이 가볍게 작동하며 배터리 소모가 없습니다
+
+아이폰 친구들에게 위치 공유를 자주 받는 안드로이드 사용자에게 필수적인 앱입니다.

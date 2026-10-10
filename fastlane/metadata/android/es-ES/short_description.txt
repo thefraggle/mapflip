@@ -1,1 +1,1 @@
-Redirige enlaces Apple Maps a Google Maps. Conversor rápido de mapas.
+Abre enlaces de Apple Maps en Google Maps. Redirección y conversor de mapas.

@@ -1,1 +1,1 @@
-將 Apple Maps 連結重新導向至 Google Maps。極速地圖轉換器。
+在Android上將Apple Maps地圖連結自動跳轉至Google地圖或其他導航開啟。

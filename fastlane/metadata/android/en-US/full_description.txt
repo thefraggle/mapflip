@@ -1,28 +1,33 @@
-Your friends send you Apple Maps links – but you use Google Maps?
+Your friends send you Apple Maps links – but you use Google Maps or other navigation apps on Android?
 
-MapFlip is the ultimate Apple Maps converter, fast Apple map redirect, and link converter for Android. Set it up once, and everything works automatically as a seamless Google Maps redirect: Every Apple Map link, Apple Maps URL, or location opens directly in Google Maps. No copying, no pasting, no browser detours.
+MapFlip is the ultimate Apple Maps converter, fast Apple map redirect, and automatic link converter for Android. Every Apple Map link, Apple Maps URL, or location opens instantly in your preferred navigation app. No copying, no pasting, no manual searching, and no browser detours.
 
-Whether you need an Apple Maps for Android solution, an Apple map for Android tool, an Apple to Google converter, or an automatic Apple to Google Maps converter, MapFlip handles every Apple Map URL and link in the background. Easily convert Apple Maps to Google Maps, convert Apple map links, redirect to Google Maps, and open Apple Maps links directly in your favorite navigation app.
+Whether you need an Apple Maps for Android solution, an Apple map for Android tool, an Apple to Google converter, or an automatic Apple to Google Maps converter, MapFlip handles every Apple Map URL and link seamlessly in the background. Easily convert Apple Maps to Google Maps, convert Apple map links, redirect to Google Maps, and open Apple Maps links directly in your favorite navigation app.
 
-🔧 How it works:
-1. Open MapFlip
-2. Tap "Open Settings"
-3. Enable link forwarding for maps.apple.com
-4. Done! Apple Maps links now open directly in Google Maps.
+⚡ 3 Easy Ways to Open Links:
+1. 🚀 Fully Automatic: Tap any Apple Maps link – MapFlip intercepts it instantly and launches your preferred navigation.
+2. 📲 Via Android Share Sheet: Share any map link or chat message directly from WhatsApp, Telegram, Signal, or SMS with MapFlip.
+3. 📋 Clipboard & Link Tester: Copy a link and open MapFlip for 1-tap redirection – or test and convert custom links in the built-in Link Tester.
 
-✨ Features & Privacy:
+🧭 Choose from 14 Navigation Apps:
+Open destinations in your favorite app:
+• Driving & Traffic: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
+• Privacy & Offline: Organic Maps, OsmAnd (incl. Plus), CoMaps, Vela
+• Outdoor & Transit: Komoot (Hiking & Cycling), Citymapper (Public Transit), Magic Earth, Locus Map, Yandex Maps, or flexible Android system picker
+
+🗺️ Supported Map Formats & Services (11 Sources):
+• Apple Maps URLs & search queries (maps.apple.com)
+• Google Maps links (maps.google.com, goo.gl) – perfect for de-Googling to private map apps
+• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing Maps & Yandex Maps
+• DuckDuckGo Maps, GPS coordinates (geo:, DMS, Decimal) & Google Plus Codes (100% offline decoding)
+• Place markers, addresses, search queries & turn-by-turn navigation routes
+
+✨ Highlights & Privacy:
 • 🚗 Turn-by-Turn Navigation & Android Auto – Apple Maps navigation and turn by turn routing in Google Maps
-• 🧭 Choose Your Navigation App – Open destinations in Google Maps, Waze, Organic Maps, CoMaps, OsmAnd, Vela, HERE WeGo, Magic Earth, Citymapper, Komoot, TomTom AmiGO, Sygic, Locus Map, or system picker
-• 🔄 Automatic Apple to Google redirect – Instant on-device Apple maps link converter & map redirect
 • 🔒 100% Offline & Private – Zero internet permissions (no android.permission.INTERNET), zero tracking, zero ads
-• ⏸️ Pause Mode & Quick Settings Tile – Suspend redirect anytime directly from your notification shade
+• 🛡️ Smart Fallback – If your preferred app is uninstalled, MapFlip safely opens Google Maps or system picker
+• ⏸️ Pause Mode & Quick Settings Tile – Suspend redirect anytime directly from your notification shade (1 hr, 8 hrs, until tomorrow)
 • 💬 Universal App Compatibility – Works seamlessly with WhatsApp, Telegram, Signal, SMS, Slack, and email
 • 👻 Invisible Background Operation – No extra screens or battery drain
 
-🗺️ Supported link formats & services:
-• Apple Maps URLs & search queries (maps.apple.com)
-• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing Maps & Yandex Maps
-• GPS coordinates & shared locations
-• Addresses, place markers & navigation routes
-
-MapFlip was built for Android users who regularly receive Apple Maps links from iPhone users.
+MapFlip is the essential tool for Android users who regularly receive Apple Maps links from iPhone users and want to open them hassle-free.
