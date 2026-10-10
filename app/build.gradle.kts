@@ -123,3 +123,9 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test:runner:1.6.2")
 }
+androidComponents {
+    beforeVariants(selector().withBuildType("release")) { variantBuilder ->
+        @Suppress("DEPRECATION")
+        variantBuilder.enableUnitTest = false
+    }
+}
