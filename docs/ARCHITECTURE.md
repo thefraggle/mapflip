@@ -46,22 +46,23 @@ flowchart TD
         G["Forward Original URL\nto Default Browser"]
     end
 
-    subgraph Targets ["Supported Navigation Apps (14 Destinations)"]
+    subgraph Targets ["Supported Navigation Apps (15 Destinations)"]
         H1["Google Maps"]
         H2["Waze"]
         H3["Organic Maps (FOSS)"]
         H4["CoMaps (FOSS)"]
         H5["OsmAnd / OsmAnd+ (FOSS)"]
         H6["Vela (FOSS)"]
-        H7["HERE WeGo"]
-        H8["Yandex Maps"]
-        H9["Magic Earth"]
-        H10["Citymapper"]
-        H11["Komoot"]
-        H12["TomTom AmiGO"]
-        H13["Sygic"]
-        H14["Locus Map / Pro"]
-        H15["System App Picker"]
+        H7["Mapy.cz"]
+        H8["HERE WeGo"]
+        H9["Yandex Maps"]
+        H10["Magic Earth"]
+        H11["Citymapper"]
+        H12["Komoot"]
+        H13["TomTom AmiGO"]
+        H14["Sygic"]
+        H15["Locus Map / Pro"]
+        H16["System App Picker"]
     end
 
     A1 --> B
@@ -77,7 +78,7 @@ flowchart TD
     C1 & C2 & C3 & C4 & C5 & C6 & C7 & C8 & C9 & C10 & C11 --> D
 
     D --> E
-    E --> H1 & H2 & H3 & H4 & H5 & H6 & H7 & H8 & H9 & H10 & H11 & H12 & H13 & H14 & H15
+    E --> H1 & H2 & H3 & H4 & H5 & H6 & H7 & H8 & H9 & H10 & H11 & H12 & H13 & H14 & H15 & H16
 ```
 
 ---
@@ -88,20 +89,20 @@ flowchart TD
 The parsing layer implements the **Strategy Pattern**. Each map source is an isolated, independently unit-tested implementation of `MapUrlParser`:
 
 * **`AppleMapsParser`**: Parses `maps.apple.com` and `applemaps://` queries (`?q=`, `?ll=`, `?address=`, `?saddr=&daddr=`, place slugs `/p/...`).
-* **`GoogleMapsParser`**: Handles `maps.google.com`, `google.com/maps`, `goo.gl/maps` and shortlinks.
+* **`GoogleMapsParser`**: Handles `maps.google.com`, `google.com/maps`, `goo.gl/maps`, and international ccTLD domains (`google.es`, `google.co.uk`, `google.fr`, etc.).
 * **`OsmMapsParser`**: Extracts nodes, ways, relations, and bounding-box coordinates from `openstreetmap.org` and `osm.org`.
 * **`BingMapsParser`**: Parses `bing.com/maps` coordinates (`cp=`) and search queries.
 * **`HereMapsParser`**: Supports path-based coordinates (`/l/lat,lon,zoom`) and query parameters (`map=lat,lon`).
 * **`YandexMapsParser`**: Handles Yandex inverted coordinate order (`ll=lon,lat`).
 * **`WazeMapsParser`**: Extracts destination coordinates from `waze.com/ul` and `live-map/directions`.
-* **`DuckDuckGoMapsParser`**: Intercepts map search and directions links while passing generic web searches cleanly to the browser.
+* **`DuckDuckGoMapsParser`**: Handles map search and directions links via Share Sheet, Clipboard detection, and interactive Link Tester.
 * **`PlusCodeParser`**: 100% offline mathematical decoding of Open Location Codes (Google Plus Codes, Base20 algorithm) without network lookup.
 * **`GeoCoordinateParser`**: Extracts standard `geo:` URIs (RFC 5870), Degree-Minute-Second (DMS) coordinates, and decimal coordinate pairs with strict sanity filtering.
 * **`MapyMapsParser`**: Parses `mapy.cz` and `mapy.com` coordinates (longitude first), searches, and routes.
 
 ### 2.2 Navigation Intent Dispatcher (`NavigationIntentBuilder`)
 Translates the normalized `ParsedLocation` into platform-native intents:
-1. **App-Specific Schemes**: Directly targets installed navigation apps via custom URI schemes (e.g. `geo:`, `google.navigation:`, `om://`, `osmand.geo:`, `here-route://`, `yandexmaps://`).
+1. **App-Specific Schemes**: Directly targets installed navigation apps via custom URI schemes (e.g. `geo:`, `google.navigation:`, `om://`, `cm://`, `osmand.geo:`, `here-route://`, `yandexmaps://`, `cz.seznam.mapy`).
 2. **Travel Mode Preservation**: Carries over driving, walking, cycling, and public transit modes from source links into compatible navigation intents.
 3. **Smart Fallback**: If the user's chosen navigation app was uninstalled, MapFlip catches the `ActivityNotFoundException`, displays a localized toast notice, and gracefully falls back to the system app chooser.
 
@@ -136,5 +137,5 @@ In the `foss` flavor, `aapt2 dump permissions` confirms that `android.permission
 
 ## 4. Testing & Quality Assurance
 
-* **Unit Test Suite**: 140 deterministic unit tests covering parsers, timezones, encoding, locales, and domain verification.
+* **Unit Test Suite**: 200+ unit, integration, and Compose UI tests covering parsers, timezones, encoding, locales, and domain verification.
 * **Clean Code & Zero External Dependencies**: The core FOSS build relies solely on AndroidX and standard Kotlin/Compose libraries.

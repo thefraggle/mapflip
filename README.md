@@ -29,21 +29,24 @@ Set it up once, and it works invisibly in the background.
 
 - 🔄 **Multi-Service Interception** – Intercepts map links, coordinates, and codes from:
   - **Apple Maps** (`maps.apple.com`, `applemaps://`)
-  - **Google Maps** (`maps.google.com`, `google.com/maps`, `goo.gl/maps`, `geo:` URIs)
+  - **Google Maps** (`maps.google.com`, `google.com/maps`, `goo.gl/maps`, `geo:` URIs across international ccTLDs)
   - **OpenStreetMap** (`openstreetmap.org`, `osm.org`)
+  - **Mapy.cz & Mapy.com** (`mapy.cz`, `mapy.com`)
   - **Bing Maps** (`bing.com/maps`, `maps.bing.com`)
   - **HERE WeGo** (`wego.here.com`, `share.here.com`, `here.com`)
   - **Yandex Maps** (`yandex.com/maps`, `maps.yandex.ru`)
   - **Waze** (`waze.com/ul`, `waze.com/live-map`)
-  - **DuckDuckGo Maps** (`duckduckgo.com/?q=...&iaxm=maps`)
+  - **DuckDuckGo Maps** (`duckduckgo.com/?q=...&iaxm=maps` via Share Sheet & Clipboard)
   - **Google Plus Codes** (100% offline Base20 decoding)
   - **Direct GPS Coordinates** (RFC 5870 `geo:`, decimal & DMS)
-- 🎯 **Configurable Target Apps** – Route destinations directly to 13 navigation apps:
+- 🎯 **Configurable Target Apps** – Route destinations directly to 15 navigation apps:
   - **Google Maps**
   - **Waze**
-  - **Organic Maps / CoMaps** (100% FOSS)
+  - **Organic Maps** (100% FOSS)
+  - **CoMaps** (100% FOSS)
   - **OsmAnd / OsmAnd+** (100% FOSS)
   - **Vela** (100% FOSS)
+  - **Mapy.cz**
   - **HERE WeGo**
   - **Yandex Maps**
   - **Magic Earth**
@@ -97,7 +100,7 @@ Build the FOSS release APK locally:
 
 Run unit tests:
 ```bash
-./gradlew test
+./gradlew testPlayDebugUnitTest testFossDebugUnitTest
 ```
 
 ---
