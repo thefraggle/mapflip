@@ -1,3 +1,7 @@
+## 1.3.10
+- Erhöhte Zuverlässigkeit: Verbesserte Hintergrundverarbeitung und noch stabilere Weiterleitung von Karten-Links
+- Allgemeine Detailverbesserungen: Interne Optimierungen und Fehlerbehebungen für einen reibungslosen Ablauf
+
 ## 1.3.9
 - Neue Ziel-App: Mapy.cz kann jetzt als bevorzugte Navigations-App ausgewählt werden
 - Bessere Erkennung: Verbesserte Unterstützung für internationale Google-Maps-Links
