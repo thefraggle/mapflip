@@ -9,11 +9,11 @@ MapFlip은 애플 지도 링크를 구글 지도나 선호하는 내비게이션
 2. 📲 안드로이드 공유 메뉴: 카카오톡, 라인, 텔레그램, 문자 메시지에서 링크를 MapFlip으로 바로 '공유'하여 실행하세요.
 3. 📋 클립보드 & 링크 테스터: 링크를 복사하고 MapFlip을 열면 1탭으로 즉시 열리며, 내장된 테스터로 링크를 확인하고 변환할 수도 있습니다.
 
-🧭 14개 내비게이션 앱 지원:
+🧭 15개 내비게이션 앱 지원:
 상황과 취향에 맞는 지도 앱을 자유롭게 선택하세요:
 • 운전 및 교통정보: Google 지도, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • 프라이버시 및 오프라인 지도: Organic Maps, OsmAnd (Plus 지원), CoMaps, Vela
-• 아웃도어 및 대중교통: Komoot (등산 및 자전거), Citymapper (대중교통), Magic Earth, Locus Map, Yandex Maps 또는 안드로이드 시스템 선택 창
+• 아웃도어 및 대중교통: Mapy.cz, Komoot (등산 및 자전거), Citymapper (대중교통), Magic Earth, Locus Map, Yandex Maps 또는 안드로이드 시스템 선택 창
 
 🗺️ 지원하는 지도 서비스 및 형식 (11개 소스):
 • Apple Maps URL 및 검색어 (maps.apple.com)

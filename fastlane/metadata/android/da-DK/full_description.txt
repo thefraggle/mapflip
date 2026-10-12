@@ -9,11 +9,11 @@ Uanset om du vil åbne Apple Maps på Android, konvertere Apple Maps-links til G
 2. 📲 Via Androids Delemenu: Del kortlinks eller chatbeskeder direkte fra WhatsApp, Telegram, Signal eller SMS med MapFlip.
 3. 📋 Udklipsholder & Linktester: Kopiér et link og åbn MapFlip for 1-tryk omdirigering – eller test og konverter links i den indbyggede tester.
 
-🧭 Vælg mellem 14 navigations-apps:
+🧭 Vælg mellem 15 navigations-apps:
 Åbn destinationer og ruter i din favorit-app:
 • Bil & Trafik: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Privatliv & Offline kort: Organic Maps, OsmAnd (inkl. Plus), CoMaps, Vela
-• Udendørs & Offentlig transport: Komoot (cykling & vandring), Citymapper (offentlig transport), Magic Earth, Locus Map, Yandex Maps eller Android-systemvælger
+• Udendørs & Offentlig transport: Mapy.cz, Komoot (cykling & vandring), Citymapper (offentlig transport), Magic Earth, Locus Map, Yandex Maps eller Android-systemvælger
 
 🗺️ Understøttede kortformater & tjenester (11 kilder):
 • Apple Maps URL'er & søgninger (maps.apple.com)

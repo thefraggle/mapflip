@@ -2,18 +2,18 @@ Deine Freunde schicken dir Apple Maps Links – aber du nutzt Google Maps oder e
 
 MapFlip ist der zuverlässige Apple Maps Konverter, smarte Apple Karten Konverter und die automatische Kartenweiterleitung für Android. Jeder Apple Karten Link, jeder Apple Maps Link und jede URL öffnet sich blitzschnell in deiner bevorzugten Navigations-App. Kein manuelles Suchen, kein Abtippen von Adressen, kein Umweg über den Browser.
 
-Egal ob Apple to Google Maps, Apple Karten zu Google Maps, Apple Karten weiterleiten, Apple Karten teilen, Apple Karten öffnen oder Apple Karten auf Android: MapFlip erledigt die Google Maps Weiterleitung nahtlos im Hintergrund.
+Egal ob Apple to Google Maps, Apple Karten zu Google Maps, Apple Karten weiterleiten, Apple Karten teilen, Apple Karten öffnen oder Apple Karten auf Android: MapFlip erledigt die Google Maps Weiterleitung nahtlos im Hintergrund. Starte sofort deine Google Maps Navigation oder alternative Routenführung.
 
 ⚡ 3 einfache Wege zum Ziel:
 1. 🚀 Vollautomatisch: Tippe auf einen Apple Maps Link – MapFlip fängt ihn direkt ab und startet deine Navigation.
 2. 📲 Über das Teilen-Menü: Teile beliebige Karten-Links oder Chat-Nachrichten direkt über das Android-Teilen-Menü mit MapFlip.
 3. 📋 Zwischenablage & Link-Tester: Link kopieren, MapFlip öffnen und mit 1 Tap öffnen – oder im integrierten Link-Tester prüfen und umwandeln.
 
-🧭 Wähle aus 14 Navigations-Apps:
+🧭 Wähle aus 15 Navigations-Apps:
 Öffne Standorte und Routen in deiner Lieblings-App:
 • Auto & Verkehr: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Datenschutz & Offline: Organic Maps, OsmAnd (inkl. Plus), CoMaps, Vela
-• Outdoor & ÖPNV: Komoot (Fahrrad & Wandern), Citymapper (ÖPNV), Magic Earth, Locus Map, Yandex Maps oder flexible Android-Systemauswahl
+• Outdoor, ÖPNV & Reisen: Mapy.cz, Komoot (Fahrrad & Wandern), Citymapper (ÖPNV), Magic Earth, Locus Map, Yandex Maps oder flexible Android-Systemauswahl
 
 🗺️ Unterstützte Kartendienste & Formate (11 Quellen):
 • Apple Maps / Apple Karten URLs & Suchanfragen (maps.apple.com)

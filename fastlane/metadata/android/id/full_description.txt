@@ -9,11 +9,11 @@ Baik Anda memerlukan solusi Apple Maps untuk Android maupun konverter tautan ins
 2. 📲 Menu Berbagi Android: Bagikan tautan peta dari WhatsApp, Telegram, Signal, atau SMS langsung ke MapFlip.
 3. 📋 Papan Klip & Penguji Tautan: Salin tautan dan buka MapFlip untuk pengalihan 1 ketukan – atau uji dan konversi tautan di alat bawaan.
 
-🧭 Pilih dari 14 Aplikasi Navigasi:
+🧭 Pilih dari 15 Aplikasi Navigasi:
 Buka rute dan tujuan di aplikasi favorit Anda:
 • Mengemudi & Lalu Lintas: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Privasi & Peta Offline: Organic Maps, OsmAnd (termasuk Plus), CoMaps, Vela
-• Luar Ruangan & Transportasi: Komoot (sepeda & jalan kaki), Citymapper (transportasi umum), Magic Earth, Locus Map, Yandex Maps, atau pemilih sistem Android
+• Luar Ruangan & Transportasi: Mapy.cz, Komoot (sepeda & jalan kaki), Citymapper (transportasi umum), Magic Earth, Locus Map, Yandex Maps, atau pemilih sistem Android
 
 🗺️ Layanan dan Format Peta yang Didukung (11 Sumber):
 • Tautan dan pencarian Apple Maps (maps.apple.com)

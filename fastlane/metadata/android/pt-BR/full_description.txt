@@ -9,11 +9,11 @@ Seja para ter o Apple Maps no Android, converter links do Apple Maps para o Goog
 2. 📲 Menu Compartilhar do Android: Compartilhe links de mapas ou mensagens do WhatsApp, Telegram, Signal ou SMS direto para o MapFlip.
 3. 📋 Área de transferência & Testador: Copie um link e abra o MapFlip para redirecionar em 1 toque, ou teste e converta links no testador integrado.
 
-🧭 Escolha entre 14 aplicativos de navegação:
+🧭 Escolha entre 15 aplicativos de navegação:
 Abra destinos e trajetos no seu aplicativo favorito:
 • Carro e trânsito: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Privacidade e mapas offline: Organic Maps, OsmAnd (com suporte a Plus), CoMaps, Vela
-• Ao ar livre e transporte público: Komoot (trilhas e bike), Citymapper (ônibus e metrô), Magic Earth, Locus Map, Yandex Maps ou seletor do sistema Android
+• Ao ar livre e transporte público: Mapy.cz, Komoot (trilhas e bike), Citymapper (ônibus e metrô), Magic Earth, Locus Map, Yandex Maps ou seletor do sistema Android
 
 🗺️ Formatos e serviços de mapas suportados (11 fontes):
 • Links e buscas do Apple Maps (maps.apple.com)

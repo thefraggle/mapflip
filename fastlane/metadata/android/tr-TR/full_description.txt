@@ -9,11 +9,11 @@ MapFlip, Android için en gelişmiş Apple Haritalar - Google Haritalar dönüş
 2. 📲 Android Paylaş Menüsü: WhatsApp, Telegram, Signal veya SMS üzerinden herhangi bir harita bağlantısını doğrudan MapFlip ile paylaşın.
 3. 📋 Pano ve Bağlantı Test Aracı: Bağlantıyı kopyalayın ve MapFlip'i açıp tek dokunuşla yönlendirin ya da dahili test aracıyla bağlantıları dönüştürün.
 
-🧭 14 Navigasyon Uygulaması Arasından Seçim Yapın:
+🧭 15 Navigasyon Uygulaması Arasından Seçim Yapın:
 Hedefleri ve rotaları dilediğiniz uygulamada açın:
 • Sürüş ve Trafik: Google Haritalar, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Gizlilik ve Çevrimdışı Haritalar: Organic Maps, OsmAnd (Plus dahil), CoMaps, Vela
-• Doğa ve Toplu Taşıma: Komoot (bisiklet ve doğa yürüyüşü), Citymapper (toplu taşıma), Magic Earth, Locus Map, Yandex Haritalar veya esnek Android sistem seçici
+• Doğa ve Toplu Taşıma: Mapy.cz, Komoot (bisiklet ve doğa yürüyüşü), Citymapper (toplu taşıma), Magic Earth, Locus Map, Yandex Haritalar veya esnek Android sistem seçici
 
 🗺️ Desteklenen Harita Servisleri ve Biçimleri (11 Kaynak):
 • Apple Haritalar URL'leri ve aramaları (maps.apple.com)

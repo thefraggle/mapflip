@@ -9,11 +9,11 @@ Enten du trenger Apple Maps for Android, vil konvertere Apple Maps til Google Ma
 2. 📲 Via Androids Del-meny: Del kartlenker eller meldinger direkte fra WhatsApp, Telegram, Signal eller SMS med MapFlip.
 3. 📋 Utklippstavle & Lenketester: Kopier en lenke og åpne MapFlip for 1-trykks viderekobling – eller test og konverter lenker i den innebygde testeren.
 
-🧭 Velg blant 14 navigasjonsapper:
+🧭 Velg blant 15 navigasjonsapper:
 Åpne destinasjoner og ruter i favorittappen din:
 • Bil & Trafikk: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Personvern & Frakoblede kart: Organic Maps, OsmAnd (inkl. Plus), CoMaps, Vela
-• Friluftsliv & Kollektivtransport: Komoot (sykkel & fottur), Citymapper (kollektivtransport), Magic Earth, Locus Map, Yandex Maps eller Android-systemvalg
+• Friluftsliv & Kollektivtransport: Mapy.cz, Komoot (sykkel & fottur), Citymapper (kollektivtransport), Magic Earth, Locus Map, Yandex Maps eller Android-systemvalg
 
 🗺️ Støttede karttjenester & formater (11 kilder):
 • Apple Maps URL-er & søk (maps.apple.com)

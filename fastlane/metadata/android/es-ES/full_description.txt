@@ -9,11 +9,11 @@ Ya sea que busques una solución de Apple Maps para Android, pasar enlaces de Ap
 2. 📲 Menú Compartir de Android: Comparte enlaces de mapas o mensajes desde WhatsApp, Telegram, Signal o SMS directamente con MapFlip.
 3. 📋 Portapapeles y Probador de enlaces: Copia un enlace y abre MapFlip para redirigir con 1 toque, o prueba y convierte enlaces en el probador integrado.
 
-🧭 Elige entre 14 aplicaciones de navegación:
+🧭 Elige entre 15 aplicaciones de navegación:
 Abre destinos y rutas en tu app preferida:
 • Conducción y tráfico: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Privacidad y mapas offline: Organic Maps, OsmAnd (incl. Plus), CoMaps, Vela
-• Aire libre y transporte: Komoot (ciclismo y senderismo), Citymapper (transporte público), Magic Earth, Locus Map, Yandex Maps o el selector del sistema Android
+• Aire libre y transporte: Mapy.cz, Komoot (ciclismo y senderismo), Citymapper (transporte público), Magic Earth, Locus Map, Yandex Maps o el selector del sistema Android
 
 🗺️ Formatos y servicios de mapas compatibles (11 fuentes):
 • Enlaces y búsquedas de Apple Maps (maps.apple.com)

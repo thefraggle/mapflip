@@ -9,11 +9,11 @@ MapFlip 是專為 Android 使用者打造的 Apple Maps 智慧連結轉換器與
 2. 📲 透過 Android 分享選單：在 LINE、WhatsApp、Telegram 或簡訊中點擊「分享」，直接傳送給 MapFlip 快速解析。
 3. 📋 剪貼簿偵測與測試工具：複製連結後開啟 MapFlip 即可 1 鍵跳轉，還能使用內建測試工具即時預覽與轉換網址。
 
-🧭 支援 14 款導航與地圖 App：
+🧭 支援 15 款導航與地圖 App：
 隨心選擇最符合你需求的導航工具：
 • 開車與路況導航：Google 地圖、Waze、HERE WeGo、TomTom AmiGO、Sygic
 • 隱私安全與離線地圖：Organic Maps、OsmAnd（含 Plus 版）、CoMaps、Vela
-• 戶外運動與大眾運輸：Komoot（單車與登山）、Citymapper（大眾交通）、Magic Earth、Locus Map、Yandex Maps 或彈性系統選擇選單
+• 戶外運動與大眾運輸：Mapy.cz、Komoot（單車與登山）、Citymapper（大眾交通）、Magic Earth、Locus Map、Yandex Maps 或彈性系統選擇選單
 
 🗺️ 支援 11 種地圖來源與格式：
 • Apple Maps 蘋果地圖網址與搜尋關鍵字 (maps.apple.com)

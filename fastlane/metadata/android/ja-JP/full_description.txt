@@ -9,11 +9,11 @@ Appleマップリンクの自動転送、Googleマップへのリダイレクト
 2. 📲 Androidの共有メニューから：LINE、WhatsApp、Telegram、SMSなどのメッセージを「共有」からMapFlipに送るだけで即座に展開。
 3. 📋 クリップボード＆リンクテスター：リンクをコピーしてMapFlipを開くだけで1タップ起動。内蔵テスターでリンクの確認や手動変換も可能。
 
-🧭 14種類のナビゲーションアプリに対応：
+🧭 15種類のナビゲーションアプリに対応：
 目的に合わせてお好みの地図アプリを選択可能：
 • ドライブ・渋滞情報：Googleマップ、Waze、HERE WeGo、TomTom AmiGO、Sygic
 • プライバシー＆完全オフライン地図：Organic Maps、OsmAnd (Plus対応)、CoMaps、Vela
-• アウトドア・乗換案内：Komoot (登山・サイクリング)、Citymapper (公共交通機関)、Magic Earth、Locus Map、Yandex Maps、またはAndroid標準選択メニュー
+• アウトドア・乗換案内：Mapy.cz、Komoot (登山・サイクリング)、Citymapper (公共交通機関)、Magic Earth、Locus Map、Yandex Maps、またはAndroid標準選択メニュー
 
 🗺️ 幅広い地図サービス＆形式に対応（11のソース）：
 • AppleマップのURLおよび検索クエリ (maps.apple.com)

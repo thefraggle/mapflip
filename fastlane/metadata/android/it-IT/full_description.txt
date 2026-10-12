@@ -9,11 +9,11 @@ Se cerchi una soluzione per Apple Maps su Android, convertire link Apple Maps in
 2. 📲 Menu Condividi di Android: Condividi link o messaggi di testo direttamente da WhatsApp, Telegram, Signal o SMS con MapFlip.
 3. 📋 Appunti e Tester di link: Copia un link e apri MapFlip per reindirizzare con 1 tocco, oppure converti e testa i link nel tester integrato.
 
-🧭 Scegli tra 14 app di navigazione:
+🧭 Scegli tra 15 app di navigazione:
 Apri destinazioni e percorsi nella tua applicazione preferita:
 • Guida e traffico: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Privacy e mappe offline: Organic Maps, OsmAnd (incluso Plus), CoMaps, Vela
-• Outdoor e trasporti: Komoot (bici ed escursioni), Citymapper (mezzi pubblici), Magic Earth, Locus Map, Yandex Maps o il selettore di sistema Android
+• Outdoor e trasporti: Mapy.cz, Komoot (bici ed escursioni), Citymapper (mezzi pubblici), Magic Earth, Locus Map, Yandex Maps o il selettore di sistema Android
 
 🗺️ Formati e servizi di mappe supportati (11 sorgenti):
 • Link e ricerche di Apple Maps (maps.apple.com)

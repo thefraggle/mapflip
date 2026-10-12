@@ -2,18 +2,18 @@ Your friends send you Apple Maps links – but you use Google Maps or other navi
 
 MapFlip is the ultimate Apple Maps converter, fast Apple map redirect, and automatic link converter for Android. Every Apple Map link, Apple Maps URL, or location opens instantly in your preferred navigation app. No copying, no pasting, no manual searching, and no browser detours.
 
-Whether you need an Apple Maps for Android solution, an Apple map for Android tool, an Apple to Google converter, or an automatic Apple to Google Maps converter, MapFlip handles every Apple Map URL and link seamlessly in the background. Easily convert Apple Maps to Google Maps, convert Apple map links, redirect to Google Maps, and open Apple Maps links directly in your favorite navigation app.
+Whether you need an Apple Maps for Android solution, an Apple map for Android tool, an Apple to Google converter, or an automatic Apple to Google Maps converter, MapFlip handles every Apple Map URL and link seamlessly in the background. Easily convert Apple Maps to Google Maps, convert Apple map links, redirect to Google Maps, and open Apple Maps links directly in your favorite navigation app. Plan routes, navigate offline, and open any location with ease.
 
 ⚡ 3 Easy Ways to Open Links:
 1. 🚀 Fully Automatic: Tap any Apple Maps link – MapFlip intercepts it instantly and launches your preferred navigation.
 2. 📲 Via Android Share Sheet: Share any map link or chat message directly from WhatsApp, Telegram, Signal, or SMS with MapFlip.
 3. 📋 Clipboard & Link Tester: Copy a link and open MapFlip for 1-tap redirection – or test and convert custom links in the built-in Link Tester.
 
-🧭 Choose from 14 Navigation Apps:
+🧭 Choose from 15 Navigation Apps:
 Open destinations in your favorite app:
 • Driving & Traffic: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Privacy & Offline: Organic Maps, OsmAnd (incl. Plus), CoMaps, Vela
-• Outdoor & Transit: Komoot (Hiking & Cycling), Citymapper (Public Transit), Magic Earth, Locus Map, Yandex Maps, or flexible Android system picker
+• Outdoor & Transit: Mapy.cz, Komoot (Hiking & Cycling), Citymapper (Public Transit), Magic Earth, Locus Map, Yandex Maps, or flexible Android system picker
 
 🗺️ Supported Map Formats & Services (11 Sources):
 • Apple Maps URLs & search queries (maps.apple.com)

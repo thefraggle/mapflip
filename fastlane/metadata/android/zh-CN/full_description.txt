@@ -9,11 +9,11 @@ MapFlip 是一款专为安卓用户打造的苹果地图智能链接转换器与
 2. 📲 系统分享菜单：在任何聊天界面或浏览器中点击“分享”，直接发送给 MapFlip 快速打开。
 3. 📋 剪贴板识别与测试工具：复制链接后打开 MapFlip 即可一键跳转，还能通过内置测试器预览与转换任意地图链接。
 
-🧭 支持 14 款主流导航地图：
+🧭 支持 15 款主流导航地图：
 自由选择你常用的地图与导航工具：
 • 驾车与路况导航：Google Maps、Waze、HERE WeGo、TomTom AmiGO、Sygic
 • 隐私保护与离线地图：Organic Maps、OsmAnd（含 Plus）、CoMaps、Vela
-• 户外运动与公交出行：Komoot（徒步与骑行）、Citymapper（公共交通）、Magic Earth、Locus Map、Yandex Maps 或原生系统选择器
+• 户外运动与公交出行：Mapy.cz、Komoot（徒步与骑行）、Citymapper（公共交通）、Magic Earth、Locus Map、Yandex Maps 或原生系统选择器
 
 🗺️ 支持 11 种地图来源与格式：
 • Apple Maps 苹果地图 URL 及搜索关键词 (maps.apple.com)

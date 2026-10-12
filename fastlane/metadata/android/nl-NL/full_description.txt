@@ -9,11 +9,11 @@ Of je nu zoekt naar Apple Maps voor Android, een snelle Apple Maps converter of 
 2. 📲 Via het Android-deelmenu: Deel kaartlinks of chatberichten direct vanuit WhatsApp, Telegram, Signal of sms naar MapFlip.
 3. 📋 Klembord & Link-tester: Kopieer een link en open MapFlip voor 1-tik doorverwijzing – of converteer en test links in de ingebouwde tester.
 
-🧭 Kies uit 14 navigatie-apps:
+🧭 Kies uit 15 navigatie-apps:
 Open bestemmingen en routes in je favoriete app:
 • Auto & Verkeer: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Privacy & Offline kaarten: Organic Maps, OsmAnd (incl. Plus), CoMaps, Vela
-• Outdoor & OV: Komoot (fietsen & wandelen), Citymapper (openbaar vervoer), Magic Earth, Locus Map, Yandex Maps of het Android-systeemkeuzemenu
+• Outdoor & OV: Mapy.cz, Komoot (fietsen & wandelen), Citymapper (openbaar vervoer), Magic Earth, Locus Map, Yandex Maps of het Android-systeemkeuzemenu
 
 🗺️ Ondersteunde kaartdiensten & formaten (11 bronnen):
 • Apple Maps URL's & zoekopdrachten (maps.apple.com)
