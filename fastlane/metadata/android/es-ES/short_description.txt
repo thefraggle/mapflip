@@ -1,1 +1,1 @@
-Abre enlaces de Apple Maps en Google Maps. Redirección y conversor de mapas.
+Abre enlaces en tu app de navegación: redirección rápida, conversor, ruta y GPS.

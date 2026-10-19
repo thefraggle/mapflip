@@ -1,1 +1,1 @@
-Open map links in favorite navigation apps. Fast redirect, converter & routes.
+Open links in navigation apps: automatic map redirect, route & directions.

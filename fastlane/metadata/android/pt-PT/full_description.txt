@@ -1,8 +1,8 @@
 Os seus amigos enviam-lhe links do Apple Maps, mas utiliza o Google Maps ou outra aplicação de navegação no Android?
 
-O MapFlip é o conversor ideal de Apple Maps para Google Maps e o redirecionamento automático de mapas para Android. Qualquer link, endereço ou localização do Apple Maps abre imediatamente na sua aplicação de navegação preferida. Sem copiar, sem colar e sem passar pelo navegador web.
+O MapFlip é o conversor ideal de Apple Maps para Google Maps e o redirecionamento rápido e automático de mapas para Android. Qualquer link, endereço ou localização do Apple Maps abre imediatamente na sua aplicação de navegação preferida. Sem copiar, sem colar e sem passar pelo navegador web.
 
-Quer pretenda abrir o Apple Maps no Android, converter links do Apple Maps para Google Maps ou redirecionar mapas de forma fluida, o MapFlip faz tudo em segundo plano.
+Quer pretenda abrir o Apple Maps no Android, converter links do Apple Maps para Google Maps ou abrir qualquer rota de forma fluida na sua app de navegação, o MapFlip faz tudo em segundo plano.
 
 ⚡ 3 formas simples de abrir os seus links:
 1. 🚀 Totalmente automático: Toque num link do Apple Maps e o MapFlip abre diretamente o seu navegador de eleição.

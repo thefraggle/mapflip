@@ -1,8 +1,8 @@
 Sturen je vrienden Apple Maps-links, maar gebruik jij Google Maps of een andere navigatie-app op Android?
 
-MapFlip is de betrouwbare Apple Maps naar Google Maps converter en automatische kaartdoorverwijzing voor Android. Elke Apple Maps-link, URL of gedeelde locatie opent direct in jouw favoriete navigatie-app. Zonder kopiëren, zonder plakken, zonder handmatig zoeken en zonder omweg via de browser.
+MapFlip is de betrouwbare Apple Maps naar Google Maps converter en snelle doorverwijzing voor Android. Elke Apple Maps-link, URL of gedeelde locatie opent direct in jouw favoriete navigatie-app. Zonder kopiëren, zonder plakken, zonder handmatig zoeken en zonder omweg via de browser.
 
-Of je nu zoekt naar Apple Maps voor Android, een snelle Apple Maps converter of automatische kaartdoorsturing: MapFlip regelt het naadloos op de achtergrond.
+Of je nu zoekt naar Apple Maps voor Android, een snelle Apple Maps converter voor elke route of automatische kaartdoorsturing in je navigatie: MapFlip regelt het naadloos op de achtergrond.
 
 ⚡ 3 eenvoudige manieren om links te openen:
 1. 🚀 Volledig automatisch: Tik op een Apple Maps-link en MapFlip opent meteen je gekozen navigatie.

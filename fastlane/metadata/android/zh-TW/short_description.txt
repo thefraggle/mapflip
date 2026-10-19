@@ -1,1 +1,1 @@
-在Android上將Apple Maps地圖連結自動跳轉至Google地圖或其他導航開啟。
+在Android上將地圖與位置連結自動跳轉至習慣的導航App開啟。高速連結轉換、路線規劃與GPS導航。

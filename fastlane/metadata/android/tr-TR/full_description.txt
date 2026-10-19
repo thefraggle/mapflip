@@ -1,6 +1,6 @@
 Arkadaşlarınız size Apple Haritalar bağlantıları gönderiyor ama siz Android'de Google Haritalar veya başka bir navigasyon uygulaması mı kullanıyorsunuz?
 
-MapFlip, Android için en gelişmiş Apple Haritalar - Google Haritalar dönüştürücüsü ve otomatik harita yönlendiricisidir. Herhangi bir Apple Haritalar bağlantısı, adresi veya konumu anında tercih ettiğiniz navigasyon uygulamasında açılır. Kopyalama, yapıştırma, manuel arama veya tarayıcıda bekleme yok.
+MapFlip, Android için en gelişmiş Apple Haritalar - Google Haritalar dönüştürücüsü ve hızlı yönlendirme sunan otomatik harita yönlendiricisidir. Herhangi bir Apple Haritalar bağlantısı, rota, adres veya konum anında favori navigasyonda açılır. Kopyalama, yapıştırma, manuel arama veya tarayıcıda bekleme yok.
 
 İster Android için Apple Haritalar çözümü arıyor olun, ister Apple Haritalar bağlantılarını Google Haritalar'a çevirmek isteyin: MapFlip her şeyi arka planda pürüzsüzce halleder.
 

@@ -1,1 +1,1 @@
-Omdiriger Apple Maps-links til Google Maps. Hurtig kortkonverter.
+Åbn kortlinks i din navigation: hurtig omdirigering, kortkonverter, rute og GPS.
