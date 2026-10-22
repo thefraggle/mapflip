@@ -1,5 +1,6 @@
 package de.goork.mapflip.parser
 
+import java.net.URLDecoder
 import java.util.Locale
 import java.util.regex.Pattern
 
@@ -10,15 +11,15 @@ import java.util.regex.Pattern
 object PlusCodeParser : MapUrlParser {
 
     override val serviceName: String = "Plus Code"
-    override val supportedHosts: List<String> = listOf("plus.codes")
+    override val supportedHosts: List<String> = listOf("plus.codes", "www.plus.codes")
 
     private const val CODE_ALPHABET = "23456789CFGHJMPQRVWX"
     private const val SEPARATOR = '+'
     private const val SEPARATOR_POSITION = 8
 
-    // URL pattern (e.g. https://plus.codes/8FW4V75V+8G or plus.codes/9F42C2M2+X7)
+    // Full or short Plus Code URL pattern (e.g. https://plus.codes/8FW4V75V+8G or https://plus.codes/V75V+8G,Paris)
     private val URL_PATTERN = Pattern.compile(
-        """(?:https?://(?:www\.)?plus\.codes/|plus\.codes/)([23456789CFGHJMPQRVWX]{4,8}\+[23456789CFGHJMPQRVWX]{2,6})""",
+        """(?:https?://(?:www\.)?plus\.codes/|plus\.codes/)([23456789CFGHJMPQRVWX]{4,8}\+[23456789CFGHJMPQRVWX]{2,6}(?:[^\s<>"'()]*)?)""",
         Pattern.CASE_INSENSITIVE
     )
 
@@ -38,12 +39,16 @@ object PlusCodeParser : MapUrlParser {
     override fun extractUrl(text: String?): String? {
         if (text.isNullOrBlank()) return null
 
-        // 1. Check for plus.codes URL
+        // 1. Check for plus.codes URL (full or short code with locality)
         val urlMatcher = URL_PATTERN.matcher(text)
         if (urlMatcher.find()) {
-            val code = urlMatcher.group(1)?.uppercase(Locale.US)
-            if (code != null && isFullCode(code)) {
-                return "https://plus.codes/$code"
+            val rawPayload = trimExtractedUrl(urlMatcher.group(1) ?: "")
+            if (rawPayload.isNotBlank()) {
+                val codeCandidate = rawPayload.uppercase(Locale.US)
+                if (isFullCode(codeCandidate)) {
+                    return "https://plus.codes/$codeCandidate"
+                }
+                return "https://plus.codes/$rawPayload"
             }
         }
 
@@ -60,13 +65,25 @@ object PlusCodeParser : MapUrlParser {
     }
 
     override fun parse(url: String): ParsedLocation {
-        val rawCode = extractCode(url) ?: return ParsedLocation.Home
-        val coords = decode(rawCode) ?: return ParsedLocation.Home
-        return ParsedLocation.Coordinates(
-            latitude = coords.first,
-            longitude = coords.second,
-            label = rawCode
-        )
+        val rawCode = extractCode(url)
+        if (rawCode != null) {
+            val coords = decode(rawCode)
+            if (coords != null) {
+                return ParsedLocation.Coordinates(
+                    latitude = coords.first,
+                    longitude = coords.second,
+                    label = rawCode
+                )
+            }
+        }
+
+        // Handle short Plus Code URLs (e.g. https://plus.codes/V75V+8G,Paris) as SearchQuery
+        val shortQuery = extractShortCodeQuery(url)
+        if (!shortQuery.isNullOrBlank()) {
+            return ParsedLocation.SearchQuery(shortQuery)
+        }
+
+        return ParsedLocation.Home
     }
 
     /**
@@ -147,16 +164,30 @@ object PlusCodeParser : MapUrlParser {
 
     private fun extractCode(input: String): String? {
         val trimmed = input.trim()
-        val urlMatcher = URL_PATTERN.matcher(trimmed)
-        if (urlMatcher.find()) {
-            return urlMatcher.group(1)?.uppercase(Locale.US)
-        }
         val standaloneMatcher = STANDALONE_PATTERN.matcher(trimmed)
         if (standaloneMatcher.find()) {
             return standaloneMatcher.group(1)?.uppercase(Locale.US)
         }
         val upper = trimmed.uppercase(Locale.US)
         return if (isFullCode(upper)) upper else null
+    }
+
+    private fun extractShortCodeQuery(input: String): String? {
+        val trimmed = input.trim()
+        val urlMatcher = URL_PATTERN.matcher(trimmed)
+        if (urlMatcher.find()) {
+            val raw = trimExtractedUrl(urlMatcher.group(1) ?: "")
+            if (raw.isNotBlank()) {
+                val decoded = try {
+                    // Preserve '+' in the OLC code itself by only decoding %XX sequences
+                    URLDecoder.decode(raw.replace("+", "%2B"), "UTF-8")
+                } catch (_: Exception) {
+                    raw
+                }
+                return decoded.replace(",", " ").replace(Regex("""\s+"""), " ").trim()
+            }
+        }
+        return null
     }
 
     private fun isFullCode(code: String): Boolean {

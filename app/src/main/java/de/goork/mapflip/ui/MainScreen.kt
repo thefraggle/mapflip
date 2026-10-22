@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
@@ -165,7 +166,7 @@ fun MainScreen(
 
                     // Subtitle / Claim
                     Text(
-                        text = s.subtitle,
+                        text = s.formatSubtitle(userPreferences.targetApp),
                         style = MaterialTheme.typography.titleMedium.copy(
                             fontWeight = FontWeight.SemiBold,
                             lineHeight = 22.sp
@@ -422,6 +423,16 @@ fun MainScreen(
                 onOpenSystemSettings = {
                     Analytics.trackEvent("setup_guide_settings_clicked")
                     showSetupGuideSheet = false
+                    val openAppDetailsFallback = {
+                        try {
+                            context.startActivity(Intent(
+                                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                Uri.parse("package:${context.packageName}")
+                            ))
+                        } catch (e: Exception) {
+                            Log.w("MapFlip", "Failed to open application details settings", e)
+                        }
+                    }
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                         try {
                             context.startActivity(Intent(
@@ -429,16 +440,10 @@ fun MainScreen(
                                 Uri.parse("package:${context.packageName}")
                             ))
                         } catch (_: Exception) {
-                            context.startActivity(Intent(
-                                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                Uri.parse("package:${context.packageName}")
-                            ))
+                            openAppDetailsFallback()
                         }
                     } else {
-                        context.startActivity(Intent(
-                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                            Uri.parse("package:${context.packageName}")
-                        ))
+                        openAppDetailsFallback()
                     }
                 },
                 domainStatus = domainStatus,

@@ -1,3 +1,8 @@
+## 1.4.1
+- Broader Link Support: Improved handling for Plus Code web links (`plus.codes`), Waze short links (`ul.waze.com`), and labeled Geo URIs
+- Smarter App Handoff: More reliable package detection for multi-edition map apps and improved address search routing for Komoot
+- UI & Localization Polish: Dynamic subtitle matching your selected navigation app, expanded clipboard service labels, and refined translations
+
 ## 1.4.0
 - Improved App Picker: The navigation app list in settings is now smoothly scrollable and fully accessible across all screen sizes
 - Smarter Redirection: More reliable validation of shared text and improved handoff to your default browser and web fallbacks

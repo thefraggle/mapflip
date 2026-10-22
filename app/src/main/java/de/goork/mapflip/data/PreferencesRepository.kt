@@ -35,6 +35,9 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
     }
 
     init {
+        if (prefs.getLong(PREFS_KEY_FIRST_INSTALL_TS, 0L) == 0L) {
+            prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, System.currentTimeMillis()).apply()
+        }
         prefs.registerOnSharedPreferenceChangeListener(prefChangeListener)
     }
 
@@ -70,11 +73,16 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
         if (pausedUntil > 0L) {
             val now = System.currentTimeMillis()
             if (now >= pausedUntil) {
-                // Pause expired, auto-resume in storage without triggering recursive state mutation
+                // Pause expired, auto-resume in storage and synchronize StateFlow
                 prefs.edit()
                     .putBoolean(AppConstants.PREFS_KEY_PAUSED, false)
                     .putLong(PREFS_KEY_PAUSED_UNTIL, 0L)
                     .apply()
+                _preferences?.let { flow ->
+                    if (flow.value.isPaused) {
+                        flow.value = flow.value.copy(isPaused = false, pausedUntilTimestamp = 0L)
+                    }
+                }
                 return false
             }
         }

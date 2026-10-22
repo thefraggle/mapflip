@@ -1,3 +1,8 @@
+## 1.4.1
+- Erweiterte Link-Erkennung: Bessere Unterstützung für Plus-Code-Weblinks (`plus.codes`), Waze-Kurzlinks (`ul.waze.com`) und Geo-URIs mit Ortsnamen
+- Verbesserte Ziel-Übergabe: Zuverlässigere Erkennung installierter Karten-Varianten und optimierte Adress-Suche für Komoot
+- Oberflächen- & Sprach-Feinschliff: Dynamischer Untertitel passend zur gewählten Ziel-App, erweiterte Zwischenablage-Erkennung und korrigierte Übersetzungen
+
 ## 1.4.0
 - Verbesserte App-Auswahl: Die Liste der Navigations-Apps in den Einstellungen ist jetzt flüssig scrollbar und auf allen Bildschirmgrößen vollständig erreichbar
 - Präzisere Weiterleitung: Zuverlässigere Prüfung von geteilten Texten sowie optimierte Übergabe an den Standard-Browser und Web-Fallbacks

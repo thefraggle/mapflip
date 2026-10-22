@@ -109,7 +109,7 @@ Translates the normalized `ParsedLocation` into platform-native intents:
 ### 2.3 Android 12+ Deep Link Verification (`DomainVerificationHelper`)
 Android 12 (API 31+) restricts unverified HTTP/HTTPS link handling:
 * MapFlip provides a visual **`SetupGuideBottomSheet`** that guides users through link activation in 3 numbered steps.
-* `DomainVerificationManager` dynamically inspects `hostToStateMap` to determine whether all declared domain hosts (29 hosts across supported map services) are verified or selected (`DOMAIN_STATE_SELECTED` / `DOMAIN_STATE_VERIFIED`).
+* `DomainVerificationManager` dynamically inspects `hostToStateMap` to determine whether all declared domain hosts (32 hosts across supported map services) are verified or selected (`DOMAIN_STATE_SELECTED` / `DOMAIN_STATE_VERIFIED`).
 * Live badge in the main screen reflects real-time link enablement status.
 
 ### 2.4 Pause Subsystem & Quick Settings Tile

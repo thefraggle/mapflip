@@ -1,0 +1,5 @@
+• Added direct support for Plus Codes web links (plus.codes) and short codes with locality names
+• Added Waze short links (ul.waze.com) and /location paths
+• Parenthesized labels in geo URIs and map links inside plain text are now preserved
+• Improved detection of installed target apps (CoMaps, OsmAnd, Locus Map) and Komoot text search routing
+• Refined translations, clipboard source labels, error handling, and internal code structure

@@ -140,25 +140,26 @@ object Strings {
         val effectivePrivacyNote: String
             get() = if (de.goork.mapflip.BuildConfig.FLAVOR == "play" && privacyNotePlay.isNotBlank()) privacyNotePlay else privacyNote
 
-        fun testButtonLabel(targetApp: de.goork.mapflip.navigation.TargetNavigationApp): String {
-            val appName = when (targetApp) {
-                de.goork.mapflip.navigation.TargetNavigationApp.GOOGLE_MAPS -> "Google Maps"
-                de.goork.mapflip.navigation.TargetNavigationApp.WAZE -> "Waze"
-                de.goork.mapflip.navigation.TargetNavigationApp.ORGANIC_MAPS -> "Organic Maps"
-                de.goork.mapflip.navigation.TargetNavigationApp.COMAPS -> "CoMaps"
-                de.goork.mapflip.navigation.TargetNavigationApp.OSMAND -> "OsmAnd"
-                de.goork.mapflip.navigation.TargetNavigationApp.VELA -> "Vela"
-                de.goork.mapflip.navigation.TargetNavigationApp.HERE_WEGO -> "HERE WeGo"
-                de.goork.mapflip.navigation.TargetNavigationApp.YANDEX_MAPS -> "Yandex Maps"
-                de.goork.mapflip.navigation.TargetNavigationApp.MAGIC_EARTH -> "Magic Earth"
-                de.goork.mapflip.navigation.TargetNavigationApp.CITYMAPPER -> "Citymapper"
-                de.goork.mapflip.navigation.TargetNavigationApp.KOMOOT -> "Komoot"
-                de.goork.mapflip.navigation.TargetNavigationApp.TOMTOM_AMIGO -> "TomTom AmiGO"
-                de.goork.mapflip.navigation.TargetNavigationApp.SYGIC -> "Sygic"
-                de.goork.mapflip.navigation.TargetNavigationApp.LOCUS_MAP -> "Locus Map"
-                de.goork.mapflip.navigation.TargetNavigationApp.MAPY_CZ -> "Mapy.cz"
-                de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> if (sectionTargetApp.isNotBlank()) sectionTargetApp else "Navigation App"
+        fun formatSubtitle(targetApp: de.goork.mapflip.navigation.TargetNavigationApp): String {
+            if (targetApp == de.goork.mapflip.navigation.TargetNavigationApp.GOOGLE_MAPS) return subtitle
+            val targetLabel = if (targetApp.isSystemPicker) {
+                if (sectionTargetApp.isNotBlank()) sectionTargetApp else "Navigation App"
+            } else {
+                targetApp.displayName
             }
+            return subtitle.replace("Google Maps", targetLabel)
+        }
+
+        private fun resolveTargetAppDisplayLabel(targetApp: de.goork.mapflip.navigation.TargetNavigationApp): String {
+            return if (targetApp.isSystemPicker) {
+                if (sectionTargetApp.isNotBlank()) sectionTargetApp else "Navigation App"
+            } else {
+                targetApp.displayName
+            }
+        }
+
+        fun testButtonLabel(targetApp: de.goork.mapflip.navigation.TargetNavigationApp): String {
+            val appName = resolveTargetAppDisplayLabel(targetApp)
             return try {
                 btnTestLink.format(appName)
             } catch (_: Exception) {
@@ -167,24 +168,7 @@ object Strings {
         }
 
         fun openInButtonLabel(targetApp: de.goork.mapflip.navigation.TargetNavigationApp): String {
-            val appName = when (targetApp) {
-                de.goork.mapflip.navigation.TargetNavigationApp.GOOGLE_MAPS -> "Google Maps"
-                de.goork.mapflip.navigation.TargetNavigationApp.WAZE -> "Waze"
-                de.goork.mapflip.navigation.TargetNavigationApp.ORGANIC_MAPS -> "Organic Maps"
-                de.goork.mapflip.navigation.TargetNavigationApp.COMAPS -> "CoMaps"
-                de.goork.mapflip.navigation.TargetNavigationApp.OSMAND -> "OsmAnd"
-                de.goork.mapflip.navigation.TargetNavigationApp.VELA -> "Vela"
-                de.goork.mapflip.navigation.TargetNavigationApp.HERE_WEGO -> "HERE WeGo"
-                de.goork.mapflip.navigation.TargetNavigationApp.YANDEX_MAPS -> "Yandex Maps"
-                de.goork.mapflip.navigation.TargetNavigationApp.MAGIC_EARTH -> "Magic Earth"
-                de.goork.mapflip.navigation.TargetNavigationApp.CITYMAPPER -> "Citymapper"
-                de.goork.mapflip.navigation.TargetNavigationApp.KOMOOT -> "Komoot"
-                de.goork.mapflip.navigation.TargetNavigationApp.TOMTOM_AMIGO -> "TomTom AmiGO"
-                de.goork.mapflip.navigation.TargetNavigationApp.SYGIC -> "Sygic"
-                de.goork.mapflip.navigation.TargetNavigationApp.LOCUS_MAP -> "Locus Map"
-                de.goork.mapflip.navigation.TargetNavigationApp.MAPY_CZ -> "Mapy.cz"
-                de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER -> if (sectionTargetApp.isNotBlank()) sectionTargetApp else "Navigation App"
-            }
+            val appName = resolveTargetAppDisplayLabel(targetApp)
             return try {
                 btnOpenInApp.format(appName)
             } catch (_: Exception) {
@@ -493,7 +477,7 @@ object Strings {
         setupTitle = "Comment ça marche",
         step1 = "Appuyez sur le bouton \"Ouvrir les paramètres\"",
         step2 = "Activez \"Ouvrir les liens pris en charge\" pour les services de cartes souhaités (ex. Apple, Bing, OSM, Yandex)",
-        step3 = "Terminé! Les liens de cartes s\'''ouvriront désormais facilement dans votre application de navigation préférée.",
+        step3 = "Terminé! Les liens de cartes s'ouvriront désormais facilement dans votre application de navigation préférée.",
         btnSettings = "Ouvrir les paramètres",
         statusActive = "Les liens sont activés",
         statusInactive = "Les liens ne sont pas encore actifs",
@@ -553,7 +537,7 @@ object Strings {
         statusInstalled = "Installée",
         statusNotInstalled = "Non installée",
         tileSetupRequired = "Configuration requise",
-        targetAppFallbackOpened = "%s n\'''est pas installée – ouvert avec %s",
+        targetAppFallbackOpened = "%s n'est pas installée – ouvert avec %s",
         redirectingToApp = "Redirection vers %s...",
         setupSheetTitle = "Configurer les liens de carte",
         setupSheetSubtitle = "Android 12+ requiert la confirmation manuelle des liens de carte pris en charge.",
@@ -611,7 +595,7 @@ object Strings {
         dialogPauseTitle = "Seleziona durata pausa",
         menuSettingsAbout = "Impostazioni e Informazioni",
         aboutTitle = "Informazioni su MapFlip",
-        appVersionLabel = "Version",
+        appVersionLabel = "Versione",
         btnClose = "Chiudi",
         sectionLanguage = "Lingua",
         sectionTheme = "Aspetto",

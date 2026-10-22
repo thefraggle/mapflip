@@ -1,0 +1,5 @@
+• Prise en charge directe des liens web Plus Codes (plus.codes) et des codes courts avec localité
+• Ajout des liens courts Waze (ul.waze.com) et des chemins /location
+• Conservation des libellés entre parenthèses dans les URI geo et les liens en texte brut
+• Meilleure détection des applications installées (CoMaps, OsmAnd, Locus Map) et recherche texte Komoot
+• Traductions, libellés du presse-papiers, gestion des erreurs et structure interne optimisés

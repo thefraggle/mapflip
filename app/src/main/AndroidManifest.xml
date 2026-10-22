@@ -121,8 +121,11 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" android:host="waze.com" android:pathPrefix="/ul" />
                 <data android:scheme="https" android:host="www.waze.com" android:pathPrefix="/ul" />
+                <data android:scheme="https" android:host="ul.waze.com" />
                 <data android:scheme="https" android:host="waze.com" android:pathPrefix="/live-map" />
                 <data android:scheme="https" android:host="www.waze.com" android:pathPrefix="/live-map" />
+                <data android:scheme="https" android:host="waze.com" android:pathPrefix="/location" />
+                <data android:scheme="https" android:host="www.waze.com" android:pathPrefix="/location" />
             </intent-filter>
 
             <!-- 7. Google Maps Links (De-Google) -->
@@ -157,6 +160,15 @@
                 <data android:host="www.mapy.com" />
                 <data android:host="mapy.cz" />
                 <data android:host="www.mapy.cz" />
+            </intent-filter>
+
+            <!-- 10. Plus Codes Web Links -->
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="plus.codes" />
+                <data android:scheme="https" android:host="www.plus.codes" />
             </intent-filter>
         </activity>
 

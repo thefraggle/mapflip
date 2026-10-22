@@ -314,6 +314,10 @@ class NavigationIntentBuilderTest {
         // Komoot
         assertEquals("komoot://tour?coordinate=52.52,13.405",
             NavigationIntentBuilder.buildKomootUriString(coords))
+        assertEquals("komoot://tour?coordinate=52.52,13.405",
+            NavigationIntentBuilder.buildKomootUriString(ParsedLocation.Navigation("52.52,13.405")))
+        assertEquals("https://www.komoot.com/search/Brandenburger+Tor",
+            NavigationIntentBuilder.buildKomootUriString(ParsedLocation.Navigation("Brandenburger Tor")))
 
         // TomTom AmiGO
         assertEquals("amigo://navigate?to=52.52,13.405",

@@ -35,9 +35,9 @@ Set it up once, and it works invisibly in the background.
   - **Bing Maps** (`bing.com/maps`, `maps.bing.com`)
   - **HERE WeGo** (`wego.here.com`, `share.here.com`, `here.com`)
   - **Yandex Maps** (`yandex.com/maps`, `maps.yandex.ru`)
-  - **Waze** (`waze.com/ul`, `waze.com/live-map`)
+  - **Waze** (`waze.com/ul`, `ul.waze.com`, `waze.com/live-map`, `waze.com/location`)
   - **DuckDuckGo Maps** (`duckduckgo.com/?q=...&iaxm=maps` via Share Sheet & Clipboard)
-  - **Google Plus Codes** (100% offline Base20 decoding)
+  - **Google Plus Codes** (`plus.codes` web links & 100% offline Base20 decoding)
   - **Direct GPS Coordinates** (RFC 5870 `geo:`, decimal & DMS)
 - 🎯 **Configurable Target Apps** – Route destinations directly to 15 navigation apps:
   - **Google Maps**

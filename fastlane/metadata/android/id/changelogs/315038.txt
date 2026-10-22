@@ -1,0 +1,5 @@
+• Dukungan langsung tautan web Plus Codes (plus.codes) dan kode pendek dengan nama kota
+• Menambahkan tautan pendek Waze (ul.waze.com) dan jalur /location
+• Label dalam tanda kurung pada URI geo dan tautan dalam teks biasa kini dipertahankan
+• Peningkatan deteksi aplikasi terinstal (CoMaps, OsmAnd, Locus Map) dan pencarian teks Komoot
+• Optimalisasi terjemahan, label papan klip, penanganan kesalahan, dan struktur kode

@@ -1,0 +1,5 @@
+• Direkte støtte for Plus Codes-nettlenker (plus.codes) og kortkoder med stedsnavn
+• Lagt til korte Waze-lenker (ul.waze.com) og /location-stier
+• Etiketter i parentes i geo-URI-er og kartlenker i ren tekst bevares nå
+• Bedre gjenkjenning av installerte apper (CoMaps, OsmAnd, Locus Map) og tekstsøk i Komoot
+• Optimaliserte oversettelser, utklippstavle-etiketter, feilhåndtering og intern kodestruktur

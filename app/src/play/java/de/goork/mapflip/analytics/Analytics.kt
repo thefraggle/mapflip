@@ -43,6 +43,7 @@ object Analytics {
     private var osVersion = ""
     private var locale = ""
 
+    private val sessionLock = Any()
     private var currentSessionId = ""
     private var lastEventTimestamp = 0L
 
@@ -120,17 +121,21 @@ object Analytics {
     }
 
     private fun refreshSessionId() {
-        currentSessionId = UUID.randomUUID().toString().lowercase()
-        lastEventTimestamp = System.currentTimeMillis()
+        synchronized(sessionLock) {
+            currentSessionId = UUID.randomUUID().toString().lowercase()
+            lastEventTimestamp = System.currentTimeMillis()
+        }
     }
 
     private fun getValidSessionId(): String {
-        val now = System.currentTimeMillis()
-        if (currentSessionId.isEmpty() || (now - lastEventTimestamp) > SESSION_TIMEOUT_MS) {
-            refreshSessionId()
+        synchronized(sessionLock) {
+            val now = System.currentTimeMillis()
+            if (currentSessionId.isEmpty() || (now - lastEventTimestamp) > SESSION_TIMEOUT_MS) {
+                refreshSessionId()
+            }
+            lastEventTimestamp = now
+            return currentSessionId
         }
-        lastEventTimestamp = now
-        return currentSessionId
     }
 
     private fun getIso8601Timestamp(): String {
@@ -140,7 +145,7 @@ object Analytics {
     }
 
     fun trackEvent(eventName: String, properties: Map<String, Any> = emptyMap()) {
-        if (!isInitialized || APP_KEY.isBlank() || CUSTOM_HOST.isBlank()) return
+        if (!isInitialized || APP_KEY.isBlank() || CUSTOM_HOST.isBlank() || !CUSTOM_HOST.startsWith("https://", ignoreCase = true)) return
         scope.launch {
             try {
                 val systemPropsObj = JSONObject().apply {
@@ -187,10 +192,12 @@ object Analytics {
                 } finally {
                     try {
                         connection?.disconnect()
-                    } catch (_: Throwable) {}
+                    } catch (e: Throwable) {
+                        Log.d(TAG, "Failed to disconnect telemetry connection", e)
+                    }
                 }
-            } catch (_: Throwable) {
-                // Silently swallow analytics errors to never impact UX
+            } catch (e: Throwable) {
+                Log.d(TAG, "Telemetry dispatch skipped", e)
             }
         }
     }

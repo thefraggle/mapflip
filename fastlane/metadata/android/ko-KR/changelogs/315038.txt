@@ -1,0 +1,5 @@
+• Plus Codes 웹 링크(plus.codes) 및 지역명 포함 단축 코드 지원
+• Waze 단축 링크(ul.waze.com) 및 /location 경로 추가
+• geo URI 및 일반 텍스트 내 지도 링크의 괄호 라벨 유지
+• CoMaps, OsmAnd, Locus Map 감지 및 Komoot 텍스트 검색 개선
+• 번역, 클립보드 출처 라벨, 오류 처리 및 내부 코드 최적화

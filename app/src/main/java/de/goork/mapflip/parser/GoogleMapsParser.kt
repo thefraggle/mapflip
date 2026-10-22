@@ -44,7 +44,7 @@ object GoogleMapsParser : MapUrlParser {
         if (text.isNullOrBlank()) return null
         val matcher = URL_PATTERN.matcher(text)
         if (matcher.find()) {
-            val url = matcher.group().trimEnd('.', ',', ';', '!', '?', ')')
+            val url = trimExtractedUrl(matcher.group())
             if (canParse(url)) return url
         }
         return null
@@ -154,21 +154,5 @@ object GoogleMapsParser : MapUrlParser {
             }
         }
         return null
-    }
-
-    private fun parseQueryParams(query: String): Map<String, String> {
-        if (query.isBlank()) return emptyMap()
-        return query.split("&").mapNotNull { param ->
-            val parts = param.split("=", limit = 2)
-            if (parts.size == 2) {
-                try {
-                    val key = URLDecoder.decode(parts[0], "UTF-8").lowercase().trim()
-                    val value = URLDecoder.decode(parts[1], "UTF-8").trim()
-                    key to value
-                } catch (_: Exception) {
-                    null
-                }
-            } else null
-        }.toMap()
     }
 }

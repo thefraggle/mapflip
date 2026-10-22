@@ -1,0 +1,5 @@
+• 新增對 Plus Codes 網頁連結 (plus.codes) 及帶地名短代碼的直接支援
+• 新增 Waze 短連結 (ul.waze.com) 與 /location 路徑支援
+• 保留 geo URI 與純文字地圖連結中的括號標籤
+• 改進 CoMaps、OsmAnd、Locus Map 的偵測與 Komoot 文字搜尋
+• 最佳化多語言翻譯、剪貼簿來源標籤、錯誤處理及內部程式碼結構

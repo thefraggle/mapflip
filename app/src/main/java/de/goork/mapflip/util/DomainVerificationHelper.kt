@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.pm.verify.domain.DomainVerificationManager
 import android.content.pm.verify.domain.DomainVerificationUserState
 import android.os.Build
+import android.util.Log
 
 data class DomainStatusInfo(
     val totalHosts: Int,
@@ -53,7 +54,8 @@ object DomainVerificationHelper {
                     isFullyEnabled = isFully,
                     isPartiallyEnabled = isPartially
                 )
-            } catch (_: Throwable) {
+            } catch (e: Throwable) {
+                Log.w("MapFlip", "Failed to read domain verification user state", e)
                 null
             }
         }

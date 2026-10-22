@@ -244,7 +244,11 @@ fun LinkTesterCard(
                                             type = "text/plain"
                                             putExtra(Intent.EXTRA_TEXT, convertedTargetUri)
                                         }
-                                        context.startActivity(Intent.createChooser(shareIntent, s.btnShareLink))
+                                        try {
+                                            context.startActivity(Intent.createChooser(shareIntent, s.btnShareLink))
+                                        } catch (_: Exception) {
+                                            Toast.makeText(context, s.targetAppOpenError, Toast.LENGTH_SHORT).show()
+                                        }
                                     },
                                     modifier = Modifier.weight(1f),
                                     shape = RoundedCornerShape(10.dp)

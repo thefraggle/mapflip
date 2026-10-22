@@ -1,0 +1,5 @@
+• Plus Codes web bağlantıları (plus.codes) ve konum içeren kısa kodlar için doğrudan destek
+• Waze kısa bağlantıları (ul.waze.com) ve /location yolları eklendi
+• Geo URI'lerdeki ve metin içi bağlantılardaki parantezli etiketler artık korunuyor
+• Yüklü hedef uygulamaların (CoMaps, OsmAnd, Locus Map) tespiti ve Komoot metin araması iyileştirildi
+• Çeviriler, pano etiketleri, hata yönetimi ve dahili kod yapısı optimize edildi

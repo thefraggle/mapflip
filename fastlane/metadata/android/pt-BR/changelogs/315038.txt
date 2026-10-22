@@ -1,0 +1,5 @@
+• Suporte direto para links web Plus Codes (plus.codes) e códigos curtos com localidade
+• Adicionados links curtos do Waze (ul.waze.com) e caminhos /location
+• Rótulos entre parênteses em URIs geo e links em texto simples agora são preservados
+• Melhor detecção de apps instalados (CoMaps, OsmAnd, Locus Map) e busca por texto no Komoot
+• Traduções, rótulos da área de transferência, tratamento de erros e código otimizados

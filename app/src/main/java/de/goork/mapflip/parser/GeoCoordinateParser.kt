@@ -13,9 +13,9 @@ object GeoCoordinateParser : MapUrlParser {
     override val serviceName: String = "Geo / Coordinates"
     override val supportedHosts: List<String> = emptyList()
 
-    // 1. geo: URI Pattern (e.g. geo:52.52,13.40?q=Berlin or geo:0,0?q=52.52,13.40)
+    // 1. geo: URI Pattern (e.g. geo:52.52,13.40?q=Berlin or geo:0,0?q=52.52,13.40(Berlin))
     private val GEO_URI_PATTERN = Pattern.compile(
-        """\bgeo:[-+]?[0-9]+(?:\.[0-9]+)?(?:,[-+]?[0-9]+(?:\.[0-9]+)?)?(?:[^\s<>"'()]*[^\s<>"'().,;:!])?""",
+        """\bgeo:[-+]?[0-9]+(?:\.[0-9]+)?(?:,[-+]?[0-9]+(?:\.[0-9]+)?)?(?:\?[^\s<>"']*)?""",
         Pattern.CASE_INSENSITIVE
     )
 
@@ -47,7 +47,7 @@ object GeoCoordinateParser : MapUrlParser {
         // 1. Check for explicit geo: URI
         val geoMatcher = GEO_URI_PATTERN.matcher(text)
         if (geoMatcher.find()) {
-            val uri = geoMatcher.group().trimEnd('.', ',', ';', '!', '?', ')')
+            val uri = trimExtractedUrl(geoMatcher.group())
             if (canParse(uri)) return uri
         }
 

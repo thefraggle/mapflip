@@ -1,0 +1,5 @@
+• Plus-Codes-Weblinks (plus.codes) sowie Kurzcodes mit Ortszusatz werden nun direkt unterstützt
+• Waze-Kurzlinks (ul.waze.com) und /location-Pfade ergänzt
+• Klammer-Labels in Geo-URIs und Kartenlinks im Fließtext bleiben vollständig erhalten
+• Verbesserte Erkennung installierter Ziel-Apps (CoMaps, OsmAnd, Locus Map) sowie Komoot-Textsuche
+• Übersetzungen, Zwischenablage-Labels, Fehlerbehandlung und interne Code-Struktur optimiert

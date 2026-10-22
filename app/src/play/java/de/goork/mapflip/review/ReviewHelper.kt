@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import com.google.android.play.core.review.ReviewManagerFactory
 import de.goork.mapflip.analytics.Analytics
 import de.goork.mapflip.data.PreferencesRepository
@@ -55,7 +56,8 @@ object ReviewHelper {
                     onComplete?.invoke()
                 }
             }
-        } catch (_: Throwable) {
+        } catch (e: Throwable) {
+            Log.w("MapFlip", "Failed to launch in-app review flow", e)
             onComplete?.invoke()
         }
     }
@@ -76,7 +78,9 @@ object ReviewHelper {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
                 context.startActivity(webIntent)
-            } catch (_: Exception) {}
+            } catch (e: Exception) {
+                Log.w("MapFlip", "Failed to open Play Store web listing", e)
+            }
         }
     }
 }

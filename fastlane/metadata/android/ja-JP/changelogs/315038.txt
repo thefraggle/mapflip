@@ -1,0 +1,5 @@
+• Plus Codesリンク(plus.codes)と地域名付き短縮コードに対応
+• Waze短縮リンク(ul.waze.com)と /location パスを追加
+• geo URIやテキスト内リンクの括弧付きラベルを保持
+• CoMaps、OsmAnd、Locus Mapの検出とKomoot検索を改善
+• 翻訳、クリップボード表示、エラー処理を最適化

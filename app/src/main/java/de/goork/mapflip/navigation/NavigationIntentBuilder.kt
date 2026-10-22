@@ -161,19 +161,10 @@ object NavigationIntentBuilder {
     }
 
     fun buildCoMapsIntent(location: ParsedLocation, context: Context? = null): Intent {
-        val primaryPackage = TargetNavigationApp.COMAPS.packageName!!
-        val pkg = if (context != null) {
-            try {
-                context.packageManager.getPackageInfo(primaryPackage, 0)
-                primaryPackage
-            } catch (_: Exception) {
-                TargetNavigationApp.COMAPS_FDROID_PACKAGE
-            }
-        } else {
-            primaryPackage
-        }
+        val pkg = TargetNavigationApp.COMAPS.resolveInstalledPackage(context)
+            ?: TargetNavigationApp.COMAPS.packageName
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildCoMapsUriString(location))).apply {
-            setPackage(pkg)
+            if (pkg != null) setPackage(pkg)
         }
     }
 
@@ -189,18 +180,8 @@ object NavigationIntentBuilder {
     }
 
     fun buildOsmAndIntent(location: ParsedLocation, context: Context? = null): Intent {
-        val pkg = if (context != null) {
-            val pm = context.packageManager
-            val isPlusInstalled = try {
-                pm.getPackageInfo("net.osmand.plus", 0)
-                true
-            } catch (_: Exception) {
-                false
-            }
-            if (isPlusInstalled) "net.osmand.plus" else TargetNavigationApp.OSMAND.packageName
-        } else {
-            TargetNavigationApp.OSMAND.packageName
-        }
+        val pkg = TargetNavigationApp.OSMAND.resolveInstalledPackage(context)
+            ?: TargetNavigationApp.OSMAND.packageName
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildOsmAndUriString(location))).apply {
             if (pkg != null) setPackage(pkg)
         }
@@ -376,13 +357,27 @@ object NavigationIntentBuilder {
         }
     }
 
+    private val COORD_PAIR_REGEX = Regex("""^[-+]?[0-9]+(?:\.[0-9]+)?\s*,\s*[-+]?[0-9]+(?:\.[0-9]+)?$""")
+
     fun buildKomootUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "komoot://"
             is ParsedLocation.Coordinates -> "komoot://tour?coordinate=${formatCoordCompact(location.latitude)},${formatCoordCompact(location.longitude)}"
             is ParsedLocation.SearchQuery -> "https://www.komoot.com/search/${encode(location.query)}"
-            is ParsedLocation.Navigation -> "komoot://tour?coordinate=${encode(location.destination)}"
-            is ParsedLocation.Directions -> "komoot://tour?coordinate=${encode(location.destination)}"
+            is ParsedLocation.Navigation -> {
+                if (COORD_PAIR_REGEX.matches(location.destination.trim())) {
+                    "komoot://tour?coordinate=${location.destination.replace(" ", "")}"
+                } else {
+                    "https://www.komoot.com/search/${encode(location.destination)}"
+                }
+            }
+            is ParsedLocation.Directions -> {
+                if (COORD_PAIR_REGEX.matches(location.destination.trim())) {
+                    "komoot://tour?coordinate=${location.destination.replace(" ", "")}"
+                } else {
+                    "https://www.komoot.com/search/${encode(location.destination)}"
+                }
+            }
             is ParsedLocation.WebFallback -> "https://www.komoot.com/search/${encode(location.fallbackUrl)}"
         }
     }
@@ -461,18 +456,8 @@ object NavigationIntentBuilder {
     }
 
     fun buildLocusMapIntent(location: ParsedLocation, context: Context? = null): Intent {
-        val pkg = if (context != null) {
-            val pm = context.packageManager
-            val isProInstalled = try {
-                pm.getPackageInfo("menion.android.locus.pro", 0)
-                true
-            } catch (_: Exception) {
-                false
-            }
-            if (isProInstalled) "menion.android.locus.pro" else TargetNavigationApp.LOCUS_MAP.packageName
-        } else {
-            TargetNavigationApp.LOCUS_MAP.packageName
-        }
+        val pkg = TargetNavigationApp.LOCUS_MAP.resolveInstalledPackage(context)
+            ?: TargetNavigationApp.LOCUS_MAP.packageName
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildLocusMapUriString(location))).apply {
             if (pkg != null) setPackage(pkg)
         }

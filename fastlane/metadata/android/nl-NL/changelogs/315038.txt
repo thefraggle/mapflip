@@ -1,0 +1,5 @@
+• Directe ondersteuning voor Plus Codes-weblinks (plus.codes) en korte codes met plaatsnaam
+• Korte Waze-links (ul.waze.com) en /location-paden toegevoegd
+• Labels tussen haakjes in geo-URI's en kaartlinks in platte tekst blijven behouden
+• Betere detectie van geïnstalleerde doel-apps (CoMaps, OsmAnd, Locus Map) en Komoot-tekstzoekopdrachten
+• Vertalingen, klembordlabels, foutafhandeling en interne codestructuur geoptimaliseerd

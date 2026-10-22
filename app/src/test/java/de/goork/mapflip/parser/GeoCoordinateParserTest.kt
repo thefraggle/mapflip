@@ -32,6 +32,23 @@ class GeoCoordinateParserTest {
     }
 
     @Test
+    fun `extractUrl preserves balanced closing parenthesis in geo URI label`() {
+        val text = "Treffpunkt: geo:0,0?q=52.520008,13.404954(Berlin+Center)."
+        val extracted = GeoCoordinateParser.extractUrl(text)
+        assertEquals("geo:0,0?q=52.520008,13.404954(Berlin+Center)", extracted)
+        val parsed = GeoCoordinateParser.parse(extracted!!)
+        assertTrue(parsed is ParsedLocation.Coordinates)
+        assertEquals("Berlin Center", (parsed as ParsedLocation.Coordinates).label)
+    }
+
+    @Test
+    fun `extractUrl strips unmatched surrounding closing parenthesis`() {
+        val text = "Siehe (geo:52.520008,13.404954) für Details"
+        val extracted = GeoCoordinateParser.extractUrl(text)
+        assertEquals("geo:52.520008,13.404954", extracted)
+    }
+
+    @Test
     fun `parses geo URIs with text search query`() {
         val uri = "geo:0,0?q=Brandenburger+Tor"
         val parsed = GeoCoordinateParser.parse(uri)

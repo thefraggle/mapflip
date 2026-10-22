@@ -1,0 +1,5 @@
+• Bezpośrednia obsługa linków Plus Codes (plus.codes) oraz krótkich kodów z nazwą miejscowości
+• Dodano krótkie linki Waze (ul.waze.com) oraz ścieżki /location
+• Etykiety w nawiasach w adresach geo URI i linkach w tekście są teraz zachowywane
+• Lepsze wykrywanie zainstalowanych aplikacji (CoMaps, OsmAnd, Locus Map) i wyszukiwania w Komoot
+• Ulepszone tłumaczenia, etykiety schowka, obsługa błędów i struktura kodu

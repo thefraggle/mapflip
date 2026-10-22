@@ -67,4 +67,16 @@ class PlusCodeParserTest {
         assertNull(PlusCodeParser.decode("INVALID+CODE"))
         assertNull(PlusCodeParser.decode("12345+67")) // 1 is not in OLC alphabet
     }
+
+    @Test
+    fun `parses short plus code URL with locality as SearchQuery`() {
+        val shortUrl = "https://plus.codes/V75V+8G,Paris"
+        assertTrue(PlusCodeParser.canParse(shortUrl))
+        val extracted = PlusCodeParser.extractUrl("Ort: https://plus.codes/V75V+8G,Paris.")
+        assertEquals("https://plus.codes/V75V+8G,Paris", extracted)
+
+        val parsed = PlusCodeParser.parse(shortUrl)
+        assertTrue(parsed is ParsedLocation.SearchQuery)
+        assertEquals("V75V+8G Paris", (parsed as ParsedLocation.SearchQuery).query)
+    }
 }

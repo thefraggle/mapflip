@@ -90,44 +90,41 @@ enum class TargetNavigationApp(
 
     companion object {
         const val COMAPS_FDROID_PACKAGE = "app.comaps.fdroid"
+        const val OSMAND_PLUS_PACKAGE = "net.osmand.plus"
+        const val LOCUS_PRO_PACKAGE = "menion.android.locus.pro"
 
         fun fromId(id: String?): TargetNavigationApp {
             return entries.firstOrNull { it.id.equals(id, ignoreCase = true) } ?: GOOGLE_MAPS
         }
     }
 
-    fun isInstalled(context: android.content.Context): Boolean {
-        if (isSystemPicker) return true
-        val pkg = packageName ?: return false
+    /**
+     * Resolves the actually installed package name for this navigation app,
+     * supporting multi-package apps (OsmAnd/OsmAnd+, CoMaps/CoMaps F-Droid, Locus Map/Locus Pro).
+     */
+    fun resolveInstalledPackage(context: android.content.Context?): String? {
+        if (isSystemPicker) return null
+        val primary = packageName ?: return null
+        if (context == null) return primary
         val pm = context.packageManager
-        return try {
-            pm.getPackageInfo(pkg, 0)
-            true
-        } catch (_: Exception) {
-            if (this == COMAPS) {
-                try {
-                    pm.getPackageInfo(COMAPS_FDROID_PACKAGE, 0)
-                    true
-                } catch (_: Exception) {
-                    false
-                }
-            } else if (this == OSMAND) {
-                try {
-                    pm.getPackageInfo("net.osmand.plus", 0)
-                    true
-                } catch (_: Exception) {
-                    false
-                }
-            } else if (this == LOCUS_MAP) {
-                try {
-                    pm.getPackageInfo("menion.android.locus.pro", 0)
-                    true
-                } catch (_: Exception) {
-                    false
-                }
-            } else {
+        val candidates = when (this) {
+            COMAPS -> listOf(primary, COMAPS_FDROID_PACKAGE)
+            OSMAND -> listOf(OSMAND_PLUS_PACKAGE, primary)
+            LOCUS_MAP -> listOf(LOCUS_PRO_PACKAGE, primary)
+            else -> listOf(primary)
+        }
+        return candidates.firstOrNull { pkg ->
+            try {
+                pm.getPackageInfo(pkg, 0)
+                true
+            } catch (_: Exception) {
                 false
             }
         }
+    }
+
+    fun isInstalled(context: android.content.Context): Boolean {
+        if (isSystemPicker) return true
+        return resolveInstalledPackage(context) != null
     }
 }

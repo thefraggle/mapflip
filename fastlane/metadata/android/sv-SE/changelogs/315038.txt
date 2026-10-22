@@ -1,0 +1,5 @@
+• Direkt stöd för Plus Codes-webblänkar (plus.codes) och kortkoder med ortsnamn
+• Lagt till korta Waze-länkar (ul.waze.com) och /location-sökvägar
+• Etiketter inom parentes i geo-URI:er och kartlänkar i löpande text bevaras nu
+• Bättre identifiering av installerade appar (CoMaps, OsmAnd, Locus Map) och textsökning i Komoot
+• Optimerade översättningar, urklippsetiketter, felhantering och intern kodstruktur

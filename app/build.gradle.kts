@@ -19,9 +19,10 @@ val aptabaseKey: String = System.getenv("APTABASE_KEY")
 val aptabaseHost: String = System.getenv("APTABASE_HOST")
     ?: keystoreProperties.getProperty("aptabaseHost", "https://telemetry-apps.goork.de")
 
-val appVersion = "1.4.0"
+// Kept at top level for .github/workflows/android-release.yml (workflow_dispatch grep)
+val appVersion = "1.4.1"
 
-val appVersionCode = 315037
+val appVersionCode = 315038
 
 android {
     namespace = "de.goork.mapflip"
@@ -31,8 +32,9 @@ android {
         applicationId = "de.goork.mapflip"
         minSdk = 26
         targetSdk = 36
-        versionCode = appVersionCode
-        versionName = appVersion
+        // IMPORTANT: Must remain static literals (not variable references) for F-Droid's checkupdates.py regex parser
+        versionCode = 315038
+        versionName = "1.4.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
