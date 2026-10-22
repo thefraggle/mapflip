@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -14,8 +15,8 @@ import de.goork.mapflip.navigation.NavigationIntentBuilder
 import de.goork.mapflip.parser.UniversalMapParser
 
 /**
- * Transparent activity that silently intercepts and redirects map links (Apple, Bing, OSM, Yandex)
- * to the user's preferred navigation app (Google Maps, Waze, Organic Maps, OsmAnd, or System Picker).
+ * Transparent activity that silently intercepts and redirects supported map links,
+ * coordinates, and Plus Codes to the user's preferred navigation app.
  *
  * If MapFlip is paused by the user, it forwards the original URL directly to a web browser.
  */
@@ -41,9 +42,16 @@ class RedirectActivity : Activity() {
         if (mapUrl != null) {
             val sourceService = UniversalMapParser.detectSourceService(mapUrl)
             val dataUri = incomingUri ?: Uri.parse(mapUrl)
-            if (incomingUri != null && !UniversalMapParser.canParse(mapUrl)) {
-                // Not a supported map URL (e.g. regular web search from intercepted search engine host)
-                forwardOriginalUrl(dataUri)
+            if (!UniversalMapParser.canParse(mapUrl)) {
+                if (incomingUri != null) {
+                    // Not a supported map URL (e.g. regular web search from intercepted search engine host)
+                    forwardOriginalUrl(dataUri)
+                } else {
+                    Analytics.trackEvent("redirect_failed", mapOf(
+                        "reason" to "unsupported_shared_text",
+                        "is_share_sheet" to isShareSheet
+                    ))
+                }
             } else if (isPaused) {
                 // When paused: forward original URL to non-MapFlip browser
                 Analytics.trackEvent("redirect_paused", mapOf("source_service" to sourceService))
@@ -170,7 +178,7 @@ class RedirectActivity : Activity() {
         // 2. Specific Waze web fallback if applicable
         if (targetApp == de.goork.mapflip.navigation.TargetNavigationApp.WAZE) {
             try {
-                val wazeWebUri = Uri.parse("https://waze.com/ul?${dataUri.query ?: ""}")
+                val wazeWebUri = Uri.parse(NavigationIntentBuilder.buildWazeWebFallbackUriString(parsedLocation))
                 val fallbackIntent = Intent(Intent.ACTION_VIEW, wazeWebUri).apply {
                     addCategory(Intent.CATEGORY_BROWSABLE)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -201,9 +209,16 @@ class RedirectActivity : Activity() {
         }
 
         val browserPackage = try {
-            packageManager.queryIntentActivities(genericWebIntent, 0)
-                .map { it.activityInfo.packageName }
-                .firstOrNull { it != packageName }
+            val defaultBrowser = packageManager.resolveActivity(genericWebIntent, PackageManager.MATCH_DEFAULT_ONLY)
+                ?.activityInfo?.packageName
+                ?.takeIf { it != packageName && it != "android" }
+            defaultBrowser
+                ?: packageManager.queryIntentActivities(genericWebIntent, PackageManager.MATCH_DEFAULT_ONLY)
+                    .map { it.activityInfo.packageName }
+                    .firstOrNull { it != packageName && it != "android" }
+                ?: packageManager.queryIntentActivities(genericWebIntent, 0)
+                    .map { it.activityInfo.packageName }
+                    .firstOrNull { it != packageName && it != "android" }
         } catch (e: Exception) {
             Log.w("MapFlip", "Failed to query browser activities", e)
             null

@@ -1,0 +1,3 @@
+• Scrollable navigation app picker in settings for all screen sizes.
+• Smarter validation of shared text and improved handoff to your default browser.
+• Enhanced keyboard navigation (ESC) and larger touch targets.

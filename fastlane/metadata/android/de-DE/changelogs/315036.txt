@@ -1,0 +1,3 @@
+• Mapy.cz kann jetzt als Standard-Navigations-App ausgewählt werden.
+• Verbesserte Erkennung internationaler Google-Maps-Links.
+• Stabilität und Zuverlässigkeit bei Link-Weiterleitungen erhöht.

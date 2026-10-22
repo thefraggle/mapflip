@@ -1,0 +1,3 @@
+• Selector de aplicaciones desplazable en los ajustes para todos los tamaños de pantalla.
+• Validación más precisa del texto compartido y mejor redirección al navegador predeterminado.
+• Navegación por teclado mejorada (ESC) y áreas táctiles más amplias.

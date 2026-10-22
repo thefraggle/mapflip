@@ -1,0 +1,3 @@
+• Scrollbar appväljare i inställningarna för alla skärmstorlekar.
+• Mer exakt kontroll av delad text och bättre vidarebefordran till standardwebbläsaren.
+• Förbättrad tangentbordsnavigering (ESC) och större tryckytor.

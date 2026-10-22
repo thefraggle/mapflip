@@ -95,13 +95,13 @@ fun ClipboardBanner(
                 }
                 IconButton(
                     onClick = onDismiss,
-                    modifier = Modifier.size(28.dp)
+                    modifier = Modifier.size(40.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.Close,
                         contentDescription = s.btnClose,
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(18.dp)
                     )
                 }
             }

@@ -1,0 +1,3 @@
+• Sélecteur d'application défilant dans les paramètres pour toutes les tailles d'écran.
+• Validation plus précise du texte partagé et redirection améliorée vers le navigateur par défaut.
+• Navigation au clavier améliorée (ESC) et zones tactiles agrandies.

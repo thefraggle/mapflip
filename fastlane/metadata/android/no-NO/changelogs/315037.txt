@@ -1,0 +1,3 @@
+• Rullbar app-velger i innstillingene for alle skjermstørrelser.
+• Mer presis sjekk av delt tekst og bedre videresending til standardnettleseren.
+• Forbedret tastaturnavigering (ESC) og større trykkflater.

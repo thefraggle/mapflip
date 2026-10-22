@@ -148,4 +148,41 @@ class PreferencesRepositoryTest {
         repo.lastReviewPromptTimestamp = testTs
         org.junit.Assert.assertEquals(testTs, repo.lastReviewPromptTimestamp)
     }
+
+    @Test
+    fun testPauseForDurationAndUnpauseUpdatesStateFlow() {
+        val prefs = FakeSharedPreferences()
+        val repo = PreferencesRepository.createForTesting(prefs)
+
+        assertFalse(repo.isCurrentlyPaused())
+        assertFalse(repo.preferences.value.isPaused)
+
+        repo.pauseForDuration(3_600_000L)
+        org.junit.Assert.assertTrue(repo.isCurrentlyPaused())
+        org.junit.Assert.assertTrue(repo.preferences.value.isPaused)
+        org.junit.Assert.assertTrue(repo.preferences.value.pausedUntilTimestamp > System.currentTimeMillis())
+
+        repo.unpause()
+        assertFalse(repo.isCurrentlyPaused())
+        assertFalse(repo.preferences.value.isPaused)
+        org.junit.Assert.assertEquals(0L, repo.preferences.value.pausedUntilTimestamp)
+    }
+
+    @Test
+    fun testLanguageThemeAndTargetAppUpdatesStateFlow() {
+        val prefs = FakeSharedPreferences()
+        val repo = PreferencesRepository.createForTesting(prefs)
+
+        repo.setLanguage("de")
+        org.junit.Assert.assertEquals("de", repo.getLanguage())
+        org.junit.Assert.assertEquals("de", repo.preferences.value.language)
+
+        repo.setTheme("dark")
+        org.junit.Assert.assertEquals("dark", repo.getTheme())
+        org.junit.Assert.assertEquals("dark", repo.preferences.value.theme)
+
+        repo.setTargetApp(de.goork.mapflip.navigation.TargetNavigationApp.ORGANIC_MAPS)
+        org.junit.Assert.assertEquals(de.goork.mapflip.navigation.TargetNavigationApp.ORGANIC_MAPS, repo.getTargetApp())
+        org.junit.Assert.assertEquals(de.goork.mapflip.navigation.TargetNavigationApp.ORGANIC_MAPS, repo.preferences.value.targetApp)
+    }
 }

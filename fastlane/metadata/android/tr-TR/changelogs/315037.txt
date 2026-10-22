@@ -1,0 +1,3 @@
+• Ayarlardaki navigasyon uygulaması listesi artık tüm ekran boyutları için kaydırılabilir.
+• Paylaşılan metin doğrulaması ve varsayılan tarayıcıya yönlendirme iyileştirildi.
+• Klavye kontrolü (ESC) ve dokunma alanları geliştirildi.

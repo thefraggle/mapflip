@@ -1,0 +1,3 @@
+• Mapy.cz kini dapat dipilih sebagai aplikasi navigasi pilihan Anda.
+• Peningkatan pengenalan tautan Google Maps internasional.
+• Peningkatan stabilitas dan keandalan pengalihan tautan.

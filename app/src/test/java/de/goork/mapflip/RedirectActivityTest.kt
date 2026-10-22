@@ -3,9 +3,13 @@ package de.goork.mapflip
 import android.content.Intent
 import android.net.Uri
 import de.goork.mapflip.data.PreferencesRepository
+import de.goork.mapflip.navigation.NavigationIntentBuilder
 import de.goork.mapflip.navigation.TargetNavigationApp
+import de.goork.mapflip.parser.ParsedLocation
+import de.goork.mapflip.parser.UniversalMapParser
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -159,5 +163,33 @@ class RedirectActivityTest {
         assertNotNull(startedIntent)
         // Since neither Organic Maps nor Google Maps are installed, it falls back to SYSTEM_PICKER chooser
         assertEquals(Intent.ACTION_CHOOSER, startedIntent.action)
+    }
+
+    @Test
+    fun testShareSheetWithPlainNonMapTextDoesNotLaunchNavigationApp() {
+        val initialFlips = repository.successfulFlipCount
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, "Hallo Welt, treffen wir uns heute Abend?")
+        }
+
+        val controller = Robolectric.buildActivity(RedirectActivity::class.java, intent)
+        val activity = controller.create().get()
+
+        assertTrue(activity.isFinishing)
+        val shadowActivity = shadowOf(activity)
+        assertNull(shadowActivity.nextStartedActivity)
+        assertEquals(initialFlips, repository.successfulFlipCount)
+    }
+
+    @Test
+    fun testWazeWebFallbackUsesNormalizedCoordinatesInsteadOfRawSourceQuery() {
+        // Yandex URL uses inverted ll=lon,lat (13.4050,52.5200)
+        val yandexUrl = "https://yandex.com/maps/?ll=13.4050,52.5200&z=15"
+        val parsed = UniversalMapParser.parse(yandexUrl)
+        assertTrue(parsed is ParsedLocation.Coordinates)
+
+        val wazeFallback = NavigationIntentBuilder.buildWazeWebFallbackUriString(parsed)
+        assertEquals("https://www.waze.com/ul?ll=52.52,13.405&navigate=yes", wazeFallback)
     }
 }

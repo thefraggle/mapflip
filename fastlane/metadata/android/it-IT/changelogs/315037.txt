@@ -1,0 +1,3 @@
+• Selettore dell'app di navigazione scorrevole nelle impostazioni per tutte le dimensioni dello schermo.
+• Verifica più precisa del testo condiviso e migliore apertura nel browser predefinito.
+• Navigazione da tastiera migliorata (ESC) e aree di tocco più ampie.

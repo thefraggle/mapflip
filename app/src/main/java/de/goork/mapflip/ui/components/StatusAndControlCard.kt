@@ -18,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import de.goork.mapflip.ui.Strings
 import de.goork.mapflip.ui.theme.Green500
+import de.goork.mapflip.ui.theme.Orange500
 import de.goork.mapflip.ui.theme.Red500
 import de.goork.mapflip.util.DomainStatusInfo
 
@@ -61,7 +62,7 @@ fun StatusAndControlCard(
                     isPaused -> MaterialTheme.colorScheme.onSurfaceVariant
                     domainStatus != null -> when {
                         domainStatus.isFullyEnabled -> Green500
-                        domainStatus.isPartiallyEnabled -> Color(0xFFFF9800)
+                        domainStatus.isPartiallyEnabled -> Orange500
                         else -> Red500
                     }
                     linksActive == true -> Green500

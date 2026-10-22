@@ -1,0 +1,3 @@
+• Scrollbare app-kiezer in de instellingen voor alle schermformaten.
+• Nauwkeurigere controle van gedeelde tekst en betere doorverwijzing naar de standaardbrowser.
+• Verbeterde toetsenbordnavigatie (ESC) en grotere aanraakvlakken.

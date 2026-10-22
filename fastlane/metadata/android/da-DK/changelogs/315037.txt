@@ -1,0 +1,3 @@
+• Rulbar app-vælger i indstillingerne til alle skærmstørrelser.
+• Mere præcis kontrol af delt tekst og bedre viderestilling til standardbrowseren.
+• Forbedret tastaturnavigation (ESC) og større trykflader.

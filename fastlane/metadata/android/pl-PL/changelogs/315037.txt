@@ -1,0 +1,3 @@
+• Przewijana lista aplikacji nawigacyjnych w ustawieniach dla wszystkich rozmiarów ekranu.
+• Dokładniejsza weryfikacja udostępnionego tekstu i lepsze przekazywanie do domyślnej przeglądarki.
+• Ulepszona obsługa klawiatury (ESC) i większe obszary dotyku.

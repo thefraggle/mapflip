@@ -1,3 +1,8 @@
+## 1.4.0
+- Verbesserte App-Auswahl: Die Liste der Navigations-Apps in den Einstellungen ist jetzt flüssig scrollbar und auf allen Bildschirmgrößen vollständig erreichbar
+- Präzisere Weiterleitung: Zuverlässigere Prüfung von geteilten Texten sowie optimierte Übergabe an den Standard-Browser und Web-Fallbacks
+- Bedienkomfort & Design: Verbesserte Tastaturnavigation (ESC), optimierte Klickflächen und vereinheitlichte Statusfarben
+
 ## 1.3.10
 - Erhöhte Zuverlässigkeit: Verbesserte Hintergrundverarbeitung und noch stabilere Weiterleitung von Karten-Links
 - Allgemeine Detailverbesserungen: Interne Optimierungen und Fehlerbehebungen für einen reibungslosen Ablauf
@@ -184,29 +189,29 @@
 - Pausenzustand wird jetzt auch in der System-Kachel detailliert angezeigt
 
 ## 1.1.5
-- Statischen VersionCode für zuverlässige F-Droid Reproducible Builds eingeführt
+- Statischen VersionCode für zuverlässige reproduzierbare Builds eingeführt
 - Interne Stabilitäts-Updates für den Build-Prozess
 
 ## 1.1.4
-- Build-Konfiguration für F-Droid Reproducible Builds optimiert (JDK 21, dependenciesInfo)
+- Build-Konfiguration für reproduzierbare Builds optimiert (JDK 21, dependenciesInfo)
 - Interne Anpassungen
 
 ## 1.1.3
-- Grafische Assets für Fastlane und F-Droid-Store hinzugefügt
+- Grafische Store-Assets und Metadaten hinzugefügt
 - Interne Bereinigung der Ressourcen
 
 ## 1.1.2
 - Interne Sicherheits-Updates für Build-Prozesse
-- Metadaten-Updates zur Vorbereitung des F-Droid-Releases
+- Metadaten-Updates zur Vorbereitung weiterer Veröffentlichungen
 
 ## 1.1.1
 - Einstellungen aufgeräumt: Menü vereinfacht und Lesbarkeit verbessert
-- Build-Flavors hinzugefügt zur Vorbereitung des F-Droid-Releases
+- Build-Konfiguration erweitert
 
 ## 1.1.0
-- Neuer Bewertungs-Button zum schnellen Bewerten der App im Google Play Store
+- Neuer Bewertungs-Button zum schnellen Bewerten der App
 - Dezenten Datenschutzhinweis in der App-UI hinzugefügt (100% lokal, kein Datentracking)
-- App-Beschreibung für bessere Auffindbarkeit im App Store optimiert
+- App-Beschreibung für bessere Auffindbarkeit optimiert
 
 ## 1.0.9
 - Link-Tester zeigt jetzt in der richtigen Sprache an – auch bei Englisch, Japanisch und allen anderen

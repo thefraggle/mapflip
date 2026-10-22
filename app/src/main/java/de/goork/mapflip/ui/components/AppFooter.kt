@@ -53,7 +53,7 @@ fun AppFooter(s: Strings.AppStrings) {
                             Log.w("MapFlip", "Failed to open privacy policy", e)
                         }
                     }
-                    .padding(vertical = 2.dp),
+                    .padding(vertical = 8.dp, horizontal = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
@@ -84,7 +84,7 @@ fun AppFooter(s: Strings.AppStrings) {
                             Log.w("MapFlip", "Failed to open impressum", e)
                         }
                     }
-                    .padding(vertical = 2.dp),
+                    .padding(vertical = 8.dp, horizontal = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(

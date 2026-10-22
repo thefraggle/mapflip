@@ -1,0 +1,3 @@
+• Seletor de aplicativos rolável nas configurações para todos os tamanhos de tela.
+• Validação mais precisa de textos compartilhados e melhor redirecionamento para o navegador padrão.
+• Navegação por teclado aprimorada (ESC) e áreas de toque maiores.

@@ -1,0 +1,3 @@
+• Pemilih aplikasi navigasi kini dapat digulir di pengaturan untuk semua ukuran layar.
+• Validasi teks yang dibagikan lebih akurat dan pengalihan ke browser bawaan lebih stabil.
+• Navigasi keyboard (ESC) lebih baik dan area sentuh lebih besar.

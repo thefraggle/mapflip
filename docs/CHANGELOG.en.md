@@ -1,3 +1,8 @@
+## 1.4.0
+- Improved App Picker: The navigation app list in settings is now smoothly scrollable and fully accessible across all screen sizes
+- Smarter Redirection: More reliable validation of shared text and improved handoff to your default browser and web fallbacks
+- Usability & Polish: Enhanced keyboard navigation (ESC), larger touch targets, and unified status colors
+
 ## 1.3.10
 - Enhanced Reliability: Improved background processing and more stable link redirection
 - General Improvements: Internal optimizations and bug fixes for a smoother experience
@@ -184,29 +189,29 @@
 - Pause state details are now shown in the Quick Settings Tile
 
 ## 1.1.5
-- Introduced static VersionCode for reliable F-Droid Reproducible Builds
+- Introduced static VersionCode for reliable reproducible builds
 - Internal stability updates for the build process
 
 ## 1.1.4
-- Optimized build configuration for F-Droid Reproducible Builds (JDK 21, dependenciesInfo)
+- Optimized build configuration for reproducible builds (JDK 21, dependenciesInfo)
 - Internal adjustments
 
 ## 1.1.3
-- Added graphic assets for Fastlane and F-Droid store
+- Added graphic assets and store metadata
 - Internal cleanup of resources
 
 ## 1.1.2
 - Internal security updates for build processes
-- Metadata updates to prepare for the F-Droid release
+- Metadata updates to prepare for release distribution
 
 ## 1.1.1
 - Cleaned up settings: simplified the menu and improved readability
-- Added build flavors to prepare for the F-Droid store release
+- Expanded build configuration
 
 ## 1.1.0
-- Added direct rating button to easily rate the app on the Google Play Store
+- Added direct rating button to easily rate the app
 - Added a clear privacy note in the app (100% local, no data tracking)
-- Optimized app store description for better visibility
+- Optimized store description for better visibility
 
 ## 1.0.9
 - Link Tester now displays in the correct language – including English, Japanese, and all others

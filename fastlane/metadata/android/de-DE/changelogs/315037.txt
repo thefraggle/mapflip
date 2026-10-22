@@ -1,0 +1,3 @@
+• Scrollbare App-Auswahl in den Einstellungen für alle Bildschirmgrößen.
+• Präzisere Prüfung geteilter Texte und optimierte Übergabe an den Standard-Browser.
+• Verbesserte Bedienung per Tastatur (ESC) und größere Klickflächen.

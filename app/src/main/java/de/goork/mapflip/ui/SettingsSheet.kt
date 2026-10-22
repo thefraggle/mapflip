@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.HelpOutline
+import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.outlined.DarkMode
 import androidx.compose.material.icons.outlined.Email
@@ -48,6 +49,7 @@ import de.goork.mapflip.AppConstants
 import de.goork.mapflip.BuildConfig
 import de.goork.mapflip.analytics.Analytics
 import de.goork.mapflip.navigation.TargetNavigationApp
+import de.goork.mapflip.ui.components.AppFooter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -245,68 +247,74 @@ fun SettingsSheet(
                         }
                     }
                     Spacer(Modifier.height(12.dp))
-                    targetApps.forEach { (app, isInstalled) ->
-                        val isSelected = currentTargetApp == app
-                        Surface(
-                            onClick = {
-                                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                Analytics.trackEvent("target_app_changed", mapOf("target_app" to app.name.lowercase()))
-                                onTargetAppSelected(app)
-                                showTargetAppPicker = false
-                            },
-                            shape = RoundedCornerShape(12.dp),
-                            color = if (isSelected) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f)
-                            else Color.Transparent,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 16.dp, vertical = 14.dp),
-                                verticalAlignment = Alignment.CenterVertically
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .heightIn(max = 380.dp),
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        items(targetApps, key = { it.first.name }) { (app, isInstalled) ->
+                            val isSelected = currentTargetApp == app
+                            Surface(
+                                onClick = {
+                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                    Analytics.trackEvent("target_app_changed", mapOf("target_app" to app.name.lowercase()))
+                                    onTargetAppSelected(app)
+                                    showTargetAppPicker = false
+                                },
+                                shape = RoundedCornerShape(12.dp),
+                                color = if (isSelected) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f)
+                                else Color.Transparent,
+                                modifier = Modifier.fillMaxWidth()
                             ) {
-                                Icon(
-                                    imageVector = if (app.isSystemPicker) Icons.Outlined.Explore else Icons.Outlined.Map,
-                                    contentDescription = null,
-                                    tint = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
-                                    modifier = Modifier.size(22.dp)
-                                )
-                                Spacer(Modifier.width(16.dp))
-                                Column(
-                                    modifier = Modifier.weight(1f)
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 16.dp, vertical = 14.dp),
+                                    verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    Text(
-                                        text = if (app == TargetNavigationApp.SYSTEM_PICKER) s.targetAppAlwaysAsk else app.displayName,
-                                        style = MaterialTheme.typography.bodyLarge.copy(
-                                            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
-                                        ),
-                                        color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+                                    Icon(
+                                        imageVector = if (app.isSystemPicker) Icons.Outlined.Explore else Icons.Outlined.Map,
+                                        contentDescription = null,
+                                        tint = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                                        modifier = Modifier.size(22.dp)
                                     )
-                                }
-                                if (!app.isSystemPicker) {
-                                    Surface(
-                                        shape = RoundedCornerShape(6.dp),
-                                        color = if (isInstalled) {
-                                            MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
-                                        } else {
-                                            MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.25f)
-                                        }
+                                    Spacer(Modifier.width(16.dp))
+                                    Column(
+                                        modifier = Modifier.weight(1f)
                                     ) {
                                         Text(
-                                            text = if (isInstalled) s.statusInstalled else s.statusNotInstalled,
-                                            style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
-                                            color = if (isInstalled) {
-                                                MaterialTheme.colorScheme.primary
-                                            } else {
-                                                MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
-                                            },
-                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                                            text = if (app == TargetNavigationApp.SYSTEM_PICKER) s.targetAppAlwaysAsk else app.displayName,
+                                            style = MaterialTheme.typography.bodyLarge.copy(
+                                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                                            ),
+                                            color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
                                         )
+                                    }
+                                    if (!app.isSystemPicker) {
+                                        Surface(
+                                            shape = RoundedCornerShape(6.dp),
+                                            color = if (isInstalled) {
+                                                MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
+                                            } else {
+                                                MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.25f)
+                                            }
+                                        ) {
+                                            Text(
+                                                text = if (isInstalled) s.statusInstalled else s.statusNotInstalled,
+                                                style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
+                                                color = if (isInstalled) {
+                                                    MaterialTheme.colorScheme.primary
+                                                } else {
+                                                    MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+                                                },
+                                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                                            )
+                                        }
                                     }
                                 }
                             }
                         }
-                        Spacer(Modifier.height(4.dp))
                     }
                 }
                 else -> {
@@ -385,6 +393,7 @@ fun SettingsSheet(
                         icon = Icons.Outlined.Email,
                         title = s.btnFeedback,
                         subtitle = AppConstants.FEEDBACK_EMAIL,
+                        trailingIcon = Icons.AutoMirrored.Outlined.OpenInNew,
                         onClick = {
                             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             Analytics.trackEvent("feedback_clicked")
@@ -420,6 +429,7 @@ fun SettingsSheet(
                             icon = Icons.Outlined.Favorite,
                             title = s.btnDonate,
                             subtitle = s.donateSubtitle,
+                            trailingIcon = Icons.AutoMirrored.Outlined.OpenInNew,
                             onClick = {
                                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                 Analytics.trackEvent("donate_clicked")
@@ -439,6 +449,7 @@ fun SettingsSheet(
                             icon = Icons.Outlined.Star,
                             title = s.btnRateApp,
                             subtitle = "Google Play Store",
+                            trailingIcon = Icons.AutoMirrored.Outlined.OpenInNew,
                             onClick = {
                                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                 Analytics.trackEvent("rate_app_clicked")
@@ -457,84 +468,7 @@ fun SettingsSheet(
                     Spacer(Modifier.height(24.dp))
 
                     // Unified Footer matching MainScreen
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            text = "${s.headline} v${BuildConfig.VERSION_NAME}",
-                            style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Medium),
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Spacer(Modifier.height(2.dp))
-                        Text(
-                            text = s.copyright,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Spacer(Modifier.height(2.dp))
-                        Row(
-                            modifier = Modifier.padding(vertical = 2.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Row(
-                                modifier = Modifier
-                                    .clickable {
-                                        try {
-                                            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.URL_PRIVACY_POLICY)))
-                                        } catch (e: Exception) {
-                                            Log.w("MapFlip", "Failed to open privacy policy", e)
-                                        }
-                                    }
-                                    .padding(vertical = 2.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Text(
-                                    text = s.privacyPolicyTitle,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.primary
-                                )
-                                Spacer(Modifier.width(4.dp))
-                                Icon(
-                                    imageVector = Icons.AutoMirrored.Outlined.OpenInNew,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(12.dp)
-                                )
-                            }
-                            Text(
-                                text = " · ",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.padding(horizontal = 6.dp)
-                            )
-                            Row(
-                                modifier = Modifier
-                                    .clickable {
-                                        try {
-                                            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.URL_IMPRESSUM)))
-                                        } catch (e: Exception) {
-                                            Log.w("MapFlip", "Failed to open impressum", e)
-                                        }
-                                    }
-                                    .padding(vertical = 2.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Text(
-                                    text = s.impressumTitle,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.primary
-                                )
-                                Spacer(Modifier.width(4.dp))
-                                Icon(
-                                    imageVector = Icons.AutoMirrored.Outlined.OpenInNew,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(12.dp)
-                                )
-                            }
-                        }
-                    }
+                    AppFooter(s = s)
                 }
             }
         }
@@ -546,6 +480,7 @@ private fun SettingsItem(
     icon: ImageVector,
     title: String,
     subtitle: String,
+    trailingIcon: ImageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
     onClick: () -> Unit
 ) {
     Surface(
@@ -580,7 +515,7 @@ private fun SettingsItem(
                 )
             }
             Icon(
-                imageVector = Icons.AutoMirrored.Outlined.OpenInNew,
+                imageVector = trailingIcon,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                 modifier = Modifier.size(16.dp)

@@ -25,12 +25,12 @@ flowchart TD
         C["UniversalMapParser\n(Strategy Pattern)"]
         C1["AppleMapsParser"]
         C2["GoogleMapsParser"]
-        C3["OsmMapsParser"]
+        C3["OpenStreetMapParser"]
         C4["BingMapsParser"]
         C5["HereMapsParser"]
         C6["YandexMapsParser"]
         C7["WazeMapsParser"]
-        C8["DuckDuckGoMapsParser"]
+        C8["DuckDuckGoParser"]
         C9["PlusCodeParser\n(OLC Base20 Offline Decoder)"]
         C10["GeoCoordinateParser\n(RFC 5870, DMS, Decimal)"]
         C11["MapyMapsParser\n(Mapy.cz & Mapy.com)"]
@@ -90,21 +90,21 @@ The parsing layer implements the **Strategy Pattern**. Each map source is an iso
 
 * **`AppleMapsParser`**: Parses `maps.apple.com` and `applemaps://` queries (`?q=`, `?ll=`, `?address=`, `?saddr=&daddr=`, place slugs `/p/...`).
 * **`GoogleMapsParser`**: Handles `maps.google.com`, `google.com/maps`, `goo.gl/maps`, and international ccTLD domains (`google.es`, `google.co.uk`, `google.fr`, etc.).
-* **`OsmMapsParser`**: Extracts nodes, ways, relations, and bounding-box coordinates from `openstreetmap.org` and `osm.org`.
+* **`OpenStreetMapParser`**: Extracts nodes, ways, relations, and bounding-box coordinates from `openstreetmap.org` and `osm.org`.
 * **`BingMapsParser`**: Parses `bing.com/maps` coordinates (`cp=`) and search queries.
 * **`HereMapsParser`**: Supports path-based coordinates (`/l/lat,lon,zoom`) and query parameters (`map=lat,lon`).
 * **`YandexMapsParser`**: Handles Yandex inverted coordinate order (`ll=lon,lat`).
 * **`WazeMapsParser`**: Extracts destination coordinates from `waze.com/ul` and `live-map/directions`.
-* **`DuckDuckGoMapsParser`**: Handles map search and directions links via Share Sheet, Clipboard detection, and interactive Link Tester.
+* **`DuckDuckGoParser`**: Handles map search and directions links via Share Sheet, Clipboard detection, and interactive Link Tester.
 * **`PlusCodeParser`**: 100% offline mathematical decoding of Open Location Codes (Google Plus Codes, Base20 algorithm) without network lookup.
 * **`GeoCoordinateParser`**: Extracts standard `geo:` URIs (RFC 5870), Degree-Minute-Second (DMS) coordinates, and decimal coordinate pairs with strict sanity filtering.
 * **`MapyMapsParser`**: Parses `mapy.cz` and `mapy.com` coordinates (longitude first), searches, and routes.
 
 ### 2.2 Navigation Intent Dispatcher (`NavigationIntentBuilder`)
 Translates the normalized `ParsedLocation` into platform-native intents:
-1. **App-Specific Schemes**: Directly targets installed navigation apps via custom URI schemes (e.g. `geo:`, `google.navigation:`, `om://`, `cm://`, `osmand.geo:`, `here-route://`, `yandexmaps://`, `cz.seznam.mapy`).
+1. **App-Specific Schemes**: Directly targets installed navigation apps via custom URI schemes and package targets (e.g. `geo:`, `google.navigation:`, `waze://`, `om://`, `cm://`, `yandexmaps://`, `citymapper://`, `komoot://`, `tomtomgo://`, `https://share.here.com/r/`, `https://mapy.com/fnc/v1/`).
 2. **Travel Mode Preservation**: Carries over driving, walking, cycling, and public transit modes from source links into compatible navigation intents.
-3. **Smart Fallback**: If the user's chosen navigation app was uninstalled, MapFlip catches the `ActivityNotFoundException`, displays a localized toast notice, and gracefully falls back to the system app chooser.
+3. **Smart Fallback & Default Browser Resolution**: If the user's chosen navigation app was uninstalled, MapFlip catches the `ActivityNotFoundException`, displays a localized toast notice, and gracefully falls back to Google Maps, the system app chooser, or normalized web fallbacks (prioritizing the user's default browser via `MATCH_DEFAULT_ONLY`).
 
 ### 2.3 Android 12+ Deep Link Verification (`DomainVerificationHelper`)
 Android 12 (API 31+) restricts unverified HTTP/HTTPS link handling:
@@ -131,7 +131,7 @@ MapFlip is built with a strict separation between open-source distribution and s
 | **Monetization / Ads** | Zero | Zero |
 
 ### Kernel-Level Verification
-In the `foss` flavor, `aapt2 dump permissions` confirms that `android.permission.INTERNET` is completely absent. Because the Linux kernel does not assign GID 3003 (`AID_INET`) to the app's process, it is mathematically und physically impossible for the app to open network sockets.
+In the `foss` flavor, `aapt2 dump permissions` confirms that `android.permission.INTERNET` is completely absent. Because the Linux kernel does not assign GID 3003 (`AID_INET`) to the app's process, it is mathematically and physically impossible for the app to open network sockets.
 
 ---
 

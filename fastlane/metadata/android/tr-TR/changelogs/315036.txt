@@ -1,0 +1,3 @@
+• Mapy.cz artık tercih edilen navigasyon uygulaması olarak seçilebilir.
+• Uluslararası Google Haritalar bağlantılarının daha iyi tanınması.
+• Bağlantı yönlendirmelerinde artırılmış kararlılık ve güvenilirlik.

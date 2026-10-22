@@ -1,0 +1,3 @@
+• Seletor de aplicações deslizante nas definições para todos os tamanhos de ecrã.
+• Validação mais precisa de texto partilhado e melhor encaminhamento para o navegador predefinido.
+• Navegação por teclado melhorada (ESC) e áreas de toque maiores.

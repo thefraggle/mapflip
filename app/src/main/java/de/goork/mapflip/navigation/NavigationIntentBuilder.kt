@@ -115,6 +115,17 @@ object NavigationIntentBuilder {
         }
     }
 
+    fun buildWazeWebFallbackUriString(location: ParsedLocation): String {
+        return when (location) {
+            is ParsedLocation.Home -> "https://www.waze.com/ul"
+            is ParsedLocation.Coordinates -> "https://www.waze.com/ul?ll=${formatCoordCompact(location.latitude)},${formatCoordCompact(location.longitude)}&navigate=yes"
+            is ParsedLocation.SearchQuery -> "https://www.waze.com/ul?q=${encode(location.query)}&navigate=yes"
+            is ParsedLocation.Navigation -> "https://www.waze.com/ul?q=${encode(location.destination)}&navigate=yes"
+            is ParsedLocation.Directions -> "https://www.waze.com/ul?q=${encode(location.destination)}&navigate=yes"
+            is ParsedLocation.WebFallback -> "https://www.waze.com/ul?q=${encode(location.fallbackUrl)}"
+        }
+    }
+
     fun buildWazeIntent(location: ParsedLocation): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildWazeUriString(location))).apply {
             setPackage(TargetNavigationApp.WAZE.packageName)

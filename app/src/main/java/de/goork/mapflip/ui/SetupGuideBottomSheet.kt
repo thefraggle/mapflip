@@ -1,6 +1,7 @@
 package de.goork.mapflip.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -16,15 +17,25 @@ import androidx.compose.material.icons.outlined.Share
 import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import de.goork.mapflip.ui.theme.Green500
+import de.goork.mapflip.ui.theme.Orange500
 import de.goork.mapflip.util.DomainStatusInfo
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,15 +47,28 @@ fun SetupGuideBottomSheet(
     s: Strings.AppStrings
 ) {
     val haptic = LocalHapticFeedback.current
+    val focusRequester = remember { FocusRequester() }
 
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         containerColor = MaterialTheme.colorScheme.surface
     ) {
+        LaunchedEffect(Unit) {
+            focusRequester.requestFocus()
+        }
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .focusRequester(focusRequester)
+                .focusable()
+                .onPreviewKeyEvent { keyEvent ->
+                    if (keyEvent.type == KeyEventType.KeyDown && keyEvent.key == Key.Escape) {
+                        onDismissRequest()
+                        true
+                    } else false
+                }
                 .navigationBarsPadding()
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 24.dp, vertical = 8.dp),
@@ -68,12 +92,12 @@ fun SetupGuideBottomSheet(
             if (domainStatus != null) {
                 val (statusColor, statusIcon, statusText) = when {
                     domainStatus.isFullyEnabled -> Triple(
-                        Color(0xFF4CAF50),
+                        Green500,
                         Icons.Outlined.CheckCircle,
                         s.formatStatusAllActive(domainStatus.totalHosts)
                     )
                     domainStatus.isPartiallyEnabled -> Triple(
-                        Color(0xFFFF9800),
+                        Orange500,
                         Icons.Outlined.Warning,
                         s.formatStatusPartial(domainStatus.enabledHosts, domainStatus.totalHosts)
                     )

@@ -1,0 +1,3 @@
+• Ahora puedes seleccionar Mapy.cz como tu app de navegación preferida.
+• Reconocimiento mejorado de enlaces internacionales de Google Maps.
+• Mayor estabilidad y fiabilidad en las redirecciones de enlaces.
