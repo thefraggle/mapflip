@@ -38,6 +38,13 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    if (defaultConfig.versionCode != appVersionCode) {
+        throw GradleException("versionCode mismatch in app/build.gradle.kts: defaultConfig.versionCode (${defaultConfig.versionCode}) does not match appVersionCode ($appVersionCode)")
+    }
+    if (defaultConfig.versionName != appVersion) {
+        throw GradleException("versionName mismatch in app/build.gradle.kts: defaultConfig.versionName (${defaultConfig.versionName}) does not match appVersion ($appVersion)")
+    }
+
     signingConfigs {
         create("release") {
             if (keystoreProperties.isNotEmpty()) {
