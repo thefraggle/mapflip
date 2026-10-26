@@ -84,6 +84,10 @@ class MapyMapsParserTest {
     @Test
     fun `extract share text and reject unrelated hosts`() {
         assertEquals("https://mapy.cz/s/abcdef", UniversalMapParser.extractMapUrl("Visit https://mapy.cz/s/abcdef."))
+        assertEquals(
+            "https://mapy.cz/fnc/v1/search?query=Museum+(Prag)",
+            MapyMapsParser.extractUrl("(https://mapy.cz/fnc/v1/search?query=Museum+(Prag))")
+        )
         for (url in listOf(
             "https://mapy.com.evil.test/s/foo",
             "https://evil.test/?url=https://mapy.com",
@@ -93,5 +97,11 @@ class MapyMapsParserTest {
         )) {
             assertFalse(MapyMapsParser.canParse(url))
         }
+    }
+
+    @Test
+    fun `pathless uris do not throw and parse coordinates`() {
+        val result = MapyMapsParser.parse("https://mapy.cz?x=14.4&y=50.1")
+        assertEquals(ParsedLocation.Coordinates(50.1, 14.4), result)
     }
 }

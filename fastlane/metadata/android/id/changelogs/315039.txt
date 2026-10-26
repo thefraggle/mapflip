@@ -1,0 +1,4 @@
+• Penyesuaian subjudul dinamis sesuai aplikasi navigasi yang dipilih dalam semua bahasa
+• Penanganan tanda baca dan tanda kurung yang konsisten pada tautan peta
+• Peningkatan stabilitas penguraian dan penanganan kesalahan untuk tautan Mapy.cz
+• Pengoptimalan internal dan konfigurasi build yang bersih

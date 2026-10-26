@@ -1,0 +1,4 @@
+• Dynamic subtitle adjustment matching the selected navigation app across all languages
+• Consistent punctuation and balanced parentheses handling in map links
+• Enhanced parsing robustness and error handling for Mapy.cz links
+• Internal optimizations and clean build configuration

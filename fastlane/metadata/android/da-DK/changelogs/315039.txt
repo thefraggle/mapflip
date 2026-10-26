@@ -1,0 +1,4 @@
+• Dynamisk undertiteltilpasning matchende den valgte navigationsapp på alle sprog
+• Ensartet håndtering af tegnsætning og parenteser i kortlinks
+• Forbedret parsing-stabilitet og fejlhåndtering for Mapy.cz-links
+• Interne optimeringer og ren build-konfiguration

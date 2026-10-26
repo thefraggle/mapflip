@@ -10,7 +10,7 @@ object YandexMapsParser : MapUrlParser {
     override val supportedHosts: List<String> = listOf("yandex.com", "www.yandex.com", "yandex.ru", "www.yandex.ru", "maps.yandex.com", "maps.yandex.ru")
 
     private val URL_PATTERN = Pattern.compile(
-        """https?://(?:www\.)?(?:maps\.)?yandex\.(?:com|ru)/maps[^\s<>"'()]*""",
+        """https?://(?:www\.)?(?:maps\.)?yandex\.(?:com|ru)/maps[^\s<>"']*""",
         Pattern.CASE_INSENSITIVE
     )
 
@@ -23,8 +23,7 @@ object YandexMapsParser : MapUrlParser {
         if (text.isNullOrBlank()) return null
         val matcher = URL_PATTERN.matcher(text)
         if (matcher.find()) {
-            var url = matcher.group()
-            url = url.trimEnd('.', ',', ';', '!', '?', ')', ']', '>')
+            var url = trimExtractedUrl(matcher.group())
             return url
         }
         return null

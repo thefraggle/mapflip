@@ -1,0 +1,4 @@
+• Ajustement dynamique du sous-titre selon l'application de navigation choisie dans toutes les langues
+• Gestion cohérente de la ponctuation et des parenthèses dans les liens de cartes
+• Stabilité d'analyse améliorée et meilleure gestion des erreurs pour les liens Mapy.cz
+• Optimisations internes et configuration de build nettoyée

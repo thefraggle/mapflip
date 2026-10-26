@@ -1,3 +1,9 @@
+## 1.4.2
+- Dynamische Untertitel-Anpassung: Zuverlässige Anzeige der gewählten Ziel-App im Untertitel für alle Sprachen (u. a. Japanisch, Chinesisch, Koreanisch, Arabisch, Russisch)
+- Verbesserte Link-Erkennung: Konsistente Bereinigung von Satzzeichen und Klammer-Zusätzen über alle unterstützten Kartendienste
+- Erhöhte Zuverlässigkeit: Verbesserte Parsing-Stabilität und Fehlerabsicherung für Mapy.cz- und Mapy.com-Links
+- Interne Optimierungen: Bereinigte Build-Konfiguration und schnellere Paketauflösung
+
 ## 1.4.1
 - Erweiterte Link-Erkennung: Bessere Unterstützung für Plus-Code-Weblinks (`plus.codes`), Waze-Kurzlinks (`ul.waze.com`) und Geo-URIs mit Ortsnamen
 - Verbesserte Ziel-Übergabe: Zuverlässigere Erkennung installierter Karten-Varianten und optimierte Adress-Suche für Komoot

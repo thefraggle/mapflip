@@ -10,7 +10,7 @@ object WazeMapsParser : MapUrlParser {
     override val supportedHosts: List<String> = listOf("waze.com", "www.waze.com", "ul.waze.com")
 
     private val URL_PATTERN = Pattern.compile(
-        """https?://(?:(?:www|ul)\.)?waze\.com/(?:ul|live-map|location)[^\s<>"'()]*""",
+        """https?://(?:(?:www|ul)\.)?waze\.com/(?:ul|live-map|location)[^\s<>"']*""",
         Pattern.CASE_INSENSITIVE
     )
 
@@ -23,8 +23,7 @@ object WazeMapsParser : MapUrlParser {
         if (text.isNullOrBlank()) return null
         val matcher = URL_PATTERN.matcher(text)
         if (matcher.find()) {
-            var url = matcher.group()
-            url = url.trimEnd('.', ',', ';', '!', '?', ')', ']', '>')
+            var url = trimExtractedUrl(matcher.group())
             return url
         }
         return null

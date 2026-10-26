@@ -142,12 +142,18 @@ object Strings {
 
         fun formatSubtitle(targetApp: de.goork.mapflip.navigation.TargetNavigationApp): String {
             if (targetApp == de.goork.mapflip.navigation.TargetNavigationApp.GOOGLE_MAPS) return subtitle
-            val targetLabel = if (targetApp.isSystemPicker) {
-                if (sectionTargetApp.isNotBlank()) sectionTargetApp else "Navigation App"
+            val targetLabel = resolveTargetAppDisplayLabel(targetApp)
+            val delimiter = if (subtitle.contains("←")) "←" else if (subtitle.contains("→")) "→" else ""
+            return if (delimiter.isNotEmpty()) {
+                val parts = subtitle.split(delimiter, limit = 2)
+                if (parts.size == 2) {
+                    "${parts[0].trim()} $delimiter $targetLabel"
+                } else {
+                    subtitle.replace("Google Maps", targetLabel)
+                }
             } else {
-                targetApp.displayName
+                subtitle.replace("Google Maps", targetLabel)
             }
-            return subtitle.replace("Google Maps", targetLabel)
         }
 
         private fun resolveTargetAppDisplayLabel(targetApp: de.goork.mapflip.navigation.TargetNavigationApp): String {
@@ -225,7 +231,7 @@ object Strings {
             "es" -> ES
             "tr" -> TR
             "ko" -> KO
-            "zh" -> ZH_CN
+            "zh", "zh-cn" -> ZH_CN
             "zh-tw" -> ZH_TW
             "ar" -> AR
             "ru" -> RU

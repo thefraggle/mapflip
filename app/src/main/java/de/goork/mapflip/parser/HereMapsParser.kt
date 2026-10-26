@@ -10,7 +10,7 @@ object HereMapsParser : MapUrlParser {
     override val supportedHosts: List<String> = listOf("wego.here.com", "share.here.com", "maps.here.com", "here.com")
 
     private val URL_PATTERN = Pattern.compile(
-        """https?://(?:(?:wego|share|maps)\.here\.com|here\.com/[^\s<>"'()]+)[^\s<>"'()]*""",
+        """https?://(?:(?:wego|share|maps)\.here\.com|here\.com/[^\s<>"']+)[^\s<>"']*""",
         Pattern.CASE_INSENSITIVE
     )
 
@@ -28,8 +28,7 @@ object HereMapsParser : MapUrlParser {
         if (text.isNullOrBlank()) return null
         val matcher = URL_PATTERN.matcher(text)
         if (matcher.find()) {
-            var url = matcher.group()
-            url = url.trimEnd('.', ',', ';', '!', '?', ')', ']', '>')
+            var url = trimExtractedUrl(matcher.group())
             return url
         }
         return null

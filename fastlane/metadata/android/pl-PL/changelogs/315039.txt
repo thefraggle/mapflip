@@ -1,0 +1,4 @@
+• Dynamiczne dopasowanie podtytułu do wybranej aplikacji nawigacyjnej we wszystkich językach
+• Spójna obsługa znaków interpunkcyjnych i nawiasów w linkach map
+• Zwiększona stabilność przetwarzania i obsługa błędów dla linków Mapy.cz
+• Optymalizacje wewnętrzne i uporządkowana konfiguracja kompilacji

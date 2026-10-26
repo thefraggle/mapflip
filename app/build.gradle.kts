@@ -17,12 +17,12 @@ if (keystorePropertiesFile.exists()) {
 val aptabaseKey: String = System.getenv("APTABASE_KEY")
     ?: keystoreProperties.getProperty("aptabaseKey", "")
 val aptabaseHost: String = System.getenv("APTABASE_HOST")
-    ?: keystoreProperties.getProperty("aptabaseHost", "https://telemetry-apps.goork.de")
+    ?: keystoreProperties.getProperty("aptabaseHost", "")
 
 // Kept at top level for .github/workflows/android-release.yml (workflow_dispatch grep)
-val appVersion = "1.4.1"
+val appVersion = "1.4.2"
 
-val appVersionCode = 315038
+val appVersionCode = 315039
 
 android {
     namespace = "de.goork.mapflip"

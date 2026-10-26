@@ -1,0 +1,4 @@
+• Dynamische aanpassing van de ondertitel aan de gekozen navigatie-app in alle talen
+• Consistente verwerking van leestekens en haakjes in kaartlinks
+• Verbeterde parsestabiliteit en foutafhandeling voor Mapy.cz-links
+• Interne optimalisaties en schone build-configuratie

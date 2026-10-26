@@ -21,7 +21,7 @@ object GoogleMapsParser : MapUrlParser {
 
     // Regex for matching Google Maps URLs in text
     private val URL_PATTERN = Pattern.compile(
-        """(?:https?://(?:maps\.google\.[a-z.]+|www\.google\.[a-z.]+/maps|google\.[a-z.]+/maps|maps\.app\.goo\.gl|goo\.gl/maps))[^\s<>"'()]*""",
+        """(?:https?://(?:maps\.google\.[a-z.]+|www\.google\.[a-z.]+/maps|google\.[a-z.]+/maps|maps\.app\.goo\.gl|goo\.gl/maps))[^\s<>"']*""",
         Pattern.CASE_INSENSITIVE
     )
 

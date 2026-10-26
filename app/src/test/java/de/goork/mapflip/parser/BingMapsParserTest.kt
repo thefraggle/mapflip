@@ -20,6 +20,8 @@ class BingMapsParserTest {
     fun `extractUrl extracts bing maps from text`() {
         val text = "Check out this place: https://www.bing.com/maps?q=Eiffel+Tower!"
         assertEquals("https://www.bing.com/maps?q=Eiffel+Tower", BingMapsParser.extractUrl(text))
+        val textParens = "(https://www.bing.com/maps?q=Museum+(Berlin))"
+        assertEquals("https://www.bing.com/maps?q=Museum+(Berlin)", BingMapsParser.extractUrl(textParens))
     }
 
     @Test

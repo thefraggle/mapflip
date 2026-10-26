@@ -1,7 +1,6 @@
 package de.goork.mapflip.parser
 
 import java.net.URI
-import java.net.URLDecoder
 
 /**
  * Parser for Mapy.com / Mapy.cz URLs.
@@ -22,7 +21,7 @@ object MapyMapsParser : MapUrlParser {
     } catch (_: Exception) { false }
 
     override fun extractUrl(text: String?): String? = text?.let {
-        urlPattern.find(it)?.value?.trimEnd('.', ',', ';', '!', ')', ']', '>')
+        urlPattern.find(it)?.value?.let { match -> trimExtractedUrl(match) }
     }
 
     override fun parse(url: String): ParsedLocation {
@@ -31,19 +30,18 @@ object MapyMapsParser : MapUrlParser {
         if (!canParse(extracted)) return fallback
         return try {
             val uri = URI(extracted.replace(" ", "%20"))
-            val params = (uri.rawQuery ?: "").split('&').filter { it.isNotBlank() }.associate {
-                val parts = it.split('=', limit = 2)
-                URLDecoder.decode(parts[0], "UTF-8") to URLDecoder.decode(parts.getOrElse(1) { "" }, "UTF-8").trim()
-            }
+            val params = parseQueryParams(uri.rawQuery ?: "")
+            val path = uri.path ?: ""
             // Short links cannot be resolved offline: preserve the original URL for web fallback.
-            if (uri.path.startsWith("/s/")) return fallback
-            if (uri.path.endsWith("/route")) {
+            if (path.startsWith("/s/")) return fallback
+            if (path.endsWith("/route")) {
                 // ParsedLocation cannot represent intermediate stops: preserve the original route.
                 if (!params["waypoints"].isNullOrBlank()) return fallback
                 val end = coordinates(params["end"]) ?: return fallback
+                val routeType = params["routetype"] ?: params["routeType"]
                 val mode = when {
-                    params["routeType"]?.startsWith("foot_") == true -> TravelMode.WALKING
-                    params["routeType"]?.startsWith("bike_") == true -> TravelMode.BICYCLING
+                    routeType?.startsWith("foot_") == true -> TravelMode.WALKING
+                    routeType?.startsWith("bike_") == true -> TravelMode.BICYCLING
                     else -> TravelMode.DRIVING
                 }
                 val start = coordinates(params["start"])

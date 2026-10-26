@@ -1,0 +1,4 @@
+• Dynamische Untertitel-Anpassung passend zur gewählten Ziel-App in allen Sprachen
+• Konsistente Erkennung von Satzzeichen und Klammer-Zusätzen in Karten-Links
+• Verbesserte Parsing-Stabilität und Fehlerabsicherung für Mapy.cz-Links
+• Interne Optimierungen und bereinigte Build-Konfiguration

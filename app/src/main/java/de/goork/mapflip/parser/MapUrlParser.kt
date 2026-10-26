@@ -22,16 +22,17 @@ fun isValidLatLon(lat: Double, lon: Double): Boolean {
 fun parseQueryParams(query: String): Map<String, String> {
     if (query.isBlank()) return emptyMap()
     return query.split("&").mapNotNull { param ->
-        val parts = param.split("=", limit = 2)
-        if (parts.size == 2) {
+        if (param.isBlank()) null
+        else {
+            val parts = param.split("=", limit = 2)
             try {
                 val key = URLDecoder.decode(parts[0], "UTF-8").lowercase().trim()
-                val value = URLDecoder.decode(parts[1], "UTF-8").trim()
+                val value = if (parts.size > 1) URLDecoder.decode(parts[1], "UTF-8").trim() else ""
                 key to value
             } catch (_: Exception) {
                 null
             }
-        } else null
+        }
     }.toMap()
 }
 

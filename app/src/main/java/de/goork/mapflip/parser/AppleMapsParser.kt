@@ -10,7 +10,7 @@ object AppleMapsParser : MapUrlParser {
     override val supportedHosts: List<String> = listOf("maps.apple.com")
 
     private val URL_PATTERN = Pattern.compile(
-        """(?:https?://(?:www\.)?maps\.apple\.com|applemaps://|maps\.apple\.com)[^\s<>"'()]*""",
+        """(?:https?://(?:www\.)?maps\.apple\.com|applemaps://|maps\.apple\.com)[^\s<>"']*""",
         Pattern.CASE_INSENSITIVE
     )
 
@@ -24,7 +24,7 @@ object AppleMapsParser : MapUrlParser {
         val matcher = URL_PATTERN.matcher(text)
         if (matcher.find()) {
             var url = matcher.group()
-            url = url.trimEnd('.', ',', ';', '!', '?', ')', ']', '>')
+            url = trimExtractedUrl(url)
             if (canParse(url)) {
                 return url
             }

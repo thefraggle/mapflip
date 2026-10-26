@@ -100,6 +100,8 @@ The parsing layer implements the **Strategy Pattern**. Each map source is an iso
 * **`GeoCoordinateParser`**: Extracts standard `geo:` URIs (RFC 5870), Degree-Minute-Second (DMS) coordinates, and decimal coordinate pairs with strict sanity filtering.
 * **`MapyMapsParser`**: Parses `mapy.cz` and `mapy.com` coordinates (longitude first), searches, and routes.
 
+All parsers share consistent URL extraction, punctuation stripping, and balanced parenthesis preservation via `trimExtractedUrl()`, ensuring coordinates or queries embedded inside text or parentheses (e.g. `(https://.../?q=Place+(City))`) remain valid.
+
 ### 2.2 Navigation Intent Dispatcher (`NavigationIntentBuilder`)
 Translates the normalized `ParsedLocation` into platform-native intents:
 1. **App-Specific Schemes**: Directly targets installed navigation apps via custom URI schemes and package targets (e.g. `geo:`, `google.navigation:`, `waze://`, `om://`, `cm://`, `yandexmaps://`, `citymapper://`, `komoot://`, `tomtomgo://`, `https://share.here.com/r/`, `https://mapy.com/fnc/v1/`).

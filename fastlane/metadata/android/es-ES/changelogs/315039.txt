@@ -1,0 +1,4 @@
+• Ajuste dinámico del subtítulo según la app de navegación seleccionada en todos los idiomas
+• Manejo coherente de signos de puntuación y paréntesis en enlaces de mapas
+• Mayor estabilidad de análisis y manejo de errores para enlaces de Mapy.cz
+• Optimizaciones internas y configuración de compilación limpia

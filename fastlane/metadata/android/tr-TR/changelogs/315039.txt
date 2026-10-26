@@ -1,0 +1,4 @@
+• Tüm dillerde seçilen navigasyon uygulamasına göre dinamik alt başlık uyarlaması
+• Harita bağlantılarında noktalama işaretleri ve parantezlerin tutarlı işlenmesi
+• Mapy.cz bağlantıları için gelişmiş ayrıştırma kararlılığı ve hata yönetimi
+• Dahili optimizasyonlar ve temiz derleme yapılandırması

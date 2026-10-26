@@ -139,6 +139,14 @@ class AppleMapsParserTest {
     }
 
     @Test
+    fun `extracts url preserving balanced parentheses`() {
+        assertEquals(
+            "https://maps.apple.com/?q=Museum+(Berlin)",
+            extractMapUrl("(https://maps.apple.com/?q=Museum+(Berlin))")
+        )
+    }
+
+    @Test
     fun `handles applemaps custom scheme`() {
         assertEquals("geo:0,0?q=Berlin",
             convert("applemaps://maps.apple.com/?q=Berlin"))

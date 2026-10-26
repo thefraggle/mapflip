@@ -1,3 +1,9 @@
+## 1.4.2
+- Dynamic Subtitle Adjustment: Reliable display of the selected target app in the subtitle across all languages (including Japanese, Chinese, Korean, Arabic, Russian)
+- Improved Link Detection: Consistent punctuation and balanced parentheses handling across all supported map services
+- Enhanced Reliability: Improved parsing robustness and null-safety for Mapy.cz and Mapy.com links
+- Internal Improvements: Cleaned up build configuration and faster package resolution
+
 ## 1.4.1
 - Broader Link Support: Improved handling for Plus Code web links (`plus.codes`), Waze short links (`ul.waze.com`), and labeled Geo URIs
 - Smarter App Handoff: More reliable package detection for multi-edition map apps and improved address search routing for Komoot

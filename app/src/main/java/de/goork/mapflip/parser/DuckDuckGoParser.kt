@@ -10,7 +10,7 @@ object DuckDuckGoParser : MapUrlParser {
     override val supportedHosts: List<String> = listOf("duckduckgo.com", "www.duckduckgo.com")
 
     private val URL_PATTERN = Pattern.compile(
-        """https?://(?:www\.)?duckduckgo\.com[^\s<>"'()]*""",
+        """https?://(?:www\.)?duckduckgo\.com[^\s<>"']*""",
         Pattern.CASE_INSENSITIVE
     )
 
@@ -36,8 +36,7 @@ object DuckDuckGoParser : MapUrlParser {
         if (text.isNullOrBlank()) return null
         val matcher = URL_PATTERN.matcher(text)
         while (matcher.find()) {
-            var candidate = matcher.group()
-            candidate = candidate.trimEnd('.', ',', ';', '!', '?', ')', ']', '>')
+            var candidate = trimExtractedUrl(matcher.group())
             if (canParse(candidate)) {
                 return candidate
             }
