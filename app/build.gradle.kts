@@ -33,8 +33,8 @@ android {
         minSdk = 26
         targetSdk = 36
         // IMPORTANT: Must remain static literals (not variable references) for F-Droid's checkupdates.py regex parser
-        versionCode = 315038
-        versionName = "1.4.1"
+        versionCode = 315039
+        versionName = "1.4.2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
