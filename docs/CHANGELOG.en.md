@@ -1,3 +1,9 @@
+## 1.4.3
+- Enhanced Robustness: Clock-skew protection and immediate synchronous storage for first install timestamp
+- Repository Hygiene: Added pull request template and optimized workflow triggers
+- Documentation Polish: Updated contribution guidelines covering 20 languages and regional variants
+- General Improvements: Internal stability optimizations and code cleanups
+
 ## 1.4.2
 - Dynamic Subtitle Adjustment: Reliable display of the selected target app in the subtitle across all languages (including Japanese, Chinese, Korean, Arabic, Russian)
 - Improved Link Detection: Consistent punctuation and balanced parentheses handling across all supported map services

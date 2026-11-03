@@ -1,0 +1,4 @@
+• Maggiore affidabilità: Verifica dell'integrità temporale e memorizzazione migliorata
+• Configurazione del repository e della CI ottimizzata
+• Linee guida per contribuzione e localizzazione aggiornate
+• Miglioramenti interni della stabilità e pulizia del codice

@@ -1,0 +1,4 @@
+• Enhanced reliability: Time integrity checks and improved storage handling
+• Optimized repository and CI configuration
+• Updated contribution and localization guidelines
+• Internal stability improvements and code cleanup

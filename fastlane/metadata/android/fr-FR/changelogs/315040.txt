@@ -1,0 +1,4 @@
+• Fiabilité améliorée : Contrôle d'intégrité temporelle et stockage fiabilisé
+• Configuration optimisée du dépôt et de l'intégration continue (CI)
+• Directives de contribution et de localisation mises à jour
+• Améliorations internes de la stabilité et nettoyage du code

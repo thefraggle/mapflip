@@ -1,0 +1,4 @@
+• Verbeterde betrouwbaarheid: Tijdscontrole en verbeterde opslagverwerking
+• Geoptimaliseerde repository- en CI-configuratie
+• Bijgewerkte richtlijnen voor bijdragen en lokalisatie
+• Interne stabiliteitsverbeteringen en codeopschoning

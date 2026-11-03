@@ -1,0 +1,4 @@
+• Forbedret pålidelighed: Tidsintegritetstjek og forbedret lagring
+• Optimeret arkiv- og CI-konfiguration
+• Opdaterede retningslinjer for bidrag og lokalisering
+• Interne stabilitetsforbedringer og kodeoprydning

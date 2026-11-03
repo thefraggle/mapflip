@@ -1,11 +1,6 @@
 name: iOS CI
 
 on:
-  pull_request:
-    branches: [ main ]
-    paths:
-      - 'iosApp/**'
-      - '.github/workflows/ios-ci.yml'
   workflow_dispatch:
 
 concurrency:

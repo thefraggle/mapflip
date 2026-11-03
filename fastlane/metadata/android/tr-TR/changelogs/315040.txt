@@ -1,0 +1,4 @@
+• Gelişmiş güvenilirlik: Zaman bütünlüğü kontrolü ve iyileştirilmiş depolama
+• İyileştirilmiş depo ve CI yapılandırması
+• Güncellenmiş katkı ve yerelleştirme yönergeleri
+• Dahili kararlılık iyileştirmeleri ve kod temizliği

@@ -1,3 +1,9 @@
+## 1.4.3
+- Erhöhte Zuverlässigkeit: Zeit-Integritätsprüfung (Clock-Skew-Schutz) und sofortige synchrone Speicherung des Erstinstallations-Zeitstempels
+- Verbesserte Repository-Hygiene: Neue Pull-Request-Vorlage und optimierte Workflow-Trigger
+- Doku- & Sprach-Feinschliff: Aktualisierte Beitragsrichtlinien für 20 unterstützte Sprachen und regionale Varianten
+- Allgemeine Optimierungen: Interne Stabilitätsverbesserungen und Code-Bereinigung
+
 ## 1.4.2
 - Dynamische Untertitel-Anpassung: Zuverlässige Anzeige der gewählten Ziel-App im Untertitel für alle Sprachen (u. a. Japanisch, Chinesisch, Koreanisch, Arabisch, Russisch)
 - Verbesserte Link-Erkennung: Konsistente Bereinigung von Satzzeichen und Klammer-Zusätzen über alle unterstützten Kartendienste

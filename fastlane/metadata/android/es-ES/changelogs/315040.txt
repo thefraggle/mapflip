@@ -1,0 +1,4 @@
+• Mayor fiabilidad: Verificación de integridad temporal y almacenamiento mejorado
+• Configuración optimizada de repositorio e integración continua (CI)
+• Directrices de contribución y localización actualizadas
+• Mejoras internas de estabilidad y limpieza de código

@@ -36,7 +36,7 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
 
     init {
         if (prefs.getLong(PREFS_KEY_FIRST_INSTALL_TS, 0L) == 0L) {
-            prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, System.currentTimeMillis()).apply()
+            prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, System.currentTimeMillis()).commit()
         }
         prefs.registerOnSharedPreferenceChangeListener(prefChangeListener)
     }
@@ -124,7 +124,7 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
             val ts = prefs.getLong(PREFS_KEY_FIRST_INSTALL_TS, 0L)
             if (ts == 0L) {
                 val now = System.currentTimeMillis()
-                prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, now).apply()
+                prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, now).commit()
                 return now
             }
             return ts

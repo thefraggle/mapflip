@@ -22,8 +22,8 @@ object ReviewEligibility {
         installTime: Long,
         lastPrompt: Long
     ): Boolean {
-        val isInstalledLongEnough = (now - installTime) >= MIN_DAYS_AFTER_INSTALL_MS
-        val isCooldownPassed = (now - lastPrompt) >= PROMPT_COOLDOWN_MS
+        val isInstalledLongEnough = (now >= installTime) && ((now - installTime) >= MIN_DAYS_AFTER_INSTALL_MS)
+        val isCooldownPassed = lastPrompt == 0L || ((now >= lastPrompt) && ((now - lastPrompt) >= PROMPT_COOLDOWN_MS))
         val hasEnoughFlips = flips >= MIN_FLIPS_FOR_REVIEW
         return hasEnoughFlips && isInstalledLongEnough && isCooldownPassed
     }

@@ -53,4 +53,22 @@ class ReviewEligibilityTest {
 
         assertTrue(ReviewEligibility.isEligibleForReview(now, flips, installTime, lastPrompt))
     }
+
+    @Test
+    fun testNotEligibleWhenClockSkewBeforeInstallTime() {
+        val flips = ReviewEligibility.MIN_FLIPS_FOR_REVIEW
+        val installTime = now + (10 * oneDay) // System clock skewed backwards
+        val lastPrompt = 0L
+
+        assertFalse(ReviewEligibility.isEligibleForReview(now, flips, installTime, lastPrompt))
+    }
+
+    @Test
+    fun testNotEligibleWhenClockSkewBeforeLastPrompt() {
+        val flips = ReviewEligibility.MIN_FLIPS_FOR_REVIEW
+        val installTime = now - (30 * oneDay)
+        val lastPrompt = now + (5 * oneDay) // System clock skewed backwards after prompt
+
+        assertFalse(ReviewEligibility.isEligibleForReview(now, flips, installTime, lastPrompt))
+    }
 }

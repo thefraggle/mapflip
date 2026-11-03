@@ -1,0 +1,4 @@
+• Zwiększona niezawodność: Sprawdzanie spójności czasu i ulepszony zapis ustawień
+• Zoptymalizowana konfiguracja repozytorium oraz CI
+• Zaktualizowane wytyczne dotyczące wkładu i lokalizacji
+• Wewnętrzne poprawki stabilności i uporządkowanie kodu
