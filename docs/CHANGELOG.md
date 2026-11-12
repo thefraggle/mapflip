@@ -1,3 +1,9 @@
+## 1.4.4
+- Verbesserte Weiterleitung: Optimierte Erkennung von Karten-Links, Routen und Zwischenzielen
+- Präzisere Standorte: Zuverlässigere Verarbeitung von Adressen, Koordinaten und Kartenausschnitten
+- Erhöhte Stabilität: Fehlerbehebungen und reibungslose Übergabe an bevorzugte Karten-Apps
+- Feinschliff der Oberfläche: Bessere Bedienung und automatische Anpassung der Einstellungen
+
 ## 1.4.3
 - Erhöhte Zuverlässigkeit: Zeit-Integritätsprüfung (Clock-Skew-Schutz) und sofortige synchrone Speicherung des Erstinstallations-Zeitstempels
 - Verbesserte Repository-Hygiene: Neue Pull-Request-Vorlage und optimierte Workflow-Trigger

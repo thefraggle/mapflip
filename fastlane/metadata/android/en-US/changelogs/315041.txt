@@ -1,0 +1,3 @@
+• Improved redirection for map links and routes
+• More reliable recognition of locations and addresses
+• Stability improvements and bug fixes

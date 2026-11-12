@@ -1,0 +1,3 @@
+• Reindirizzamento migliorato per link di mappe e percorsi
+• Riconoscimento più affidabile di posizioni e indirizzi
+• Miglioramenti della stabilità e correzioni di bug

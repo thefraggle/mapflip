@@ -164,13 +164,29 @@ class RedirectActivity : Activity() {
         dataUri: Uri,
         parsedLocation: de.goork.mapflip.parser.ParsedLocation
     ) {
-        // 1. Try generic System Picker chooser
+        // 1. Try generic System Picker chooser (only if external handlers exist to prevent self-looping)
         try {
-            val chooserIntent = NavigationIntentBuilder.buildGenericGeoIntent(parsedLocation, createChooser = true).apply {
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            val geoIntent = Intent(Intent.ACTION_VIEW, Uri.parse(NavigationIntentBuilder.buildGenericGeoUriString(parsedLocation)))
+            val handlers = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                packageManager.queryIntentActivities(geoIntent, PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_DEFAULT_ONLY.toLong()))
+            } else {
+                @Suppress("DEPRECATION")
+                packageManager.queryIntentActivities(geoIntent, PackageManager.MATCH_DEFAULT_ONLY)
+            }.filter { it.activityInfo.packageName != packageName }
+
+            if (handlers.isNotEmpty()) {
+                val chooserIntent = NavigationIntentBuilder.buildGenericGeoIntent(parsedLocation, createChooser = true).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        putExtra(
+                            Intent.EXTRA_EXCLUDE_COMPONENTS,
+                            arrayOf(android.content.ComponentName(this@RedirectActivity, RedirectActivity::class.java))
+                        )
+                    }
+                }
+                startActivity(chooserIntent)
+                return
             }
-            startActivity(chooserIntent)
-            return
         } catch (e: Exception) {
             Log.w("MapFlip", "Failed to launch generic chooser intent", e)
         }

@@ -31,6 +31,7 @@
     <application
         android:name=".MapFlipApp"
         android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:localeConfig="@xml/locales_config"
@@ -60,7 +61,7 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
 
-            <!-- 1. Apple Maps Links -->
+            <!-- 1. Apple Maps Web Links & Custom Scheme -->
             <intent-filter android:autoVerify="false">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -68,15 +69,26 @@
                 <data android:scheme="https" android:host="maps.apple.com" />
                 <data android:scheme="http" android:host="maps.apple.com" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="applemaps" />
+            </intent-filter>
 
-            <!-- 2. Bing Maps Links -->
+            <!-- 2. Bing Maps Links (Split: subdomains vs pathPrefix) -->
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="maps.bing.com" />
+            </intent-filter>
             <intent-filter android:autoVerify="false">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" android:host="bing.com" android:pathPrefix="/maps" />
                 <data android:scheme="https" android:host="www.bing.com" android:pathPrefix="/maps" />
-                <data android:scheme="https" android:host="maps.bing.com" />
             </intent-filter>
 
             <!-- 3. OpenStreetMap Links -->
@@ -89,7 +101,14 @@
                 <data android:scheme="https" android:host="osm.org" />
             </intent-filter>
 
-            <!-- 4. Yandex Maps Links -->
+            <!-- 4. Yandex Maps Links (Split: maps subdomains vs main /maps) -->
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="maps.yandex.com" />
+                <data android:scheme="https" android:host="maps.yandex.ru" />
+            </intent-filter>
             <intent-filter android:autoVerify="false">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -98,8 +117,6 @@
                 <data android:scheme="https" android:host="www.yandex.com" android:pathPrefix="/maps" />
                 <data android:scheme="https" android:host="yandex.ru" android:pathPrefix="/maps" />
                 <data android:scheme="https" android:host="www.yandex.ru" android:pathPrefix="/maps" />
-                <data android:scheme="https" android:host="maps.yandex.com" />
-                <data android:scheme="https" android:host="maps.yandex.ru" />
             </intent-filter>
 
             <!-- 5. HERE WeGo Links -->
@@ -108,36 +125,46 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" android:host="wego.here.com" />
-                <data android:scheme="https" android:host="share.here.com" />
+                <data android:scheme="share.here.com" />
                 <data android:scheme="https" android:host="maps.here.com" />
                 <data android:scheme="https" android:host="here.com" />
                 <data android:scheme="https" android:host="www.here.com" />
             </intent-filter>
 
-            <!-- 6. Waze Web Links -->
+            <!-- 6. Waze Web Links (Split: ul.waze.com vs waze.com path prefixes) -->
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="ul.waze.com" />
+            </intent-filter>
             <intent-filter android:autoVerify="false">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" android:host="waze.com" android:pathPrefix="/ul" />
                 <data android:scheme="https" android:host="www.waze.com" android:pathPrefix="/ul" />
-                <data android:scheme="https" android:host="ul.waze.com" />
                 <data android:scheme="https" android:host="waze.com" android:pathPrefix="/live-map" />
                 <data android:scheme="https" android:host="www.waze.com" android:pathPrefix="/live-map" />
                 <data android:scheme="https" android:host="waze.com" android:pathPrefix="/location" />
                 <data android:scheme="https" android:host="www.waze.com" android:pathPrefix="/location" />
             </intent-filter>
 
-            <!-- 7. Google Maps Links (De-Google) -->
+            <!-- 7. Google Maps Links (Split: maps.google.com & maps.app.goo.gl vs /maps pathPrefix) -->
             <intent-filter android:autoVerify="false">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" android:host="maps.google.com" />
                 <data android:scheme="http" android:host="maps.google.com" />
+                <data android:scheme="https" android:host="maps.app.goo.gl" />
+            </intent-filter>
+            <intent-filter android:autoVerify="false">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" android:host="www.google.com" android:pathPrefix="/maps" />
                 <data android:scheme="https" android:host="google.com" android:pathPrefix="/maps" />
-                <data android:scheme="https" android:host="maps.app.goo.gl" />
                 <data android:scheme="https" android:host="goo.gl" android:pathPrefix="/maps" />
             </intent-filter>
 

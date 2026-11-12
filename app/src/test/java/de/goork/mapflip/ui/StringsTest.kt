@@ -76,4 +76,12 @@ class StringsTest {
         val ar = Strings.getStrings("ar")
         assertEquals("خرائط Apple ← تطبيق الملاحة", ar.formatSubtitle(TargetNavigationApp.SYSTEM_PICKER))
     }
+
+    @Test
+    fun testResolveLanguageMapsLegacyIndonesianAndHant() {
+        assertEquals("id", Strings.resolveLanguage("in"))
+        assertEquals("id", Strings.resolveLanguage("id"))
+        assertEquals("no", Strings.resolveLanguage("nb"))
+        assertEquals("no", Strings.resolveLanguage("nn"))
+    }
 }

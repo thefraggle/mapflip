@@ -420,4 +420,11 @@ class NavigationIntentBuilderTest {
         val home = ParsedLocation.Home
         assertEquals("https://mapy.cz", NavigationIntentBuilder.buildMapyCzUriString(home))
     }
+
+    @Test
+    fun `formats negative zero coordinates cleanly without negative sign`() {
+        val negZero = ParsedLocation.Coordinates(-0.0, -0.0)
+        val uri = NavigationIntentBuilder.buildGenericGeoUriString(negZero)
+        assertEquals("geo:0.000000,0.000000?q=0.000000,0.000000", uri)
+    }
 }

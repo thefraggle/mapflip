@@ -492,8 +492,11 @@ object NavigationIntentBuilder {
     }
 
     fun buildMapyCzIntent(location: ParsedLocation): Intent {
-        return Intent(Intent.ACTION_VIEW, Uri.parse(buildMapyCzUriString(location))).apply {
-            setPackage(TargetNavigationApp.MAPY_CZ.packageName)
+        val uriStr = buildMapyCzUriString(location)
+        return Intent(Intent.ACTION_VIEW, Uri.parse(uriStr)).apply {
+            if (location !is ParsedLocation.WebFallback || uriStr.contains("mapy.cz")) {
+                setPackage(TargetNavigationApp.MAPY_CZ.packageName)
+            }
         }
     }
 
@@ -527,11 +530,13 @@ object NavigationIntentBuilder {
     }
 
     private fun formatCoord(value: Double): String {
-        return "%.6f".format(java.util.Locale.US, value)
+        val normalized = if (value == -0.0 || (value > -1e-9 && value < 1e-9)) 0.0 else value
+        return "%.6f".format(java.util.Locale.US, normalized)
     }
 
     private fun formatCoordCompact(value: Double): String {
-        return java.text.DecimalFormat("0.######", java.text.DecimalFormatSymbols(java.util.Locale.US)).format(value)
+        val normalized = if (value == -0.0 || (value > -1e-9 && value < 1e-9)) 0.0 else value
+        return java.text.DecimalFormat("0.######", java.text.DecimalFormatSymbols(java.util.Locale.US)).format(normalized)
     }
 
     private fun encode(value: String): String = URLEncoder.encode(value, "UTF-8")

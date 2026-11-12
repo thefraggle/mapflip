@@ -14,6 +14,8 @@ class OsmMapsParserTest {
         assertTrue(OpenStreetMapParser.canParse("http://openstreetmap.org/search?query=Berlin"))
         assertFalse(OpenStreetMapParser.canParse("https://google.com/maps"))
         assertFalse(OpenStreetMapParser.canParse("https://osm.com"))
+        assertFalse(OpenStreetMapParser.canParse("https://microcosm.org/foo"))
+        assertFalse(OpenStreetMapParser.canParse("https://cosm.org/bar"))
     }
 
     @Test
@@ -59,6 +61,9 @@ class OsmMapsParserTest {
 
         val car = OpenStreetMapParser.parse("https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=52.52,13.40;52.51,13.41")
         assertEquals(ParsedLocation.Directions(origin = "52.52,13.40", destination = "52.51,13.41", mode = TravelMode.DRIVING), car)
+
+        val emptyOrigin = OpenStreetMapParser.parse("https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=;52.51,13.41")
+        assertEquals(ParsedLocation.Navigation("52.51,13.41", mode = TravelMode.DRIVING), emptyOrigin)
     }
 
     @Test

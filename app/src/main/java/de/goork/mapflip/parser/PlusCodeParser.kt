@@ -19,13 +19,13 @@ object PlusCodeParser : MapUrlParser {
 
     // Full or short Plus Code URL pattern (e.g. https://plus.codes/8FW4V75V+8G or https://plus.codes/V75V+8G,Paris)
     private val URL_PATTERN = Pattern.compile(
-        """(?:https?://(?:www\.)?plus\.codes/|plus\.codes/)([23456789CFGHJMPQRVWX]{4,8}\+[23456789CFGHJMPQRVWX]{2,6}(?:[^\s<>"'()]*)?)""",
+        """(?:https?://(?:www\.)?plus\.codes/|plus\.codes/)([23456789CFGHJMPQRVWX]{4,8}\+[23456789CFGHJMPQRVWX]{2,7}(?:[^\s<>"'()]*)?)""",
         Pattern.CASE_INSENSITIVE
     )
 
     // Standalone full Plus Code pattern (e.g. 8FW4V75V+8G or 9F42C2M2+X7)
     private val STANDALONE_PATTERN = Pattern.compile(
-        """\b([23456789CFGHJMPQRVWX]{8}\+[23456789CFGHJMPQRVWX]{2,6})\b""",
+        """\b([23456789CFGHJMPQRVWX]{8}\+[23456789CFGHJMPQRVWX]{2,7})\b""",
         Pattern.CASE_INSENSITIVE
     )
 
@@ -103,8 +103,9 @@ object PlusCodeParser : MapUrlParser {
         var lonRes = 20.0
 
         // Pair 1 (chars 0, 1): resolution 20.0°
-        val v0 = charValue(cleanCode[0]) ?: return null
-        val v1 = charValue(cleanCode[1]) ?: return null
+        // Per OLC spec: latitude indices are 0..8 (-90° to +90°), longitude indices are 0..17 (-180° to +180°)
+        val v0 = charValue(cleanCode[0])?.takeIf { it in 0..8 } ?: return null
+        val v1 = charValue(cleanCode[1])?.takeIf { it in 0..17 } ?: return null
         lat += v0 * 20.0
         lon += v1 * 20.0
 
@@ -158,6 +159,8 @@ object PlusCodeParser : MapUrlParser {
         // Convert south-west corner to center of bounding box
         val centerLat = lat - 90.0 + (latRes / 2.0)
         val centerLon = lon - 180.0 + (lonRes / 2.0)
+
+        if (!isValidLatLon(centerLat, centerLon)) return null
 
         return Pair(centerLat, centerLon)
     }

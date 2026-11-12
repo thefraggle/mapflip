@@ -50,7 +50,25 @@ object YandexMapsParser : MapUrlParser {
                 else -> null
             }
 
-            // 1. Coordinates: ll=longitude,latitude (NOTE: Yandex puts LONGITUDE first!)
+            // 1. Route / rtext=lat,lon~lat,lon (check BEFORE ll to avoid taking viewport center)
+            val rtext = params["rtext"]
+            if (!rtext.isNullOrBlank()) {
+                val legs = rtext.split("~")
+                if (legs.size >= 2) {
+                    val origin = legs.first().trim()
+                    val destination = legs.last().trim()
+                    if (origin.isEmpty() && destination.isNotEmpty()) {
+                        return ParsedLocation.Navigation(destination = destination, mode = travelMode)
+                    } else if (origin.isNotEmpty() && destination.isNotEmpty()) {
+                        return ParsedLocation.Directions(origin = origin, destination = destination, mode = travelMode)
+                    }
+                } else if (legs.size == 1 && legs[0].isNotBlank()) {
+                    val target = legs[0].trim()
+                    return ParsedLocation.Navigation(destination = target, mode = travelMode)
+                }
+            }
+
+            // 2. Coordinates: ll=longitude,latitude (NOTE: Yandex puts LONGITUDE first!)
             val ll = params["ll"]
             if (!ll.isNullOrBlank()) {
                 val parts = ll.replace(" ", "").split(",")
@@ -64,19 +82,10 @@ object YandexMapsParser : MapUrlParser {
                 }
             }
 
-            // 2. Search query / text
+            // 3. Search query / text
             val text = params["text"] ?: params["what[where]"]
             if (!text.isNullOrBlank()) {
                 return ParsedLocation.SearchQuery(text)
-            }
-
-            // 3. Route / rtext=lat,lon~lat,lon
-            val rtext = params["rtext"]
-            if (!rtext.isNullOrBlank()) {
-                val legs = rtext.split("~")
-                if (legs.size >= 2) {
-                    return ParsedLocation.Directions(origin = legs.first(), destination = legs.last(), mode = travelMode)
-                }
             }
 
             ParsedLocation.WebFallback(normalizedUrl)

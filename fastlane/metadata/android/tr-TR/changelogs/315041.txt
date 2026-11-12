@@ -1,0 +1,3 @@
+• Harita bağlantıları ve rotaların yönlendirilmesi iyileştirildi
+• Konum ve adreslerin algılanması daha güvenilir hale getirildi
+• Kararlılık iyileştirmeleri ve hata düzeltmeleri

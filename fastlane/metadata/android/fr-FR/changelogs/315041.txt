@@ -1,0 +1,3 @@
+• Amélioration de la redirection des liens de cartes et des itinéraires
+• Détection plus fiable des lieux et des adresses
+• Améliorations de la stabilité et corrections de bugs

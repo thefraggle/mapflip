@@ -22,6 +22,7 @@ import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Tune
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -62,10 +63,10 @@ fun MainScreen(
 
     var showPauseSheet by remember { mutableStateOf(false) }
     var showSettingsSheet by remember { mutableStateOf(false) }
-    var isSetupGuideExpanded by remember { mutableStateOf(false) }
-    var isLinkTesterExpanded by remember { mutableStateOf(false) }
+    var isSetupGuideExpanded by rememberSaveable { mutableStateOf(false) }
+    var isLinkTesterExpanded by rememberSaveable { mutableStateOf(false) }
 
-    var testInputUrl by remember { mutableStateOf("") }
+    var testInputUrl by rememberSaveable { mutableStateOf("") }
     val convertedTargetUri = remember(testInputUrl, userPreferences.targetApp) {
         if (testInputUrl.isNotBlank()) {
             val loc = UniversalMapParser.parse(testInputUrl)
@@ -83,12 +84,13 @@ fun MainScreen(
     var domainStatus by remember { mutableStateOf<DomainStatusInfo?>(null) }
     var showSetupGuideSheet by remember { mutableStateOf(false) }
     var detectedClipboardUrl by remember { mutableStateOf<String?>(null) }
-    var dismissedClipboardUrl by remember { mutableStateOf<String?>(null) }
+    var dismissedClipboardUrl by rememberSaveable { mutableStateOf<String?>(null) }
 
     val lifecycleOwner = LocalLifecycleOwner.current
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
+                repository.refreshPauseState()
                 val currentDomainStatus = DomainVerificationHelper.getDomainStatus(context)
                 domainStatus = currentDomainStatus
                 val currentStatus = currentDomainStatus?.let { it.enabledHosts > 0 }
@@ -398,6 +400,18 @@ fun MainScreen(
                 currentTargetApp = userPreferences.targetApp,
                 onLanguageSelected = { newLang ->
                     repository.setLanguage(newLang)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        try {
+                            val localeManager = context.getSystemService(android.app.LocaleManager::class.java)
+                            if (newLang == "auto") {
+                                localeManager.applicationLocales = android.os.LocaleList.getEmptyLocaleList()
+                            } else {
+                                localeManager.applicationLocales = android.os.LocaleList.forLanguageTags(newLang)
+                            }
+                        } catch (e: Exception) {
+                            Log.w("MapFlip", "Failed to update LocaleManager applicationLocales", e)
+                        }
+                    }
                 },
                 onThemeSelected = { newTheme ->
                     repository.setTheme(newTheme)

@@ -1,8 +1,8 @@
 朋友常常傳送 Apple Maps 蘋果地圖連結，而在 Android 手機上無法順暢開啟嗎？
 
-MapFlip 是專為 Android 使用者打造的地圖與位置連結高速連結轉換與自動跳轉工具。無論收到任何 Apple Maps 網址或地點分享，都能瞬間在你習慣的導航 App 中開啟。完全不需要手動複製貼上，更不必經由瀏覽器繞路！
+MapFlip 是專為 Android 使用者打造的地圖與位置極速連結開啟工具、高速連結轉換與自動跳轉工具。無論收到任何 Apple Maps 網址或地點分享，都能瞬間在你習慣的導航 App 中開啟。直接開啟 Apple Maps 連結，完全不需要手動複製貼上，更不必經由瀏覽器繞路！
 
-不管是解決 Apple Maps 在 Android 上的開啟問題、進行路線規劃與 GPS 導航，還是快速擷取好友分享的地點，MapFlip 在背景都能為你迅速搞定。
+不管是直接開啟 Apple Maps 連結、尋找 Apple to Google 地圖轉換應用、進行路線規劃與 GPS 導航，還是快速開啟好友分享的目的地，MapFlip 在背景都能為你迅速搞定。
 
 ⚡ 3種輕鬆開啟地圖的方式：
 1. 🚀 全自動跳轉：點擊通訊軟體中的 Apple Maps 連結，MapFlip 自動攔截並開啟導航。
@@ -23,11 +23,11 @@ MapFlip 是專為 Android 使用者打造的地圖與位置連結高速連結轉
 • 地點圖釘、地址、地名搜尋與即時導航路徑
 
 ✨ 核心亮點與隱私承諾：
-• 🚗 轉向即時導航與 Android Auto – 立即啟動原生語音路徑指引
-• 🔒 100% 離線與極致隱私 – 零網路連線權限 (無 android.permission.INTERNET)，無追蹤器，無廣告干擾
+• 🚗 轉向即時導航與 Android Auto – Google 地圖轉向語音即時導航、路徑規劃與 Android Auto 車載整合
+• 🔒 100% 離線與極致隱私 – 零網路連線權限 (無 android.permission.– 100% local link conversion on device, zero tracking of location or URLs, zero ads
 • 🛡️ 智慧容錯機制 – 若預設導航 App 已解除安裝，自動安全切換至 Google 地圖或系統選擇選單
 • ⏸️ 暫停模式與快速設定磚 – 下拉快捷面板隨時暫停跳轉（可選 1小時、8小時或至明天早上）
 • 💬 廣泛相容主流應用 – 完美支援 LINE、Messenger、Telegram、Signal、簡訊與電子郵件
 • 👻 輕巧無負擔 – 背景無感執行，完全不消耗手機電量
 
-經常收到 iPhone 好友地點分享的 Android 使用者必備必裝工具！
+MapFlip 是 Android 上聰明的 Apple Maps 替代工具，經常收到 iPhone 好友地點分享的必備必裝神器！

@@ -195,14 +195,19 @@ object Strings {
         if (!savedPref.isNullOrBlank() && savedPref != "auto") {
             return when (savedPref.lowercase()) {
                 "nb", "nn" -> "no"
+                "in" -> "id"
                 else -> savedPref
             }
         }
         val locale = Locale.getDefault()
         val lang = locale.language.lowercase()
         val country = locale.country.uppercase()
+        if (lang == "in" || lang == "id") {
+            return "id"
+        }
         if (lang == "zh") {
-            return if (country == "TW" || country == "HK" || country == "MO") "zh-tw" else "zh"
+            val script = locale.script
+            return if (script.equals("Hant", ignoreCase = true) || country == "TW" || country == "HK" || country == "MO") "zh-tw" else "zh"
         }
         if (lang == "pt") {
             return if (country == "BR") "pt-br" else "pt"

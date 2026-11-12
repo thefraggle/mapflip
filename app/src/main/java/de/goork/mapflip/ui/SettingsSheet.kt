@@ -9,7 +9,9 @@ import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
@@ -318,12 +320,17 @@ fun SettingsSheet(
                     }
                 }
                 else -> {
-                    // Main Settings / About Overview
-                    Text(
-                        text = s.menuSettingsAbout,
-                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .verticalScroll(rememberScrollState())
+                    ) {
+                        // Main Settings / About Overview
+                        Text(
+                            text = s.menuSettingsAbout,
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
                     Spacer(Modifier.height(16.dp))
 
                     // 1. Target Navigation App Option
@@ -418,6 +425,8 @@ fun SettingsSheet(
                                 context.startActivity(intent)
                             } catch (e: Exception) {
                                 Log.w("MapFlip", "Failed to launch feedback email intent", e)
+                                de.goork.mapflip.util.ClipboardUtil.copyToClipboard(context, AppConstants.FEEDBACK_EMAIL)
+                                android.widget.Toast.makeText(context, "${AppConstants.FEEDBACK_EMAIL} copied", android.widget.Toast.LENGTH_LONG).show()
                             }
                         }
                     )
@@ -453,14 +462,7 @@ fun SettingsSheet(
                             onClick = {
                                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                 Analytics.trackEvent("rate_app_clicked")
-                                val act = context as? android.app.Activity
-                                if (act != null) {
-                                    de.goork.mapflip.review.ReviewHelper.launchReviewFlow(act, trigger = "settings_manual") {
-                                        de.goork.mapflip.review.ReviewHelper.openPlayStoreListing(context)
-                                    }
-                                } else {
-                                    de.goork.mapflip.review.ReviewHelper.openPlayStoreListing(context)
-                                }
+                                de.goork.mapflip.review.ReviewHelper.openPlayStoreListing(context)
                             }
                         )
                     }
@@ -469,6 +471,7 @@ fun SettingsSheet(
 
                     // Unified Footer matching MainScreen
                     AppFooter(s = s)
+                    }
                 }
             }
         }

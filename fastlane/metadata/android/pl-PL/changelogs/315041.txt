@@ -1,0 +1,3 @@
+• Ulepszone przekierowywanie linków do map i tras
+• Bardziej niezawodne rozpoznawanie lokalizacji i adresów
+• Usprawnienia stabilności i poprawki błędów

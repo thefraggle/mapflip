@@ -1,0 +1,3 @@
+• Verbesserte Weiterleitung von Karten-Links und Routen
+• Zuverlässigere Erkennung von Standorten und Adressen
+• Optimierte Stabilität und Fehlerbehebungen

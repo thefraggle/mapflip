@@ -11,6 +11,8 @@ class WazeMapsParserTest {
     fun `canParse detects waze domains and paths`() {
         assertTrue(WazeMapsParser.canParse("https://waze.com/ul?ll=48.8584,2.2945"))
         assertTrue(WazeMapsParser.canParse("https://www.waze.com/ul?q=Berlin"))
+        assertTrue(WazeMapsParser.canParse("https://ul.waze.com/ul?ll=48.8584,2.2945"))
+        assertTrue(WazeMapsParser.canParse("https://ul.waze.com/?ll=48.8584,2.2945"))
         assertTrue(WazeMapsParser.canParse("https://waze.com/live-map/directions?to=ll.52.5,13.4"))
         assertTrue(WazeMapsParser.canParse("https://waze.com/location?ll=52.5,13.4"))
         assertFalse(WazeMapsParser.canParse("https://google.com/maps"))
@@ -21,6 +23,8 @@ class WazeMapsParserTest {
     fun `extractUrl extracts waze link from text`() {
         val text = "Join me here: https://waze.com/ul?ll=48.8584,2.2945&navigate=yes."
         assertEquals("https://waze.com/ul?ll=48.8584,2.2945&navigate=yes", WazeMapsParser.extractUrl(text))
+        val textUl = "Tap: https://ul.waze.com/ul?ll=48.8584,2.2945 for directions"
+        assertEquals("https://ul.waze.com/ul?ll=48.8584,2.2945", WazeMapsParser.extractUrl(textUl))
     }
 
     @Test

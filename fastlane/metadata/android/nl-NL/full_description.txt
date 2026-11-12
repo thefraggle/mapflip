@@ -1,8 +1,8 @@
 Sturen je vrienden Apple Maps-links, maar gebruik jij Google Maps of een andere navigatie-app op Android?
 
-MapFlip is de betrouwbare Apple Maps naar Google Maps converter en snelle doorverwijzing voor Android. Elke Apple Maps-link, URL of gedeelde locatie opent direct in jouw favoriete navigatie-app. Zonder kopiëren, zonder plakken, zonder handmatig zoeken en zonder omweg via de browser.
+MapFlip is de betrouwbare Apple Maps naar Google Maps converter, snelle link-opener en automatische doorverwijzing voor Android. Elke Apple Maps-link, URL of locatie opent direct in jouw favoriete navigatie-app. Open Apple Maps-links direct zonder kopiëren, zonder plakken, zonder handmatig zoeken en zonder omweg via de browser.
 
-Of je nu zoekt naar Apple Maps voor Android, een snelle Apple Maps converter voor elke route of automatische kaartdoorsturing in je navigatie: MapFlip regelt het naadloos op de achtergrond.
+Of je nu Apple Maps-links wilt openen op Android, een Apple Maps naar Google Maps app zoekt, een snelle Apple Maps converter wilt voor elke route of bestemmingen wilt doorsturen: MapFlip regelt het naadloos op de achtergrond.
 
 ⚡ 3 eenvoudige manieren om links te openen:
 1. 🚀 Volledig automatisch: Tik op een Apple Maps-link en MapFlip opent meteen je gekozen navigatie.
@@ -23,11 +23,11 @@ Open bestemmingen en routes in je favoriete app:
 • Locatiemarkeringen, adressen en turn-by-turn navigatieroutes
 
 ✨ Hoogtepunten & Privacy:
-• 🚗 Turn-by-Turn navigatie & Android Auto – Start direct de ingebouwde routebegeleiding
-• 🔒 100% Offline & Veilig – Geen internettoestemming (0 permissies), geen tracking, geen advertenties
+• 🚗 Turn-by-Turn navigatie & Android Auto – Turn-by-turn routebegeleiding in Google Maps, volledige Android Auto-integratie en realtime navigatie
+• 🔒 100% Offline & Veilig – Geen – 100% local link conversion on device, zero tracking of location or URLs, zero ads
 • 🛡️ Slimme fallback – Is je gekozen app niet geïnstalleerd? MapFlip schakelt veilig over naar Google Maps of de systeemselectie
 • ⏸️ Pauzemodus & Snelle instellingen-tegel – Pauzeer de omleiding op elk gewenst moment vanuit je notificatiebalk (1 uur, 8 uur, tot morgenochtend)
 • 💬 Universele compatibiliteit – Werkt naadloos met WhatsApp, Telegram, Signal, sms, Slack en e-mail
 • 👻 Onzichtbaar op de achtergrond – Geen extra schermen en nul batterijverbruik
 
-MapFlip is de ideale tool voor Android-gebruikers die regelmatig kaartlinks ontvangen van iPhone-gebruikers.
+MapFlip is het slimme Apple Maps alternatief en de ideale tool voor Android-gebruikers die kaartlinks ontvangen van iPhone-gebruikers.

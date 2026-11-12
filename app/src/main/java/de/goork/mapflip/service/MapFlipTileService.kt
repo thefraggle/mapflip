@@ -1,5 +1,6 @@
 package de.goork.mapflip.service
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -8,7 +9,6 @@ import android.os.Build
 import android.provider.Settings
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
-import androidx.annotation.RequiresApi
 import de.goork.mapflip.AppConstants
 import de.goork.mapflip.MainActivity
 import de.goork.mapflip.PauseHelper
@@ -17,7 +17,6 @@ import de.goork.mapflip.data.PreferencesRepository
 import de.goork.mapflip.ui.Strings
 import de.goork.mapflip.util.DomainVerificationHelper
 
-@RequiresApi(Build.VERSION_CODES.N)
 class MapFlipTileService : TileService() {
 
     private val repository by lazy { PreferencesRepository.getInstance(applicationContext) }
@@ -75,6 +74,7 @@ class MapFlipTileService : TileService() {
             startActivityAndCollapse(pendingIntent)
         } else {
             @Suppress("DEPRECATION")
+            @SuppressLint("StartActivityAndCollapseDeprecated")
             startActivityAndCollapse(intent)
         }
     }

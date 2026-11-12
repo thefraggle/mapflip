@@ -10,13 +10,13 @@ object WazeMapsParser : MapUrlParser {
     override val supportedHosts: List<String> = listOf("waze.com", "www.waze.com", "ul.waze.com")
 
     private val URL_PATTERN = Pattern.compile(
-        """https?://(?:(?:www|ul)\.)?waze\.com/(?:ul|live-map|location)[^\s<>"']*""",
+        """https?://(?:ul\.waze\.com|(?:(?:www|ul)\.)?waze\.com/(?:ul|live-map|location))[^\s<>"']*""",
         Pattern.CASE_INSENSITIVE
     )
 
     override fun canParse(url: String): Boolean {
         val lower = url.lowercase().trim()
-        return lower.contains("waze.com/ul") || lower.contains("waze.com/live-map") || lower.contains("waze.com/location")
+        return lower.contains("ul.waze.com") || lower.contains("waze.com/ul") || lower.contains("waze.com/live-map") || lower.contains("waze.com/location")
     }
 
     override fun extractUrl(text: String?): String? {

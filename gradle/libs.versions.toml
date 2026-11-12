@@ -8,6 +8,11 @@ lifecycleRuntimeKtx = "2.8.7"
 junit = "4.13.2"
 mockk = "1.13.16"
 robolectric = "4.14.1"
+playReview = "2.0.2"
+screengrab = "2.1.1"
+testCore = "1.6.1"
+testExtJunit = "1.2.1"
+testRunner = "1.6.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -26,6 +31,11 @@ androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lif
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+play-review = { group = "com.google.android.play", name = "review-ktx", version.ref = "playReview" }
+screengrab = { group = "tools.fastlane", name = "screengrab", version.ref = "screengrab" }
+androidx-test-core = { group = "androidx.test", name = "core", version.ref = "testCore" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "testExtJunit" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "testRunner" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

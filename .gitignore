@@ -20,6 +20,12 @@ local.properties
 keystore.properties
 release-notes/
 .env
+.env.*
+!.env.example
+*service-account*.json
+*.pepk
+.vscode/
+docs/PLAYSTORE_LISTING.md
 .kotlin/
 vendor/
 .bundle/

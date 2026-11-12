@@ -10,7 +10,7 @@ object BingMapsParser : MapUrlParser {
     override val supportedHosts: List<String> = listOf("bing.com", "www.bing.com", "maps.bing.com")
 
     private val URL_PATTERN = Pattern.compile(
-        """https?://(?:www\.)?bing\.com/maps[^\s<>"']*""",
+        """https?://(?:maps\.bing\.com|(?:www\.)?bing\.com/maps)[^\s<>"']*""",
         Pattern.CASE_INSENSITIVE
     )
 

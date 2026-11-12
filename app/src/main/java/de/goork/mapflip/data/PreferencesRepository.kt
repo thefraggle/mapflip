@@ -35,8 +35,19 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
     }
 
     init {
+        // Clear expired pause if any on startup
+        val isPaused = prefs.getBoolean(AppConstants.PREFS_KEY_PAUSED, false)
+        if (isPaused) {
+            val pausedUntil = prefs.getLong(PREFS_KEY_PAUSED_UNTIL, 0L)
+            if (pausedUntil > 0L && System.currentTimeMillis() >= pausedUntil) {
+                prefs.edit()
+                    .putBoolean(AppConstants.PREFS_KEY_PAUSED, false)
+                    .putLong(PREFS_KEY_PAUSED_UNTIL, 0L)
+                    .apply()
+            }
+        }
         if (prefs.getLong(PREFS_KEY_FIRST_INSTALL_TS, 0L) == 0L) {
-            prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, System.currentTimeMillis()).commit()
+            prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, System.currentTimeMillis()).apply()
         }
         prefs.registerOnSharedPreferenceChangeListener(prefChangeListener)
     }
@@ -106,6 +117,14 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
         setPauseState(paused = false, untilTimestamp = 0L)
     }
 
+    fun refreshPauseState() {
+        isCurrentlyPaused()
+        val latest = readCurrentPreferences()
+        if (_preferences.value != latest) {
+            _preferences.value = latest
+        }
+    }
+
     var successfulFlipCount: Int
         get() = prefs.getInt(PREFS_KEY_SUCCESSFUL_FLIP_COUNT, 0)
         set(value) {
@@ -124,7 +143,7 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
             val ts = prefs.getLong(PREFS_KEY_FIRST_INSTALL_TS, 0L)
             if (ts == 0L) {
                 val now = System.currentTimeMillis()
-                prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, now).commit()
+                prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, now).apply()
                 return now
             }
             return ts

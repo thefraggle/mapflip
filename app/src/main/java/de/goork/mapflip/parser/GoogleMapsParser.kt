@@ -30,6 +30,11 @@ object GoogleMapsParser : MapUrlParser {
         """@([-+]?[0-9]+\.[0-9]+),([-+]?[0-9]+\.[0-9]+)"""
     )
 
+    // Data-parameter pin coordinates pattern e.g. !3d52.520008!4d13.404954
+    private val PIN_COORD_PATTERN = Pattern.compile(
+        """!3d([-+]?[0-9]+\.[0-9]+)!4d([-+]?[0-9]+\.[0-9]+)"""
+    )
+
     private val CAN_PARSE_PATTERN = Pattern.compile(
         """(?:maps\.google\.[a-z.]+|google\.[a-z.]+/maps|maps\.app\.goo\.gl|goo\.gl/maps)""",
         Pattern.CASE_INSENSITIVE
@@ -60,6 +65,7 @@ object GoogleMapsParser : MapUrlParser {
 
         return try {
             val uri = URI(normalizedUrl.replace(" ", "%20"))
+            val rawPath = uri.rawPath ?: uri.path ?: ""
             val path = uri.path ?: ""
             val params = parseQueryParams(uri.rawQuery ?: "")
 
@@ -86,12 +92,12 @@ object GoogleMapsParser : MapUrlParser {
             }
 
             // 2. Directions via path: /maps/dir/Origin/Destination/...
-            if (path.contains("/dir/")) {
-                val segments = path.split("/").filter { it.isNotBlank() }
-                val dirIndex = segments.indexOfFirst { it.equals("dir", ignoreCase = true) }
-                if (dirIndex != -1 && segments.size >= dirIndex + 3) {
-                    val origin = URLDecoder.decode(segments[dirIndex + 1], "UTF-8")
-                    val destination = URLDecoder.decode(segments[dirIndex + 2], "UTF-8")
+            if (rawPath.contains("/dir/")) {
+                val rawSegments = rawPath.split("/").filter { it.isNotBlank() }
+                val dirIndex = rawSegments.indexOfFirst { it.equals("dir", ignoreCase = true) }
+                if (dirIndex != -1 && rawSegments.size >= dirIndex + 3) {
+                    val origin = decodePathSegment(rawSegments[dirIndex + 1])
+                    val destination = decodePathSegment(rawSegments[dirIndex + 2])
                     if (!origin.startsWith("@") && !destination.startsWith("@")) {
                         return ParsedLocation.Directions(origin = origin, destination = destination, mode = travelMode)
                     }
@@ -112,32 +118,51 @@ object GoogleMapsParser : MapUrlParser {
                 }
             }
 
-            // 4. Path coordinates e.g. /@52.520008,13.404954,16z
-            val coordMatcher = PATH_COORD_PATTERN.matcher(path)
-            if (coordMatcher.find()) {
-                val lat = coordMatcher.group(1)?.toDoubleOrNull()
-                val lon = coordMatcher.group(2)?.toDoubleOrNull()
+            // 4. Pin coordinates in path data e.g. !3d52.520008!4d13.404954 (precise POI location)
+            val pinMatcher = PIN_COORD_PATTERN.matcher(rawPath)
+            if (pinMatcher.find()) {
+                val lat = pinMatcher.group(1)?.toDoubleOrNull()
+                val lon = pinMatcher.group(2)?.toDoubleOrNull()
                 if (lat != null && lon != null && isValidLatLon(lat, lon)) {
-                    val label = extractPlaceLabel(path) ?: qParam
+                    val label = extractPlaceLabel(rawPath) ?: qParam
                     return ParsedLocation.Coordinates(lat, lon, label = label, mode = travelMode)
                 }
             }
 
-            // 5. Place name / search query in path: /maps/place/Name
-            val placeLabel = extractPlaceLabel(path)
+            // 5. Path coordinates e.g. /@52.520008,13.404954,16z
+            val coordMatcher = PATH_COORD_PATTERN.matcher(rawPath)
+            if (coordMatcher.find()) {
+                val lat = coordMatcher.group(1)?.toDoubleOrNull()
+                val lon = coordMatcher.group(2)?.toDoubleOrNull()
+                if (lat != null && lon != null && isValidLatLon(lat, lon)) {
+                    val label = extractPlaceLabel(rawPath) ?: qParam
+                    return ParsedLocation.Coordinates(lat, lon, label = label, mode = travelMode)
+                }
+            }
+
+            // 6. Place name / search query in path: /maps/place/Name
+            val placeLabel = extractPlaceLabel(rawPath)
             if (!placeLabel.isNullOrBlank()) {
                 return ParsedLocation.SearchQuery(placeLabel)
             }
 
-            // 6. Text query parameter (q=Brandenburger+Tor)
+            // 7. Text query parameter (q=Brandenburger+Tor)
             if (!qParam.isNullOrBlank()) {
                 return ParsedLocation.SearchQuery(qParam)
             }
 
-            // 7. Short URLs / Web fallback
+            // 8. Short URLs / Web fallback
             ParsedLocation.WebFallback(normalizedUrl)
         } catch (_: Exception) {
             ParsedLocation.WebFallback(normalizedUrl)
+        }
+    }
+
+    private fun decodePathSegment(segment: String): String {
+        return try {
+            URLDecoder.decode(segment, "UTF-8")
+        } catch (_: Exception) {
+            segment
         }
     }
 
@@ -147,11 +172,8 @@ object GoogleMapsParser : MapUrlParser {
         val placeIndex = segments.indexOfFirst { it.equals("place", ignoreCase = true) }
         if (placeIndex != -1 && segments.size > placeIndex + 1) {
             val placeSegment = segments[placeIndex + 1]
-            return try {
-                URLDecoder.decode(placeSegment.replace("+", " "), "UTF-8")
-            } catch (_: Exception) {
-                placeSegment
-            }
+            if (placeSegment.startsWith("@")) return null
+            return decodePathSegment(placeSegment)
         }
         return null
     }

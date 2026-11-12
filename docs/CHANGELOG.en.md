@@ -1,3 +1,9 @@
+## 1.4.4
+- Improved Redirection: Optimized detection of map links, routes, and waypoints
+- More Precise Locations: More reliable handling of addresses, coordinates, and map views
+- Enhanced Stability: Bug fixes and smoother handoff to preferred navigation apps
+- Interface Refinements: Better usability and automatic settings adjustments
+
 ## 1.4.3
 - Enhanced Robustness: Clock-skew protection and immediate synchronous storage for first install timestamp
 - Repository Hygiene: Added pull request template and optimized workflow triggers

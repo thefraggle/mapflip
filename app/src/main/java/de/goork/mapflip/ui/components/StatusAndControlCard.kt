@@ -65,8 +65,8 @@ fun StatusAndControlCard(
                         domainStatus.isPartiallyEnabled -> Orange500
                         else -> Red500
                     }
-                    linksActive == true -> Green500
-                    else -> Red500
+                    linksActive == false -> Red500
+                    else -> Green500
                 }
                 Box(
                     modifier = Modifier
@@ -83,8 +83,8 @@ fun StatusAndControlCard(
                             domainStatus.isPartiallyEnabled -> s.formatStatusPartial(domainStatus.enabledHosts, domainStatus.totalHosts)
                             else -> s.setupStatusNone
                         }
-                        linksActive == true -> s.statusActive
-                        else -> s.statusInactive
+                        linksActive == false -> s.statusInactive
+                        else -> s.statusActive
                     },
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onSurface,

@@ -1,0 +1,3 @@
+• Redirección mejorada de enlaces de mapas y rutas
+• Reconocimiento más fiable de ubicaciones y direcciones
+• Mejoras de estabilidad y corrección de errores

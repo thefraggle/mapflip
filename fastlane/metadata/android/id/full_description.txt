@@ -1,8 +1,8 @@
 Teman Anda sering mengirim tautan Apple Maps – tetapi Anda menggunakan Google Maps atau aplikasi navigasi lain di Android?
 
-MapFlip adalah konverter Apple Maps ke Google Maps terbaik dan alat pengalihan cepat tautan peta otomatis untuk Android. Setiap tautan, rute, alamat, atau lokasi Apple Maps akan langsung terbuka di aplikasi navigasi pilihan Anda. Tanpa salin-tempel manual, tanpa repot mencari ulang, dan tanpa perantara browser.
+MapFlip adalah konverter Apple Maps ke Google Maps terbaik, pembuka tautan cepat, dan alat pengalihan tautan peta otomatis untuk Android. Setiap tautan, URL, alamat, atau lokasi Apple Maps akan langsung terbuka di aplikasi navigasi pilihan Anda. Buka tautan Apple Maps secara langsung tanpa salin-tempel dan tanpa perantara browser.
 
-Baik Anda memerlukan solusi Apple Maps untuk Android maupun konverter tautan instan, MapFlip menangani semuanya di latar belakang secara mulus.
+Baik Anda ingin membuka tautan Apple Maps di Android, mencari aplikasi Apple Maps ke Google Maps, maupun memerlukan konverter tautan dan rute instan, MapFlip menangani semuanya di latar belakang secara mulus.
 
 ⚡ 3 Cara Mudah Membuka Tautan:
 1. 🚀 Sepenuhnya Otomatis: Ketuk tautan Apple Maps dan MapFlip akan langsung membuka navigasi favorit Anda.
@@ -23,11 +23,11 @@ Buka rute dan tujuan di aplikasi favorit Anda:
 • Penanda lokasi, alamat, dan rute panduan navigasi belokan demi belokan
 
 ✨ Fitur Unggulan & Privasi:
-• 🚗 Navigasi Belokan demi Belokan & Android Auto – Memulai panduan rute asli secara instan
-• 🔒 100% Offline & Privat – Nol izin internet (tanpa akses jaringan), tanpa pelacakan, tanpa iklan
+• 🚗 Navigasi Belokan demi Belokan & Android Auto – Navigasi belokan demi belokan di Google Maps, integrasi penuh Android Auto, dan panduan rute
+• 🔒 100% Offline & Privat – Nol izin – 100% local link conversion on device, zero tracking of location or URLs, zero ads
 • 🛡️ Fallback Pintar – Jika aplikasi pilihan dicopot, MapFlip akan membuka Google Maps atau menu sistem dengan aman
 • ⏸️ Mode Jeda & Tombol Pengaturan Cepat – Jeda pengalihan kapan saja dari bilah notifikasi (1 jam, 8 jam, hingga besok)
 • 💬 Kompatibilitas Universal – Berfungsi lancar dengan WhatsApp, Telegram, Signal, SMS, Slack, dan email
 • 👻 Bekerja Hening di Latar Belakang – Tanpa layar tambahan dan tanpa boros baterai
 
-MapFlip adalah aplikasi wajib bagi pengguna Android yang sering menerima tautan lokasi dari pengguna iPhone.
+MapFlip adalah alternatif pintar Apple Maps dan aplikasi wajib bagi pengguna Android yang menerima tautan lokasi dari iPhone.

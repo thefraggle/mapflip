@@ -106,7 +106,7 @@ All parsers share consistent URL extraction, punctuation stripping, and balanced
 Translates the normalized `ParsedLocation` into platform-native intents:
 1. **App-Specific Schemes**: Directly targets installed navigation apps via custom URI schemes and package targets (e.g. `geo:`, `google.navigation:`, `waze://`, `om://`, `cm://`, `yandexmaps://`, `citymapper://`, `komoot://`, `tomtomgo://`, `https://share.here.com/r/`, `https://mapy.com/fnc/v1/`).
 2. **Travel Mode Preservation**: Carries over driving, walking, cycling, and public transit modes from source links into compatible navigation intents.
-3. **Smart Fallback & Default Browser Resolution**: If the user's chosen navigation app was uninstalled, MapFlip catches the `ActivityNotFoundException`, displays a localized toast notice, and gracefully falls back to Google Maps, the system app chooser, or normalized web fallbacks (prioritizing the user's default browser via `MATCH_DEFAULT_ONLY`).
+3. **Smart Fallback & Default Browser Resolution**: If the user's chosen navigation app was uninstalled, MapFlip catches the `ActivityNotFoundException`, displays a localized toast notice, and gracefully falls back to Google Maps, the system app chooser, or normalized web fallbacks (prioritizing the user's default browser via `MATCH_DEFAULT_ONLY`). When launching the system chooser, MapFlip explicitly excludes itself via `Intent.EXTRA_EXCLUDE_COMPONENTS` to prevent recursive redirection loops.
 
 ### 2.3 Android 12+ Deep Link Verification (`DomainVerificationHelper`)
 Android 12 (API 31+) restricts unverified HTTP/HTTPS link handling:

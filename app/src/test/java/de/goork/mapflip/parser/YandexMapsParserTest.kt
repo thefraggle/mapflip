@@ -90,6 +90,18 @@ class YandexMapsParserTest {
     }
 
     @Test
+    fun `parse prioritizes route over viewport ll coordinates`() {
+        val parsed = YandexMapsParser.parse("https://yandex.ru/maps/?ll=30.0,60.0&rtext=55.75,37.61~59.93,30.31&rtt=auto")
+        assertEquals(ParsedLocation.Directions(origin = "55.75,37.61", destination = "59.93,30.31", mode = TravelMode.DRIVING), parsed)
+    }
+
+    @Test
+    fun `parse handles empty origin navigation in rtext`() {
+        val parsed = YandexMapsParser.parse("https://yandex.ru/maps/?rtext=~55.75,37.61&rtt=pd")
+        assertEquals(ParsedLocation.Navigation("55.75,37.61", mode = TravelMode.WALKING), parsed)
+    }
+
+    @Test
     fun `parse handles malformed or empty URLs safely`() {
         assertEquals(ParsedLocation.Home, YandexMapsParser.parse(""))
         assertEquals(ParsedLocation.Home, YandexMapsParser.parse("   "))

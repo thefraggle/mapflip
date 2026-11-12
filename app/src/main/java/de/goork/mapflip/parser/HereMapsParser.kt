@@ -44,20 +44,20 @@ object HereMapsParser : MapUrlParser {
 
         return try {
             val uri = URI(normalizedUrl.replace(" ", "%20"))
-            val path = uri.path ?: ""
+            val rawPath = uri.rawPath ?: uri.path ?: ""
             val params = parseQueryParams(uri.rawQuery ?: "")
 
             val queryMode = params["m"]?.lowercase()
             val queryTravelMode = when (queryMode) {
                 "walk", "pedestrian" -> TravelMode.WALKING
                 "bicycle", "bike" -> TravelMode.BICYCLING
-                "publictransport", "transit" -> TravelMode.TRANSIT
+                "publictransport", "public-transport", "transit" -> TravelMode.TRANSIT
                 "drive", "car" -> TravelMode.DRIVING
                 else -> null
             }
 
             // 1. Path-based coordinates e.g. /l/52.5200,13.4050,16,Berlin or /r/52.52,13.40
-            val pathCoordMatcher = SHARE_COORD_PATTERN.matcher(path)
+            val pathCoordMatcher = SHARE_COORD_PATTERN.matcher(rawPath)
             if (pathCoordMatcher.find()) {
                 val lat = pathCoordMatcher.group(1)?.toDoubleOrNull()
                 val lon = pathCoordMatcher.group(2)?.toDoubleOrNull()
@@ -82,17 +82,17 @@ object HereMapsParser : MapUrlParser {
             }
 
             // 3. Directions in path e.g. /directions/drive/Origin/Destination or /directions/mix/Origin/Destination
-            if (path.contains("/directions/")) {
-                val segments = path.split("/").filter { it.isNotBlank() }
+            if (rawPath.contains("/directions/")) {
+                val segments = rawPath.split("/").filter { it.isNotBlank() }
                 val dirIndex = segments.indexOfFirst { it.equals("directions", ignoreCase = true) }
                 if (dirIndex != -1 && segments.size >= dirIndex + 3) {
                     val modePart = segments.getOrNull(dirIndex + 1)?.lowercase()
-                    val origin = URLDecoder.decode(segments[dirIndex + 2], "UTF-8")
-                    val destination = if (segments.size >= dirIndex + 4) URLDecoder.decode(segments[dirIndex + 3], "UTF-8") else null
+                    val origin = decodePathSegment(segments[dirIndex + 2])
+                    val destination = if (segments.size >= dirIndex + 4) decodePathSegment(segments[dirIndex + 3]) else null
                     val travelMode = when (modePart) {
                         "walk", "pedestrian" -> TravelMode.WALKING
                         "bicycle", "bike" -> TravelMode.BICYCLING
-                        "publicTransport", "transit" -> TravelMode.TRANSIT
+                        "publictransport", "public-transport", "transit" -> TravelMode.TRANSIT
                         "drive", "car" -> TravelMode.DRIVING
                         else -> null
                     }
@@ -105,10 +105,10 @@ object HereMapsParser : MapUrlParser {
             }
 
             // 4. Search query in path e.g. /search/Berlin
-            if (path.contains("/search/")) {
-                val queryPart = path.substringAfter("/search/").substringBefore("/")
+            if (rawPath.contains("/search/")) {
+                val queryPart = rawPath.substringAfter("/search/").substringBefore("/")
                 if (queryPart.isNotBlank()) {
-                    return ParsedLocation.SearchQuery(URLDecoder.decode(queryPart, "UTF-8"))
+                    return ParsedLocation.SearchQuery(decodePathSegment(queryPart))
                 }
             }
 
@@ -121,6 +121,14 @@ object HereMapsParser : MapUrlParser {
             ParsedLocation.WebFallback(normalizedUrl)
         } catch (_: Exception) {
             ParsedLocation.WebFallback(normalizedUrl)
+        }
+    }
+
+    private fun decodePathSegment(segment: String): String {
+        return try {
+            URLDecoder.decode(segment, "UTF-8")
+        } catch (_: Exception) {
+            segment
         }
     }
 }

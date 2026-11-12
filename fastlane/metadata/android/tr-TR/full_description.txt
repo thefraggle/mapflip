@@ -1,8 +1,8 @@
 Arkadaşlarınız size Apple Haritalar bağlantıları gönderiyor ama siz Android'de Google Haritalar veya başka bir navigasyon uygulaması mı kullanıyorsunuz?
 
-MapFlip, Android için en gelişmiş Apple Haritalar - Google Haritalar dönüştürücüsü ve hızlı yönlendirme sunan otomatik harita yönlendiricisidir. Herhangi bir Apple Haritalar bağlantısı, rota, adres veya konum anında favori navigasyonda açılır. Kopyalama, yapıştırma, manuel arama veya tarayıcıda bekleme yok.
+MapFlip, Android için en gelişmiş Apple Haritalar - Google Haritalar dönüştürücüsü, hızlı bağlantı açıcı ve otomatik harita yönlendiricisidir. Herhangi bir Apple Haritalar bağlantısı, URL, adres veya konum anında favori navigasyonda açılır. Apple Haritalar bağlantılarını doğrudan açın; kopyalama, yapıştırma veya tarayıcıda bekleme yok.
 
-İster Android için Apple Haritalar çözümü arıyor olun, ister Apple Haritalar bağlantılarını Google Haritalar'a çevirmek isteyin: MapFlip her şeyi arka planda pürüzsüzce halleder.
+İster Android'de Apple Haritalar bağlantılarını açmak, ister bir Apple Haritalar Google Haritalar uygulaması kullanmak veya bağlantıları dönüştürüp hedeflere yönlendirmek isteyin: MapFlip her şeyi arka planda pürüzsüzce halleder.
 
 ⚡ Bağlantıları Açmanın 3 Kolay Yolu:
 1. 🚀 Tam Otomatik: Apple Haritalar bağlantısına dokunun; MapFlip bağlantıyı anında yakalayıp navigasyonunuzu başlatır.
@@ -23,11 +23,11 @@ Hedefleri ve rotaları dilediğiniz uygulamada açın:
 • Konum işaretleri, adresler ve adım adım dönüş navigasyon rotaları
 
 ✨ Öne Çıkan Özellikler ve Gizlilik:
-• 🚗 Adım Adım Navigasyon ve Android Auto – Doğrudan yerel rota rehberliğini başlatır
-• 🔒 %100 Çevrimdışı ve Gizli – Sıfır internet izni (ağ erişimi yok), takip yok, reklam yok
+• 🚗 Adım Adım Navigasyon ve Android Auto – Google Haritalar'da adım adım dönüş navigasyonu, tam Android Auto entegrasyonu ve canlı rota rehberliği
+• 🔒 %100 Çevrimdışı ve Gizli – Sıfır – 100% local link conversion on device, zero tracking of location or URLs, zero ads
 • 🛡️ Akıllı Yedekleme – Tercih ettiğiniz uygulama yüklü değilse MapFlip güvenle Google Haritalar'ı veya sistem seçiciyi açar
 • ⏸️ Duraklatma Modu ve Hızlı Ayarlar Kutucuğu – Yönlendirmeyi bildirim panelinden dilediğiniz zaman duraklatın (1 saat, 8 saat, yarına kadar)
 • 💬 Evrensel Uyumluluk – WhatsApp, Telegram, Signal, SMS, Slack ve e-postalarla kusursuz çalışır
 • 👻 Arka Planda Görünmez – Ekstra ekranlar yok ve pil tüketimi sıfır
 
-MapFlip, iPhone kullanan arkadaşlarından düzenli olarak harita bağlantısı alan Android kullanıcıları için vazgeçilmez bir yardımcıdır.
+MapFlip, akıllı bir Apple Maps alternatifi ve iPhone kullanıcılarından harita bağlantısı alan Android kullanıcıları için vazgeçilmez bir yardımcıdır.

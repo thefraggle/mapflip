@@ -1,0 +1,3 @@
+• Forbedret viderestilling af kortlinks og ruter
+• Mere pålidelig genkendelse af placeringer og adresser
+• Stabilitetsforbedringer og fejlrettelser

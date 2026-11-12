@@ -11,7 +11,9 @@ plugins {
 val keystorePropertiesFile = rootProject.file("keystore.properties")
 val keystoreProperties = Properties()
 if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+    keystorePropertiesFile.inputStream().use { stream ->
+        keystoreProperties.load(stream)
+    }
 }
 
 val aptabaseKey: String = System.getenv("APTABASE_KEY")
@@ -20,9 +22,9 @@ val aptabaseHost: String = System.getenv("APTABASE_HOST")
     ?: keystoreProperties.getProperty("aptabaseHost", "")
 
 // Kept at top level for .github/workflows/android-release.yml (workflow_dispatch grep)
-val appVersion = "1.4.3"
+val appVersion = "1.4.4"
 
-val appVersionCode = 315040
+val appVersionCode = 315041
 
 android {
     namespace = "de.goork.mapflip"
@@ -33,8 +35,8 @@ android {
         minSdk = 26
         targetSdk = 36
         // IMPORTANT: Must remain static literals (not variable references) for F-Droid's checkupdates.py regex parser
-        versionCode = 315040
-        versionName = "1.4.3"
+        versionCode = 315041
+        versionName = "1.4.4"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -48,10 +50,16 @@ android {
     signingConfigs {
         create("release") {
             if (keystoreProperties.isNotEmpty()) {
-                storeFile = rootProject.file(keystoreProperties["storeFile"] as String)
-                storePassword = keystoreProperties["storePassword"] as String
-                keyAlias = keystoreProperties["keyAlias"] as String
-                keyPassword = keystoreProperties["keyPassword"] as String
+                val sFile = keystoreProperties.getProperty("storeFile")
+                val sPass = keystoreProperties.getProperty("storePassword")
+                val kAlias = keystoreProperties.getProperty("keyAlias")
+                val kPass = keystoreProperties.getProperty("keyPassword")
+                if (sFile != null && sPass != null && kAlias != null && kPass != null) {
+                    storeFile = rootProject.file(sFile)
+                    storePassword = sPass
+                    keyAlias = kAlias
+                    keyPassword = kPass
+                }
             }
         }
     }
@@ -125,12 +133,12 @@ dependencies {
     testImplementation(libs.androidx.compose.ui.test.junit4)
 
     // Google Play In-App Review API (Play Store Flavor only)
-    add("playImplementation", "com.google.android.play:review-ktx:2.0.2")
+    add("playImplementation", libs.play.review)
 
-    androidTestImplementation("tools.fastlane:screengrab:2.1.1")
-    androidTestImplementation("androidx.test:core:1.6.1")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test:runner:1.6.2")
+    androidTestImplementation(libs.screengrab)
+    androidTestImplementation(libs.androidx.test.core)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.test.runner)
 }
 androidComponents {
     beforeVariants(selector().withBuildType("release")) { variantBuilder ->

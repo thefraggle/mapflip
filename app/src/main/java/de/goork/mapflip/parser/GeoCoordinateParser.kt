@@ -54,14 +54,15 @@ object GeoCoordinateParser : MapUrlParser {
         // 2. Check for DMS coordinates
         val dmsMatcher = DMS_PATTERN.matcher(text)
         if (dmsMatcher.find()) {
-            val lat = parseDmsComponent(
-                dmsMatcher.group(1), dmsMatcher.group(2), dmsMatcher.group(3), dmsMatcher.group(4)
-            )
-            val lon = parseDmsComponent(
-                dmsMatcher.group(5), dmsMatcher.group(6), dmsMatcher.group(7), dmsMatcher.group(8)
-            )
-            if (isValidLatLon(lat, lon)) {
-                return formatGeoUri(lat, lon)
+            val h1 = dmsMatcher.group(4)?.trim()?.uppercase(Locale.US) ?: ""
+            val h2 = dmsMatcher.group(8)?.trim()?.uppercase(Locale.US) ?: ""
+            val val1 = parseDmsComponent(dmsMatcher.group(1), dmsMatcher.group(2), dmsMatcher.group(3))
+            val val2 = parseDmsComponent(dmsMatcher.group(5), dmsMatcher.group(6), dmsMatcher.group(7))
+            if (!val1.isNaN() && !val2.isNaN()) {
+                val coords = resolveSignedCoordinates(val1, h1, val2, h2)
+                if (coords != null && isValidLatLon(coords.first, coords.second)) {
+                    return formatGeoUri(coords.first, coords.second)
+                }
             }
         }
 
@@ -73,9 +74,9 @@ object GeoCoordinateParser : MapUrlParser {
             val val2 = ddDirMatcher.group(3)?.toDoubleOrNull()
             val dir2 = ddDirMatcher.group(4)
             if (val1 != null && val2 != null && dir1 != null && dir2 != null) {
-                val (lat, lon) = resolveDirectional(val1, dir1, val2, dir2)
-                if (isValidLatLon(lat, lon)) {
-                    return formatGeoUri(lat, lon)
+                val coords = resolveSignedCoordinates(val1, dir1, val2, dir2)
+                if (coords != null && isValidLatLon(coords.first, coords.second)) {
+                    return formatGeoUri(coords.first, coords.second)
                 }
             }
         }
@@ -143,7 +144,7 @@ object GeoCoordinateParser : MapUrlParser {
 
             // If coordinates were in pathPart, use them and attach queryParam as label
             val pathCoords = parsePathCoords(pathPart)
-            if (pathCoords != null && (pathCoords.first != 0.0 || pathCoords.second != 0.0)) {
+            if (pathCoords != null && isValidLatLon(pathCoords.first, pathCoords.second) && (pathCoords.first != 0.0 || pathCoords.second != 0.0)) {
                 return ParsedLocation.Coordinates(pathCoords.first, pathCoords.second, label = queryParam)
             }
 
@@ -178,21 +179,26 @@ object GeoCoordinateParser : MapUrlParser {
         // Check DMS
         val dms = DMS_PATTERN.matcher(text)
         if (dms.matches()) {
-            val lat = parseDmsComponent(dms.group(1), dms.group(2), dms.group(3), dms.group(4))
-            val lon = parseDmsComponent(dms.group(5), dms.group(6), dms.group(7), dms.group(8))
-            if (isValidLatLon(lat, lon)) return Pair(lat, lon)
+            val h1 = dms.group(4)?.trim()?.uppercase(Locale.US) ?: ""
+            val h2 = dms.group(8)?.trim()?.uppercase(Locale.US) ?: ""
+            val val1 = parseDmsComponent(dms.group(1), dms.group(2), dms.group(3))
+            val val2 = parseDmsComponent(dms.group(5), dms.group(6), dms.group(7))
+            if (!val1.isNaN() && !val2.isNaN()) {
+                val coords = resolveSignedCoordinates(val1, h1, val2, h2)
+                if (coords != null && isValidLatLon(coords.first, coords.second)) return coords
+            }
         }
 
         // Check Directional DD
         val ddDir = DD_DIRECTIONAL_PATTERN.matcher(text)
         if (ddDir.matches()) {
-            val v1 = ddDir.group(1)?.toDoubleOrNull()
-            val d1 = ddDir.group(2)
-            val v2 = ddDir.group(3)?.toDoubleOrNull()
-            val d2 = ddDir.group(4)
-            if (v1 != null && v2 != null && d1 != null && d2 != null) {
-                val (lat, lon) = resolveDirectional(v1, d1, v2, d2)
-                if (isValidLatLon(lat, lon)) return Pair(lat, lon)
+            val val1 = ddDir.group(1)?.toDoubleOrNull()
+            val dir1 = ddDir.group(2)
+            val val2 = ddDir.group(3)?.toDoubleOrNull()
+            val dir2 = ddDir.group(4)
+            if (val1 != null && val2 != null && dir1 != null && dir2 != null) {
+                val coords = resolveSignedCoordinates(val1, dir1, val2, dir2)
+                if (coords != null && isValidLatLon(coords.first, coords.second)) return coords
             }
         }
 
@@ -207,29 +213,36 @@ object GeoCoordinateParser : MapUrlParser {
         return null
     }
 
-    private fun parseDmsComponent(degStr: String?, minStr: String?, secStr: String?, hemiStr: String?): Double {
-        val deg = degStr?.toDoubleOrNull() ?: 0.0
-        val min = minStr?.toDoubleOrNull() ?: 0.0
-        val sec = secStr?.toDoubleOrNull() ?: 0.0
-        val decimal = deg + (min / 60.0) + (sec / 3600.0)
-        val hemi = hemiStr?.trim()?.uppercase(Locale.US) ?: "N"
-        return if (hemi == "S" || hemi == "W") -decimal else decimal
+    private fun parseDmsComponent(degStr: String?, minStr: String?, secStr: String?): Double {
+        val deg = degStr?.toDoubleOrNull() ?: return Double.NaN
+        val min = minStr?.toDoubleOrNull() ?: return Double.NaN
+        val sec = secStr?.toDoubleOrNull() ?: return Double.NaN
+        if (min < 0.0 || min >= 60.0 || sec < 0.0 || sec >= 60.0 || deg < 0.0) {
+            return Double.NaN
+        }
+        return deg + (min / 60.0) + (sec / 3600.0)
     }
 
-    private fun resolveDirectional(val1: Double, dir1: String, val2: Double, dir2: String): Pair<Double, Double> {
+    private fun resolveSignedCoordinates(val1: Double, dir1: String, val2: Double, dir2: String): Pair<Double, Double>? {
         val d1 = dir1.trim().uppercase(Locale.US)
         val d2 = dir2.trim().uppercase(Locale.US)
-        var lat = 0.0
-        var lon = 0.0
+        val isLat1 = d1 == "N" || d1 == "S"
+        val isLat2 = d2 == "N" || d2 == "S"
+        val isLon1 = d1 == "E" || d1 == "W"
+        val isLon2 = d2 == "E" || d2 == "W"
 
-        if (d1 == "N" || d1 == "S") {
-            lat = if (d1 == "S") -val1 else val1
-            lon = if (d2 == "W") -val2 else val2
+        // Ensure exactly one latitude and one longitude axis
+        return if (isLat1 && isLon2) {
+            val lat = if (d1 == "S") -val1 else val1
+            val lon = if (d2 == "W") -val2 else val2
+            Pair(lat, lon)
+        } else if (isLon1 && isLat2) {
+            val lon = if (d1 == "W") -val1 else val1
+            val lat = if (d2 == "S") -val2 else val2
+            Pair(lat, lon)
         } else {
-            lon = if (d1 == "W") -val1 else val1
-            lat = if (d2 == "S") -val2 else val2
+            null
         }
-        return Pair(lat, lon)
     }
 
     private fun formatGeoUri(lat: Double, lon: Double): String {

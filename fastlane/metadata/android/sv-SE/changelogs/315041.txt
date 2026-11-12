@@ -1,0 +1,3 @@
+• Förbättrad omdirigering av kartlänkar och rutter
+• Mer tillförlitlig identifiering av platser och adresser
+• Stabilitetsförbättringar och buggfixar

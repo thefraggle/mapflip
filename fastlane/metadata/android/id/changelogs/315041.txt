@@ -1,0 +1,3 @@
+• Peningkatan pengalihan tautan peta dan rute
+• Pengenalan lokasi dan alamat yang lebih andal
+• Peningkatan stabilitas dan perbaikan bug

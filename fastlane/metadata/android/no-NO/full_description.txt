@@ -1,8 +1,8 @@
 Sender vennene dine deg Apple Maps-lenker – men du bruker Google Maps eller en annen navigasjonsapp på Android?
 
-MapFlip er den ultimate Apple Maps til Google Maps konverter og rask viderekobling for Android. Hver Apple Maps-lenke, rute, adresse eller posisjon åpnes umiddelbart i din foretrukne navigasjonsapp. Ingen kopiering, ingen liming og ingen omvei via nettleseren.
+MapFlip er den ultimate Apple Maps til Google Maps konverter, rask lenkeåpner og automatisk viderekobling for Android. Hver Apple Maps-lenke, URL, adresse eller posisjon åpnes umiddelbart i din foretrukne navigasjonsapp. Åpne Apple Maps-lenker direkte uten kopiering, liming eller omvei via nettleseren.
 
-Enten du trenger Apple Maps for Android, vil konvertere Apple Maps til Google Maps eller ønsker rask kartviderekobling, håndterer MapFlip alt sømløst i bakgrunnen.
+Enten du vil åpne Apple Maps-lenker på Android, trenger en Apple Maps til Google Maps app, vil konvertere Apple Maps eller ønsker rask viderekobling til destinasjoner, håndterer MapFlip alt sømløst i bakgrunnen.
 
 ⚡ 3 enkle måter å åpne lenker på:
 1. 🚀 Helautomatisk: Trykk på en Apple Maps-lenke – MapFlip fanger den opp umiddelbart og åpner navigasjonen din.
@@ -23,11 +23,11 @@ Enten du trenger Apple Maps for Android, vil konvertere Apple Maps til Google Ma
 • Stedmarkører, adresser og sving-for-sving navigasjonsruter
 
 ✨ Høydepunkter & Personvern:
-• 🚗 Sving-for-sving navigasjon & Android Auto – Starter ruteveiledning med én gang
-• 🔒 100% Frakoblet & Privat – Ingen internettillatelser (0 tillatelser), ingen sporing, ingen reklame
+• 🚗 Sving-for-sving navigasjon & Android Auto – Sving-for-sving ruteveiledning i Google Maps, full Android Auto-integrasjon og trygg navigasjon
+• 🔒 100% Frakoblet & Privat – Ingen – 100% local link conversion on device, zero tracking of location or URLs, zero ads
 • 🛡️ Smart Fallback – Hvis den valgte appen er avinstallert, åpner MapFlip trygt Google Maps eller systemvelgeren
 • ⏸️ Pausemodus & Hurtiginnstillinger-flis – Sett omdirigeringen på pause direkte fra varslingspanelet (1 time, 8 timer, til i morgen)
 • 💬 Universell kompatibilitet – Fungerer med WhatsApp, Telegram, Signal, SMS, Slack og e-post
 • 👻 Usynlig i bakgrunnen – Ingen ekstra skjermbilder og null batteribruk
 
-MapFlip er det uunnværlige verktøyet for Android-brukere som mottar Apple Maps-lenker fra iPhone-brukere.
+MapFlip er det smarte Apple Maps-alternativet og det uunnværlige verktøyet for Android-brukere som mottar Apple Maps-lenker fra iPhone-brukere.

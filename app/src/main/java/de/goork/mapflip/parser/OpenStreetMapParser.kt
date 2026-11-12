@@ -16,7 +16,13 @@ object OpenStreetMapParser : MapUrlParser {
 
     override fun canParse(url: String): Boolean {
         val lower = url.lowercase().trim()
-        return lower.contains("openstreetmap.org") || lower.contains("osm.org")
+        val normalized = if (!lower.startsWith("http://") && !lower.startsWith("https://")) "https://$lower" else lower
+        return try {
+            val host = URI(normalized).host?.lowercase() ?: ""
+            host == "openstreetmap.org" || host == "www.openstreetmap.org" || host == "osm.org" || host == "www.osm.org"
+        } catch (_: Exception) {
+            URL_PATTERN.matcher(url).find()
+        }
     }
 
     override fun extractUrl(text: String?): String? {
@@ -53,7 +59,13 @@ object OpenStreetMapParser : MapUrlParser {
             if (!route.isNullOrBlank()) {
                 val legs = route.split(";")
                 if (legs.size >= 2) {
-                    return ParsedLocation.Directions(origin = legs.first(), destination = legs.last(), mode = travelMode)
+                    val origin = legs.first().trim()
+                    val destination = legs.last().trim()
+                    if (origin.isEmpty() && destination.isNotEmpty()) {
+                        return ParsedLocation.Navigation(destination = destination, mode = travelMode)
+                    } else if (origin.isNotEmpty() && destination.isNotEmpty()) {
+                        return ParsedLocation.Directions(origin = origin, destination = destination, mode = travelMode)
+                    }
                 }
             }
 
