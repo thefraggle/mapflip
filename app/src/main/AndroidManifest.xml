@@ -125,7 +125,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" android:host="wego.here.com" />
-                <data android:scheme="share.here.com" />
+                <data android:scheme="https" android:host="share.here.com" />
                 <data android:scheme="https" android:host="maps.here.com" />
                 <data android:scheme="https" android:host="here.com" />
                 <data android:scheme="https" android:host="www.here.com" />

@@ -1,10 +1,9 @@
 package de.goork.mapflip.ui.components
 
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
@@ -39,7 +38,7 @@ import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.goork.mapflip.analytics.Analytics
-import de.goork.mapflip.navigation.NavigationIntentBuilder
+import de.goork.mapflip.navigation.NavigationLauncher
 import de.goork.mapflip.navigation.TargetNavigationApp
 import de.goork.mapflip.parser.UniversalMapParser
 import de.goork.mapflip.ui.Strings
@@ -175,10 +174,9 @@ fun LinkTesterCard(
                                     .fillMaxWidth()
                                     .clickable {
                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
-                                        val clip = ClipData.newPlainText("Converted Map URL", convertedTargetUri)
-                                        clipboard?.setPrimaryClip(clip)
-                                        Toast.makeText(context, s.linkCopiedToast, Toast.LENGTH_SHORT).show()
+                                        if (ClipboardUtil.copyToClipboard(context, convertedTargetUri, s.headline)) {
+                                            Toast.makeText(context, s.linkCopiedToast, Toast.LENGTH_SHORT).show()
+                                        }
                                     }
                             ) {
                                 Row(
@@ -215,10 +213,9 @@ fun LinkTesterCard(
                                     onClick = {
                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                         Analytics.trackEvent("tester_copy_clicked")
-                                        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
-                                        val clip = ClipData.newPlainText("Converted Map URL", convertedTargetUri)
-                                        clipboard?.setPrimaryClip(clip)
-                                        Toast.makeText(context, s.linkCopiedToast, Toast.LENGTH_SHORT).show()
+                                        if (ClipboardUtil.copyToClipboard(context, convertedTargetUri, s.headline)) {
+                                            Toast.makeText(context, s.linkCopiedToast, Toast.LENGTH_SHORT).show()
+                                        }
                                     },
                                     modifier = Modifier.weight(1f),
                                     shape = RoundedCornerShape(10.dp)
@@ -246,7 +243,8 @@ fun LinkTesterCard(
                                         }
                                         try {
                                             context.startActivity(Intent.createChooser(shareIntent, s.btnShareLink))
-                                        } catch (_: Exception) {
+                                        } catch (e: Exception) {
+                                            Log.w("MapFlip", "Failed to launch share sheet from link tester", e)
                                             Toast.makeText(context, s.targetAppOpenError, Toast.LENGTH_SHORT).show()
                                         }
                                     },
@@ -272,31 +270,29 @@ fun LinkTesterCard(
                             FilledTonalButton(
                                 onClick = {
                                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                    val sourceService = UniversalMapParser.detectSourceService(testInputUrl)
+                                    val loc = UniversalMapParser.parse(testInputUrl)
+                                    val effectiveTarget = NavigationLauncher.resolveEffectiveTargetApp(
+                                        context = context,
+                                        configuredApp = targetApp,
+                                        sourceService = sourceService,
+                                        showToastOnFallback = true
+                                    )
                                     Analytics.trackEvent("link_tester_used", mapOf(
-                                        "target_app" to targetApp.name.lowercase(),
-                                        "source_service" to UniversalMapParser.detectSourceService(testInputUrl)
+                                        "target_app" to effectiveTarget.name.lowercase(),
+                                        "source_service" to sourceService
                                     ))
-                                    try {
-                                        val loc = UniversalMapParser.parse(testInputUrl)
-                                        val intent = NavigationIntentBuilder.buildIntent(loc, targetApp, context).apply {
-                                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                        }
-                                        context.startActivity(intent)
-                                    } catch (_: android.content.ActivityNotFoundException) {
-                                        val appName = when (targetApp) {
-                                            TargetNavigationApp.SYSTEM_PICKER -> s.sectionTargetApp
-                                            else -> targetApp.displayName
-                                        }
-                                        Toast.makeText(context, s.appNotInstalledToast(appName), Toast.LENGTH_SHORT).show()
-                                    } catch (_: Exception) {
-                                        try {
-                                            val fallback = Intent(Intent.ACTION_VIEW, Uri.parse(convertedTargetUri)).apply {
-                                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                            }
-                                            context.startActivity(fallback)
-                                        } catch (_: Exception) {
-                                            Toast.makeText(context, s.targetAppOpenError, Toast.LENGTH_SHORT).show()
-                                        }
+                                    val sourceUri = runCatching { Uri.parse(testInputUrl.trim()) }.getOrNull()
+                                    val result = NavigationLauncher.launchWithFallback(
+                                        context = context,
+                                        parsedLocation = loc,
+                                        effectiveTargetApp = effectiveTarget,
+                                        sourceUri = sourceUri,
+                                        sourceService = sourceService,
+                                        showSuccessToast = false
+                                    )
+                                    if (!result.launched) {
+                                        Toast.makeText(context, s.targetAppOpenError, Toast.LENGTH_SHORT).show()
                                     }
                                 },
                                 modifier = Modifier.fillMaxWidth(),

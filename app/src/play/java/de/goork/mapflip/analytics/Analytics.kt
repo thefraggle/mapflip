@@ -34,7 +34,8 @@ object Analytics {
     private const val SDK_VERSION = "aptabase-android@1.0.0"
     private const val SESSION_TIMEOUT_MS = 60 * 60 * 1000L // 1 hour
 
-    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO.limitedParallelism(2))
     private var isInitialized = false
 
     private var appVersion = BuildConfig.VERSION_NAME

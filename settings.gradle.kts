@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MapFlip"
 include(":app")
+include(":baselineprofile")

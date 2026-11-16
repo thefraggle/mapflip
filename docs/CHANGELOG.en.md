@@ -1,3 +1,10 @@
+## 1.5.0
+- Improved Link Detection: More reliable interception of HERE share links (`share.here.com`) and integer Google Maps coordinates
+- Smarter Fallback Handling: Unified app installation checks and fallback routing in Clipboard Banner and Link Tester
+- Enhanced Reliability: Stricter host matching, safer Plus Code length validation, and cleaner state initialization
+- Performance Optimization: Dedicated Baseline Profile (`:baselineprofile`) for faster cold startup and instant link redirection
+- Internal Improvements: Improved error logging and dead-code cleanup
+
 ## 1.4.4
 - Improved Redirection: Optimized detection of map links, routes, and waypoints
 - More Precise Locations: More reliable handling of addresses, coordinates, and map views

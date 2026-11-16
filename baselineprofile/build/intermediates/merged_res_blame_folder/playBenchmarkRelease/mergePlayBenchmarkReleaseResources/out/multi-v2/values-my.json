@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "de.goork.mapflip.baselineprofile-mergePlayBenchmarkReleaseResources-16:/values-my/values-my.xml",
+            "map": [
+                {
+                    "source": "/Users/daniel.notthoff/.gradle/caches/8.11.1/transforms/fba5e9ce7ed2e80e9677dfd833c392de/transformed/core-1.9.0/res/values-my/values-my.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        }
+    ]
+}

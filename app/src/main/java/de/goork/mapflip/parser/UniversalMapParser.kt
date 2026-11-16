@@ -39,17 +39,23 @@ object UniversalMapParser {
                 return parser.parse(extracted)
             }
         }
-        // Fallback default: If valid web URL, return WebFallback; if malformed or non-web, delegate/home
+        // Fallback default: If valid web URL, return WebFallback; otherwise Home
         return try {
-            val uri = java.net.URI(extracted)
+            val uri = java.net.URI(extracted.trim().replace(" ", "%20"))
             if (uri.scheme?.startsWith("http", ignoreCase = true) == true && uri.host != null) {
                 ParsedLocation.WebFallback(extracted)
             } else {
-                AppleMapsParser.parse(extracted)
+                ParsedLocation.Home
             }
         } catch (_: Exception) {
             ParsedLocation.Home
         }
+    }
+
+    fun detectParser(url: String?): MapUrlParser? {
+        if (url.isNullOrBlank()) return null
+        val extracted = extractMapUrl(url) ?: url
+        return parsers.firstOrNull { it.canParse(extracted) }
     }
 
     fun detectSourceService(url: String?): String {

@@ -72,7 +72,8 @@ object ReviewHelper {
                 addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
             }
             context.startActivity(intent)
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            Log.w("MapFlip", "Play Store app intent unavailable, falling back to web", e)
             try {
                 val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$packageName")).apply {
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

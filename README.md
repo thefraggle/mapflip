@@ -89,6 +89,8 @@ Set it up once, and it works invisibly in the background.
 
 ## 🛠️ Build & Development
 
+**Prerequisites:** JDK 17+ (CI uses JDK 21) and Android SDK 36 (configured via `local.properties` or `ANDROID_HOME`).
+
 The project is split into two flavors:
 - `foss` – 100% open source, zero permissions, independent of Google services.
 - `play` – Google Play release flavor with rating prompts and self-hosted privacy-focused telemetry.

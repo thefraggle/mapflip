@@ -40,6 +40,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import de.goork.mapflip.analytics.Analytics
 import de.goork.mapflip.data.PreferencesRepository
 import de.goork.mapflip.navigation.NavigationIntentBuilder
+import de.goork.mapflip.navigation.NavigationLauncher
 import de.goork.mapflip.parser.UniversalMapParser
 import de.goork.mapflip.ui.components.*
 import de.goork.mapflip.util.ClipboardUtil
@@ -203,19 +204,28 @@ fun MainScreen(
                                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                     val url = detectedClipboardUrl
                                     if (url != null) {
+                                        val sourceService = UniversalMapParser.detectSourceService(url)
                                         val parsed = UniversalMapParser.parse(url)
-                                        val targetIntent = NavigationIntentBuilder.buildIntent(
-                                            parsed, userPreferences.targetApp, context
-                                        ).apply {
-                                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                        }
+                                        val effectiveTarget = NavigationLauncher.resolveEffectiveTargetApp(
+                                            context = context,
+                                            configuredApp = userPreferences.targetApp,
+                                            sourceService = sourceService,
+                                            showToastOnFallback = true
+                                        )
                                         Analytics.trackEvent("clipboard_banner_clicked", mapOf(
-                                            "source_service" to UniversalMapParser.detectSourceService(url),
-                                            "target_app" to userPreferences.targetApp.name.lowercase()
+                                            "source_service" to sourceService,
+                                            "target_app" to effectiveTarget.name.lowercase()
                                         ))
-                                        try {
-                                            context.startActivity(targetIntent)
-                                        } catch (_: Exception) {
+                                        val sourceUri = runCatching { Uri.parse(url) }.getOrNull()
+                                        val result = NavigationLauncher.launchWithFallback(
+                                            context = context,
+                                            parsedLocation = parsed,
+                                            effectiveTargetApp = effectiveTarget,
+                                            sourceUri = sourceUri,
+                                            sourceService = sourceService,
+                                            showSuccessToast = false
+                                        )
+                                        if (!result.launched) {
                                             Toast.makeText(
                                                 context,
                                                 s.targetAppOpenError,
@@ -453,7 +463,8 @@ fun MainScreen(
                                 Settings.ACTION_APP_OPEN_BY_DEFAULT_SETTINGS,
                                 Uri.parse("package:${context.packageName}")
                             ))
-                        } catch (_: Exception) {
+                        } catch (e: Exception) {
+                            Log.w("MapFlip", "Failed to open app default link settings, falling back to app details", e)
                             openAppDetailsFallback()
                         }
                     } else {

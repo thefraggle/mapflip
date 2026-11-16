@@ -1,0 +1,3 @@
+- Improved Link Detection: More reliable interception of HERE share links and integer Google Maps coordinates
+- Smarter Fallback Handling: Unified app installation checks and fallback routing in Clipboard Banner and Link Tester
+- Enhanced Reliability: Stricter host matching, safer Plus Code validation, and cleaner state initialization

@@ -27,15 +27,24 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
         context.applicationContext.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE)
     )
 
-    private val _preferences = MutableStateFlow(readCurrentPreferences())
-    val preferences: StateFlow<UserPreferences> = _preferences.asStateFlow()
+    private val _preferences: MutableStateFlow<UserPreferences>
+    val preferences: StateFlow<UserPreferences>
 
     private val prefChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { _, _ ->
-        _preferences?.value = readCurrentPreferences()
+        _preferences.value = readCurrentPreferences()
     }
 
     init {
-        // Clear expired pause if any on startup
+        clearExpiredPauseIfNeeded()
+        if (prefs.getLong(PREFS_KEY_FIRST_INSTALL_TS, 0L) == 0L) {
+            prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, System.currentTimeMillis()).apply()
+        }
+        _preferences = MutableStateFlow(readCurrentPreferences())
+        preferences = _preferences.asStateFlow()
+        prefs.registerOnSharedPreferenceChangeListener(prefChangeListener)
+    }
+
+    private fun clearExpiredPauseIfNeeded() {
         val isPaused = prefs.getBoolean(AppConstants.PREFS_KEY_PAUSED, false)
         if (isPaused) {
             val pausedUntil = prefs.getLong(PREFS_KEY_PAUSED_UNTIL, 0L)
@@ -46,24 +55,20 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
                     .apply()
             }
         }
-        if (prefs.getLong(PREFS_KEY_FIRST_INSTALL_TS, 0L) == 0L) {
-            prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, System.currentTimeMillis()).apply()
-        }
-        prefs.registerOnSharedPreferenceChangeListener(prefChangeListener)
     }
 
     fun getLanguage(): String = prefs.getString(AppConstants.PREFS_KEY_LANG, "auto") ?: "auto"
 
     fun setLanguage(language: String) {
         prefs.edit().putString(AppConstants.PREFS_KEY_LANG, language).apply()
-        _preferences?.value = readCurrentPreferences()
+        _preferences.value = readCurrentPreferences()
     }
 
     fun getTheme(): String = prefs.getString(AppConstants.PREFS_KEY_THEME, "system") ?: "system"
 
     fun setTheme(theme: String) {
         prefs.edit().putString(AppConstants.PREFS_KEY_THEME, theme).apply()
-        _preferences?.value = readCurrentPreferences()
+        _preferences.value = readCurrentPreferences()
     }
 
     fun getTargetApp(): TargetNavigationApp {
@@ -73,7 +78,7 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
 
     fun setTargetApp(targetApp: TargetNavigationApp) {
         prefs.edit().putString(AppConstants.PREFS_KEY_TARGET_APP, targetApp.id).apply()
-        _preferences?.value = readCurrentPreferences()
+        _preferences.value = readCurrentPreferences()
     }
 
     fun isCurrentlyPaused(): Boolean {
@@ -81,21 +86,13 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
         if (!isPaused) return false
 
         val pausedUntil = prefs.getLong(PREFS_KEY_PAUSED_UNTIL, 0L)
-        if (pausedUntil > 0L) {
-            val now = System.currentTimeMillis()
-            if (now >= pausedUntil) {
-                // Pause expired, auto-resume in storage and synchronize StateFlow
-                prefs.edit()
-                    .putBoolean(AppConstants.PREFS_KEY_PAUSED, false)
-                    .putLong(PREFS_KEY_PAUSED_UNTIL, 0L)
-                    .apply()
-                _preferences?.let { flow ->
-                    if (flow.value.isPaused) {
-                        flow.value = flow.value.copy(isPaused = false, pausedUntilTimestamp = 0L)
-                    }
-                }
-                return false
-            }
+        if (pausedUntil > 0L && System.currentTimeMillis() >= pausedUntil) {
+            // Pause expired, auto-resume in storage
+            prefs.edit()
+                .putBoolean(AppConstants.PREFS_KEY_PAUSED, false)
+                .putLong(PREFS_KEY_PAUSED_UNTIL, 0L)
+                .apply()
+            return false
         }
         return true
     }
@@ -163,7 +160,7 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
             .putBoolean(AppConstants.PREFS_KEY_PAUSED, paused)
             .putLong(PREFS_KEY_PAUSED_UNTIL, untilTimestamp)
             .apply()
-        _preferences?.value = readCurrentPreferences()
+        _preferences.value = readCurrentPreferences()
     }
 
     private fun readCurrentPreferences(): UserPreferences {

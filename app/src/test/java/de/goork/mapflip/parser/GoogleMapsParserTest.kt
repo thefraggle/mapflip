@@ -114,4 +114,14 @@ class GoogleMapsParserTest {
         assertNull(GoogleMapsParser.extractUrl("https://maps.apple.com/?q=Berlin"))
         assertNull(GoogleMapsParser.extractUrl("https://example.com"))
     }
+
+    @Test
+    fun `parses integer path coordinates without decimal point`() {
+        val url = "https://www.google.com/maps/@52,13,15z"
+        val parsed = GoogleMapsParser.parse(url)
+        assertTrue(parsed is ParsedLocation.Coordinates)
+        val coords = parsed as ParsedLocation.Coordinates
+        assertEquals(52.0, coords.latitude, 0.0001)
+        assertEquals(13.0, coords.longitude, 0.0001)
+    }
 }

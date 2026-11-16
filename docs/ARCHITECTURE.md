@@ -41,7 +41,7 @@ flowchart TD
     end
 
     subgraph Dispatcher ["Target Dispatcher"]
-        E["NavigationIntentBuilder"]
+        E["NavigationIntentBuilder & NavigationLauncher"]
         F{"Pause Active?"}
         G["Forward Original URL\nto Default Browser"]
     end
@@ -102,11 +102,11 @@ The parsing layer implements the **Strategy Pattern**. Each map source is an iso
 
 All parsers share consistent URL extraction, punctuation stripping, and balanced parenthesis preservation via `trimExtractedUrl()`, ensuring coordinates or queries embedded inside text or parentheses (e.g. `(https://.../?q=Place+(City))`) remain valid.
 
-### 2.2 Navigation Intent Dispatcher (`NavigationIntentBuilder`)
-Translates the normalized `ParsedLocation` into platform-native intents:
-1. **App-Specific Schemes**: Directly targets installed navigation apps via custom URI schemes and package targets (e.g. `geo:`, `google.navigation:`, `waze://`, `om://`, `cm://`, `yandexmaps://`, `citymapper://`, `komoot://`, `tomtomgo://`, `https://share.here.com/r/`, `https://mapy.com/fnc/v1/`).
+### 2.2 Navigation Intent Dispatcher (`NavigationIntentBuilder` & `NavigationLauncher`)
+Translates the normalized `ParsedLocation` into platform-native intents and dispatches them consistently across `RedirectActivity`, `ClipboardBanner`, and `LinkTesterCard`:
+1. **App-Specific Schemes**: Directly targets installed navigation apps via custom URI schemes and package targets (e.g. `geo:`, `google.navigation:`, `waze://`, `om://`, `cm://`, `yandexmaps://`, `citymapper://`, `komoot://`, `amigo://`, `com.sygic.aura://`, `https://wego.here.com/`, `https://mapy.cz/`).
 2. **Travel Mode Preservation**: Carries over driving, walking, cycling, and public transit modes from source links into compatible navigation intents.
-3. **Smart Fallback & Default Browser Resolution**: If the user's chosen navigation app was uninstalled, MapFlip catches the `ActivityNotFoundException`, displays a localized toast notice, and gracefully falls back to Google Maps, the system app chooser, or normalized web fallbacks (prioritizing the user's default browser via `MATCH_DEFAULT_ONLY`). When launching the system chooser, MapFlip explicitly excludes itself via `Intent.EXTRA_EXCLUDE_COMPONENTS` to prevent recursive redirection loops.
+3. **Smart Fallback & Default Browser Resolution**: `NavigationLauncher` verifies app installation before launch and catches `ActivityNotFoundException`, displays a localized toast notice, and gracefully falls back to Google Maps, the system app chooser, or normalized web fallbacks (prioritizing the user's default browser via `MATCH_DEFAULT_ONLY`). When launching the system chooser, MapFlip explicitly excludes itself via `Intent.EXTRA_EXCLUDE_COMPONENTS` to prevent recursive redirection loops.
 
 ### 2.3 Android 12+ Deep Link Verification (`DomainVerificationHelper`)
 Android 12 (API 31+) restricts unverified HTTP/HTTPS link handling:
@@ -115,7 +115,7 @@ Android 12 (API 31+) restricts unverified HTTP/HTTPS link handling:
 * Live badge in the main screen reflects real-time link enablement status.
 
 ### 2.4 Pause Subsystem & Quick Settings Tile
-* **`PauseHelper`**: Allows users to pause redirection for 1 hour, 8 hours, until tomorrow morning (06:00 AM with proper timezone boundary arithmetic), or indefinitely.
+* **`PauseHelper` & `PreferencesRepository`**: Allows users to pause redirection for 1 hour, 8 hours, until tomorrow morning (06:00 AM with proper timezone boundary arithmetic), or indefinitely.
 * **`MapFlipTileService`**: System Quick Settings tile allowing 1-tap toggling of the pause state directly from the notification shade without launching the app.
 
 ---

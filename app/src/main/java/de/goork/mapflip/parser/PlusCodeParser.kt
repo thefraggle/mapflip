@@ -95,7 +95,7 @@ object PlusCodeParser : MapUrlParser {
         if (!isFullCode(upper)) return null
 
         val cleanCode = upper.replace("+", "")
-        if (cleanCode.length < 8) return null
+        if (cleanCode.length != 8 && cleanCode.length < 10) return null
 
         var lat = 0.0
         var lon = 0.0

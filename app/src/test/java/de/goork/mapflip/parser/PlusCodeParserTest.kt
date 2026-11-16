@@ -66,6 +66,7 @@ class PlusCodeParserTest {
         assertNull(PlusCodeParser.extractUrl("C++ ist toll"))
         assertNull(PlusCodeParser.decode("INVALID+CODE"))
         assertNull(PlusCodeParser.decode("12345+67")) // 1 is not in OLC alphabet
+        assertNull(PlusCodeParser.decode("8FW4V75V+8")) // 9 chars (odd after +) is invalid
     }
 
     @Test

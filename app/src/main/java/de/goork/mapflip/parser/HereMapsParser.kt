@@ -20,8 +20,22 @@ object HereMapsParser : MapUrlParser {
     )
 
     override fun canParse(url: String): Boolean {
-        val lower = url.lowercase().trim()
-        return lower.contains("wego.here.com") || lower.contains("share.here.com") || lower.contains("maps.here.com") || lower.contains("here.com/")
+        val trimmed = url.trim()
+        if (trimmed.isBlank()) return false
+        val normalized = if (!trimmed.startsWith("http://", ignoreCase = true) && !trimmed.startsWith("https://", ignoreCase = true)) {
+            "https://$trimmed"
+        } else trimmed
+        return try {
+            val uri = URI(normalized.replace(" ", "%20"))
+            val host = uri.host?.lowercase() ?: return false
+            when (host) {
+                "wego.here.com", "share.here.com", "maps.here.com" -> true
+                "here.com", "www.here.com" -> !uri.path.isNullOrEmpty() && uri.path != "/"
+                else -> false
+            }
+        } catch (_: Exception) {
+            false
+        }
     }
 
     override fun extractUrl(text: String?): String? {

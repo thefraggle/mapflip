@@ -1,3 +1,10 @@
+## 1.5.0
+- Verbesserte Link-Erkennung: Zuverlässigeres Abfangen von HERE-Share-Links (`share.here.com`) und Google-Maps-Koordinaten ohne Nachkommastellen
+- Stabilere Weiterleitung: Einheitliche App-Prüfung und intelligenter Fallback auch über das Zwischenablage-Banner und den Link-Tester
+- Erhöhte Zuverlässigkeit: Präzisere Host-Validierung, robustere Plus-Code-Prüfung und bereinigte Zustandsverwaltung
+- Performance-Optimierung: App-eigenes Baseline Profile (`:baselineprofile`) für schnelleren Kaltstart und sofortige Link-Weiterleitung
+- Interne Optimierungen: Bessere Fehlerprotokollierung und Code-Bereinigung
+
 ## 1.4.4
 - Verbesserte Weiterleitung: Optimierte Erkennung von Karten-Links, Routen und Zwischenzielen
 - Präzisere Standorte: Zuverlässigere Verarbeitung von Adressen, Koordinaten und Kartenausschnitten

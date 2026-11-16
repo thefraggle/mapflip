@@ -15,6 +15,7 @@ class HereMapsParserTest {
         assertTrue(HereMapsParser.canParse("https://here.com/directions/drive/Berlin/Munich"))
         assertFalse(HereMapsParser.canParse("https://google.com/maps"))
         assertFalse(HereMapsParser.canParse("https://here.com"))
+        assertFalse(HereMapsParser.canParse("https://www.atmosphere.com/news"))
     }
 
     @Test

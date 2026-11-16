@@ -19,6 +19,7 @@ local.properties
 *.hprof
 keystore.properties
 release-notes/
+release_body.md
 .env
 .env.*
 !.env.example

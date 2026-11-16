@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.androidx.baselineprofile)
 }
 
 // Load signing properties & optional telemetry keys
@@ -22,9 +23,9 @@ val aptabaseHost: String = System.getenv("APTABASE_HOST")
     ?: keystoreProperties.getProperty("aptabaseHost", "")
 
 // Kept at top level for .github/workflows/android-release.yml (workflow_dispatch grep)
-val appVersion = "1.4.4"
+val appVersion = "1.5.0"
 
-val appVersionCode = 315041
+val appVersionCode = 315042
 
 android {
     namespace = "de.goork.mapflip"
@@ -35,8 +36,8 @@ android {
         minSdk = 26
         targetSdk = 36
         // IMPORTANT: Must remain static literals (not variable references) for F-Droid's checkupdates.py regex parser
-        versionCode = 315041
-        versionName = "1.4.4"
+        versionCode = 315042
+        versionName = "1.5.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -99,6 +100,11 @@ android {
         buildConfig = true
     }
 
+    baselineProfile {
+        automaticGenerationDuringBuild = false
+        saveInSrc = true
+    }
+
     flavorDimensions.add("distribution")
     productFlavors {
         create("play") {
@@ -125,6 +131,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.profileinstaller)
+    baselineProfile(project(":baselineprofile"))
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     testImplementation(libs.junit)

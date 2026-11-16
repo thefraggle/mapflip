@@ -33,7 +33,6 @@ class ScreenshotTest {
         val langCode = currentLocale.language
 
         prefs.edit()
-            .putBoolean("mock_links_active", true)
             .putBoolean(AppConstants.PREFS_KEY_PAUSED, false)
             .putLong(PauseHelper.PREFS_KEY_PAUSED_UNTIL, 0L)
             .putString(AppConstants.PREFS_KEY_LANG, langCode)

@@ -1,18 +1,9 @@
 package de.goork.mapflip
 
-import android.content.Context
-import de.goork.mapflip.data.PreferencesRepository
 import java.util.Calendar
 
 object PauseHelper {
-    const val PREFS_KEY_PAUSED_UNTIL = PreferencesRepository.PREFS_KEY_PAUSED_UNTIL
-
-    /**
-     * Checks if the app is currently paused, delegating to [PreferencesRepository].
-     */
-    fun isCurrentlyPaused(context: Context): Boolean {
-        return PreferencesRepository.getInstance(context).isCurrentlyPaused()
-    }
+    const val PREFS_KEY_PAUSED_UNTIL = de.goork.mapflip.data.PreferencesRepository.PREFS_KEY_PAUSED_UNTIL
 
     /**
      * Helper to compute next morning at 6:00 AM timestamp.

@@ -25,14 +25,14 @@ object GoogleMapsParser : MapUrlParser {
         Pattern.CASE_INSENSITIVE
     )
 
-    // Path coordinates pattern e.g. /@52.520008,13.404954,15z
+    // Path coordinates pattern e.g. /@52.520008,13.404954,15z or /@52,13,15z
     private val PATH_COORD_PATTERN = Pattern.compile(
-        """@([-+]?[0-9]+\.[0-9]+),([-+]?[0-9]+\.[0-9]+)"""
+        """@([-+]?[0-9]+(?:\.[0-9]+)?),([-+]?[0-9]+(?:\.[0-9]+)?)"""
     )
 
     // Data-parameter pin coordinates pattern e.g. !3d52.520008!4d13.404954
     private val PIN_COORD_PATTERN = Pattern.compile(
-        """!3d([-+]?[0-9]+\.[0-9]+)!4d([-+]?[0-9]+\.[0-9]+)"""
+        """!3d([-+]?[0-9]+(?:\.[0-9]+)?)!4d([-+]?[0-9]+(?:\.[0-9]+)?)"""
     )
 
     private val CAN_PARSE_PATTERN = Pattern.compile(

@@ -426,7 +426,7 @@ fun SettingsSheet(
                             } catch (e: Exception) {
                                 Log.w("MapFlip", "Failed to launch feedback email intent", e)
                                 de.goork.mapflip.util.ClipboardUtil.copyToClipboard(context, AppConstants.FEEDBACK_EMAIL)
-                                android.widget.Toast.makeText(context, "${AppConstants.FEEDBACK_EMAIL} copied", android.widget.Toast.LENGTH_LONG).show()
+                                android.widget.Toast.makeText(context, s.linkCopiedToast, android.widget.Toast.LENGTH_LONG).show()
                             }
                         }
                     )

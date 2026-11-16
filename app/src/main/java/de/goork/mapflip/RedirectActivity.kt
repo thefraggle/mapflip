@@ -1,17 +1,14 @@
 package de.goork.mapflip
 
 import android.app.Activity
-import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import de.goork.mapflip.analytics.Analytics
 import de.goork.mapflip.data.PreferencesRepository
-import de.goork.mapflip.navigation.NavigationIntentBuilder
+import de.goork.mapflip.navigation.NavigationLauncher
+import de.goork.mapflip.parser.ParsedLocation
 import de.goork.mapflip.parser.UniversalMapParser
 
 /**
@@ -45,7 +42,7 @@ class RedirectActivity : Activity() {
             if (!UniversalMapParser.canParse(mapUrl)) {
                 if (incomingUri != null) {
                     // Not a supported map URL (e.g. regular web search from intercepted search engine host)
-                    forwardOriginalUrl(dataUri)
+                    NavigationLauncher.forwardOriginalUrl(this, dataUri)
                 } else {
                     Analytics.trackEvent("redirect_failed", mapOf(
                         "reason" to "unsupported_shared_text",
@@ -55,40 +52,24 @@ class RedirectActivity : Activity() {
             } else if (isPaused) {
                 // When paused: forward original URL to non-MapFlip browser
                 Analytics.trackEvent("redirect_paused", mapOf("source_service" to sourceService))
-                forwardOriginalUrl(dataUri)
+                NavigationLauncher.forwardOriginalUrl(this, dataUri)
             } else {
                 val parsedLocation = UniversalMapParser.parse(mapUrl)
                 val targetApp = repository.getTargetApp()
-                val isTargetInstalled = targetApp.isInstalled(this)
-                val effectiveTargetApp = if (isTargetInstalled) {
-                    targetApp
-                } else {
-                    val fallback = if (de.goork.mapflip.navigation.TargetNavigationApp.GOOGLE_MAPS.isInstalled(this)) {
-                        de.goork.mapflip.navigation.TargetNavigationApp.GOOGLE_MAPS
-                    } else {
-                        de.goork.mapflip.navigation.TargetNavigationApp.SYSTEM_PICKER
-                    }
-                    showFallbackToast(targetApp, fallback)
-                    Analytics.trackEvent("redirect_fallback", mapOf(
-                        "configured_app" to targetApp.name.lowercase(),
-                        "fallback_app" to fallback.name.lowercase(),
-                        "source_service" to sourceService,
-                        "reason" to "configured_app_not_installed"
-                    ))
-                    fallback
-                }
-
-                val targetIntent = NavigationIntentBuilder.buildIntent(parsedLocation, effectiveTargetApp, this).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }
+                val effectiveTargetApp = NavigationLauncher.resolveEffectiveTargetApp(
+                    context = this,
+                    configuredApp = targetApp,
+                    sourceService = sourceService,
+                    showToastOnFallback = true
+                )
 
                 val locationType = when (parsedLocation) {
-                    is de.goork.mapflip.parser.ParsedLocation.Coordinates -> "coordinates"
-                    is de.goork.mapflip.parser.ParsedLocation.SearchQuery -> "search_query"
-                    is de.goork.mapflip.parser.ParsedLocation.Navigation -> "navigation"
-                    is de.goork.mapflip.parser.ParsedLocation.Directions -> "directions"
-                    is de.goork.mapflip.parser.ParsedLocation.WebFallback -> "web_fallback"
-                    is de.goork.mapflip.parser.ParsedLocation.Home -> "home"
+                    is ParsedLocation.Coordinates -> "coordinates"
+                    is ParsedLocation.SearchQuery -> "search_query"
+                    is ParsedLocation.Navigation -> "navigation"
+                    is ParsedLocation.Directions -> "directions"
+                    is ParsedLocation.WebFallback -> "web_fallback"
+                    is ParsedLocation.Home -> "home"
                 }
 
                 Analytics.trackEvent("redirect_performed", mapOf(
@@ -98,25 +79,16 @@ class RedirectActivity : Activity() {
                     "is_share_sheet" to isShareSheet
                 ))
 
-                try {
-                    startActivity(targetIntent)
+                val result = NavigationLauncher.launchWithFallback(
+                    context = this,
+                    parsedLocation = parsedLocation,
+                    effectiveTargetApp = effectiveTargetApp,
+                    sourceUri = dataUri,
+                    sourceService = sourceService,
+                    showSuccessToast = true
+                )
+                if (result.launched) {
                     repository.incrementSuccessfulFlips()
-                    // Issue #10: Feedback toast when redirect is performed
-                    showRedirectToast(effectiveTargetApp)
-                } catch (_: ActivityNotFoundException) {
-                    Analytics.trackEvent("redirect_fallback", mapOf(
-                        "target_app" to effectiveTargetApp.name.lowercase(),
-                        "source_service" to sourceService,
-                        "reason" to "app_not_installed"
-                    ))
-                    handleTargetNotFoundFallback(effectiveTargetApp, dataUri, parsedLocation)
-                } catch (e: Exception) {
-                    Analytics.trackEvent("redirect_fallback", mapOf(
-                        "target_app" to effectiveTargetApp.name.lowercase(),
-                        "source_service" to sourceService,
-                        "reason" to e.javaClass.simpleName
-                    ))
-                    forwardOriginalUrl(dataUri)
                 }
             }
         } else {
@@ -128,145 +100,6 @@ class RedirectActivity : Activity() {
 
         finish()
         suppressTransitionAnimation()
-    }
-
-    private fun showFallbackToast(
-        configuredApp: de.goork.mapflip.navigation.TargetNavigationApp,
-        fallbackApp: de.goork.mapflip.navigation.TargetNavigationApp
-    ) {
-        try {
-            val repo = PreferencesRepository.getInstance(this)
-            val langCode = de.goork.mapflip.ui.Strings.resolveLanguage(repo.preferences.value.language)
-            val s = de.goork.mapflip.ui.Strings.getStrings(langCode)
-            val fallbackName = if (fallbackApp.isSystemPicker) s.targetAppAlwaysAsk else fallbackApp.displayName
-            val msg = s.targetAppFallbackOpened.format(configuredApp.displayName, fallbackName)
-            android.widget.Toast.makeText(applicationContext, msg, android.widget.Toast.LENGTH_LONG).show()
-        } catch (e: Exception) {
-            Log.w("MapFlip", "Failed to show fallback toast", e)
-        }
-    }
-
-    private fun showRedirectToast(targetApp: de.goork.mapflip.navigation.TargetNavigationApp) {
-        try {
-            val repo = PreferencesRepository.getInstance(this)
-            val langCode = de.goork.mapflip.ui.Strings.resolveLanguage(repo.preferences.value.language)
-            val s = de.goork.mapflip.ui.Strings.getStrings(langCode)
-            val appName = if (targetApp.isSystemPicker) s.targetAppAlwaysAsk else targetApp.displayName
-            val msg = s.redirectingToApp.format(appName)
-            android.widget.Toast.makeText(applicationContext, msg, android.widget.Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            Log.w("MapFlip", "Failed to show redirect toast", e)
-        }
-    }
-
-    private fun handleTargetNotFoundFallback(
-        targetApp: de.goork.mapflip.navigation.TargetNavigationApp,
-        dataUri: Uri,
-        parsedLocation: de.goork.mapflip.parser.ParsedLocation
-    ) {
-        // 1. Try generic System Picker chooser (only if external handlers exist to prevent self-looping)
-        try {
-            val geoIntent = Intent(Intent.ACTION_VIEW, Uri.parse(NavigationIntentBuilder.buildGenericGeoUriString(parsedLocation)))
-            val handlers = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                packageManager.queryIntentActivities(geoIntent, PackageManager.ResolveInfoFlags.of(PackageManager.MATCH_DEFAULT_ONLY.toLong()))
-            } else {
-                @Suppress("DEPRECATION")
-                packageManager.queryIntentActivities(geoIntent, PackageManager.MATCH_DEFAULT_ONLY)
-            }.filter { it.activityInfo.packageName != packageName }
-
-            if (handlers.isNotEmpty()) {
-                val chooserIntent = NavigationIntentBuilder.buildGenericGeoIntent(parsedLocation, createChooser = true).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        putExtra(
-                            Intent.EXTRA_EXCLUDE_COMPONENTS,
-                            arrayOf(android.content.ComponentName(this@RedirectActivity, RedirectActivity::class.java))
-                        )
-                    }
-                }
-                startActivity(chooserIntent)
-                return
-            }
-        } catch (e: Exception) {
-            Log.w("MapFlip", "Failed to launch generic chooser intent", e)
-        }
-
-        // 2. Specific Waze web fallback if applicable
-        if (targetApp == de.goork.mapflip.navigation.TargetNavigationApp.WAZE) {
-            try {
-                val wazeWebUri = Uri.parse(NavigationIntentBuilder.buildWazeWebFallbackUriString(parsedLocation))
-                val fallbackIntent = Intent(Intent.ACTION_VIEW, wazeWebUri).apply {
-                    addCategory(Intent.CATEGORY_BROWSABLE)
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }
-                startActivity(fallbackIntent)
-                return
-            } catch (e: Exception) {
-                Log.w("MapFlip", "Failed to launch Waze web fallback", e)
-            }
-        }
-
-        // 3. Fallback: browser
-        forwardOriginalUrl(dataUri)
-    }
-
-    /**
-     * Forwards original map URL to standard web browser when redirect is paused or no native map app is found.
-     */
-    private fun forwardOriginalUrl(uri: Uri) {
-        val scheme = uri.scheme?.lowercase()
-        if (scheme != "http" && scheme != "https") {
-            Log.w("MapFlip", "Refusing to forward non-web URI to browser: $uri")
-            return
-        }
-
-        val genericWebIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com")).apply {
-            addCategory(Intent.CATEGORY_BROWSABLE)
-        }
-
-        val browserPackage = try {
-            val defaultBrowser = packageManager.resolveActivity(genericWebIntent, PackageManager.MATCH_DEFAULT_ONLY)
-                ?.activityInfo?.packageName
-                ?.takeIf { it != packageName && it != "android" }
-            defaultBrowser
-                ?: packageManager.queryIntentActivities(genericWebIntent, PackageManager.MATCH_DEFAULT_ONLY)
-                    .map { it.activityInfo.packageName }
-                    .firstOrNull { it != packageName && it != "android" }
-                ?: packageManager.queryIntentActivities(genericWebIntent, 0)
-                    .map { it.activityInfo.packageName }
-                    .firstOrNull { it != packageName && it != "android" }
-        } catch (e: Exception) {
-            Log.w("MapFlip", "Failed to query browser activities", e)
-            null
-        }
-
-        if (browserPackage != null) {
-            val targetIntent = Intent(Intent.ACTION_VIEW, uri).apply {
-                addCategory(Intent.CATEGORY_BROWSABLE)
-                setPackage(browserPackage)
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }
-            try {
-                startActivity(targetIntent)
-                return
-            } catch (e: Exception) {
-                Log.w("MapFlip", "Failed to launch browser with package $browserPackage", e)
-            }
-        }
-
-        // Fallback: browser selector intent
-        try {
-            val selectorIntent = Intent(Intent.ACTION_MAIN).apply {
-                addCategory(Intent.CATEGORY_APP_BROWSER)
-            }
-            val browserIntent = Intent(Intent.ACTION_VIEW, uri).apply {
-                selector = selectorIntent
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }
-            startActivity(browserIntent)
-        } catch (e: Exception) {
-            Log.w("MapFlip", "Failed to launch browser selector intent", e)
-        }
     }
 
     /** Suppress enter/exit animation so the redirect is invisible. */

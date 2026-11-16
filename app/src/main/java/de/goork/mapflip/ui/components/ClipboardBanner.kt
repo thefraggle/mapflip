@@ -28,20 +28,7 @@ fun ClipboardBanner(
     onOpen: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    val serviceName = when (UniversalMapParser.detectSourceService(url)) {
-        "apple" -> "Apple Maps"
-        "google" -> "Google Maps"
-        "bing" -> "Bing Maps"
-        "osm" -> "OpenStreetMap"
-        "mapy" -> "Mapy.cz"
-        "yandex" -> "Yandex Maps"
-        "here" -> "HERE WeGo"
-        "waze" -> "Waze"
-        "duckduckgo" -> "DuckDuckGo Maps"
-        "plus_code" -> "Plus Code"
-        "geo_coordinates" -> "Geo / GPS"
-        else -> s.testLinkTitle
-    }
+    val serviceName = UniversalMapParser.detectParser(url)?.serviceName ?: s.testLinkTitle
 
     Card(
         modifier = Modifier

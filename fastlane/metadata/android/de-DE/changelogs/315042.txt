@@ -1,0 +1,3 @@
+- Verbesserte Link-Erkennung: Zuverlässigeres Abfangen von HERE-Share-Links und ganzzahligen Google-Maps-Koordinaten
+- Stabilere Weiterleitung: Einheitliche App-Prüfung und intelligenter Fallback auch über Zwischenablage-Banner und Link-Tester
+- Erhöhte Zuverlässigkeit: Präzisere Host-Validierung, robustere Plus-Code-Prüfung und bereinigte Zustandsverwaltung
