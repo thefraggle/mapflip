@@ -2,9 +2,13 @@ package de.goork.mapflip.data
 
 import android.content.SharedPreferences
 import de.goork.mapflip.AppConstants
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.util.Calendar
+import java.util.TimeZone
 
 class PreferencesRepositoryTest {
 
@@ -184,5 +188,182 @@ class PreferencesRepositoryTest {
         repo.setTargetApp(de.goork.mapflip.navigation.TargetNavigationApp.ORGANIC_MAPS)
         org.junit.Assert.assertEquals(de.goork.mapflip.navigation.TargetNavigationApp.ORGANIC_MAPS, repo.getTargetApp())
         org.junit.Assert.assertEquals(de.goork.mapflip.navigation.TargetNavigationApp.ORGANIC_MAPS, repo.preferences.value.targetApp)
+    }
+
+    private fun createCalendar(
+        year: Int,
+        month: Int,
+        day: Int,
+        hour: Int,
+        minute: Int,
+        second: Int = 0,
+        timeZone: TimeZone = TimeZone.getTimeZone("UTC")
+    ): Calendar {
+        return Calendar.getInstance(timeZone).apply {
+            set(year, month - 1, day, hour, minute, second)
+            set(Calendar.MILLISECOND, 0)
+        }
+    }
+
+    @Test
+    fun `pauseUntilTomorrowMorning daytime pauses until 6 AM on following day and expires at 6 AM`() {
+        val tz = TimeZone.getTimeZone("Europe/Berlin")
+        val inputCal = createCalendar(2026, 9, 4, 14, 30, timeZone = tz)
+        var now = inputCal.timeInMillis
+        val repo = PreferencesRepository.createForTesting(
+            prefs = FakeSharedPreferences(),
+            clock = { now },
+            timeZoneProvider = { tz }
+        )
+
+        repo.pauseUntilTomorrowMorning()
+        assertTrue(repo.isCurrentlyPaused())
+        assertTrue(repo.preferences.value.isPaused)
+
+        val resultMillis = repo.preferences.value.pausedUntilTimestamp
+        val resultCal = Calendar.getInstance(tz).apply { timeInMillis = resultMillis }
+        assertEquals(2026, resultCal.get(Calendar.YEAR))
+        assertEquals(Calendar.SEPTEMBER, resultCal.get(Calendar.MONTH))
+        assertEquals(5, resultCal.get(Calendar.DAY_OF_MONTH))
+        assertEquals(6, resultCal.get(Calendar.HOUR_OF_DAY))
+        assertEquals(0, resultCal.get(Calendar.MINUTE))
+        assertEquals(0, resultCal.get(Calendar.SECOND))
+        assertEquals(0, resultCal.get(Calendar.MILLISECOND))
+        assertTrue("Result must be in the future", resultMillis > inputCal.timeInMillis)
+
+        // Advances clock to 6:00 AM -> auto-expires
+        now = resultMillis
+        repo.refreshPauseState()
+        assertFalse(repo.isCurrentlyPaused())
+        assertFalse(repo.preferences.value.isPaused)
+        assertEquals(0L, repo.preferences.value.pausedUntilTimestamp)
+    }
+
+    @Test
+    fun `pauseUntilTomorrowMorning late evening before midnight pauses until 6 AM next day`() {
+        val tz = TimeZone.getTimeZone("UTC")
+        val inputCal = createCalendar(2026, 9, 4, 23, 59, 59, timeZone = tz)
+        val repo = PreferencesRepository.createForTesting(FakeSharedPreferences(), { inputCal.timeInMillis }, { tz })
+
+        repo.pauseUntilTomorrowMorning()
+        val resultCal = Calendar.getInstance(tz).apply { timeInMillis = repo.preferences.value.pausedUntilTimestamp }
+        assertEquals(2026, resultCal.get(Calendar.YEAR))
+        assertEquals(Calendar.SEPTEMBER, resultCal.get(Calendar.MONTH))
+        assertEquals(5, resultCal.get(Calendar.DAY_OF_MONTH))
+        assertEquals(6, resultCal.get(Calendar.HOUR_OF_DAY))
+        assertEquals(0, resultCal.get(Calendar.MINUTE))
+        assertEquals(0, resultCal.get(Calendar.SECOND))
+    }
+
+    @Test
+    fun `pauseUntilTomorrowMorning after midnight before 6 AM pauses until 6 AM of same day`() {
+        val tz = TimeZone.getTimeZone("Europe/Berlin")
+        val inputCal = createCalendar(2026, 9, 5, 2, 15, 0, timeZone = tz)
+        val repo = PreferencesRepository.createForTesting(FakeSharedPreferences(), { inputCal.timeInMillis }, { tz })
+
+        repo.pauseUntilTomorrowMorning()
+        val resultMillis = repo.preferences.value.pausedUntilTimestamp
+        val resultCal = Calendar.getInstance(tz).apply { timeInMillis = resultMillis }
+        assertEquals(2026, resultCal.get(Calendar.YEAR))
+        assertEquals(Calendar.SEPTEMBER, resultCal.get(Calendar.MONTH))
+        assertEquals(5, resultCal.get(Calendar.DAY_OF_MONTH))
+        assertEquals(6, resultCal.get(Calendar.HOUR_OF_DAY))
+        assertEquals(0, resultCal.get(Calendar.MINUTE))
+        assertEquals(0, resultCal.get(Calendar.SECOND))
+        assertTrue("Result must be in the future", resultMillis > inputCal.timeInMillis)
+    }
+
+    @Test
+    fun `pauseUntilTomorrowMorning one second before 6 AM pauses until 6 AM of same day`() {
+        val tz = TimeZone.getTimeZone("UTC")
+        val inputCal = createCalendar(2026, 9, 5, 5, 59, 59, timeZone = tz)
+        val repo = PreferencesRepository.createForTesting(FakeSharedPreferences(), { inputCal.timeInMillis }, { tz })
+
+        repo.pauseUntilTomorrowMorning()
+        val resultMillis = repo.preferences.value.pausedUntilTimestamp
+        val resultCal = Calendar.getInstance(tz).apply { timeInMillis = resultMillis }
+        assertEquals(5, resultCal.get(Calendar.DAY_OF_MONTH))
+        assertEquals(6, resultCal.get(Calendar.HOUR_OF_DAY))
+        assertEquals(1000L, resultMillis - inputCal.timeInMillis)
+    }
+
+    @Test
+    fun `pauseUntilTomorrowMorning exactly at 6 AM pauses until 6 AM of following day`() {
+        val tz = TimeZone.getTimeZone("UTC")
+        val inputCal = createCalendar(2026, 9, 5, 6, 0, 0, timeZone = tz)
+        val repo = PreferencesRepository.createForTesting(FakeSharedPreferences(), { inputCal.timeInMillis }, { tz })
+
+        repo.pauseUntilTomorrowMorning()
+        val resultMillis = repo.preferences.value.pausedUntilTimestamp
+        val resultCal = Calendar.getInstance(tz).apply { timeInMillis = resultMillis }
+        assertEquals(6, resultCal.get(Calendar.DAY_OF_MONTH))
+        assertEquals(6, resultCal.get(Calendar.HOUR_OF_DAY))
+        assertEquals(24 * 3600 * 1000L, resultMillis - inputCal.timeInMillis)
+    }
+
+    @Test
+    fun `pauseUntilTomorrowMorning crosses month leap year and year end boundaries`() {
+        val tz = TimeZone.getTimeZone("UTC")
+
+        val monthCal = createCalendar(2026, 4, 30, 22, 0, timeZone = tz)
+        val monthRepo = PreferencesRepository.createForTesting(FakeSharedPreferences(), { monthCal.timeInMillis }, { tz })
+        monthRepo.pauseUntilTomorrowMorning()
+        val monthResult = Calendar.getInstance(tz).apply { timeInMillis = monthRepo.preferences.value.pausedUntilTimestamp }
+        assertEquals(Calendar.MAY, monthResult.get(Calendar.MONTH))
+        assertEquals(1, monthResult.get(Calendar.DAY_OF_MONTH))
+
+        val leapCal = createCalendar(2024, 2, 28, 20, 0, timeZone = tz)
+        val leapRepo = PreferencesRepository.createForTesting(FakeSharedPreferences(), { leapCal.timeInMillis }, { tz })
+        leapRepo.pauseUntilTomorrowMorning()
+        val leapResult = Calendar.getInstance(tz).apply { timeInMillis = leapRepo.preferences.value.pausedUntilTimestamp }
+        assertEquals(29, leapResult.get(Calendar.DAY_OF_MONTH))
+        assertEquals(Calendar.FEBRUARY, leapResult.get(Calendar.MONTH))
+
+        val nonLeapCal = createCalendar(2025, 2, 28, 20, 0, timeZone = tz)
+        val nonLeapRepo = PreferencesRepository.createForTesting(FakeSharedPreferences(), { nonLeapCal.timeInMillis }, { tz })
+        nonLeapRepo.pauseUntilTomorrowMorning()
+        val nonLeapResult = Calendar.getInstance(tz).apply { timeInMillis = nonLeapRepo.preferences.value.pausedUntilTimestamp }
+        assertEquals(1, nonLeapResult.get(Calendar.DAY_OF_MONTH))
+        assertEquals(Calendar.MARCH, nonLeapResult.get(Calendar.MONTH))
+
+        val yearEndCal = createCalendar(2026, 12, 31, 23, 45, timeZone = tz)
+        val yearEndRepo = PreferencesRepository.createForTesting(FakeSharedPreferences(), { yearEndCal.timeInMillis }, { tz })
+        yearEndRepo.pauseUntilTomorrowMorning()
+        val yearEndResult = Calendar.getInstance(tz).apply { timeInMillis = yearEndRepo.preferences.value.pausedUntilTimestamp }
+        assertEquals(2027, yearEndResult.get(Calendar.YEAR))
+        assertEquals(Calendar.JANUARY, yearEndResult.get(Calendar.MONTH))
+        assertEquals(1, yearEndResult.get(Calendar.DAY_OF_MONTH))
+    }
+
+    @Test
+    fun `pauseUntilTomorrowMorning works reliably across different world timezones`() {
+        val testZones = listOf(
+            "Pacific/Honolulu",
+            "America/Los_Angeles",
+            "America/New_York",
+            "Europe/London",
+            "Europe/Berlin",
+            "Asia/Tokyo",
+            "Pacific/Auckland"
+        )
+
+        for (zoneId in testZones) {
+            val tz = TimeZone.getTimeZone(zoneId)
+            val eveningCal = createCalendar(2026, 6, 15, 21, 0, timeZone = tz)
+            val eveningRepo = PreferencesRepository.createForTesting(FakeSharedPreferences(), { eveningCal.timeInMillis }, { tz })
+            eveningRepo.pauseUntilTomorrowMorning()
+            val eveningResultCal = Calendar.getInstance(tz).apply { timeInMillis = eveningRepo.preferences.value.pausedUntilTimestamp }
+            assertEquals("Hour must be 6 in $zoneId", 6, eveningResultCal.get(Calendar.HOUR_OF_DAY))
+            assertEquals("Minute must be 0 in $zoneId", 0, eveningResultCal.get(Calendar.MINUTE))
+            assertEquals("Day must be 16 in $zoneId", 16, eveningResultCal.get(Calendar.DAY_OF_MONTH))
+
+            val nightCal = createCalendar(2026, 6, 15, 3, 0, timeZone = tz)
+            val nightRepo = PreferencesRepository.createForTesting(FakeSharedPreferences(), { nightCal.timeInMillis }, { tz })
+            nightRepo.pauseUntilTomorrowMorning()
+            val nightResultCal = Calendar.getInstance(tz).apply { timeInMillis = nightRepo.preferences.value.pausedUntilTimestamp }
+            assertEquals("Hour must be 6 in $zoneId", 6, nightResultCal.get(Calendar.HOUR_OF_DAY))
+            assertEquals("Minute must be 0 in $zoneId", 0, nightResultCal.get(Calendar.MINUTE))
+            assertEquals("Day must be 15 in $zoneId", 15, nightResultCal.get(Calendar.DAY_OF_MONTH))
+        }
     }
 }

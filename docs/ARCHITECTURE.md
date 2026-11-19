@@ -115,7 +115,7 @@ Android 12 (API 31+) restricts unverified HTTP/HTTPS link handling:
 * Live badge in the main screen reflects real-time link enablement status.
 
 ### 2.4 Pause Subsystem & Quick Settings Tile
-* **`PauseHelper` & `PreferencesRepository`**: Allows users to pause redirection for 1 hour, 8 hours, until tomorrow morning (06:00 AM with proper timezone boundary arithmetic), or indefinitely.
+* **`PreferencesRepository`**: Manages pause states (1 hour, 8 hours, until tomorrow morning 06:00 AM with timezone boundary arithmetic, or indefinitely) and reactive preferences via `StateFlow`.
 * **`MapFlipTileService`**: System Quick Settings tile allowing 1-tap toggling of the pause state directly from the notification shade without launching the app.
 
 ---

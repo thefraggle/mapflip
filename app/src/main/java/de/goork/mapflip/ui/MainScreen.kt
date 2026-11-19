@@ -204,34 +204,11 @@ fun MainScreen(
                                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                     val url = detectedClipboardUrl
                                     if (url != null) {
-                                        val sourceService = UniversalMapParser.detectSourceService(url)
-                                        val parsed = UniversalMapParser.parse(url)
-                                        val effectiveTarget = NavigationLauncher.resolveEffectiveTargetApp(
-                                            context = context,
+                                        NavigationLauncher.create(context).launchFromUi(
+                                            url = url,
                                             configuredApp = userPreferences.targetApp,
-                                            sourceService = sourceService,
-                                            showToastOnFallback = true
+                                            eventName = "clipboard_banner_clicked"
                                         )
-                                        Analytics.trackEvent("clipboard_banner_clicked", mapOf(
-                                            "source_service" to sourceService,
-                                            "target_app" to effectiveTarget.name.lowercase()
-                                        ))
-                                        val sourceUri = runCatching { Uri.parse(url) }.getOrNull()
-                                        val result = NavigationLauncher.launchWithFallback(
-                                            context = context,
-                                            parsedLocation = parsed,
-                                            effectiveTargetApp = effectiveTarget,
-                                            sourceUri = sourceUri,
-                                            sourceService = sourceService,
-                                            showSuccessToast = false
-                                        )
-                                        if (!result.launched) {
-                                            Toast.makeText(
-                                                context,
-                                                s.targetAppOpenError,
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                        }
                                     }
                                 },
                                 onDismiss = {

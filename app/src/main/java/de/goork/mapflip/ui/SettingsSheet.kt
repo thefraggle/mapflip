@@ -462,7 +462,7 @@ fun SettingsSheet(
                             onClick = {
                                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                 Analytics.trackEvent("rate_app_clicked")
-                                de.goork.mapflip.review.ReviewHelper.openPlayStoreListing(context)
+                                de.goork.mapflip.review.ReviewHelper.openStoreListing(context)
                             }
                         )
                     }

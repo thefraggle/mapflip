@@ -13,19 +13,19 @@ Ya sea que busques abrir enlaces de Apple Maps en Android, una app de Apple Maps
 Abre destinos y rutas en tu app preferida:
 • Conducción y tráfico: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Privacidad y mapas offline: Organic Maps, OsmAnd (incl. Plus), CoMaps, Vela
-• Aire libre y transporte: Mapy.cz, Komoot (ciclismo y senderismo), Citymapper (transporte público), Magic Earth, Locus Map, Yandex Maps o el selector del sistema Android
+• Aire libre y transporte: Mapy.cz, Komoot (ciclismo y senderismo), Citymapper (transporte público), Magic Earth, Locus Map, Yandex o el selector del sistema Android
 
 🗺️ Formatos y servicios de mapas compatibles (11 fuentes):
 • Enlaces y búsquedas de Apple Maps (maps.apple.com)
 • Enlaces de Google Maps (maps.google.com, goo.gl) – ideal para redirigir a mapas privados
-• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing Maps y Yandex Maps
-• DuckDuckGo Maps, coordenadas GPS (geo:, DMS, decimales) y Google Plus Codes (100% offline)
+• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing y Yandex
+• DuckDuckGo, coordenadas GPS (geo:, DMS, decimales) y Google Plus Codes (100% offline)
 • Marcadores de lugares, direcciones y rutas de navegación paso a paso
 
 ✨ Características destacadas y privacidad:
-• 🚗 Navegación paso a paso y Android Auto – Navegación paso a paso en Google Maps, integración completa con Android Auto y ruta guiada
-• 🔒 100% Offline y Privado – Cero permisos de internet (sin android.permission.– 100% local link conversion on device, zero tracking of location or URLs, zero ads
-• 🛡️ Fallback inteligente – Si tu app preferida no está instalada, abre Google Maps o el menú del sistema de forma segura
+• 🚗 Navegación paso a paso y Android Auto – Navegación paso a paso y integración completa con Android Auto y ruta guiada
+• 🔒 100% Offline y Privado – Cero permisos de internet (sin android.permission.INTERNET), sin rastreo, sin anuncios
+• 🛡️ Fallback inteligente – Si tu app preferida no está instalada, abre Google o el menú del sistema de forma segura
 • ⏸️ Modo Pausa y Ajuste Rápido – Pausa la redirección cuando quieras desde el panel de notificaciones (1 h, 8 h, hasta mañana)
 • 💬 Compatibilidad universal – Funciona con WhatsApp, Telegram, Signal, SMS, Slack y correo electrónico
 • 👻 Invisible en segundo plano – Sin pantallas intermedias y con consumo cero de batería

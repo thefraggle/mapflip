@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import de.goork.mapflip.data.PreferencesRepository
 import org.junit.ClassRule
 import org.junit.Rule
 import org.junit.Test
@@ -34,7 +35,7 @@ class ScreenshotTest {
 
         prefs.edit()
             .putBoolean(AppConstants.PREFS_KEY_PAUSED, false)
-            .putLong(PauseHelper.PREFS_KEY_PAUSED_UNTIL, 0L)
+            .putLong(PreferencesRepository.PREFS_KEY_PAUSED_UNTIL, 0L)
             .putString(AppConstants.PREFS_KEY_LANG, langCode)
             .apply()
 

@@ -1,3 +1,8 @@
+## 1.5.1
+- More Reliable Redirection: Improved package pinning for Mapy.cz short links and direct browser handoff for web fallbacks
+- Cleaner App Picker: MapFlip is consistently excluded from the system chooser to prevent redundant self-redirection
+- Internal Improvements: Simplified architecture, clearer responsibilities, and expanded unit test coverage
+
 ## 1.5.0
 - Improved Link Detection: More reliable interception of HERE share links (`share.here.com`) and integer Google Maps coordinates
 - Smarter Fallback Handling: Unified app installation checks and fallback routing in Clipboard Banner and Link Tester

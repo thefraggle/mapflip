@@ -13,18 +13,18 @@ MapFlip 是專為 Android 使用者打造的地圖與位置極速連結開啟工
 隨心選擇最符合你需求的導航工具：
 • 開車與路況導航：Google 地圖、Waze、HERE WeGo、TomTom AmiGO、Sygic
 • 隱私安全與離線地圖：Organic Maps、OsmAnd（含 Plus 版）、CoMaps、Vela
-• 戶外運動與大眾運輸：Mapy.cz、Komoot（單車與登山）、Citymapper（大眾交通）、Magic Earth、Locus Map、Yandex Maps 或彈性系統選擇選單
+• 戶外運動與大眾運輸：Mapy.cz、Komoot（單車與登山）、Citymapper（大眾交通）、Magic Earth、Locus Map、Yandex 或彈性系統選擇選單
 
 🗺️ 支援 11 種地圖來源與格式：
 • Apple Maps 蘋果地圖網址與搜尋關鍵字 (maps.apple.com)
 • Google Maps 連結 (maps.google.com, goo.gl) – 輕鬆轉換至注重隱私的開源地圖
-• OpenStreetMap (osm.org)、Mapy.cz / Mapy.com、HERE WeGo、Waze、Bing 必應地圖及 Yandex Maps
+• OpenStreetMap (osm.org)、Mapy.cz / Mapy.com、HERE WeGo、Waze、Bing 必應地圖及 Yandex
 • DuckDuckGo 地圖、GPS 經緯度座標 (geo:、度分秒、十進位) 與 Google Plus Codes（100% 離線解碼）
 • 地點圖釘、地址、地名搜尋與即時導航路徑
 
 ✨ 核心亮點與隱私承諾：
 • 🚗 轉向即時導航與 Android Auto – Google 地圖轉向語音即時導航、路徑規劃與 Android Auto 車載整合
-• 🔒 100% 離線與極致隱私 – 零網路連線權限 (無 android.permission.– 100% local link conversion on device, zero tracking of location or URLs, zero ads
+• 🔒 100% 離線與極致隱私 – 零網路連線權限 (無 android.permission.INTERNET)，無追蹤器，無廣告干擾
 • 🛡️ 智慧容錯機制 – 若預設導航 App 已解除安裝，自動安全切換至 Google 地圖或系統選擇選單
 • ⏸️ 暫停模式與快速設定磚 – 下拉快捷面板隨時暫停跳轉（可選 1小時、8小時或至明天早上）
 • 💬 廣泛相容主流應用 – 完美支援 LINE、Messenger、Telegram、Signal、簡訊與電子郵件

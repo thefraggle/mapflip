@@ -1,0 +1,3 @@
+- More Reliable Redirection: Improved package pinning for Mapy.cz short links and direct browser handoff for web fallbacks
+- Cleaner App Picker: MapFlip is consistently excluded from the system chooser to prevent redundant self-redirection
+- Internal Improvements: Simplified architecture, clearer responsibilities, and expanded unit test coverage

@@ -11,7 +11,6 @@ import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import de.goork.mapflip.AppConstants
 import de.goork.mapflip.MainActivity
-import de.goork.mapflip.PauseHelper
 import de.goork.mapflip.analytics.Analytics
 import de.goork.mapflip.data.PreferencesRepository
 import de.goork.mapflip.ui.Strings

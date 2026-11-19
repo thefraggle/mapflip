@@ -1,3 +1,8 @@
+## 1.5.1
+- Zuverlässigere Weiterleitung: Verbesserte Paket-Bindung für Mapy.cz-Kurzlinks und direkte Browser-Übergabe bei Web-Fallbacks
+- Sauberere App-Auswahl: MapFlip wird im System-Auswahldialog konsequent ausgeblendet, um unnötige Rücksprünge zu vermeiden
+- Interne Optimierungen: Vereinfachte Architektur, klarere Zuständigkeiten und erweiterte Testabdeckung
+
 ## 1.5.0
 - Verbesserte Link-Erkennung: Zuverlässigeres Abfangen von HERE-Share-Links (`share.here.com`) und Google-Maps-Koordinaten ohne Nachkommastellen
 - Stabilere Weiterleitung: Einheitliche App-Prüfung und intelligenter Fallback auch über das Zwischenablage-Banner und den Link-Tester

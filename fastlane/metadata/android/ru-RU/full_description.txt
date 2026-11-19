@@ -18,8 +18,8 @@ MapFlip — это надежный конвертер ссылок Apple Maps �
 🗺️ Поддерживаемые картографические сервисы (11 источников):
 • Ссылки и поисковые запросы Apple Maps (maps.apple.com)
 • Ссылки Google Maps (maps.google.com, goo.gl) – удобно для перенаправления в независимые карты
-• Яндекс Карты (yandex.ru/maps), OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze и Bing Maps
-• DuckDuckGo Maps, координаты GPS (geo:, DMS, десятичные) и Google Plus Codes (100% офлайн-декодирование)
+• Яндекс Карты (yandex.ru/maps), OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze и Bing
+• DuckDuckGo, координаты GPS (geo:, DMS, десятичные) и Google Plus Codes (100% офлайн-декодирование)
 • Метки на карте, адреса и пошаговые навигационные маршруты
 
 ✨ Преимущества и конфиденциальность:

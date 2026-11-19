@@ -6,43 +6,17 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import com.google.android.play.core.review.ReviewManagerFactory
-import de.goork.mapflip.analytics.Analytics
-import de.goork.mapflip.data.PreferencesRepository
 
 /**
- * Play Store Flavor ReviewHelper: Coordinates Google Play In-App Reviews politely and unobtrusively.
+ * Play Store adapter for [ReviewPromptPort].
  */
-object ReviewHelper {
+object ReviewHelper : ReviewPromptPort {
 
-    /**
-     * Checks activity and timing criteria before requesting Google Play In-App Review.
-     */
-    fun maybeRequestReview(
+    override fun launchReviewFlow(
         activity: Activity,
-        repository: PreferencesRepository,
-        trigger: String = "auto_criteria_met"
-    ) {
-        val now = System.currentTimeMillis()
-        val flips = repository.successfulFlipCount
-        val installTime = repository.firstInstallTimestamp
-        val lastPrompt = repository.lastReviewPromptTimestamp
-
-        if (ReviewEligibility.isEligibleForReview(now, flips, installTime, lastPrompt)) {
-            repository.lastReviewPromptTimestamp = now
-            launchReviewFlow(activity, trigger = trigger)
-        }
-    }
-
-    /**
-     * Directly triggers the In-App Review Flow.
-     */
-    fun launchReviewFlow(
-        activity: Activity,
-        trigger: String = "auto_criteria_met",
-        onComplete: (() -> Unit)? = null
+        onComplete: () -> Unit
     ) {
         try {
-            Analytics.trackEvent("review_prompt_triggered", mapOf("trigger" to trigger))
             val manager = ReviewManagerFactory.create(activity)
             val request = manager.requestReviewFlow()
             request.addOnCompleteListener { task ->
@@ -50,22 +24,19 @@ object ReviewHelper {
                     val reviewInfo = task.result
                     val flow = manager.launchReviewFlow(activity, reviewInfo)
                     flow.addOnCompleteListener {
-                        onComplete?.invoke()
+                        onComplete()
                     }
                 } else {
-                    onComplete?.invoke()
+                    onComplete()
                 }
             }
         } catch (e: Throwable) {
             Log.w("MapFlip", "Failed to launch in-app review flow", e)
-            onComplete?.invoke()
+            onComplete()
         }
     }
 
-    /**
-     * Opens Play Store app listing as a direct fallback or manual feedback option.
-     */
-    fun openPlayStoreListing(context: Context) {
+    override fun openStoreListing(context: Context) {
         val packageName = context.packageName
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName")).apply {

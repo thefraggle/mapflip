@@ -13,7 +13,7 @@ MapFlip은 지도 및 위치 링크를 선호하는 내비게이션 앱으로 �
 상황과 취향에 맞는 지도 앱을 자유롭게 선택하세요:
 • 운전 및 교통정보: Google 지도, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • 프라이버시 및 오프라인 지도: Organic Maps, OsmAnd (Plus 지원), CoMaps, Vela
-• 아웃도어 및 대중교통: Mapy.cz, Komoot (등산 및 자전거), Citymapper (대중교통), Magic Earth, Locus Map, Yandex Maps 또는 안드로이드 시스템 선택 창
+• 아웃도어 및 대중교통: Mapy.cz, Komoot (등산 및 자전거), Citymapper (대중교통), Magic Earth, Locus Map, Yandex 또는 안드로이드 시스템 선택 창
 
 🗺️ 지원하는 지도 서비스 및 형식 (11개 소스):
 • Apple Maps URL 및 검색어 (maps.apple.com)

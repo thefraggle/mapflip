@@ -13,18 +13,18 @@ MapFlip 是一款专为安卓用户打造的地图与位置极速链接打开器
 自由选择你常用的地图与导航工具：
 • 驾车与路况导航：Google Maps、Waze、HERE WeGo、TomTom AmiGO、Sygic
 • 隐私保护与离线地图：Organic Maps、OsmAnd（含 Plus）、CoMaps、Vela
-• 户外运动与公交出行：Mapy.cz、Komoot（徒步与骑行）、Citymapper（公共交通）、Magic Earth、Locus Map、Yandex Maps 或原生系统选择器
+• 户外运动与公交出行：Mapy.cz、Komoot（徒步与骑行）、Citymapper（公共交通）、Magic Earth、Locus Map、Yandex 或原生系统选择器
 
 🗺️ 支持 11 种地图来源与格式：
 • Apple Maps 苹果地图 URL 及搜索关键词 (maps.apple.com)
 • Google Maps 谷歌地图链接 (maps.google.com, goo.gl) – 方便重定向至开源离线地图
-• OpenStreetMap (osm.org)、Mapy.cz / Mapy.com、HERE WeGo、Waze、Bing 必应地图及 Yandex Maps
+• OpenStreetMap (osm.org)、Mapy.cz / Mapy.com、HERE WeGo、Waze、Bing 必应地图及 Yandex
 • DuckDuckGo 地图、原始 GPS 坐标 (geo:、DMS 度分秒、十进制经纬度) 以及 Google Plus Codes 离线地址码
 • 地点标记、街道地址、位置搜索及精准导航路径
 
 ✨ 核心特色与隐私保障：
 • 🚗 路线导航与 Android Auto – Google 地图转向语音导航、路线规划与 Android Auto 车机无缝投屏
-• 🔒 100% 离线与隐私保护 – 零联网权限 (无 android.permission.– 100% local link conversion on device, zero tracking of location or URLs, zero ads
+• 🔒 100% 离线与隐私保护 – 零联网权限 (无 android.permission.INTERNET)，无任何后台追踪，无任何广告
 • 🛡️ 智能防失效容错 – 若目标应用被卸载，自动安全回退至系统默认地图或选择窗口
 • ⏸️ 便捷暂停与快捷设置磁贴 – 下拉控制中心一键暂停重定向（可选 1小时、8小时或次日早晨）
 • 💬 广泛兼容主流应用 – 完美支持微信、QQ、Telegram、Signal、短信及各类邮件客户端

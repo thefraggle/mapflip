@@ -24,7 +24,7 @@ Hedefleri ve rotaları dilediğiniz uygulamada açın:
 
 ✨ Öne Çıkan Özellikler ve Gizlilik:
 • 🚗 Adım Adım Navigasyon ve Android Auto – Google Haritalar'da adım adım dönüş navigasyonu, tam Android Auto entegrasyonu ve canlı rota rehberliği
-• 🔒 %100 Çevrimdışı ve Gizli – Sıfır – 100% local link conversion on device, zero tracking of location or URLs, zero ads
+• 🔒 %100 Çevrimdışı ve Gizli – Sıfır internet izni (ağ erişimi yok), takip yok, reklam yok
 • 🛡️ Akıllı Yedekleme – Tercih ettiğiniz uygulama yüklü değilse MapFlip güvenle Google Haritalar'ı veya sistem seçiciyi açar
 • ⏸️ Duraklatma Modu ve Hızlı Ayarlar Kutucuğu – Yönlendirmeyi bildirim panelinden dilediğiniz zaman duraklatın (1 saat, 8 saat, yarına kadar)
 • 💬 Evrensel Uyumluluk – WhatsApp, Telegram, Signal, SMS, Slack ve e-postalarla kusursuz çalışır

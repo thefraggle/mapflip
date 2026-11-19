@@ -13,19 +13,19 @@ Seja para abrir links do Apple Maps no Android, um app de Apple Maps para Google
 Abra destinos e trajetos no seu aplicativo favorito:
 • Carro e trânsito: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Privacidade e mapas offline: Organic Maps, OsmAnd (com suporte a Plus), CoMaps, Vela
-• Ao ar livre e transporte público: Mapy.cz, Komoot (trilhas e bike), Citymapper (ônibus e metrô), Magic Earth, Locus Map, Yandex Maps ou seletor do sistema Android
+• Ao ar livre e transporte público: Mapy.cz, Komoot (trilhas e bike), Citymapper (ônibus e metrô), Magic Earth, Locus Map, Yandex ou seletor do sistema Android
 
 🗺️ Formatos e serviços de mapas suportados (11 fontes):
 • Links e buscas do Apple Maps (maps.apple.com)
 • Links do Google Maps (maps.google.com, goo.gl) – excelente para redirecionar para apps com foco em privacidade
-• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing Maps e Yandex Maps
-• DuckDuckGo Maps, coordenadas GPS (geo:, DMS, decimais) e Google Plus Codes (100% offline)
+• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing e Yandex
+• DuckDuckGo, coordenadas GPS (geo:, DMS, decimais) e Google Plus Codes (100% offline)
 • Marcadores de locais, endereços e rotas passo a passo
 
 ✨ Destaques e privacidade:
-• 🚗 Navegação passo a passo e Android Auto – Navegação passo a passo no Google Maps, integração total com o Android Auto e trajeto guiado
-• 🔒 100% Offline e Privado – Zero permissões de – 100% local link conversion on device, zero tracking of location or URLs, zero ads
-• 🛡️ Fallback inteligente – Se o app escolhido for desinstalado, o MapFlip abre o Google Maps ou o menu do sistema
+• 🚗 Navegação passo a passo e Android Auto – Navegação passo a passo e integração total com o Android Auto e trajeto guiado
+• 🔒 100% Offline e Privado – Zero permissões de internet (sem acesso à rede), zero rastreadores, zero anúncios
+• 🛡️ Fallback inteligente – Se o app escolhido for desinstalado, o MapFlip abre o Google ou o menu do sistema
 • ⏸️ Modo Pausa e Atalho Rápido – Pause o redirecionamento direto pela barra de notificações (1h, 8h, até amanhã)
 • 💬 Compatibilidade universal – Funciona com WhatsApp, Telegram, Signal, SMS, Slack e e-mail
 • 👻 Invisível em segundo plano – Sem telas desnecessárias e com consumo zero de bateria

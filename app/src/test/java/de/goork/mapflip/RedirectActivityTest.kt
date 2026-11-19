@@ -50,6 +50,9 @@ class RedirectActivityTest {
         val startedIntent = shadowActivity.nextStartedActivity
         assertNotNull(startedIntent)
         assertEquals(Intent.ACTION_CHOOSER, startedIntent.action)
+        val excluded = startedIntent.getParcelableArrayExtra(Intent.EXTRA_EXCLUDE_COMPONENTS)
+        assertNotNull(excluded)
+        assertTrue(excluded!!.any { (it as? android.content.ComponentName)?.className == RedirectActivity::class.java.name })
         val innerIntent = startedIntent.getParcelableExtra<Intent>(Intent.EXTRA_INTENT)
         assertNotNull(innerIntent)
         assertEquals(Intent.ACTION_VIEW, innerIntent?.action)
@@ -72,6 +75,9 @@ class RedirectActivityTest {
         val startedIntent = shadowActivity.nextStartedActivity
         assertNotNull(startedIntent)
         assertEquals(Intent.ACTION_CHOOSER, startedIntent.action)
+        val excluded = startedIntent.getParcelableArrayExtra(Intent.EXTRA_EXCLUDE_COMPONENTS)
+        assertNotNull(excluded)
+        assertTrue(excluded!!.any { (it as? android.content.ComponentName)?.className == RedirectActivity::class.java.name })
         val innerIntent = startedIntent.getParcelableExtra<Intent>(Intent.EXTRA_INTENT)
         assertNotNull(innerIntent)
         assertEquals(Intent.ACTION_VIEW, innerIntent?.action)

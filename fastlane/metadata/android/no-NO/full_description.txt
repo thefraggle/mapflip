@@ -13,19 +13,19 @@ Enten du vil åpne Apple Maps-lenker på Android, trenger en Apple Maps til Goog
 Åpne destinasjoner og ruter i favorittappen din:
 • Bil & Trafikk: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Personvern & Frakoblede kart: Organic Maps, OsmAnd (inkl. Plus), CoMaps, Vela
-• Friluftsliv & Kollektivtransport: Mapy.cz, Komoot (sykkel & fottur), Citymapper (kollektivtransport), Magic Earth, Locus Map, Yandex Maps eller Android-systemvalg
+• Friluftsliv & Kollektivtransport: Mapy.cz, Komoot (sykkel & fottur), Citymapper (kollektivtransport), Magic Earth, Locus Map, Yandex eller Android-systemvalg
 
 🗺️ Støttede karttjenester & formater (11 kilder):
 • Apple Maps URL-er & søk (maps.apple.com)
 • Google Maps lenker (maps.google.com, goo.gl) – perfekt for å rute til uavhengige kart
-• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing Maps & Yandex Maps
-• DuckDuckGo Maps, GPS-koordinater (geo:, DMS, desimal) & Google Plus Codes (100% offline dekoding)
+• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing & Yandex
+• DuckDuckGo, GPS-koordinater (geo:, DMS, desimal) & Google Plus Codes (100% offline dekoding)
 • Stedmarkører, adresser og sving-for-sving navigasjonsruter
 
 ✨ Høydepunkter & Personvern:
-• 🚗 Sving-for-sving navigasjon & Android Auto – Sving-for-sving ruteveiledning i Google Maps, full Android Auto-integrasjon og trygg navigasjon
-• 🔒 100% Frakoblet & Privat – Ingen – 100% local link conversion on device, zero tracking of location or URLs, zero ads
-• 🛡️ Smart Fallback – Hvis den valgte appen er avinstallert, åpner MapFlip trygt Google Maps eller systemvelgeren
+• 🚗 Sving-for-sving navigasjon & Android Auto – Sving-for-sving ruteveiledning og full Android Auto-integrasjon og trygg navigasjon
+• 🔒 100% Frakoblet & Privat – Ingen internettillatelser (0 tillatelser), ingen sporing, ingen reklame
+• 🛡️ Smart Fallback – Hvis den valgte appen er avinstallert, åpner MapFlip trygt Google eller systemvelgeren
 • ⏸️ Pausemodus & Hurtiginnstillinger-flis – Sett omdirigeringen på pause direkte fra varslingspanelet (1 time, 8 timer, til i morgen)
 • 💬 Universell kompatibilitet – Fungerer med WhatsApp, Telegram, Signal, SMS, Slack og e-post
 • 👻 Usynlig i bakgrunnen – Ingen ekstra skjermbilder og null batteribruk

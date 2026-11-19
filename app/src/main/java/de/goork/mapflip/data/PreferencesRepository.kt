@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.util.Calendar
+import java.util.TimeZone
 
 data class UserPreferences(
     val language: String = "auto",
@@ -21,7 +22,11 @@ data class UserPreferences(
  * Single source of truth for persistent user preferences and application state.
  * Manages reactive state flow and provides thread-safe access.
  */
-class PreferencesRepository internal constructor(private val prefs: SharedPreferences) {
+class PreferencesRepository internal constructor(
+    private val prefs: SharedPreferences,
+    private val clock: () -> Long = System::currentTimeMillis,
+    private val timeZoneProvider: () -> TimeZone = TimeZone::getDefault
+) {
 
     private constructor(context: Context) : this(
         context.applicationContext.getSharedPreferences(AppConstants.PREFS_NAME, Context.MODE_PRIVATE)
@@ -37,7 +42,7 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
     init {
         clearExpiredPauseIfNeeded()
         if (prefs.getLong(PREFS_KEY_FIRST_INSTALL_TS, 0L) == 0L) {
-            prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, System.currentTimeMillis()).apply()
+            prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, clock()).apply()
         }
         _preferences = MutableStateFlow(readCurrentPreferences())
         preferences = _preferences.asStateFlow()
@@ -48,7 +53,7 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
         val isPaused = prefs.getBoolean(AppConstants.PREFS_KEY_PAUSED, false)
         if (isPaused) {
             val pausedUntil = prefs.getLong(PREFS_KEY_PAUSED_UNTIL, 0L)
-            if (pausedUntil > 0L && System.currentTimeMillis() >= pausedUntil) {
+            if (pausedUntil > 0L && clock() >= pausedUntil) {
                 prefs.edit()
                     .putBoolean(AppConstants.PREFS_KEY_PAUSED, false)
                     .putLong(PREFS_KEY_PAUSED_UNTIL, 0L)
@@ -86,7 +91,7 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
         if (!isPaused) return false
 
         val pausedUntil = prefs.getLong(PREFS_KEY_PAUSED_UNTIL, 0L)
-        if (pausedUntil > 0L && System.currentTimeMillis() >= pausedUntil) {
+        if (pausedUntil > 0L && clock() >= pausedUntil) {
             // Pause expired, auto-resume in storage
             prefs.edit()
                 .putBoolean(AppConstants.PREFS_KEY_PAUSED, false)
@@ -102,12 +107,15 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
     }
 
     fun pauseForDuration(durationMs: Long) {
-        val untilTimestamp = System.currentTimeMillis() + durationMs
+        val untilTimestamp = clock() + durationMs
         setPauseState(paused = true, untilTimestamp = untilTimestamp)
     }
 
     fun pauseUntilTomorrowMorning() {
-        setPauseState(paused = true, untilTimestamp = de.goork.mapflip.PauseHelper.getTomorrowMorningTimestamp())
+        setPauseState(
+            paused = true,
+            untilTimestamp = computeTomorrowMorningTimestamp(clock(), timeZoneProvider())
+        )
     }
 
     fun unpause() {
@@ -139,7 +147,7 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
         get() {
             val ts = prefs.getLong(PREFS_KEY_FIRST_INSTALL_TS, 0L)
             if (ts == 0L) {
-                val now = System.currentTimeMillis()
+                val now = clock()
                 prefs.edit().putLong(PREFS_KEY_FIRST_INSTALL_TS, now).apply()
                 return now
             }
@@ -154,6 +162,20 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
         set(value) {
             prefs.edit().putLong(PREFS_KEY_LAST_REVIEW_PROMPT_TS, value).apply()
         }
+
+    private fun computeTomorrowMorningTimestamp(fromMillis: Long, timeZone: TimeZone): Long {
+        val calendar = Calendar.getInstance(timeZone).apply {
+            timeInMillis = fromMillis
+            if (get(Calendar.HOUR_OF_DAY) >= 6) {
+                add(Calendar.DAY_OF_YEAR, 1)
+            }
+            set(Calendar.HOUR_OF_DAY, 6)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+        return calendar.timeInMillis
+    }
 
     private fun setPauseState(paused: Boolean, untilTimestamp: Long) {
         prefs.edit()
@@ -190,8 +212,12 @@ class PreferencesRepository internal constructor(private val prefs: SharedPrefer
             }
         }
 
-        internal fun createForTesting(prefs: SharedPreferences): PreferencesRepository {
-            return PreferencesRepository(prefs)
+        internal fun createForTesting(
+            prefs: SharedPreferences,
+            clock: () -> Long = System::currentTimeMillis,
+            timeZoneProvider: () -> TimeZone = TimeZone::getDefault
+        ): PreferencesRepository {
+            return PreferencesRepository(prefs, clock, timeZoneProvider)
         }
     }
 }

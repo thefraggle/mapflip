@@ -13,19 +13,19 @@ Niezależnie od tego, czy chcesz otwierać linki Apple Maps na Androidzie, szuka
 Otwieraj cele i trasy w swojej ulubionej nawigacji:
 • Samochód i ruch drogowy: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Prywatność i mapy offline: Organic Maps, OsmAnd (w tym Plus), CoMaps, Vela
-• Turystyka i transport miejski: Mapy.cz, Komoot (rower i piesze wędrówki), Citymapper (komunikacja miejska), Magic Earth, Locus Map, Yandex Maps lub wybór systemowy Androida
+• Turystyka i transport miejski: Mapy.cz, Komoot (rower i piesze wędrówki), Citymapper (komunikacja miejska), Magic Earth, Locus Map, Yandex lub wybór systemowy Androida
 
 🗺️ Obsługiwane formaty i serwisy map (11 źródeł):
 • Linki i wyszukiwania Apple Maps (maps.apple.com)
 • Linki Google Maps (maps.google.com, goo.gl) – świetne do przekierowywania do prywatnych map
-• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing Maps i Yandex Maps
-• DuckDuckGo Maps, współrzędne GPS (geo:, DMS, dziesiętne) oraz kody Google Plus Codes (dekodowane w 100% offline)
+• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing i Yandex
+• DuckDuckGo, współrzędne GPS (geo:, DMS, dziesiętne) oraz kody Google Plus Codes (dekodowane w 100% offline)
 • Pinezki lokalizacji, adresy, zapytania i nawigacja zakręt po zakręcie
 
 ✨ Zalety i prywatność:
-• 🚗 Nawigacja zakręt po zakręcie & Android Auto – Nawigacja zakręt po zakręcie w Google Maps, pełna integracja z Android Auto i prowadzenie do celu
-• 🔒 100% Offline i prywatnie – Zero uprawnień – 100% local link conversion on device, zero tracking of location or URLs, zero ads
-• 🛡️ Inteligentny fallback – Jeśli wybrana aplikacja nie jest zainstalowana, MapFlip bezpiecznie otwiera Google Maps lub menu wyboru
+• 🚗 Nawigacja zakręt po zakręcie & Android Auto – Nawigacja zakręt po zakręcie oraz pełna integracja z Android Auto i prowadzenie do celu
+• 🔒 100% Offline i prywatnie – Zero uprawnień internetowych (brak dostępu do sieci), zero śledzenia, zero reklam
+• 🛡️ Inteligentny fallback – Jeśli wybrana aplikacja nie jest zainstalowana, MapFlip bezpiecznie otwiera Google lub menu wyboru
 • ⏸️ Tryb pauzy i Kafelek Szybkich Ustawień – Wstrzymaj przekierowanie z poziomu paska powiadomień (na 1 godz., 8 godz., do jutra)
 • 💬 Uniwersalna zgodność – Działa z WhatsApp, Telegramem, Signalem, SMS, Slackiem i pocztą e-mail
 • 👻 Niewidoczne działanie w tle – Brak zbędnych ekranów i zerowe zużycie baterii

@@ -52,7 +52,7 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildGoogleMapsUriString(location: ParsedLocation): String {
+    internal fun buildGoogleMapsUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "https://www.google.com/maps"
             is ParsedLocation.SearchQuery -> "geo:0,0?q=${encode(location.query)}"
@@ -98,13 +98,13 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildGoogleMapsIntent(location: ParsedLocation): Intent {
+    internal fun buildGoogleMapsIntent(location: ParsedLocation): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildGoogleMapsUriString(location))).apply {
             setPackage(TargetNavigationApp.GOOGLE_MAPS.packageName)
         }
     }
 
-    fun buildWazeUriString(location: ParsedLocation): String {
+    internal fun buildWazeUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "waze://"
             is ParsedLocation.Coordinates -> "waze://?ll=${formatCoordCompact(location.latitude)},${formatCoordCompact(location.longitude)}&navigate=yes"
@@ -115,7 +115,7 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildWazeWebFallbackUriString(location: ParsedLocation): String {
+    internal fun buildWazeWebFallbackUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "https://www.waze.com/ul"
             is ParsedLocation.Coordinates -> "https://www.waze.com/ul?ll=${formatCoordCompact(location.latitude)},${formatCoordCompact(location.longitude)}&navigate=yes"
@@ -126,13 +126,13 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildWazeIntent(location: ParsedLocation): Intent {
+    internal fun buildWazeIntent(location: ParsedLocation): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildWazeUriString(location))).apply {
             setPackage(TargetNavigationApp.WAZE.packageName)
         }
     }
 
-    fun buildOrganicMapsUriString(location: ParsedLocation): String {
+    internal fun buildOrganicMapsUriString(location: ParsedLocation): String {
         return buildOrganicMapsCompatibleUriString(location, "om")
     }
 
@@ -150,17 +150,17 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildOrganicMapsIntent(location: ParsedLocation): Intent {
+    internal fun buildOrganicMapsIntent(location: ParsedLocation): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildOrganicMapsUriString(location))).apply {
             setPackage(TargetNavigationApp.ORGANIC_MAPS.packageName)
         }
     }
 
-    fun buildCoMapsUriString(location: ParsedLocation): String {
+    internal fun buildCoMapsUriString(location: ParsedLocation): String {
         return buildOrganicMapsCompatibleUriString(location, "cm")
     }
 
-    fun buildCoMapsIntent(location: ParsedLocation, context: Context? = null): Intent {
+    internal fun buildCoMapsIntent(location: ParsedLocation, context: Context? = null): Intent {
         val pkg = TargetNavigationApp.COMAPS.resolveInstalledPackage(context)
             ?: TargetNavigationApp.COMAPS.packageName
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildCoMapsUriString(location))).apply {
@@ -168,7 +168,7 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildOsmAndUriString(location: ParsedLocation): String {
+    internal fun buildOsmAndUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "osmandmaps://"
             is ParsedLocation.Coordinates -> "osmandmaps://?lat=${formatCoordCompact(location.latitude)}&lon=${formatCoordCompact(location.longitude)}&z=16"
@@ -179,7 +179,7 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildOsmAndIntent(location: ParsedLocation, context: Context? = null): Intent {
+    internal fun buildOsmAndIntent(location: ParsedLocation, context: Context? = null): Intent {
         val pkg = TargetNavigationApp.OSMAND.resolveInstalledPackage(context)
             ?: TargetNavigationApp.OSMAND.packageName
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildOsmAndUriString(location))).apply {
@@ -187,7 +187,7 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildVelaUriString(location: ParsedLocation): String {
+    internal fun buildVelaUriString(location: ParsedLocation): String {
         val baseUrl = "https://maps.google.com"
         fun directions(destination: String, origin: String? = null, mode: TravelMode? = null): String {
             val originParam = origin?.let { "&origin=${encode(it)}" } ?: ""
@@ -220,13 +220,13 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildVelaIntent(location: ParsedLocation): Intent {
+    internal fun buildVelaIntent(location: ParsedLocation): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildVelaUriString(location))).apply {
             setPackage(TargetNavigationApp.VELA.packageName)
         }
     }
 
-    fun buildHereWeGoUriString(location: ParsedLocation): String {
+    internal fun buildHereWeGoUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "https://wego.here.com"
             is ParsedLocation.Coordinates -> {
@@ -268,13 +268,13 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildHereWeGoIntent(location: ParsedLocation): Intent {
+    internal fun buildHereWeGoIntent(location: ParsedLocation): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildHereWeGoUriString(location))).apply {
             setPackage(TargetNavigationApp.HERE_WEGO.packageName)
         }
     }
 
-    fun buildYandexMapsUriString(location: ParsedLocation): String {
+    internal fun buildYandexMapsUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "yandexmaps://maps.yandex.ru"
             is ParsedLocation.Coordinates -> {
@@ -311,13 +311,13 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildYandexMapsIntent(location: ParsedLocation): Intent {
+    internal fun buildYandexMapsIntent(location: ParsedLocation): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildYandexMapsUriString(location))).apply {
             setPackage(TargetNavigationApp.YANDEX_MAPS.packageName)
         }
     }
 
-    fun buildMagicEarthUriString(location: ParsedLocation): String {
+    internal fun buildMagicEarthUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "magicearth://"
             is ParsedLocation.Coordinates -> {
@@ -331,13 +331,13 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildMagicEarthIntent(location: ParsedLocation): Intent {
+    internal fun buildMagicEarthIntent(location: ParsedLocation): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildMagicEarthUriString(location))).apply {
             setPackage(TargetNavigationApp.MAGIC_EARTH.packageName)
         }
     }
 
-    fun buildCitymapperUriString(location: ParsedLocation): String {
+    internal fun buildCitymapperUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "citymapper://"
             is ParsedLocation.Coordinates -> {
@@ -351,7 +351,7 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildCitymapperIntent(location: ParsedLocation): Intent {
+    internal fun buildCitymapperIntent(location: ParsedLocation): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildCitymapperUriString(location))).apply {
             setPackage(TargetNavigationApp.CITYMAPPER.packageName)
         }
@@ -359,7 +359,7 @@ object NavigationIntentBuilder {
 
     private val COORD_PAIR_REGEX = Regex("""^[-+]?[0-9]+(?:\.[0-9]+)?\s*,\s*[-+]?[0-9]+(?:\.[0-9]+)?$""")
 
-    fun buildKomootUriString(location: ParsedLocation): String {
+    internal fun buildKomootUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "komoot://"
             is ParsedLocation.Coordinates -> "komoot://tour?coordinate=${formatCoordCompact(location.latitude)},${formatCoordCompact(location.longitude)}"
@@ -382,13 +382,13 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildKomootIntent(location: ParsedLocation): Intent {
+    internal fun buildKomootIntent(location: ParsedLocation): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildKomootUriString(location))).apply {
             setPackage(TargetNavigationApp.KOMOOT.packageName)
         }
     }
 
-    fun buildTomTomAmiGOUriString(location: ParsedLocation): String {
+    internal fun buildTomTomAmiGOUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "amigo://"
             is ParsedLocation.Coordinates -> "amigo://navigate?to=${formatCoordCompact(location.latitude)},${formatCoordCompact(location.longitude)}"
@@ -399,13 +399,13 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildTomTomAmiGOIntent(location: ParsedLocation): Intent {
+    internal fun buildTomTomAmiGOIntent(location: ParsedLocation): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildTomTomAmiGOUriString(location))).apply {
             setPackage(TargetNavigationApp.TOMTOM_AMIGO.packageName)
         }
     }
 
-    fun buildSygicUriString(location: ParsedLocation): String {
+    internal fun buildSygicUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "com.sygic.aura://"
             is ParsedLocation.Coordinates -> {
@@ -429,13 +429,13 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildSygicIntent(location: ParsedLocation): Intent {
+    internal fun buildSygicIntent(location: ParsedLocation): Intent {
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildSygicUriString(location))).apply {
             setPackage(TargetNavigationApp.SYGIC.packageName)
         }
     }
 
-    fun buildLocusMapUriString(location: ParsedLocation): String {
+    internal fun buildLocusMapUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "geo:0,0"
             is ParsedLocation.SearchQuery -> "geo:0,0?q=${encode(location.query)}"
@@ -455,7 +455,7 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildLocusMapIntent(location: ParsedLocation, context: Context? = null): Intent {
+    internal fun buildLocusMapIntent(location: ParsedLocation, context: Context? = null): Intent {
         val pkg = TargetNavigationApp.LOCUS_MAP.resolveInstalledPackage(context)
             ?: TargetNavigationApp.LOCUS_MAP.packageName
         return Intent(Intent.ACTION_VIEW, Uri.parse(buildLocusMapUriString(location))).apply {
@@ -463,7 +463,7 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildMapyCzUriString(location: ParsedLocation): String {
+    internal fun buildMapyCzUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "https://mapy.cz"
             is ParsedLocation.Coordinates -> {
@@ -491,16 +491,14 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildMapyCzIntent(location: ParsedLocation): Intent {
+    internal fun buildMapyCzIntent(location: ParsedLocation): Intent {
         val uriStr = buildMapyCzUriString(location)
         return Intent(Intent.ACTION_VIEW, Uri.parse(uriStr)).apply {
-            if (location !is ParsedLocation.WebFallback || uriStr.contains("mapy.cz")) {
-                setPackage(TargetNavigationApp.MAPY_CZ.packageName)
-            }
+            setPackage(TargetNavigationApp.MAPY_CZ.packageName)
         }
     }
 
-    fun buildGenericGeoUriString(location: ParsedLocation): String {
+    internal fun buildGenericGeoUriString(location: ParsedLocation): String {
         return when (location) {
             is ParsedLocation.Home -> "geo:0,0"
             is ParsedLocation.SearchQuery -> "geo:0,0?q=${encode(location.query)}"
@@ -520,7 +518,7 @@ object NavigationIntentBuilder {
         }
     }
 
-    fun buildGenericGeoIntent(location: ParsedLocation, createChooser: Boolean = false): Intent {
+    internal fun buildGenericGeoIntent(location: ParsedLocation, createChooser: Boolean = false): Intent {
         val baseIntent = Intent(Intent.ACTION_VIEW, Uri.parse(buildGenericGeoUriString(location)))
         return if (createChooser) {
             Intent.createChooser(baseIntent, null)

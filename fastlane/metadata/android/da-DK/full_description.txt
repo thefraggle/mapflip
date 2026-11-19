@@ -13,19 +13,19 @@ Uanset om du vil åbne Apple Maps-links på Android, søger en Apple Maps til Go
 Åbn destinationer og ruter i din favorit-app:
 • Bil & Trafik: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Privatliv & Offline kort: Organic Maps, OsmAnd (inkl. Plus), CoMaps, Vela
-• Udendørs & Offentlig transport: Mapy.cz, Komoot (cykling & vandring), Citymapper (offentlig transport), Magic Earth, Locus Map, Yandex Maps eller Android-systemvælger
+• Udendørs & Offentlig transport: Mapy.cz, Komoot (cykling & vandring), Citymapper (offentlig transport), Magic Earth, Locus Map, Yandex eller Android-systemvælger
 
 🗺️ Understøttede kortformater & tjenester (11 kilder):
 • Apple Maps URL'er & søgninger (maps.apple.com)
 • Google Maps links (maps.google.com, goo.gl) – perfekt til videresendelse til uafhængige kort
-• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing Maps & Yandex Maps
-• DuckDuckGo Maps, GPS-koordinater (geo:, DMS, decimal) & Google Plus Codes (100% offline afkodning)
+• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing & Yandex
+• DuckDuckGo, GPS-koordinater (geo:, DMS, decimal) & Google Plus Codes (100% offline afkodning)
 • Stedmarkører, adresser og trin-for-trin rutevejledning
 
 ✨ Højdepunkter & Privatliv:
-• 🚗 Trin-for-trin navigation & Android Auto – Trin-for-trin rutevejledning i Google Maps, fuld Android Auto-integration og live ruter
-• 🔒 100% Offline & Privat – Ingen – 100% local link conversion on device, zero tracking of location or URLs, zero ads
-• 🛡️ Smart Fallback – Er din valgte app afinstalleret, åbner MapFlip sikkert Google Maps eller systemvælgeren
+• 🚗 Trin-for-trin navigation & Android Auto – Trin-for-trin rutevejledning og fuld Android Auto-integration og live ruter
+• 🔒 100% Offline & Privat – Ingen internettilladelse (0 tilladelser), ingen sporing, ingen reklamer
+• 🛡️ Smart Fallback – Er din valgte app afinstalleret, åbner MapFlip sikkert Google eller systemvælgeren
 • ⏸️ Pause-tilstand & Hurtigindstillings-felt – Sæt omdirigering på pause fra notifikationspanelet (1 time, 8 timer, indtil i morgen)
 • 💬 Universel kompatibilitet – Fungerer med WhatsApp, Telegram, Signal, SMS, Slack og e-mail
 • 👻 Usynlig i baggrunden – Ingen unødige skærme og intet batteriforbrug

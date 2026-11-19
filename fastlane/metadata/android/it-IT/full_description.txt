@@ -13,19 +13,19 @@ Se cerchi una soluzione per aprire link di Apple Maps su Android, un'app da Appl
 Apri destinazioni e percorsi nella tua applicazione preferita:
 • Guida e traffico: Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Privacy e mappe offline: Organic Maps, OsmAnd (incluso Plus), CoMaps, Vela
-• Outdoor e trasporti: Mapy.cz, Komoot (bici ed escursioni), Citymapper (mezzi pubblici), Magic Earth, Locus Map, Yandex Maps o il selettore di sistema Android
+• Outdoor e trasporti: Mapy.cz, Komoot (bici ed escursioni), Citymapper (mezzi pubblici), Magic Earth, Locus Map, Yandex o il selettore di sistema Android
 
 🗺️ Formati e servizi di mappe supportati (11 sorgenti):
 • Link e ricerche di Apple Maps (maps.apple.com)
 • Link di Google Maps (maps.google.com, goo.gl) – ideale per passare a mappe libere
-• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing Maps e Yandex Maps
-• DuckDuckGo Maps, coordinate GPS (geo:, DMS, decimali) e Google Plus Codes (decodifica 100% offline)
+• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing e Yandex
+• DuckDuckGo, coordinate GPS (geo:, DMS, decimali) e Google Plus Codes (decodifica 100% offline)
 • Segnaposto, indirizzi, query di ricerca e itinerari con navigazione vocale
 
 ✨ Punti di forza e privacy:
-• 🚗 Navigazione turn-by-turn e Android Auto – Navigazione turn-by-turn con Google Maps, piena integrazione con Android Auto e itinerario guidato
-• 🔒 100% Offline e Privato – Zero autorizzazioni – 100% local link conversion on device, zero tracking of location or URLs, zero ads
-• 🛡️ Fallback intelligente – Se l'app configurata non è installata, apre Google Maps o il menu di sistema in sicurezza
+• 🚗 Navigazione turn-by-turn e Android Auto – Navigazione turn-by-turn con piena integrazione con Android Auto e itinerario guidato
+• 🔒 100% Offline e Privato – Zero autorizzazioni internet (nessun permesso di rete), zero tracciamento, zero pubblicità
+• 🛡️ Fallback intelligente – Se l'app configurata non è installata, apre Google o il menu di sistema in sicurezza
 • ⏸️ Modalità Pausa e Tile Rapido – Sospendi il reindirizzamento quando vuoi dai comandi rapidi (1 ora, 8 ore, fino a domani)
 • 💬 Compatibilità universale – Funziona con WhatsApp, Telegram, Signal, SMS, Slack ed e-mail
 • 👻 Invisibile in background – Nessuna schermata invadente e consumo batteria nullo

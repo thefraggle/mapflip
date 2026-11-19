@@ -2,31 +2,21 @@ package de.goork.mapflip.review
 
 import android.app.Activity
 import android.content.Context
-import de.goork.mapflip.data.PreferencesRepository
 
 /**
- * FOSS Flavor ReviewHelper stub: 100% No-Op.
+ * FOSS flavor no-op adapter for [ReviewPromptPort].
  * Zero Google Play dependencies, no store prompts.
  */
-object ReviewHelper {
+object ReviewHelper : ReviewPromptPort {
 
-    fun maybeRequestReview(
+    override fun launchReviewFlow(
         activity: Activity,
-        repository: PreferencesRepository,
-        trigger: String = "auto_criteria_met"
+        onComplete: () -> Unit
     ) {
-        // No-op for FOSS
+        onComplete()
     }
 
-    fun launchReviewFlow(
-        activity: Activity,
-        trigger: String = "auto_criteria_met",
-        onComplete: (() -> Unit)? = null
-    ) {
-        onComplete?.invoke()
-    }
-
-    fun openPlayStoreListing(context: Context) {
+    override fun openStoreListing(context: Context) {
         // No-op for FOSS
     }
 }

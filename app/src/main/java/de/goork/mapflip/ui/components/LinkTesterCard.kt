@@ -270,30 +270,11 @@ fun LinkTesterCard(
                             FilledTonalButton(
                                 onClick = {
                                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                    val sourceService = UniversalMapParser.detectSourceService(testInputUrl)
-                                    val loc = UniversalMapParser.parse(testInputUrl)
-                                    val effectiveTarget = NavigationLauncher.resolveEffectiveTargetApp(
-                                        context = context,
+                                    NavigationLauncher.create(context).launchFromUi(
+                                        url = testInputUrl,
                                         configuredApp = targetApp,
-                                        sourceService = sourceService,
-                                        showToastOnFallback = true
+                                        eventName = "link_tester_used"
                                     )
-                                    Analytics.trackEvent("link_tester_used", mapOf(
-                                        "target_app" to effectiveTarget.name.lowercase(),
-                                        "source_service" to sourceService
-                                    ))
-                                    val sourceUri = runCatching { Uri.parse(testInputUrl.trim()) }.getOrNull()
-                                    val result = NavigationLauncher.launchWithFallback(
-                                        context = context,
-                                        parsedLocation = loc,
-                                        effectiveTargetApp = effectiveTarget,
-                                        sourceUri = sourceUri,
-                                        sourceService = sourceService,
-                                        showSuccessToast = false
-                                    )
-                                    if (!result.launched) {
-                                        Toast.makeText(context, s.targetAppOpenError, Toast.LENGTH_SHORT).show()
-                                    }
                                 },
                                 modifier = Modifier.fillMaxWidth(),
                                 shape = RoundedCornerShape(10.dp)

@@ -1,0 +1,3 @@
+- Zuverlässigere Weiterleitung: Verbesserte Paket-Bindung für Mapy.cz-Kurzlinks und direkte Browser-Übergabe bei Web-Fallbacks
+- Sauberere App-Auswahl: MapFlip wird im System-Auswahldialog konsequent ausgeblendet, um unnötige Rücksprünge zu vermeiden
+- Interne Optimierungen: Vereinfachte Architektur, klarere Zuständigkeiten und erweiterte Testabdeckung

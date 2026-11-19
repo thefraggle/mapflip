@@ -1,1 +1,1 @@
-Open links in navigation apps: automatic map redirect, route & directions.
+Open map links in navigation apps: automatic redirect, route & directions.

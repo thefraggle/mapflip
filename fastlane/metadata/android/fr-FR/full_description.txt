@@ -13,19 +13,19 @@ Que vous cherchiez à ouvrir des liens Apple Maps sur Android, une appli Apple M
 Ouvrez vos destinations dans votre appli préférée :
 • Conduite & Trafic : Google Maps, Waze, HERE WeGo, TomTom AmiGO, Sygic
 • Vie privée & Cartes hors-ligne : Organic Maps, OsmAnd (avec Plus), CoMaps, Vela
-• Plein air & Transports : Mapy.cz, Komoot (vélo & randonnée), Citymapper (transports en commun), Magic Earth, Locus Map, Yandex Maps ou sélecteur système
+• Plein air & Transports : Mapy.cz, Komoot (vélo & randonnée), Citymapper (transports en commun), Magic Earth, Locus Map, Yandex ou sélecteur système
 
 🗺️ Formats et services de cartes pris en charge (11 sources) :
 • Liens et requêtes Apple Maps (maps.apple.com)
 • Liens Google Maps (maps.google.com, goo.gl) – parfait pour rediriger vers des cartes libres
-• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing Maps et Yandex Maps
-• DuckDuckGo Maps, coordonnées GPS (geo:, DMS, décimales) et Google Plus Codes (100% hors-ligne)
+• OpenStreetMap (osm.org), Mapy.cz / Mapy.com, HERE WeGo, Waze, Bing et Yandex
+• DuckDuckGo, coordonnées GPS (geo:, DMS, décimales) et Google Plus Codes (100% hors-ligne)
 • Repères, adresses, recherches et itinéraires de navigation virage par virage
 
 ✨ Points forts et confidentialité :
-• 🚗 Guidage étape par étape & Android Auto – Navigation virage par virage dans Google Maps, intégration Android Auto et guidage direct
-• 🔒 100% Hors-ligne & Respect de la vie privée – Zéro permission – 100% local link conversion on device, zero tracking of location or URLs, zero ads
-• 🛡️ Repli intelligent – Si l'appli choisie est désinstallée, MapFlip bascule automatiquement sur Google Maps ou le choix système
+• 🚗 Guidage étape par étape & Android Auto – Navigation virage par virage et intégration Android Auto et guidage direct
+• 🔒 100% Hors-ligne & Respect de la vie privée – Zéro permission internet (aucun accès réseau), aucun pistage, zéro pub
+• 🛡️ Repli intelligent – Si l'appli choisie est désinstallée, MapFlip bascule automatiquement sur Google ou le choix système
 • ⏸️ Mode Pause & Tuile Paramètres Rapides – Mettez la redirection en pause depuis vos notifications (1 h, 8 h, jusqu'à demain)
 • 💬 Compatibilité universelle – Fonctionne avec WhatsApp, Telegram, Signal, SMS, Slack et e-mails
 • 👻 Discret en arrière-plan – Aucune interface superflue, aucun impact sur la batterie

@@ -23,9 +23,9 @@ val aptabaseHost: String = System.getenv("APTABASE_HOST")
     ?: keystoreProperties.getProperty("aptabaseHost", "")
 
 // Kept at top level for .github/workflows/android-release.yml (workflow_dispatch grep)
-val appVersion = "1.5.0"
+val appVersion = "1.5.1"
 
-val appVersionCode = 315042
+val appVersionCode = 315043
 
 android {
     namespace = "de.goork.mapflip"
@@ -36,8 +36,8 @@ android {
         minSdk = 26
         targetSdk = 36
         // IMPORTANT: Must remain static literals (not variable references) for F-Droid's checkupdates.py regex parser
-        versionCode = 315042
-        versionName = "1.5.0"
+        versionCode = 315043
+        versionName = "1.5.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

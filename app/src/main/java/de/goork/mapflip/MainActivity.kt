@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
         super.onResume()
         if (!showPauseDialogState.value) {
             val repository = PreferencesRepository.getInstance(applicationContext)
-            de.goork.mapflip.review.ReviewHelper.maybeRequestReview(this, repository, trigger = "app_resume")
+            de.goork.mapflip.review.ReviewCoordinator(repository).maybeRequestReview(this, trigger = "app_resume")
         }
     }
 }

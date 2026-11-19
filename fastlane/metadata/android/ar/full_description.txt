@@ -13,13 +13,13 @@
 افتح الوجهات والمسارات في تطبيقك المفضل:
 • القيادة وحركة المرور: خرائط Google، Waze، HERE WeGo، TomTom AmiGO، Sygic
 • الخصوصية والخرائط بدون إنترنت: Organic Maps، OsmAnd (بما في ذلك Plus)، CoMaps، Vela
-• الأنشطة الخارجية والنقل: Mapy.cz، Komoot (المشي وركوب الدراجات)، Citymapper (المواصلات العامة)، Magic Earth، Locus Map، Yandex Maps أو قائمة النظام في أندرويد
+• الأنشطة الخارجية والنقل: Mapy.cz، Komoot (المشي وركوب الدراجات)، Citymapper (المواصلات العامة)، Magic Earth، Locus Map، Yandex أو قائمة النظام في أندرويد
 
 🗺️ تنسيقات وخدمات الخرائط المدعومة (11 مصدراً):
 • روابط وبحوث خرائط آبل (maps.apple.com)
 • روابط خرائط Google (maps.google.com, goo.gl) – مثالية للتحويل إلى تطبيقات الخرائط المستقلة
-• OpenStreetMap (osm.org)، Mapy.cz / Mapy.com، HERE WeGo، Waze، Bing Maps، Yandex Maps
-• DuckDuckGo Maps، إحداثيات GPS (geo:، DMS، العشرية) ورموز Google Plus Codes (فك ترميز 100% بدون إنترنت)
+• OpenStreetMap (osm.org)، Mapy.cz / Mapy.com، HERE WeGo، Waze، Bing، Yandex
+• DuckDuckGo، إحداثيات GPS (geo:، DMS، العشرية) ورموز Google Plus Codes (فك ترميز 100% بدون إنترنت)
 • علامات المواقع، العناوين، ومسارات الملاحة خطوة بخطوة
 
 ✨ أهم المزايا والخصوصية:
